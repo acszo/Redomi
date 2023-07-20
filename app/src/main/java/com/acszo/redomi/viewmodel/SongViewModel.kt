@@ -28,13 +28,19 @@ class SongViewModel: ViewModel() {
     fun getProviders(url: String) = viewModelScope.launch {
         try {
             _isLoading.update { true }
+
             val response: Providers = SongRepository().getSongs(url)
             _songInfo.update { response.entitiesByUniqueId[response.entitiesByUniqueId.keys.first().toString()] }
+
+            Platform.platforms.forEach {
+                it.link = response.linksByPlatform[it.title]?.url ?: ""
+            }
             _platforms.update {
                 Platform.platforms.filter {
                     it.title in response.linksByPlatform.keys
                 }
             }
+
             _isLoading.update { false }
         } catch (e: Exception) {
             print(e.message)

@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -24,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -39,7 +43,7 @@ fun BottomSheet(
     songInfo: SongInfo?,
     platforms: List<AppDetails>,
     isLoading: Boolean,
-    onClickItem: () -> Unit
+    onClickItem: (String) -> Unit
 ) {
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -57,10 +61,12 @@ fun BottomSheet(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp),
+                    .padding(horizontal = 24.dp)
+                    .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 SongInfoDisplay(songInfo?.thumbnailUrl, songInfo?.title, songInfo?.artistName)
-                val sidePadding = (-24).dp
+                val sidePadding = (-20).dp
                 LazyRow(
                     modifier = Modifier
                         .height(150.dp)
@@ -78,7 +84,7 @@ fun BottomSheet(
                     items(items = platforms) { app ->
                         val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
                             .replaceFirstChar { it.uppercase() }
-                        PlatformItem(onClickItem, title, app.image)
+                        PlatformItem(onClickItem, title, app.icon, app.link)
                     }
                 }
             }
@@ -89,7 +95,9 @@ fun BottomSheet(
 @Composable
 private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?) {
     Row(
-        modifier = Modifier.padding(vertical = 15.dp),
+        modifier = Modifier
+            .padding(vertical = 15.dp)
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         AsyncImage(
@@ -98,6 +106,7 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
                 .width(80.dp)
                 .clip(RoundedCornerShape(10.dp)),
             model = thumbnail ?: "",
+            contentScale = ContentScale.FillHeight,
             contentDescription = "Song Cover"
         )
         Column(
@@ -118,16 +127,16 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
 }
 
 @Composable
-private fun PlatformItem(onClickItem: () -> Unit, title: String, image: Int) {
+private fun PlatformItem(onClickItem: (String) -> Unit, title: String, icon: Int, link: String) {
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(18.dp))
-            .clickable { onClickItem() }
+            .clickable { onClickItem(link) }
             .padding(5.dp, 15.dp, 5.dp, 15.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
-            painterResource(id = image),
+            painterResource(id = icon),
             modifier = Modifier
                 .size(80.dp)
                 .padding(8.dp),

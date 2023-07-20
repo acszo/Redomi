@@ -1,5 +1,7 @@
 package com.acszo.redomi.ui
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -37,16 +39,39 @@ class ViewBottomSheetActivity: ComponentActivity() {
             val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
 
+            val installedApps: List<AppDetails> = platforms.filter {
+                var isInstalled = false
+                for (packageName in it.packageName) {
+                    if (isAppInstalled(packageName)) isInstalled = true
+                }
+                isInstalled
+            }
+
             RedomiTheme {
                 BottomSheet(
                     onDismiss = { this.finish() },
                     songInfo = songInfo,
-                    platforms = platforms,
+                    platforms = installedApps,
                     isLoading = isLoading,
-                    onClickItem = { }
+                    onClickItem = ::onIntentAction
                 )
             }
         }
+    }
+
+    private fun isAppInstalled(packageName: String): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
+    }
+
+    private fun onIntentAction(url: String) {
+        val uri: Uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        applicationContext.startActivity(intent)
     }
 
 }
