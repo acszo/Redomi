@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Redomi</string>
+    <string name="title_bottom_sheet">Converti canzone</string>
+
+    <string name="open">Apri</string>
+    <string name="copy">Copia</string>
+    <string name="share">Condividi</string>
+</resources>

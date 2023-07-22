@@ -41,7 +41,9 @@ import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import coil.compose.AsyncImagePainter
@@ -121,20 +123,20 @@ fun BottomSheet(
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
                     ) {
-                        ActionsMenuItem("Open", R.drawable.play_fill_icon) {
+                        ActionsMenuItem(R.string.open, R.drawable.play_fill_icon) {
                             onIntentView(
                                 context = context,
                                 url = selectedPlatformLink.value
                             )
                         }
-                        ActionsMenuItem("Copy", R.drawable.link_fill_icon) {
+                        ActionsMenuItem(R.string.copy, R.drawable.link_fill_icon) {
                             copyText(
                                 clipboardManager = clipboardManager,
                                 text = selectedPlatformLink.value,
                                 onDismiss = onDismiss
                             )
                         }
-                        ActionsMenuItem("Share", R.drawable.share_fill_icon) {
+                        ActionsMenuItem(R.string.share, R.drawable.share_fill_icon) {
                             onIntentSend(
                                 context = context,
                                 url = selectedPlatformLink.value,
@@ -171,6 +173,7 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
                 )
             }
             Image(
+                modifier = Modifier.size(80.dp),
                 painter = image,
                 contentScale = ContentScale.FillHeight,
                 contentDescription = "Song Cover",
@@ -182,12 +185,20 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
         ) {
             Text(
                 text = title ?: "",
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    platformStyle = PlatformTextStyle(
+                        includeFontPadding = false
+                    ),
+                )
             )
             Text(
                 text = artist ?: "",
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    platformStyle = PlatformTextStyle(
+                        includeFontPadding = false
+                    ),
+                ),
             )
         }
     }
@@ -204,36 +215,40 @@ private fun PlatformItem(
     link: String
 ) {
     ClickableItem(
-        {
-            if (!isActionsRequired) {
-                onIntentView(context, link)
-            } else {
-                bringActions.value = true
-                selectedPlatformLink.value = link
-            }
-        },
         @Composable {
             Image(
                 painterResource(id = icon),
                 modifier = Modifier
                     .size(80.dp)
                     .padding(8.dp),
-                contentDescription = title[0]
+                contentDescription = title[0],
             )
             Text(text = title[0].trim())
             Text(text = if (title.size > 1) title[1] else "")
-        }
+        },
+        Modifier
+            .clip(RoundedCornerShape(18.dp))
+            .clickable {
+                if (!isActionsRequired) {
+                    onIntentView(context, link)
+                } else {
+                    bringActions.value = true
+                    selectedPlatformLink.value = link
+                }
+            }
     )
 }
 
 @Composable
-private fun ActionsMenuItem(label: String, icon: Int, onClickAction: () -> Unit) {
+private fun ActionsMenuItem(label: Int, icon: Int, onClickAction: () -> Unit) {
     ClickableItem(
-        { onClickAction() },
         @Composable {
             Box(
                 modifier = Modifier
                     .clip(CircleShape)
+                    .clickable {
+                        onClickAction()
+                    }
                     .background(MaterialTheme.colorScheme.secondaryContainer)
                     .size(70.dp)
                     .padding(8.dp),
@@ -245,31 +260,25 @@ private fun ActionsMenuItem(label: String, icon: Int, onClickAction: () -> Unit)
                         .size(50.dp)
                         .padding(8.dp),
                     tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                    contentDescription = label
+                    contentDescription = stringResource(label)
                 )
             }
             Text(
-                text = label,
+                text = stringResource(label),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
     )
 }
 
-
-
 @Composable
 private fun ClickableItem(
-    onClickAction: () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .height(150.dp)
-            .clip(RoundedCornerShape(18.dp))
-            .clickable {
-                onClickAction()
-            }
             .padding(5.dp, 15.dp, 5.dp, 15.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,

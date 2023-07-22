@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Redomi</string>
     <string name="title_bottom_sheet">Song converter</string>
+
+    <string name="open">Open</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
 </resources>
