@@ -1,6 +1,5 @@
 package com.acszo.redomi.ui
 
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -53,7 +52,7 @@ class ViewBottomSheetActivity: ComponentActivity() {
                     songInfo = songInfo,
                     platforms = installedApps,
                     isLoading = isLoading,
-                    onClickItem = ::onIntentAction
+                    isActionsRequired = false
                 )
             }
         }
@@ -66,12 +65,6 @@ class ViewBottomSheetActivity: ComponentActivity() {
         } catch (e: PackageManager.NameNotFoundException) {
             false
         }
-    }
-
-    private fun onIntentAction(url: String) {
-        val uri: Uri = Uri.parse(url)
-        val intent = Intent(Intent.ACTION_VIEW, uri).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        applicationContext.startActivity(intent)
     }
 
 }

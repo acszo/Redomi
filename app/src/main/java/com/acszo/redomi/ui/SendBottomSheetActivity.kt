@@ -43,14 +43,10 @@ class SendBottomSheetActivity: ComponentActivity() {
                     songInfo = songCover,
                     platforms = platforms,
                     isLoading = isLoading,
-                    onClickItem = { }
+                    isActionsRequired = true
                 )
             }
         }
-    }
-
-    private fun actionSheet() {
-
     }
 
 }
