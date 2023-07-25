@@ -171,7 +171,7 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
             if (image.state is AsyncImagePainter.State.Loading) {
                 Icon(
                     modifier = Modifier.size(35.dp),
-                    painter = painterResource(id = R.drawable.music_note),
+                    painter = painterResource(id = R.drawable.song_fill_icon),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     contentDescription = "placeholder"
                 )
