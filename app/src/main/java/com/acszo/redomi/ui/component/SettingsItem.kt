@@ -30,7 +30,7 @@ fun SettingsItem(title: String, icon: Int, description: String, onClick: () -> U
         Icon(
             modifier = Modifier.size(24.dp),
             painter = painterResource(id = icon),
-            tint = MaterialTheme.colorScheme.onSurface,
+            tint = MaterialTheme.colorScheme.secondary,
             contentDescription = title,
         )
         Column(

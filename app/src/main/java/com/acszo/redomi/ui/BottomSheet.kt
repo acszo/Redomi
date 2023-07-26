@@ -41,9 +41,9 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
@@ -52,6 +52,8 @@ import coil.compose.rememberAsyncImagePainter
 import com.acszo.redomi.R
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
+import com.acszo.redomi.util.AppInstalled
+import com.acszo.redomi.util.Clipboard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +66,10 @@ fun BottomSheet(
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bringActions = remember { mutableStateOf(false) }
+    val selectedPlatformPackage = remember { mutableStateOf("") }
     val selectedPlatformLink = remember { mutableStateOf("") }
+    val packageManager = LocalContext.current.packageManager
+    val uriHandle = LocalUriHandler.current
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -115,7 +120,16 @@ fun BottomSheet(
                                 app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
                                     .replaceFirstChar { it.uppercase() }
                             val titleWords: List<String> = title.split("\\s+".toRegex())
-                            PlatformItem(context, isActionsRequired, bringActions, selectedPlatformLink, titleWords, app.icon, app.link)
+                            PlatformItem(
+                                context,
+                                isActionsRequired,
+                                bringActions,
+                                selectedPlatformPackage,
+                                selectedPlatformLink,
+                                titleWords,
+                                app.icon,
+                                app.link
+                            )
                         }
                     }
                 } else {
@@ -128,13 +142,16 @@ fun BottomSheet(
                         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
                     ) {
                         ActionsMenuItem(R.string.open, R.drawable.play_fill_icon) {
-                            onIntentView(
-                                context = context,
-                                url = selectedPlatformLink.value
-                            )
+                            if (AppInstalled().isInstalled(packageManager, selectedPlatformPackage.value)) {
+                                onIntentView(
+                                    context = context,
+                                    url = selectedPlatformLink.value
+                                )
+                            }
+                            uriHandle.openUri(selectedPlatformLink.value)
                         }
                         ActionsMenuItem(R.string.copy, R.drawable.link_fill_icon) {
-                            copyText(
+                            Clipboard().copyText(
                                 clipboardManager = clipboardManager,
                                 text = selectedPlatformLink.value,
                                 onDismiss = onDismiss
@@ -216,6 +233,7 @@ private fun PlatformItem(
     context: Context,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
+    selectedPlatformPackage: MutableState<String>,
     selectedPlatformLink: MutableState<String>,
     title: List<String>,
     icon: Int,
@@ -240,6 +258,7 @@ private fun PlatformItem(
                     onIntentView(context, link)
                 } else {
                     bringActions.value = true
+                    selectedPlatformPackage.value = link
                     selectedPlatformLink.value = link
                 }
             }
@@ -298,11 +317,6 @@ private fun onIntentView(context: Context, url: String) {
     val uri: Uri = Uri.parse(url)
     val intent = Intent(Intent.ACTION_VIEW, uri).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     context.startActivity(intent)
-}
-
-private fun copyText(clipboardManager: ClipboardManager, text: String, onDismiss: () -> Unit) {
-    clipboardManager.setText(AnnotatedString(text))
-    onDismiss()
 }
 
 private fun onIntentSend(context: Context, url: String, onDismiss: () -> Unit) {

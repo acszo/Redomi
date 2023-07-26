@@ -7,19 +7,27 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import com.acszo.redomi.R
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.ui.component.PageTitle
 import com.acszo.redomi.ui.component.SettingsItem
+import com.acszo.redomi.util.Clipboard
 
 @Composable
 fun SettingsPage() {
+    val uriHandle = LocalUriHandler.current
+    val clipboardManager: ClipboardManager = LocalClipboardManager.current
+    val appVersion: String = BuildConfig.VERSION_NAME
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
-            PageTitle("Redomi")
+            PageTitle(stringResource(id = R.string.app_name))
         }
     ) {
         LazyColumn(
@@ -58,16 +66,19 @@ fun SettingsPage() {
                     icon = R.drawable.github_icon,
                     description = stringResource(id = R.string.github_description)
                 ) {
-
+                    uriHandle.openUri("https://github.com/acszo/Redomi")
                 }
             }
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.version),
                     icon = R.drawable.info_icon,
-                    description = BuildConfig.VERSION_NAME
+                    description = appVersion
                 ) {
-
+                    Clipboard().copyText(
+                        clipboardManager = clipboardManager,
+                        text = appVersion
+                    )
                 }
             }
         }
