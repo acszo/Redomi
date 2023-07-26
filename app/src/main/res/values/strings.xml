@@ -5,4 +5,14 @@
     <string name="open">Open</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
+
+    <string name="apps">Apps</string>
+    <string name="apps_description">Select order and which apps to view</string>
+    <string name="layout">Layout</string>
+    <string name="layout_description">Horizontal list</string>
+    <string name="theme">Theme</string>
+    <string name="theme_description">Select your preferred theme</string>
+    <string name="github">acszo/Redomi</string>
+    <string name="github_description">Check out the GitHub repository</string>
+    <string name="version">Version</string>
 </resources>

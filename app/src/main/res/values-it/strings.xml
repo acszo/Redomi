@@ -6,4 +6,14 @@
     <string name="open">Apri</string>
     <string name="copy">Copia</string>
     <string name="share">Condividi</string>
+
+    <string name="apps">Applicazioni</string>
+    <string name="apps_description">Seleziona l\'ordine e quali applicazioni visualizzare</string>
+    <string name="layout">Aspetto</string>
+    <string name="layout_description">Lista orizzontale</string>
+    <string name="theme">Tema</string>
+    <string name="theme_description">Seleziona il tuo tema preferito</string>
+    <string name="github">acszo/Redomi</string>
+    <string name="github_description">Fai un salto nella GitHub repository</string>
+    <string name="version">Versione</string>
 </resources>

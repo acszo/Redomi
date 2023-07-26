@@ -62,9 +62,9 @@ fun BottomSheet(
     isLoading: Boolean,
     isActionsRequired: Boolean
 ) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bringActions = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -189,6 +189,8 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
         ) {
             Text(
                 text = title ?: "",
+                maxLines  = 2,
+                color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     platformStyle = PlatformTextStyle(
                         includeFontPadding = false
@@ -197,6 +199,7 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
             )
             Text(
                 text = artist ?: "",
+                maxLines  = 1,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     platformStyle = PlatformTextStyle(
