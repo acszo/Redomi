@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui
 
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,7 +14,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.theme.RedomiTheme
-import com.acszo.redomi.util.AppInstalled
 import com.acszo.redomi.viewmodel.SongViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -41,7 +41,7 @@ class ViewBottomSheetActivity: ComponentActivity() {
             val installedApps: List<AppDetails> = platforms.filter {
                 var isInstalled = false
                 for (packageName in it.packageName) {
-                    if (AppInstalled().isInstalled(packageManager, packageName)) isInstalled = true
+                    if (isAppInstalled(packageName)) isInstalled = true
                 }
                 isInstalled
             }
@@ -55,6 +55,15 @@ class ViewBottomSheetActivity: ComponentActivity() {
                     isActionsRequired = false
                 )
             }
+        }
+    }
+
+    private fun isAppInstalled(packageName: String): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
         }
     }
 

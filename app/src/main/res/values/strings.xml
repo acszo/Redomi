@@ -12,7 +12,9 @@
     <string name="layout_description">Horizontal list</string>
     <string name="theme">Theme</string>
     <string name="theme_description">Select your preferred theme</string>
-    <string name="github">acszo/Redomi</string>
-    <string name="github_description">Check out the GitHub repository</string>
+    <string name="github">Github</string>
+    <string name="github_description">Check out the repository at acszo/Redomi</string>
+    <string name="update">Update</string>
+    <string name="update_description">Check if there are any updates</string>
     <string name="version">Version</string>
 </resources>

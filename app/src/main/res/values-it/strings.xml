@@ -13,7 +13,9 @@
     <string name="layout_description">Lista orizzontale</string>
     <string name="theme">Tema</string>
     <string name="theme_description">Seleziona il tuo tema preferito</string>
-    <string name="github">acszo/Redomi</string>
-    <string name="github_description">Fai un salto nella GitHub repository</string>
+    <string name="github">Github</string>
+    <string name="github_description">Fai un salto nella repository in acszo/Redomi</string>
+    <string name="update">Aggiornamento</string>
+    <string name="update_description">Verifica la presenza di aggiornamenti</string>
     <string name="version">Versione</string>
 </resources>

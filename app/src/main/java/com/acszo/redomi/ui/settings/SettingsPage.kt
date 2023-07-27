@@ -71,6 +71,15 @@ fun SettingsPage() {
             }
             item {
                 SettingsItem(
+                    title = stringResource(id = R.string.update),
+                    icon = R.drawable.update_icon,
+                    description = stringResource(id = R.string.update_description)
+                ) {
+
+                }
+            }
+            item {
+                SettingsItem(
                     title = stringResource(id = R.string.version),
                     icon = R.drawable.info_icon,
                     description = appVersion
