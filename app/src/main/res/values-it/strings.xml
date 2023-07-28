@@ -12,7 +12,7 @@
     <string name="layout">Aspetto</string>
     <string name="layout_description">Lista orizzontale</string>
     <string name="theme">Tema</string>
-    <string name="theme_description">Seleziona il tuo tema preferito</string>
+    <string name="theme_description">Predefinito del sistema</string>
     <string name="github">Github</string>
     <string name="github_description">Fai un salto nella repository in acszo/Redomi</string>
     <string name="update">Aggiornamento</string>

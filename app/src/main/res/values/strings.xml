@@ -11,7 +11,7 @@
     <string name="layout">Layout</string>
     <string name="layout_description">Horizontal list</string>
     <string name="theme">Theme</string>
-    <string name="theme_description">Select your preferred theme</string>
+    <string name="theme_description">System default</string>
     <string name="github">Github</string>
     <string name="github_description">Check out the repository at acszo/Redomi</string>
     <string name="update">Update</string>
