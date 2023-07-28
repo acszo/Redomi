@@ -7,6 +7,11 @@
     <string name="copy">Copia</string>
     <string name="share">Condividi</string>
 
+    <string name="placeholder">placeholder</string>
+    <string name="song_cover">Cover Canzone</string>
+
+    <string name="settings">Impostazioni</string>
+
     <string name="apps">Applicazioni</string>
     <string name="apps_description">Seleziona l\'ordine e quali applicazioni visualizzare</string>
     <string name="layout">Aspetto</string>

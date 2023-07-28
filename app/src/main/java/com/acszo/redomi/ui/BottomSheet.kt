@@ -3,8 +3,10 @@ package com.acszo.redomi.ui
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +27,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -44,10 +47,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import com.acszo.redomi.MainActivity
 import com.acszo.redomi.R
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
@@ -65,6 +70,7 @@ fun BottomSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bringActions = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
+    val context: Context = LocalContext.current
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -91,9 +97,13 @@ fun BottomSheet(
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                SongInfoDisplay(songInfo?.thumbnailUrl, songInfo?.title, songInfo?.artistName)
+                SongInfoDisplay(
+                    context = context,
+                    thumbnail = songInfo?.thumbnailUrl ?: "",
+                    title = songInfo?.title ?: "",
+                    artist = songInfo?.artistName ?: ""
+                )
                 val sidePadding = (-24).dp
-                val context: Context = LocalContext.current
                 if (!bringActions.value) {
                     LazyRow(
                         modifier = Modifier
@@ -162,12 +172,14 @@ fun BottomSheet(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?) {
+private fun SongInfoDisplay(context: Context, thumbnail: String, title: String, artist: String) {
     val image = rememberAsyncImagePainter(model = thumbnail)
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
             modifier = Modifier
@@ -181,22 +193,25 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
                     modifier = Modifier.size(35.dp),
                     painter = painterResource(id = R.drawable.song_fill_icon),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                    contentDescription = "placeholder"
+                    contentDescription = stringResource(id = R.string.placeholder)
                 )
             }
             Image(
                 modifier = Modifier.size(80.dp),
                 painter = image,
                 contentScale = ContentScale.FillHeight,
-                contentDescription = "Song Cover",
+                contentDescription = stringResource(id = R.string.song_cover),
             )
         }
         Column(
-            modifier = Modifier.height(80.dp),
+            modifier = Modifier
+                .height(80.dp)
+                .weight(1f),
             verticalArrangement = Arrangement.spacedBy(5.dp, Alignment.CenterVertically),
         ) {
             Text(
-                text = title ?: "",
+                modifier = Modifier.basicMarquee(),
+                text = title,
                 maxLines  = 2,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.headlineSmall.copy(
@@ -206,14 +221,28 @@ private fun SongInfoDisplay(thumbnail: String?, title: String?, artist: String?)
                 )
             )
             Text(
-                text = artist ?: "",
+                text = artist,
                 maxLines  = 1,
+                overflow = TextOverflow.Ellipsis,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     platformStyle = PlatformTextStyle(
                         includeFontPadding = false
                     ),
                 ),
+            )
+        }
+
+        IconButton(
+            onClick = {
+                context.startActivity(Intent(context, MainActivity::class.java))
+            }
+        ) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                painter = painterResource(id = R.drawable.settings_icon),
+                tint = MaterialTheme.colorScheme.secondary,
+                contentDescription = stringResource(id = R.string.settings)
             )
         }
     }
