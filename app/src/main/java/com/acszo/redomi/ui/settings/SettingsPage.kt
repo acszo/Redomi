@@ -1,33 +1,46 @@
 package com.acszo.redomi.ui.settings
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import com.acszo.redomi.R
 import com.acszo.redomi.BuildConfig
-import com.acszo.redomi.ui.component.PageTitle
 import com.acszo.redomi.ui.component.SettingsItem
 import com.acszo.redomi.util.Clipboard
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsPage() {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     val appVersion: String = BuildConfig.VERSION_NAME
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
-            PageTitle(stringResource(id = R.string.app_name))
+            LargeTopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.app_name)
+                    )
+                },
+                scrollBehavior = scrollBehavior,
+            )
         }
     ) {
         LazyColumn(
