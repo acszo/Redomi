@@ -40,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -49,13 +48,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.offset
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.acszo.redomi.MainActivity
 import com.acszo.redomi.R
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
+import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.util.Clipboard
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -80,7 +79,12 @@ fun BottomSheet(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp),
+                    .height(150.dp)
+                    .padding(
+                        bottom = WindowInsets.systemBars
+                            .asPaddingValues()
+                            .calculateBottomPadding()
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
@@ -89,7 +93,6 @@ fun BottomSheet(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
                     .padding(
                         bottom = WindowInsets.systemBars
                             .asPaddingValues()
@@ -98,26 +101,15 @@ fun BottomSheet(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 SongInfoDisplay(
-                    context = context,
                     thumbnail = songInfo?.thumbnailUrl ?: "",
                     title = songInfo?.title ?: "",
                     artist = songInfo?.artistName ?: ""
                 )
-                val sidePadding = (-24).dp
                 if (!bringActions.value) {
                     LazyRow(
                         modifier = Modifier
                             .padding(vertical = 15.dp)
-                            .height(150.dp)
-                            .layout { measurable, constraints ->
-                                val placeable =
-                                    measurable.measure(constraints.offset(horizontal = -sidePadding.roundToPx() * 2))
-                                layout(
-                                    placeable.width + sidePadding.roundToPx() * 2, placeable.height
-                                ) {
-                                    placeable.place(+sidePadding.roundToPx(), 0)
-                                }
-                            },
+                            .height(150.dp),
                         contentPadding = PaddingValues(horizontal = 10.dp),
                     ) {
                         items(items = platforms) { app ->
@@ -125,8 +117,7 @@ fun BottomSheet(
                                 app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
                                     .replaceFirstChar { it.uppercase() }
                             val titleWords: List<String> = title.split("\\s+".toRegex())
-                            PlatformItem(
-                                context,
+                            AppItem(
                                 isActionsRequired,
                                 bringActions,
                                 selectedPlatformLink,
@@ -174,10 +165,13 @@ fun BottomSheet(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun SongInfoDisplay(context: Context, thumbnail: String, title: String, artist: String) {
+private fun SongInfoDisplay(thumbnail: String, title: String, artist: String) {
+    val context: Context = LocalContext.current
     val image = rememberAsyncImagePainter(model = thumbnail)
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp),
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -249,8 +243,7 @@ private fun SongInfoDisplay(context: Context, thumbnail: String, title: String, 
 }
 
 @Composable
-private fun PlatformItem(
-    context: Context,
+private fun AppItem(
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>,
@@ -258,6 +251,7 @@ private fun PlatformItem(
     icon: Int,
     link: String
 ) {
+    val context: Context = LocalContext.current
     ClickableItem(
         @Composable {
             Image(
@@ -313,22 +307,6 @@ private fun ActionsMenuItem(label: Int, icon: Int, onClickAction: () -> Unit) {
             )
         }
     )
-}
-
-@Composable
-private fun ClickableItem(
-    content: @Composable () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .height(150.dp)
-            .padding(5.dp, 15.dp, 5.dp, 15.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround,
-    ) {
-        content()
-    }
 }
 
 private fun onIntentView(context: Context, url: String) {
