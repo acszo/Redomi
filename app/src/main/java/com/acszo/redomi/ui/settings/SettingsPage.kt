@@ -5,20 +5,29 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 import com.acszo.redomi.R
 import com.acszo.redomi.BuildConfig
+import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.PageTitle
 import com.acszo.redomi.ui.component.SettingsItem
+import com.acszo.redomi.ui.nav.Pages.appsPage
+import com.acszo.redomi.ui.nav.Pages.layoutPage
 import com.acszo.redomi.util.Clipboard
 
 @Composable
-fun SettingsPage() {
+fun SettingsPage(navController: NavController) {
 
+    val context = LocalContext.current
+    val dataStore = SettingsDataStore(context)
+    val listType = dataStore.getLayoutListType.collectAsState(initial = "")
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     val appVersion: String = BuildConfig.VERSION_NAME
@@ -38,16 +47,16 @@ fun SettingsPage() {
                     icon = R.drawable.grid_view_icon,
                     description = stringResource(id = R.string.apps_description)
                 ) {
-
+                    navController.navigate(appsPage)
                 }
             }
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
                     icon = R.drawable.format_list_bulleted_icon,
-                    description = stringResource(id = R.string.layout_description)
+                    description = listType.value!!
                 ) {
-
+                    navController.navigate(layoutPage)
                 }
             }
             item {

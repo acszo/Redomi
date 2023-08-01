@@ -21,6 +21,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,6 +37,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -52,6 +56,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.acszo.redomi.MainActivity
 import com.acszo.redomi.R
+import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.ClickableItem
@@ -69,7 +74,10 @@ fun BottomSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bringActions = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
-    val context: Context = LocalContext.current
+
+    val context = LocalContext.current
+    val dataStore = SettingsDataStore(context)
+    val listType = dataStore.getLayoutListType.collectAsState(initial = "")
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -106,27 +114,13 @@ fun BottomSheet(
                     artist = songInfo?.artistName ?: ""
                 )
                 if (!bringActions.value) {
-                    LazyRow(
-                        modifier = Modifier
-                            .padding(vertical = 15.dp)
-                            .height(150.dp),
-                        contentPadding = PaddingValues(horizontal = 10.dp),
-                    ) {
-                        items(items = platforms) { app ->
-                            val title: String =
-                                app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
-                                    .replaceFirstChar { it.uppercase() }
-                            val titleWords: List<String> = title.split("\\s+".toRegex())
-                            AppItem(
-                                isActionsRequired,
-                                bringActions,
-                                selectedPlatformLink,
-                                titleWords,
-                                app.icon,
-                                app.link
-                            )
-                        }
-                    }
+                    LazyList(
+                        listType = listType.value!!,
+                        platforms= platforms,
+                        isActionsRequired = isActionsRequired,
+                        bringActions = bringActions,
+                        selectedPlatformLink = selectedPlatformLink
+                    )
                 } else {
                     val clipboardManager: ClipboardManager = LocalClipboardManager.current
                     Row(
@@ -163,10 +157,53 @@ fun BottomSheet(
     }
 }
 
+@Composable
+private fun LazyList(
+    listType: String,
+    platforms: List<AppDetails>,
+    isActionsRequired: Boolean,
+    bringActions: MutableState<Boolean>,
+    selectedPlatformLink: MutableState<String>
+) {
+
+    if (listType == stringResource(id = R.string.vertical_list)) {
+        LazyVerticalGrid(
+            modifier = Modifier.padding(vertical = 15.dp),
+            columns = GridCells.Fixed(3),
+            contentPadding = PaddingValues(horizontal = 10.dp),
+        ) {
+            items(items = platforms) { app ->
+                AppItem(
+                    app,
+                    isActionsRequired,
+                    bringActions,
+                    selectedPlatformLink
+                )
+            }
+        }
+    } else {
+        LazyRow(
+            modifier = Modifier
+                .padding(vertical = 15.dp)
+                .height(150.dp),
+            contentPadding = PaddingValues(horizontal = 10.dp),
+        ) {
+            items(items = platforms) { app ->
+                AppItem(
+                    app,
+                    isActionsRequired,
+                    bringActions,
+                    selectedPlatformLink
+                )
+            }
+        }
+    }
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun SongInfoDisplay(thumbnail: String, title: String, artist: String) {
-    val context: Context = LocalContext.current
+    val context = LocalContext.current
     val image = rememberAsyncImagePainter(model = thumbnail)
     Row(
         modifier = Modifier
@@ -244,34 +281,36 @@ private fun SongInfoDisplay(thumbnail: String, title: String, artist: String) {
 
 @Composable
 private fun AppItem(
+    appDetail: AppDetails,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
-    selectedPlatformLink: MutableState<String>,
-    title: List<String>,
-    icon: Int,
-    link: String
+    selectedPlatformLink: MutableState<String>
 ) {
-    val context: Context = LocalContext.current
+    val context = LocalContext.current
+    val title: String = appDetail.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
+        .replaceFirstChar { it.uppercase() }
+    val titleWords: List<String> = title.split("\\s+".toRegex())
+
     ClickableItem(
         @Composable {
             Image(
-                painterResource(id = icon),
+                painterResource(id = appDetail.icon),
                 modifier = Modifier
                     .size(80.dp)
                     .padding(8.dp),
-                contentDescription = title[0],
+                contentDescription = titleWords[0],
             )
-            Text(text = title[0].trim())
-            Text(text = if (title.size > 1) title[1] else "")
+            Text(text = titleWords[0].trim())
+            Text(text = if (titleWords.size > 1) titleWords[1] else "")
         },
         Modifier
             .clip(RoundedCornerShape(18.dp))
             .clickable {
                 if (!isActionsRequired) {
-                    onIntentView(context, link)
+                    onIntentView(context, appDetail.link)
                 } else {
                     bringActions.value = true
-                    selectedPlatformLink.value = link
+                    selectedPlatformLink.value = appDetail.link
                 }
             }
     )

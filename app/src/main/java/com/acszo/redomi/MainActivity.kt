@@ -8,7 +8,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
-import com.acszo.redomi.ui.settings.SettingsPage
+import com.acszo.redomi.ui.nav.RootNavigation
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 )
             }
             RedomiTheme {
-                SettingsPage()
+                RootNavigation()
             }
         }
     }

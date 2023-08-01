@@ -10,11 +10,13 @@
     <string name="song_cover">Song Cover</string>
 
     <string name="settings">Settings</string>
+    <string name="back">Back</string>
 
     <string name="apps">Apps</string>
     <string name="apps_description">Select order and which apps to view</string>
     <string name="layout">Layout</string>
-    <string name="layout_description">Horizontal list</string>
+    <string name="horizontal_list">Horizontal list</string>
+    <string name="vertical_list">Vertical list</string>
     <string name="theme">Theme</string>
     <string name="theme_description">System default</string>
     <string name="github">Github</string>

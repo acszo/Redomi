@@ -15,7 +15,9 @@ import com.acszo.redomi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppsPage() {
+fun AppsPage(
+    backButton: @Composable () -> Unit
+) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
@@ -28,6 +30,7 @@ fun AppsPage() {
                         text = stringResource(id = R.string.apps)
                     )
                 },
+                navigationIcon = { backButton() },
                 scrollBehavior = scrollBehavior,
             )
         }
