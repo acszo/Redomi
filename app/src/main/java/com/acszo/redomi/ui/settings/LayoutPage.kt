@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,12 +22,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
 import com.acszo.redomi.data.SettingsDataStore
+import com.acszo.redomi.ui.component.PageTitle
+import com.acszo.redomi.ui.component.SmallTopAppBar
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,47 +38,49 @@ import kotlinx.coroutines.launch
 fun LayoutPage(
     backButton: @Composable () -> Unit
 ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val pageTitle: String = stringResource(id = R.string.layout)
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     val listOptions: List<String> = listOf(
         stringResource(id = R.string.horizontal_list),
         stringResource(id = R.string.vertical_list)
     )
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
+
     val dataStore = SettingsDataStore(context)
     val listType = dataStore.getLayoutListType.collectAsState(initial = "")
     val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = 0)
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.surface,
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            LargeTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.layout)
-                    )
-                },
-                navigationIcon = { backButton() },
+            SmallTopAppBar(
+                title = pageTitle,
                 scrollBehavior = scrollBehavior,
+                navigationIcon = { backButton() }
             )
-        }
+        },
     ) {
         Column(
             modifier = Modifier.padding(it),
-            verticalArrangement = Arrangement.spacedBy(28.dp)
+            verticalArrangement = Arrangement.spacedBy(28.dp),
         ) {
-            Text(
-                modifier = Modifier.padding(horizontal = 28.dp),
-                text = stringResource(id = R.string.layout_description_page),
-
-            )
+            Column {
+                PageTitle(title = pageTitle)
+                Text(
+                    modifier = Modifier.padding(horizontal = 28.dp),
+                    text = stringResource(id = R.string.layout_description_page),
+                )
+            }
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(MaterialTheme.shapes.extraLarge)
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 listOptions.forEach { text ->
                     Box(

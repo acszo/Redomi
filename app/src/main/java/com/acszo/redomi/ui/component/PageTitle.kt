@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 fun PageTitle(title: String) {
     Text(
         modifier = Modifier
-            .padding(top = 100.dp)
+            .padding(top = 16.dp)
             .padding(horizontal = 28.dp, vertical = 28.dp),
         text = title,
         style = MaterialTheme.typography.displaySmall,
