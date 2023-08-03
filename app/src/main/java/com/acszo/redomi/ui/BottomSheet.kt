@@ -78,6 +78,7 @@ fun BottomSheet(
     val context = LocalContext.current
     val dataStore = SettingsDataStore(context)
     val listType = dataStore.getLayoutListType.collectAsState(initial = "")
+    val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = 0)
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -114,8 +115,9 @@ fun BottomSheet(
                     artist = songInfo?.artistName ?: ""
                 )
                 if (!bringActions.value) {
-                    LazyList(
+                    LazyListType(
                         listType = listType.value!!,
+                        gridSize = gridSize.value!!,
                         platforms= platforms,
                         isActionsRequired = isActionsRequired,
                         bringActions = bringActions,
@@ -158,18 +160,18 @@ fun BottomSheet(
 }
 
 @Composable
-private fun LazyList(
+private fun LazyListType(
     listType: String,
+    gridSize: Int,
     platforms: List<AppDetails>,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
-
     if (listType == stringResource(id = R.string.vertical_list)) {
         LazyVerticalGrid(
             modifier = Modifier.padding(vertical = 15.dp),
-            columns = GridCells.Fixed(3),
+            columns = GridCells.Fixed(gridSize),
             contentPadding = PaddingValues(horizontal = 10.dp),
         ) {
             items(items = platforms) { app ->

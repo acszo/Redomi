@@ -24,4 +24,9 @@
     <string name="update">Update</string>
     <string name="update_description">Check if there are any updates</string>
     <string name="version">Version</string>
+
+    <string name="layout_description_page">
+        Choose the way you want to display the apps you see when converting a song
+    </string>
+    <string name="layout_grid_size">Grid size</string>
 </resources>

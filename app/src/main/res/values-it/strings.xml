@@ -25,4 +25,9 @@
     <string name="update">Aggiornamento</string>
     <string name="update_description">Verifica la presenza di aggiornamenti</string>
     <string name="version">Versione</string>
+
+    <string name="layout_description_page">
+        Decidi come visualizzare le applicazioni che vedi quando converti una canzone
+    </string>
+    <string name="layout_grid_size">Dimensione griglia</string>
 </resources>
