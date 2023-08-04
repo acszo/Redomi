@@ -245,7 +245,7 @@ private fun SongInfoDisplay(thumbnail: String, title: String, artist: String) {
             Text(
                 modifier = Modifier.basicMarquee(),
                 text = title,
-                maxLines  = 2,
+                maxLines = 2,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     platformStyle = PlatformTextStyle(
@@ -255,7 +255,7 @@ private fun SongInfoDisplay(thumbnail: String, title: String, artist: String) {
             )
             Text(
                 text = artist,
-                maxLines  = 1,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium.copy(

@@ -53,7 +53,10 @@ fun SettingsPage(navController: NavController) {
                 Modifier.padding(it),
         ) {
             item {
-                PageTitle(title = pageTitle)
+                PageTitle(
+                    title = pageTitle,
+                    scrollBehavior = scrollBehavior
+                )
             }
             item {
                 SettingsItem(
