@@ -24,9 +24,20 @@
     <string name="update">Update</string>
     <string name="update_description">Check if there are any updates</string>
     <string name="version">Version</string>
+    <string name="info">info</string>
+
+    <string name="installed">Installed</string>
+    <string name="all">All</string>
+    <string name="apps_description_page">
+        Choose the order and which apps you want to see when converting a song.
+        \'Installed apps\' are shown when opening a link.
+        \'All apps\' are shown when converting from a music platform.
+    </string>
+    <string name="installed_tab_info">Selecting only 1 app will open it directly.</string>
+    <string name="all_tab_info">Selecting only 1 app will open it\'s actions directly.</string>
 
     <string name="layout_description_page">
-        Choose the way you want to display the apps you see when converting a song
+        Choose the way you want to display the apps you see when converting a song.
     </string>
     <string name="layout_grid_size">Grid size</string>
 </resources>

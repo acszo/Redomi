@@ -25,9 +25,20 @@
     <string name="update">Aggiornamento</string>
     <string name="update_description">Verifica la presenza di aggiornamenti</string>
     <string name="version">Versione</string>
+    <string name="info">informazioni</string>
+
+    <string name="installed">Installate</string>
+    <string name="all">Tutte</string>
+    <string name="apps_description_page">
+        Scegli l\'ordine e quali app vuoi mostrare quando converti una canzone.
+        \'App Installate\' sono mostrate quando apri un link.
+        \'Tutte le app\' sono mostrate quando converti da una piattaforma.
+    </string>
+    <string name="installed_tab_info">Selezionando un app la apre direttamente.</string>
+    <string name="all_tab_info">Selezionando un app apre le azioni direttamente.</string>
 
     <string name="layout_description_page">
-        Decidi come visualizzare le applicazioni che vedi quando converti una canzone
+        Decidi come visualizzare le applicazioni che vedi quando converti una canzone.
     </string>
     <string name="layout_grid_size">Dimensione griglia</string>
 </resources>

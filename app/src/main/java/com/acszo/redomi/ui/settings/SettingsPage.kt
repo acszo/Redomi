@@ -106,7 +106,7 @@ fun SettingsPage(navController: NavController) {
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.version),
-                    icon = R.drawable.info_icon,
+                    icon = R.drawable.info_filled_icon,
                     description = appVersion
                 ) {
                     Clipboard().copyText(

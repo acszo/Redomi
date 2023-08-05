@@ -43,7 +43,14 @@ fun RadioButtonItem(
             selected = (value == text),
             onClick = { onClick() }
         )
-        Text(text = text)
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyLarge.copy(
+                platformStyle = PlatformTextStyle(
+                    includeFontPadding = false
+                ),
+            )
+        )
     }
 }
 

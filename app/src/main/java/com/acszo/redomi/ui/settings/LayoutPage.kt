@@ -1,5 +1,11 @@
 package com.acszo.redomi.ui.settings
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
+import com.acszo.redomi.ui.component.PageDescription
 import com.acszo.redomi.ui.component.PageTitle
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.SmallTopAppBar
@@ -66,10 +73,7 @@ fun LayoutPage(
                     title = pageTitle,
                     scrollBehavior = scrollBehavior
                 )
-                Text(
-                    modifier = Modifier.padding(horizontal = 28.dp),
-                    text = stringResource(id = R.string.layout_description_page),
-                )
+                PageDescription(description = stringResource(id = R.string.layout_description_page))
             }
 
             listOptions.forEach { text ->
@@ -83,35 +87,41 @@ fun LayoutPage(
                 }
             }
 
-            if (listType.value == stringResource(id = R.string.vertical_list)) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 28.dp),
-                    text = stringResource(id = R.string.layout_grid_size),
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    for (i in 2..4) {
-                        AnimatedRadiusButton(
-                            isSelected = gridSize.value == i,
-                            size = 80.dp,
-                            backgroundColor = if (gridSize.value == i) {
-                                MaterialTheme.colorScheme.primary
-                            } else {
-                                MaterialTheme.colorScheme.surfaceVariant
-                            },
-                            text = i.toString(),
-                            textColor = if (gridSize.value == i) {
-                                MaterialTheme.colorScheme.onPrimary
-                            } else {
-                                MaterialTheme.colorScheme.onSurfaceVariant
-                            }
-                        ) {
-                            scope.launch {
-                                dataStore.saveLayoutGridSize(i)
+            AnimatedVisibility(
+                visible = listType.value == stringResource(id = R.string.vertical_list),
+                enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
+                exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(animationSpec = tween(200)),
+            ) {
+                Column(verticalArrangement = Arrangement.spacedBy(28.dp)) {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 28.dp),
+                        text = stringResource(id = R.string.layout_grid_size),
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        for (i in 2..4) {
+                            AnimatedRadiusButton(
+                                isSelected = gridSize.value == i,
+                                size = 80.dp,
+                                backgroundColor = if (gridSize.value == i) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.surfaceVariant
+                                },
+                                text = i.toString(),
+                                textColor = if (gridSize.value == i) {
+                                    MaterialTheme.colorScheme.onPrimary
+                                } else {
+                                    MaterialTheme.colorScheme.onSurfaceVariant
+                                }
+                            ) {
+                                scope.launch {
+                                    dataStore.saveLayoutGridSize(i)
+                                }
                             }
                         }
                     }
