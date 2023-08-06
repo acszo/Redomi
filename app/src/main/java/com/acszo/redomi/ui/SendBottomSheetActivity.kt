@@ -9,7 +9,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.acszo.redomi.data.DataStoreConst
+import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.theme.RedomiTheme
@@ -37,7 +40,17 @@ class SendBottomSheetActivity: ComponentActivity() {
             val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
 
-            RedomiTheme {
+            val context = LocalContext.current
+            val dataStore = SettingsDataStore(context)
+            val theme = dataStore.getThemeMode.collectAsState(initial = DataStoreConst.SYSTEM_THEME)
+
+            RedomiTheme(
+                darkTheme = when (theme.value) {
+                    DataStoreConst.DARK_THEME -> true
+                    DataStoreConst.LIGHT_THEME -> false
+                    else -> isSystemInDarkTheme()
+                }
+            ) {
                 BottomSheet(
                     onDismiss = { this.finish() },
                     songInfo = songCover,

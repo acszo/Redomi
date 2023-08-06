@@ -19,7 +19,6 @@
     <string name="horizontal_list">Lista orizzontale</string>
     <string name="vertical_list">Lista verticale</string>
     <string name="theme">Tema</string>
-    <string name="theme_description">Predefinito del sistema</string>
     <string name="github">Github</string>
     <string name="github_description">Fai un salto nella repository in acszo/Redomi</string>
     <string name="update">Aggiornamento</string>
@@ -41,4 +40,11 @@
         Decidi come visualizzare le applicazioni che vedi quando converti una canzone.
     </string>
     <string name="layout_grid_size">Dimensione griglia</string>
+
+    <string name="system_theme">Predefinito</string>
+    <string name="dark_theme">Scuro</string>
+    <string name="light_theme">Chiaro</string>
+
+    <string name="dialog_dismiss">Annulla</string>
+    <string name="dialog_confirm">Ok</string>
 </resources>

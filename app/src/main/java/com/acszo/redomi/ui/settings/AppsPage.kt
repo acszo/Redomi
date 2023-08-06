@@ -6,9 +6,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -44,6 +45,7 @@ fun AppsPage(
         stringResource(id = R.string.all)
     )
     val selectedTab = remember { mutableStateOf(tabs[0]) }
+    val scrollState = rememberScrollState()
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -57,7 +59,9 @@ fun AppsPage(
         },
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding),
+            modifier = Modifier
+                .padding(padding)
+                .verticalScroll(scrollState),
             verticalArrangement = Arrangement.spacedBy(28.dp),
         ) {
             Column {
@@ -71,8 +75,8 @@ fun AppsPage(
                 tabs = tabs,
                 selectedTab = selectedTab
             )
-            LazyColumn {
-                items(items = platforms) { app ->
+            Column {
+                for (app in platforms) {
                     val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
                         .replaceFirstChar { it.uppercase() }
                     Row(
@@ -102,6 +106,9 @@ fun AppsPage(
                     }
                 }
             }
+            Divider(
+                modifier = Modifier.padding(horizontal = 28.dp)
+            )
             PageBottomInfo(
                 if (selectedTab.value == tabs[0])
                     stringResource(id = R.string.installed_tab_info)

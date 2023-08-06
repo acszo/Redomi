@@ -8,7 +8,9 @@ import androidx.compose.ui.res.stringResource
 import com.acszo.redomi.R
 
 @Composable
-fun BackButton(backAction: () -> Unit) {
+fun BackButton(
+    backAction: () -> Unit
+) {
     IconButton(
         onClick = { backAction() }
     ) {

@@ -18,7 +18,9 @@ fun PageBottomInfo(
     text: String
 ) {
     Column(
-        modifier = Modifier.padding(horizontal = 28.dp),
+        modifier = Modifier
+            .padding(horizontal = 28.dp)
+            .padding(bottom = 28.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Icon(

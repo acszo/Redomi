@@ -13,11 +13,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -25,8 +27,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun RadioButtonItem(
-    value: String?,
-    text: String,
+    value: Int,
+    text: Int,
+    padding: Dp = 28.dp,
     onClick: () -> Unit
 ) {
     Row(
@@ -36,7 +39,7 @@ fun RadioButtonItem(
                 selected = (value == text),
                 onClick = { onClick() }
             )
-            .padding(horizontal = 28.dp),
+            .padding(horizontal = padding),
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
@@ -44,7 +47,7 @@ fun RadioButtonItem(
             onClick = { onClick() }
         )
         Text(
-            text = text,
+            text = stringResource(id = text),
             style = MaterialTheme.typography.bodyLarge.copy(
                 platformStyle = PlatformTextStyle(
                     includeFontPadding = false
@@ -85,5 +88,17 @@ fun AnimatedRadiusButton(
                 fontWeight = FontWeight.W500,
             )
         )
+    }
+}
+
+@Composable
+fun DialogTextButton(
+    onClick: () -> Unit,
+    text: String
+) {
+    TextButton(
+        onClick = { onClick() }
+    ) {
+        Text(text = text)
     }
 }

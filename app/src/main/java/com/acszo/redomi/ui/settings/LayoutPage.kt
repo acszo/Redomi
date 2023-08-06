@@ -26,6 +26,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
+import com.acszo.redomi.data.DataStoreConst.BIG_GRID
+import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
+import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
+import com.acszo.redomi.data.DataStoreConst.SMALL_GRID
+import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
+import com.acszo.redomi.data.DataStoreConst.getListType
+import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.PageDescription
@@ -45,14 +52,9 @@ fun LayoutPage(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    val listOptions: List<String> = listOf(
-        stringResource(id = R.string.horizontal_list),
-        stringResource(id = R.string.vertical_list)
-    )
-
     val dataStore = SettingsDataStore(context)
-    val listType = dataStore.getLayoutListType.collectAsState(initial = "")
-    val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = 0)
+    val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
+    val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = MEDIUM_GRID)
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -76,19 +78,19 @@ fun LayoutPage(
                 PageDescription(description = stringResource(id = R.string.layout_description_page))
             }
 
-            listOptions.forEach { text ->
+            listTypes.forEach { item ->
                 RadioButtonItem(
-                    value = listType.value,
-                    text = text,
+                    value = getListType(listType.value!!),
+                    text = item.value,
                 ) {
                     scope.launch {
-                        dataStore.saveLayoutListType(text)
+                        dataStore.saveLayoutListType(item.key)
                     }
                 }
             }
 
             AnimatedVisibility(
-                visible = listType.value == stringResource(id = R.string.vertical_list),
+                visible = listType.value == VERTICAL_LIST,
                 enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
                 exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(animationSpec = tween(200)),
             ) {
@@ -103,24 +105,24 @@ fun LayoutPage(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        for (i in 2..4) {
+                        for (grid in SMALL_GRID..BIG_GRID) {
                             AnimatedRadiusButton(
-                                isSelected = gridSize.value == i,
+                                isSelected = gridSize.value == grid,
                                 size = 80.dp,
-                                backgroundColor = if (gridSize.value == i) {
+                                backgroundColor = if (gridSize.value == grid) {
                                     MaterialTheme.colorScheme.primary
                                 } else {
                                     MaterialTheme.colorScheme.surfaceVariant
                                 },
-                                text = i.toString(),
-                                textColor = if (gridSize.value == i) {
+                                text = grid.toString(),
+                                textColor = if (gridSize.value == grid) {
                                     MaterialTheme.colorScheme.onPrimary
                                 } else {
                                     MaterialTheme.colorScheme.onSurfaceVariant
                                 }
                             ) {
                                 scope.launch {
-                                    dataStore.saveLayoutGridSize(i)
+                                    dataStore.saveLayoutGridSize(grid)
                                 }
                             }
                         }

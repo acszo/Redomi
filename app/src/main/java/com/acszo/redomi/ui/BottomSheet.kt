@@ -56,6 +56,9 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.acszo.redomi.MainActivity
 import com.acszo.redomi.R
+import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
+import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
+import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
@@ -77,8 +80,8 @@ fun BottomSheet(
 
     val context = LocalContext.current
     val dataStore = SettingsDataStore(context)
-    val listType = dataStore.getLayoutListType.collectAsState(initial = "")
-    val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = 0)
+    val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
+    val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = MEDIUM_GRID)
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -161,14 +164,14 @@ fun BottomSheet(
 
 @Composable
 private fun LazyListType(
-    listType: String,
+    listType: Int,
     gridSize: Int,
     platforms: List<AppDetails>,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
-    if (listType == stringResource(id = R.string.vertical_list)) {
+    if (listType == VERTICAL_LIST) {
         LazyVerticalGrid(
             modifier = Modifier.padding(vertical = 15.dp),
             columns = GridCells.Fixed(gridSize),

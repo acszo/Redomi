@@ -18,7 +18,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SettingsItem(title: String, icon: Int, description: String, onClick: () -> Unit) {
+fun SettingsItem(
+    title: String,
+    icon: Int,
+    description: String,
+    onClick: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
