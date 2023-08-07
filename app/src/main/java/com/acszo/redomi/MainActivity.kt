@@ -23,8 +23,17 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
+            val context = LocalContext.current
+            val dataStore = SettingsDataStore(context)
+            val theme = dataStore.getThemeMode.collectAsState(initial = SYSTEM_THEME)
+            val getTheme = when (theme.value) {
+                DARK_THEME -> true
+                LIGHT_THEME -> false
+                else -> isSystemInDarkTheme()
+            }
+
             val systemUiController = rememberSystemUiController()
-            val useDarkIcons = !isSystemInDarkTheme()
+            val useDarkIcons = !getTheme
             SideEffect {
                 systemUiController.setSystemBarsColor(
                     color = Color.Transparent,
@@ -32,16 +41,8 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-            val context = LocalContext.current
-            val dataStore = SettingsDataStore(context)
-            val theme = dataStore.getThemeMode.collectAsState(initial = SYSTEM_THEME)
-
             RedomiTheme(
-                darkTheme = when (theme.value) {
-                    DARK_THEME -> true
-                    LIGHT_THEME -> false
-                    else -> isSystemInDarkTheme()
-                }
+                darkTheme = getTheme
             ) {
                 RootNavigation()
             }

@@ -97,7 +97,7 @@ fun SettingsPage(navController: NavController) {
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.theme),
-                    icon = R.drawable.color_lens_icon,
+                    icon = R.drawable.color_lens_filled_icon,
                     description = stringResource(id = getThemeMode(themeMode.value!!))
                 ) {
                     openThemeDialog.value = true
@@ -138,7 +138,7 @@ fun SettingsPage(navController: NavController) {
 
     if (openThemeDialog.value) {
         RedomiAlertDialog(
-            icon =  R.drawable.color_lens_icon,
+            icon =  R.drawable.color_lens_outline_icon,
             title = stringResource(id = R.string.theme),
             content = {
                 themes.forEach { item ->

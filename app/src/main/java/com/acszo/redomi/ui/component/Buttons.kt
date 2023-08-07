@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -30,6 +31,7 @@ fun RadioButtonItem(
     value: Int,
     text: Int,
     padding: Dp = 28.dp,
+    fontSize: TextUnit = MaterialTheme.typography.bodyLarge.fontSize,
     onClick: () -> Unit
 ) {
     Row(
@@ -49,6 +51,7 @@ fun RadioButtonItem(
         Text(
             text = stringResource(id = text),
             style = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = fontSize,
                 platformStyle = PlatformTextStyle(
                     includeFontPadding = false
                 ),

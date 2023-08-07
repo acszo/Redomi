@@ -25,6 +25,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.BIG_GRID
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
@@ -82,6 +83,7 @@ fun LayoutPage(
                 RadioButtonItem(
                     value = getListType(listType.value!!),
                     text = item.value,
+                    fontSize = 20.sp
                 ) {
                     scope.launch {
                         dataStore.saveLayoutListType(item.key)
