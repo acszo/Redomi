@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -52,6 +54,7 @@ fun LayoutPage(
 
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
 
     val dataStore = SettingsDataStore(context)
     val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
@@ -68,7 +71,9 @@ fun LayoutPage(
         },
     ) {
         Column(
-            modifier = Modifier.padding(it),
+            modifier = Modifier
+                .padding(it)
+                .verticalScroll(scrollState),
             verticalArrangement = Arrangement.spacedBy(28.dp),
         ) {
             Column {
@@ -96,7 +101,10 @@ fun LayoutPage(
                 enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
                 exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(animationSpec = tween(200)),
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(28.dp)) {
+                Column(
+                    modifier = Modifier.padding(bottom = 28.dp),
+                    verticalArrangement = Arrangement.spacedBy(28.dp)
+                ) {
                     Text(
                         modifier = Modifier.padding(horizontal = 28.dp),
                         text = stringResource(id = R.string.layout_grid_size),
