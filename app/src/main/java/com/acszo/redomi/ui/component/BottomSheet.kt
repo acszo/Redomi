@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -40,13 +42,17 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -292,8 +298,18 @@ private fun SongInfoDisplay(
                 context.startActivity(Intent(context, MainActivity::class.java))
             }
         ) {
+            val currentRotation by remember { mutableFloatStateOf(120f) }
+            val rotation = remember { Animatable(currentRotation) }
+
+            LaunchedEffect(currentRotation) {
+                rotation.animateTo(
+                    targetValue = 180f,
+                    animationSpec = tween(300, easing = LinearOutSlowInEasing),
+                )
+            }
+
             Icon(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(24.dp).rotate(rotation.value),
                 painter = painterResource(id = R.drawable.settings_icon),
                 tint = MaterialTheme.colorScheme.secondary,
                 contentDescription = stringResource(id = R.string.settings)
