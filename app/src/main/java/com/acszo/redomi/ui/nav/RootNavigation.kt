@@ -60,16 +60,14 @@ fun NavGraphBuilder.navigationComposable(
     content: @Composable (AnimatedContentScope.(NavBackStackEntry) -> Unit)
 ) = composable(
     route = route,
-    enterTransition = { enterTransition(initialOffset) },
-    exitTransition = { exitTransition(-initialOffset) },
-    popEnterTransition = { enterTransition(-initialOffset) },
-    popExitTransition = { exitTransition(initialOffset) },
+    enterTransition = { enterTransition(1) },
+    exitTransition = { exitTransition(-1) },
+    popEnterTransition = { enterTransition(-1) },
+    popExitTransition = { exitTransition(1) },
     content = content,
 )
 
-fun enterTransition(
-    initialOffset: Float
-): EnterTransition {
+fun enterTransition(sign: Int): EnterTransition {
     return fadeIn(
         animationSpec = tween(
             durationMillis = 210,
@@ -79,13 +77,11 @@ fun enterTransition(
     ) + slideInHorizontally(
         animationSpec = tween(durationMillis = 300)
     ) {
-        (it * initialOffset).toInt()
+        sign * (it * initialOffset).toInt()
     }
 }
 
-fun exitTransition(
-    targetOffset: Float
-): ExitTransition {
+fun exitTransition(sign: Int): ExitTransition {
     return fadeOut(
         animationSpec = tween(
             durationMillis = 90,
@@ -94,6 +90,6 @@ fun exitTransition(
     ) + slideOutHorizontally(
         animationSpec = tween(durationMillis = 300)
     ) {
-        (it * targetOffset).toInt()
+        sign * (it * initialOffset).toInt()
     }
 }

@@ -15,6 +15,7 @@ import com.acszo.redomi.data.DataStoreConst
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
+import com.acszo.redomi.ui.component.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.SongViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController

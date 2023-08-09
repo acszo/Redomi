@@ -1,8 +1,12 @@
-package com.acszo.redomi.ui
+package com.acszo.redomi.ui.component
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -62,7 +66,6 @@ import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
-import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.util.Clipboard
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -117,6 +120,7 @@ fun BottomSheet(
                     title = songInfo?.title ?: "",
                     artist = songInfo?.artistName ?: ""
                 )
+
                 if (!bringActions.value) {
                     LazyListType(
                         listType = listType.value!!,
@@ -126,7 +130,17 @@ fun BottomSheet(
                         bringActions = bringActions,
                         selectedPlatformLink = selectedPlatformLink
                     )
-                } else {
+                }
+
+                AnimatedVisibility(
+                    visible = bringActions.value,
+                    enter = fadeIn(
+                        tween(
+                            durationMillis = 200,
+                            easing = LinearEasing
+                        )
+                    )
+                ) {
                     val clipboardManager: ClipboardManager = LocalClipboardManager.current
                     Row(
                         modifier = Modifier
@@ -207,7 +221,11 @@ private fun LazyListType(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun SongInfoDisplay(thumbnail: String, title: String, artist: String) {
+private fun SongInfoDisplay(
+    thumbnail: String,
+    title: String,
+    artist: String
+) {
     val context = LocalContext.current
     val image = rememberAsyncImagePainter(model = thumbnail)
     Row(
@@ -322,7 +340,11 @@ private fun AppItem(
 }
 
 @Composable
-private fun ActionsMenuItem(label: Int, icon: Int, onClickAction: () -> Unit) {
+private fun ActionsMenuItem(
+    label: Int,
+    icon: Int,
+    onClickAction: () -> Unit
+) {
     ClickableItem(
         @Composable {
             Box(
