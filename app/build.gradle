@@ -16,12 +16,12 @@ android {
         }
     }
     namespace 'com.acszo.redomi'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.acszo.redomi"
         minSdk 28
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -97,6 +97,6 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // Navigation
-    implementation 'androidx.navigation:navigation-compose:2.7.0-beta01'
+    implementation 'androidx.navigation:navigation-compose:2.7.0'
 
 }

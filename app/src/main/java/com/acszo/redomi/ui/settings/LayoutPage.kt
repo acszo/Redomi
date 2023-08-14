@@ -9,10 +9,12 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -54,7 +56,6 @@ fun LayoutPage(
 
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val scrollState = rememberScrollState()
 
     val dataStore = SettingsDataStore(context)
     val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
@@ -69,70 +70,80 @@ fun LayoutPage(
                 navigationIcon = { backButton() }
             )
         },
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
-        Column(
-            modifier = Modifier
-                .padding(it)
-                .verticalScroll(scrollState),
+        LazyColumn(
+            modifier = Modifier.padding(it),
             verticalArrangement = Arrangement.spacedBy(28.dp),
+            contentPadding = WindowInsets.systemBars.asPaddingValues()
         ) {
-            Column {
-                PageTitle(
-                    title = pageTitle,
-                    scrollBehavior = scrollBehavior
-                )
-                PageDescription(description = stringResource(id = R.string.layout_description_page))
+            item {
+                Column {
+                    PageTitle(
+                        title = pageTitle,
+                        scrollBehavior = scrollBehavior
+                    )
+                    PageDescription(description = stringResource(id = R.string.layout_description_page))
+                }
             }
 
             listTypes.forEach { item ->
-                RadioButtonItem(
-                    value = getListType(listType.value!!),
-                    text = item.value,
-                    fontSize = 20.sp
-                ) {
-                    scope.launch {
-                        dataStore.saveLayoutListType(item.key)
+                item {
+                    RadioButtonItem(
+                        value = getListType(listType.value!!),
+                        text = item.value,
+                        fontSize = 20.sp
+                    ) {
+                        scope.launch {
+                            dataStore.saveLayoutListType(item.key)
+                        }
                     }
                 }
             }
 
-            AnimatedVisibility(
-                visible = listType.value == VERTICAL_LIST,
-                enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
-                exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(animationSpec = tween(200)),
-            ) {
-                Column(
-                    modifier = Modifier.padding(bottom = 28.dp),
-                    verticalArrangement = Arrangement.spacedBy(28.dp)
+            item {
+                AnimatedVisibility(
+                    visible = listType.value == VERTICAL_LIST,
+                    enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
+                    exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(
+                        animationSpec = tween(
+                            200
+                        )
+                    ),
                 ) {
-                    Text(
-                        modifier = Modifier.padding(horizontal = 28.dp),
-                        text = stringResource(id = R.string.layout_grid_size),
-                        style = MaterialTheme.typography.titleLarge,
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly,
-                        verticalAlignment = Alignment.CenterVertically
+                    Column(
+                        modifier = Modifier.padding(bottom = 28.dp),
+                        verticalArrangement = Arrangement.spacedBy(28.dp)
                     ) {
-                        for (grid in SMALL_GRID..BIG_GRID) {
-                            AnimatedRadiusButton(
-                                isSelected = gridSize.value == grid,
-                                size = 80.dp,
-                                backgroundColor = if (gridSize.value == grid) {
-                                    MaterialTheme.colorScheme.primary
-                                } else {
-                                    MaterialTheme.colorScheme.surfaceVariant
-                                },
-                                text = grid.toString(),
-                                textColor = if (gridSize.value == grid) {
-                                    MaterialTheme.colorScheme.onPrimary
-                                } else {
-                                    MaterialTheme.colorScheme.onSurfaceVariant
-                                }
-                            ) {
-                                scope.launch {
-                                    dataStore.saveLayoutGridSize(grid)
+                        Text(
+                            modifier = Modifier.padding(horizontal = 28.dp),
+                            text = stringResource(id = R.string.layout_grid_size),
+                            style = MaterialTheme.typography.titleLarge,
+                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            for (grid in SMALL_GRID..BIG_GRID) {
+                                AnimatedRadiusButton(
+                                    isSelected = gridSize.value == grid,
+                                    size = 80.dp,
+                                    backgroundColor = if (gridSize.value == grid) {
+                                        MaterialTheme.colorScheme.primary
+                                    } else {
+                                        MaterialTheme.colorScheme.surfaceVariant
+                                    },
+                                    text = grid.toString(),
+                                    textColor = if (gridSize.value == grid) {
+                                        MaterialTheme.colorScheme.onPrimary
+                                    } else {
+                                        MaterialTheme.colorScheme.onSurfaceVariant
+                                    }
+                                ) {
+                                    scope.launch {
+                                        dataStore.saveLayoutGridSize(grid)
+                                    }
                                 }
                             }
                         }

@@ -1,6 +1,9 @@
 package com.acszo.redomi.ui.settings
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -65,10 +68,12 @@ fun SettingsPage(navController: NavController) {
                 title = pageTitle,
                 scrollBehavior = scrollBehavior
             )
-        }
+        },
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
         LazyColumn(
-                Modifier.padding(it),
+            Modifier.padding(it),
+            contentPadding = WindowInsets.systemBars.asPaddingValues()
         ) {
             item {
                 PageTitle(
