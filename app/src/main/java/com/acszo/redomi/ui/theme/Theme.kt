@@ -13,6 +13,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 import com.acszo.redomi.MainActivity
 
 private val DarkColorScheme = darkColorScheme(
@@ -55,14 +56,14 @@ fun RedomiTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            when (val activity = view.context as Activity) {
+            val activity = view.context as Activity
+            val window = (activity).window
+            when (activity) {
                 is MainActivity -> {
-                    val window = (activity).window
                     window.decorView.setBackgroundColor(colorScheme.surface.toArgb())
+                    WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
                 }
             }
-            /*window.statusBarColor = colorScheme.surface.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme*/
         }
     }
 
