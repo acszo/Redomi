@@ -26,9 +26,10 @@ class ViewBottomSheetActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val context = LocalContext.current
             val viewIntent: Uri? = intent?.data
             val songViewModel = viewModel<SongViewModel>()
-            LaunchedEffect(Unit) { songViewModel.getProviders(viewIntent.toString()) }
+            LaunchedEffect(Unit) { songViewModel.getPlatforms(context, viewIntent.toString()) }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
             val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
@@ -41,7 +42,6 @@ class ViewBottomSheetActivity: ComponentActivity() {
                 isInstalled
             }
 
-            val context = LocalContext.current
             val dataStore = SettingsDataStore(context)
             val theme = dataStore.getThemeMode.collectAsState(initial = DataStoreConst.SYSTEM_THEME)
             val getTheme = when (theme.value) {

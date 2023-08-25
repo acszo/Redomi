@@ -25,14 +25,14 @@ class SendBottomSheetActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val context = LocalContext.current
             val sendIntent: String? = intent?.getStringExtra(Intent.EXTRA_TEXT)
             val songViewModel = viewModel<SongViewModel>()
-            LaunchedEffect(Unit) { songViewModel.getProviders(sendIntent.toString()) }
+            LaunchedEffect(Unit) { songViewModel.getPlatforms(context, sendIntent.toString()) }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
             val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
 
-            val context = LocalContext.current
             val dataStore = SettingsDataStore(context)
             val theme = dataStore.getThemeMode.collectAsState(initial = DataStoreConst.SYSTEM_THEME)
             val getTheme = when (theme.value) {
