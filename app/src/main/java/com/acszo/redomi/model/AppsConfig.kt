@@ -4,6 +4,7 @@ import com.acszo.redomi.model.Platform.platforms
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AllApps(
-    val apps: List<AppDetails> = platforms
+data class AppsConfig(
+    val installedApps: List<AppDetails> = platforms,
+    val allApps: List<AppDetails> = platforms
 )

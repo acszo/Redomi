@@ -17,7 +17,7 @@ fun PageTitle(
 ) {
     Text(
         modifier = Modifier
-            .padding(top = 16.dp)
+            .padding(top = 18.dp)
             .padding(horizontal = 28.dp, vertical = 28.dp),
         text = title,
         style = MaterialTheme.typography.displaySmall,

@@ -18,8 +18,11 @@ import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.SongViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SendBottomSheetActivity: ComponentActivity() {
+    private lateinit var songViewModel: SongViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +30,8 @@ class SendBottomSheetActivity: ComponentActivity() {
         setContent {
             val context = LocalContext.current
             val sendIntent: String? = intent?.getStringExtra(Intent.EXTRA_TEXT)
-            val songViewModel = viewModel<SongViewModel>()
-            LaunchedEffect(Unit) { songViewModel.getPlatforms(context, sendIntent.toString()) }
+            songViewModel = viewModel()
+            LaunchedEffect(Unit) { songViewModel.getPlatforms(sendIntent.toString()) }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
             val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value

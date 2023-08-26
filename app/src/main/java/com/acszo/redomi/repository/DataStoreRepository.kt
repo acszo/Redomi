@@ -4,21 +4,31 @@ import android.content.Context
 import androidx.datastore.dataStore
 import com.acszo.redomi.data.AllAppSerializable
 import com.acszo.redomi.model.AppDetails
-import com.acszo.redomi.ui.settings.dataStore
-import kotlinx.collections.immutable.PersistentList
 import kotlinx.coroutines.flow.first
 
 val Context.dataStore by dataStore("selected-apps", AllAppSerializable)
 
-class DataStoreRepository {
+class DataStoreRepository(
+    private val context: Context
+) {
 
-    suspend fun getAllApps(context: Context): List<AppDetails> {
-        return context.dataStore.data.first().apps
+    suspend fun readInstalledApps(): List<AppDetails> {
+        return context.dataStore.data.first().installedApps
     }
 
-    suspend fun setAllApps(context: Context, allApps: PersistentList<AppDetails>) {
+    suspend fun saveInstalledApps(installedApps: List<AppDetails>) {
         context.dataStore.updateData {
-            it.copy(apps = allApps)
+            it.copy(installedApps = installedApps)
+        }
+    }
+
+    suspend fun readAllApps(): List<AppDetails> {
+        return context.dataStore.data.first().allApps
+    }
+
+    suspend fun saveAllApps(allApps: List<AppDetails>) {
+        context.dataStore.updateData {
+            it.copy(allApps = allApps)
         }
     }
 

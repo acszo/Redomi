@@ -1,6 +1,5 @@
 package com.acszo.redomi.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.model.AppDetails
@@ -9,16 +8,19 @@ import com.acszo.redomi.model.Providers
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.repository.DataStoreRepository
 import com.acszo.redomi.repository.SongRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
-class SongViewModel: ViewModel() {
-
-    private val dataStoreAppsRepository = DataStoreRepository()
+@HiltViewModel
+class SongViewModel @Inject constructor(
+    private val dataStoreRepository: DataStoreRepository
+): ViewModel() {
 
     private val _songInfo: MutableStateFlow<SongInfo?> = MutableStateFlow(null)
     val songInfo: StateFlow<SongInfo?> = _songInfo.asStateFlow()
@@ -29,15 +31,14 @@ class SongViewModel: ViewModel() {
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    fun getPlatforms(context: Context, url: String) = viewModelScope.launch {
+    fun getPlatforms(url: String) = viewModelScope.launch {
         try {
             _isLoading.update { true }
 
             val response: Providers = SongRepository().getSongs(url)
             _songInfo.update { response.entitiesByUniqueId[response.entitiesByUniqueId.keys.first().toString()] }
 
-            val allAppsDataStore = dataStoreAppsRepository.getAllApps(context)
-
+            val allAppsDataStore = dataStoreRepository.readAllApps()
             val allApps = Platform.platforms.filter {
                 allAppsDataStore.contains(it)
             }

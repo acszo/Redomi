@@ -1,21 +1,21 @@
 package com.acszo.redomi.data
 
 import androidx.datastore.core.Serializer
-import com.acszo.redomi.model.AllApps
+import com.acszo.redomi.model.AppsConfig
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
-object AllAppSerializable: Serializer<AllApps> {
+object AllAppSerializable: Serializer<AppsConfig> {
 
-    override val defaultValue: AllApps
-        get() = AllApps()
+    override val defaultValue: AppsConfig
+        get() = AppsConfig()
 
-    override suspend fun readFrom(input: InputStream): AllApps {
+    override suspend fun readFrom(input: InputStream): AppsConfig {
         return try {
             Json.decodeFromString(
-                deserializer = AllApps.serializer(),
+                deserializer = AppsConfig.serializer(),
                 string = input.readBytes().decodeToString()
             )
         } catch (e: SerializationException) {
@@ -24,10 +24,10 @@ object AllAppSerializable: Serializer<AllApps> {
         }
     }
 
-    override suspend fun writeTo(t: AllApps, output: OutputStream) {
+    override suspend fun writeTo(t: AppsConfig, output: OutputStream) {
         output.write(
             Json.encodeToString(
-                serializer = AllApps.serializer(),
+                serializer = AppsConfig.serializer(),
                 value = t
             ).encodeToByteArray()
         )
