@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -121,21 +122,38 @@ fun BottomSheet(
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                SongInfoDisplay(
-                    thumbnail = songInfo?.thumbnailUrl ?: "",
-                    title = songInfo?.title ?: "",
-                    artist = songInfo?.artistName ?: ""
-                )
-
-                if (!bringActions.value) {
-                    LazyListType(
-                        listType = listType.value!!,
-                        gridSize = gridSize.value!!,
-                        platforms= platforms,
-                        isActionsRequired = isActionsRequired,
-                        bringActions = bringActions,
-                        selectedPlatformLink = selectedPlatformLink
+                if (platforms.size > 1 || platforms.size == 1 && isActionsRequired) {
+                    SongInfoDisplay(
+                        thumbnail = songInfo?.thumbnailUrl ?: "",
+                        title = songInfo?.title ?: "",
+                        artist = songInfo?.artistName ?: ""
                     )
+                }
+
+                if (platforms.size > 1) {
+                    if (!bringActions.value) {
+                        LazyListType(
+                            listType = listType.value!!,
+                            gridSize = gridSize.value!!,
+                            platforms = platforms,
+                            isActionsRequired = isActionsRequired,
+                            bringActions = bringActions,
+                            selectedPlatformLink = selectedPlatformLink
+                        )
+                    }
+                } else {
+                    if (!isActionsRequired) {
+                        // if I don't, only the handle will be visible and it sucks
+                        Column(
+                            modifier = Modifier.height(150.dp)
+                        ) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+                        onIntentView(context, platforms.first().link)
+                    } else {
+                        bringActions.value = true
+                        selectedPlatformLink.value = platforms.first().link
+                    }
                 }
 
                 AnimatedVisibility(
@@ -309,7 +327,9 @@ private fun SongInfoDisplay(
             }
 
             Icon(
-                modifier = Modifier.size(24.dp).rotate(rotation.value),
+                modifier = Modifier
+                    .size(24.dp)
+                    .rotate(rotation.value),
                 painter = painterResource(id = R.drawable.settings_icon),
                 tint = MaterialTheme.colorScheme.secondary,
                 contentDescription = stringResource(id = R.string.settings)

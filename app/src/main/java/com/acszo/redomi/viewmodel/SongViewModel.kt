@@ -17,6 +17,11 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
+enum class AppList {
+    INSTALLED,
+    ALL
+}
+
 @HiltViewModel
 class SongViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
@@ -31,23 +36,28 @@ class SongViewModel @Inject constructor(
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    fun getPlatforms(url: String) = viewModelScope.launch {
+    fun getPlatforms(url: String, appList: AppList) = viewModelScope.launch {
         try {
             _isLoading.update { true }
 
             val response: Providers = SongRepository().getSongs(url)
             _songInfo.update { response.entitiesByUniqueId[response.entitiesByUniqueId.keys.first().toString()] }
 
-            val allAppsDataStore = dataStoreRepository.readAllApps()
-            val allApps = Platform.platforms.filter {
-                allAppsDataStore.contains(it)
+            val apps = Platform.platforms.filter {
+                if (appList == AppList.INSTALLED) {
+                    val installedAppsDataStore = dataStoreRepository.readInstalledApps()
+                    installedAppsDataStore.contains(it)
+                } else {
+                    val allAppsDataStore = dataStoreRepository.readAllApps()
+                    allAppsDataStore.contains(it)
+                }
             }
 
-            allApps.forEach {
+            apps.forEach {
                 it.link = response.linksByPlatform[it.title]?.url ?: ""
             }
             _platforms.update {
-                allApps.filter {
+                apps.filter {
                     it.title in response.linksByPlatform.keys
                 }
             }

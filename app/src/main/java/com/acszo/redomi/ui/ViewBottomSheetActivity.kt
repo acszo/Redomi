@@ -18,6 +18,7 @@ import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
+import com.acszo.redomi.viewmodel.AppList
 import com.acszo.redomi.viewmodel.SongViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +33,7 @@ class ViewBottomSheetActivity: ComponentActivity() {
             val context = LocalContext.current
             val viewIntent: Uri? = intent?.data
             songViewModel = viewModel()
-            LaunchedEffect(Unit) { songViewModel.getPlatforms(viewIntent.toString()) }
+            LaunchedEffect(Unit) { songViewModel.getPlatforms(viewIntent.toString(), AppList.INSTALLED) }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
             val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
