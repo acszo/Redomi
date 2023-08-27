@@ -20,6 +20,7 @@ import com.acszo.redomi.R
 fun AppCheckBoxItem(
     icon: Int,
     title: String,
+    size: Int,
     isChecked: Boolean,
     onCheckedAction: () -> Unit,
     onUnCheckedAction: () -> Unit,
@@ -50,6 +51,7 @@ fun AppCheckBoxItem(
                 if (isChecked) {
                     onCheckedAction()
                 } else {
+                    if (size == 1) return@Checkbox
                     onUnCheckedAction()
                 }
             },

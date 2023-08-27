@@ -112,6 +112,7 @@ fun AppsPage(
                             AppCheckBoxItem(
                                 icon = app.icon,
                                 title = title,
+                                size = platforms.size - installedApps.size + 1,
                                 isChecked = installedApps.contains(app),
                                 onCheckedAction = {
                                     scope.launch {
@@ -135,6 +136,7 @@ fun AppsPage(
                             AppCheckBoxItem(
                                 icon = app.icon,
                                 title = title,
+                                size = allApps.size,
                                 isChecked = allApps.contains(app),
                                 onCheckedAction = {
                                     scope.launch {
