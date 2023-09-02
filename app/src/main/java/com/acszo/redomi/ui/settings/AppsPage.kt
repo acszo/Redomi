@@ -106,13 +106,12 @@ fun AppsPage(
                 Column {
                     if (selectedTab.value == tabs.first()) {
                         for (app in checkInstalled) {
-                            val title: String =
-                                app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
+                            val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
                                     .replaceFirstChar { it.uppercase() }
                             AppCheckBoxItem(
                                 icon = app.icon,
                                 title = title,
-                                size = platforms.size - installedApps.size + 1,
+                                size = platforms.size - installedApps.size,
                                 isChecked = installedApps.contains(app),
                                 onCheckedAction = {
                                     scope.launch {
@@ -130,8 +129,7 @@ fun AppsPage(
                         }
                     } else {
                         for (app in platforms) {
-                            val title: String =
-                                app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
+                            val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
                                     .replaceFirstChar { it.uppercase() }
                             AppCheckBoxItem(
                                 icon = app.icon,

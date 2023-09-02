@@ -30,8 +30,8 @@ class SongViewModel @Inject constructor(
     private val _songInfo: MutableStateFlow<SongInfo?> = MutableStateFlow(null)
     val songInfo: StateFlow<SongInfo?> = _songInfo.asStateFlow()
 
-    private val _platforms: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
-    val platforms: StateFlow<List<AppDetails>> = _platforms.asStateFlow()
+    private val _platforms: MutableStateFlow<Map<AppDetails, String>> = MutableStateFlow(emptyMap())
+    val platforms: StateFlow<Map<AppDetails, String>> = _platforms.asStateFlow()
 
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -53,12 +53,14 @@ class SongViewModel @Inject constructor(
                 }
             }
 
-            apps.forEach {
-                it.link = response.linksByPlatform[it.title]?.url ?: ""
+            val mapAppToLink = emptyMap<AppDetails, String>().toMutableMap()
+            for (app in apps) {
+                mapAppToLink[app] = response.linksByPlatform[app.title]?.url ?: ""
             }
+
             _platforms.update {
-                apps.filter {
-                    it.title in response.linksByPlatform.keys
+                mapAppToLink.filter {
+                    it.key.title in response.linksByPlatform.keys
                 }
             }
 

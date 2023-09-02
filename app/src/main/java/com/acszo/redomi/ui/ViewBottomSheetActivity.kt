@@ -35,12 +35,12 @@ class ViewBottomSheetActivity: ComponentActivity() {
             songViewModel = viewModel()
             LaunchedEffect(Unit) { songViewModel.getPlatforms(viewIntent.toString(), AppList.INSTALLED) }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
-            val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
+            val platforms: Map<AppDetails, String> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
 
-            val installedApps: List<AppDetails> = platforms.filter {
+            val installedApps: Map<AppDetails, String> = platforms.filter {
                 var isInstalled = false
-                for (packageName in it.packageName) {
+                for (packageName in it.key.packageName) {
                     if (isAppInstalled(packageName)) isInstalled = true
                 }
                 isInstalled

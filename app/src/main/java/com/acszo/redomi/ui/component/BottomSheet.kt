@@ -80,7 +80,7 @@ import com.acszo.redomi.util.Clipboard
 fun BottomSheet(
     onDismiss: () -> Unit,
     songInfo: SongInfo?,
-    platforms: List<AppDetails>,
+    platforms: Map<AppDetails, String>,
     isLoading: Boolean,
     isActionsRequired: Boolean
 ) {
@@ -149,10 +149,10 @@ fun BottomSheet(
                         ) {
                             Spacer(modifier = Modifier.weight(1f))
                         }
-                        onIntentView(context, platforms.first().link)
+                        onIntentView(context, platforms.values.first())
                     } else {
                         bringActions.value = true
-                        selectedPlatformLink.value = platforms.first().link
+                        selectedPlatformLink.value = platforms.values.first()
                     }
                 }
 
@@ -204,7 +204,7 @@ fun BottomSheet(
 private fun LazyListType(
     listType: Int,
     gridSize: Int,
-    platforms: List<AppDetails>,
+    platforms: Map<AppDetails, String>,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
@@ -215,12 +215,13 @@ private fun LazyListType(
             columns = GridCells.Fixed(gridSize),
             contentPadding = PaddingValues(horizontal = 10.dp),
         ) {
-            items(items = platforms) { app ->
+            items(items = platforms.toList()) { (app, link) ->
                 AppItem(
-                    app,
-                    isActionsRequired,
-                    bringActions,
-                    selectedPlatformLink
+                    appDetail = app,
+                    link = link,
+                    isActionsRequired = isActionsRequired,
+                    bringActions = bringActions,
+                    selectedPlatformLink = selectedPlatformLink
                 )
             }
         }
@@ -231,12 +232,13 @@ private fun LazyListType(
                 .height(150.dp),
             contentPadding = PaddingValues(horizontal = 10.dp),
         ) {
-            items(items = platforms) { app ->
+            items(items = platforms.toList()) { (app, link) ->
                 AppItem(
-                    app,
-                    isActionsRequired,
-                    bringActions,
-                    selectedPlatformLink
+                    appDetail = app,
+                    link = link,
+                    isActionsRequired = isActionsRequired,
+                    bringActions = bringActions,
+                    selectedPlatformLink = selectedPlatformLink
                 )
             }
         }
@@ -341,6 +343,7 @@ private fun SongInfoDisplay(
 @Composable
 private fun AppItem(
     appDetail: AppDetails,
+    link: String,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
@@ -366,10 +369,10 @@ private fun AppItem(
             .clip(RoundedCornerShape(18.dp))
             .clickable {
                 if (!isActionsRequired) {
-                    onIntentView(context, appDetail.link)
+                    onIntentView(context, link)
                 } else {
                     bringActions.value = true
-                    selectedPlatformLink.value = appDetail.link
+                    selectedPlatformLink.value = link
                 }
             }
     )

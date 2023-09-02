@@ -34,7 +34,7 @@ class SendBottomSheetActivity: ComponentActivity() {
             songViewModel = viewModel()
             LaunchedEffect(Unit) { songViewModel.getPlatforms(sendIntent.toString(), AppList.ALL) }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
-            val platforms: List<AppDetails> = songViewModel.platforms.collectAsState().value
+            val platforms: Map<AppDetails, String> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
 
             val dataStore = SettingsDataStore(context)
