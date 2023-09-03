@@ -67,6 +67,7 @@ fun AppsPage(
         }
         isInstalled
     }
+    val checkInstalledSize = installedApps.filter { it in checkInstalled }.size
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -111,7 +112,7 @@ fun AppsPage(
                             AppCheckBoxItem(
                                 icon = app.icon,
                                 title = title,
-                                size = platforms.size - installedApps.size,
+                                size = checkInstalledSize,
                                 isChecked = installedApps.contains(app),
                                 onCheckedAction = {
                                     scope.launch {

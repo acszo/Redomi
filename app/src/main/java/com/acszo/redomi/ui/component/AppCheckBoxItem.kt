@@ -51,8 +51,7 @@ fun AppCheckBoxItem(
                 if (isChecked) {
                     onCheckedAction()
                 } else {
-                    if (size == 1) return@Checkbox
-                    onUnCheckedAction()
+                    if (size > 1) onUnCheckedAction()
                 }
             },
         )
