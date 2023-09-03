@@ -7,7 +7,7 @@
     <queries>
         <package android:name="com.google.android.apps.youtube.music"/>
         <package android:name="app.revanced.android.apps.youtube.music"/>
-        <package android:name="com.google.android.apps.youtube"/>
+        <package android:name="com.google.android.youtube"/>
         <package android:name="app.revanced.android.youtube"/>
         <package android:name="com.spotify.music"/>
         <package android:name="deezer.android.app"/>
