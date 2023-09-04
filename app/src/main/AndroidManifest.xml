@@ -7,6 +7,7 @@
     <queries>
         <package android:name="com.google.android.apps.youtube.music"/>
         <package android:name="app.revanced.android.apps.youtube.music"/>
+        <package android:name="com.zionhuang.music"/>
         <package android:name="com.google.android.youtube"/>
         <package android:name="app.revanced.android.youtube"/>
         <package android:name="com.spotify.music"/>
