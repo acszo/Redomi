@@ -17,7 +17,7 @@ fun ClickableItem(
     Column(
         modifier = modifier
             .fillMaxHeight()
-            .padding(5.dp, 15.dp, 5.dp, 15.dp),
+            .padding(5.dp, 10.dp, 5.dp, 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
     ) {
