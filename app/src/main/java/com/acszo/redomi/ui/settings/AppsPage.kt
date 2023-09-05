@@ -104,53 +104,51 @@ fun AppsPage(
                 )
             }
             item {
-                Column {
-                    if (selectedTab.value == tabs.first()) {
-                        for (app in checkInstalled) {
-                            val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
-                                    .replaceFirstChar { it.uppercase() }
-                            AppCheckBoxItem(
-                                icon = app.icon,
-                                title = title,
-                                size = checkInstalledSize,
-                                isChecked = installedApps.contains(app),
-                                onCheckedAction = {
-                                    scope.launch {
-                                        installedApps.add(app)
-                                        dataStoreViewModel.setInstalledApps(installedApps.toList())
-                                    }
-                                },
-                                onUnCheckedAction = {
-                                    scope.launch {
-                                        installedApps.remove(app)
-                                        dataStoreViewModel.setInstalledApps(installedApps.toList())
-                                    }
+                if (selectedTab.value == tabs.first()) {
+                    for (app in checkInstalled) {
+                        val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
+                                .replaceFirstChar { it.uppercase() }
+                        AppCheckBoxItem(
+                            icon = app.icon,
+                            title = title,
+                            size = checkInstalledSize,
+                            isChecked = installedApps.contains(app),
+                            onCheckedAction = {
+                                scope.launch {
+                                    installedApps.add(app)
+                                    dataStoreViewModel.setInstalledApps(installedApps.toList())
                                 }
-                            )
-                        }
-                    } else {
-                        for (app in platforms) {
-                            val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
-                                    .replaceFirstChar { it.uppercase() }
-                            AppCheckBoxItem(
-                                icon = app.icon,
-                                title = title,
-                                size = allApps.size,
-                                isChecked = allApps.contains(app),
-                                onCheckedAction = {
-                                    scope.launch {
-                                        allApps.add(app)
-                                        dataStoreViewModel.setAllApps(allApps.toList())
-                                    }
-                                },
-                                onUnCheckedAction = {
-                                    scope.launch {
-                                        allApps.remove(app)
-                                        dataStoreViewModel.setAllApps(allApps.toList())
-                                    }
+                            },
+                            onUnCheckedAction = {
+                                scope.launch {
+                                    installedApps.remove(app)
+                                    dataStoreViewModel.setInstalledApps(installedApps.toList())
                                 }
-                            )
-                        }
+                            }
+                        )
+                    }
+                } else {
+                    for (app in platforms) {
+                        val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
+                                .replaceFirstChar { it.uppercase() }
+                        AppCheckBoxItem(
+                            icon = app.icon,
+                            title = title,
+                            size = allApps.size,
+                            isChecked = allApps.contains(app),
+                            onCheckedAction = {
+                                scope.launch {
+                                    allApps.add(app)
+                                    dataStoreViewModel.setAllApps(allApps.toList())
+                                }
+                            },
+                            onUnCheckedAction = {
+                                scope.launch {
+                                    allApps.remove(app)
+                                    dataStoreViewModel.setAllApps(allApps.toList())
+                                }
+                            }
+                        )
                     }
                 }
             }

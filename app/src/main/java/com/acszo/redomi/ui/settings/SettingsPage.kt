@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.settings
 
+import android.os.Build
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.navigationBars
@@ -56,7 +57,10 @@ fun SettingsPage(navController: NavController) {
 
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
-    val appVersion: String = BuildConfig.VERSION_NAME
+    val versionName = BuildConfig.VERSION_NAME
+    val appVersion = "Version: $versionName"
+    val modelName = "Model: ${Build.MODEL}"
+    val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
 
     val openThemeDialog = remember { mutableStateOf(false)  }
 
@@ -130,11 +134,11 @@ fun SettingsPage(navController: NavController) {
                 SettingsItem(
                     title = stringResource(id = R.string.version),
                     icon = R.drawable.info_filled_icon,
-                    description = appVersion
+                    description = versionName
                 ) {
                     Clipboard().copyText(
                         clipboardManager = clipboardManager,
-                        text = appVersion
+                        text = appVersion + '\n' + modelName + '\n' + androidVersion
                     )
                 }
             }
