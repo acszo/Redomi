@@ -2,6 +2,7 @@ package com.acszo.redomi.ui.settings
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -16,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,10 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.acszo.redomi.R
-import com.acszo.redomi.model.AppsConfig
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.Platform.platforms
-import com.acszo.redomi.repository.dataStore
 import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.PageBottomInfo
 import com.acszo.redomi.ui.component.PageDescription
@@ -46,6 +46,7 @@ fun AppsPage(
     dataStoreViewModel: DataStoreViewModel = hiltViewModel(),
     backButton: @Composable () -> Unit
 ) {
+    Log.d("DIOCANE", "SCREEN RECOMPOSING")
     val pageTitle: String = stringResource(id = R.string.apps)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val tabs: List<String> = listOf(
@@ -56,9 +57,14 @@ fun AppsPage(
 
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val appsConfig = context.dataStore.data.collectAsState(initial = AppsConfig()).value
-    val installedApps = appsConfig.installedApps.toMutableList()
-    val allApps = appsConfig.allApps.toMutableList()
+
+    LaunchedEffect(Unit) {
+        dataStoreViewModel.getInstalledApps()
+        dataStoreViewModel.getAllApps()
+    }
+
+    val installedApps = dataStoreViewModel.installedApps.collectAsState().value.toMutableList()
+    val allApps = dataStoreViewModel.allApps.collectAsState().value.toMutableList()
 
     val checkInstalled: List<AppDetails> = platforms.filter {
         var isInstalled = false

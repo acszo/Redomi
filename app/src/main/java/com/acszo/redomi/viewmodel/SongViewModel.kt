@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -45,10 +46,10 @@ class SongViewModel @Inject constructor(
 
             val apps = Platform.platforms.filter {
                 if (appList == AppList.INSTALLED) {
-                    val installedAppsDataStore = dataStoreRepository.readInstalledApps()
+                    val installedAppsDataStore = dataStoreRepository.readDataStore().first().installedApps
                     installedAppsDataStore.contains(it)
                 } else {
-                    val allAppsDataStore = dataStoreRepository.readAllApps()
+                    val allAppsDataStore = dataStoreRepository.readDataStore().first().allApps
                     allAppsDataStore.contains(it)
                 }
             }

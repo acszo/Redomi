@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,8 +24,8 @@ class DataStoreViewModel @Inject constructor(
     val allApps: StateFlow<List<AppDetails>> = _allApps.asStateFlow()
 
     fun getInstalledApps() = viewModelScope.launch {
-        _installedApps.update {
-            dataStoreRepository.readInstalledApps()
+        dataStoreRepository.readDataStore().collectLatest {
+            _installedApps.value = it.installedApps
         }
     }
 
@@ -34,8 +34,8 @@ class DataStoreViewModel @Inject constructor(
     }
 
     fun getAllApps() = viewModelScope.launch {
-        _allApps.update {
-            dataStoreRepository.readAllApps()
+        dataStoreRepository.readDataStore().collectLatest {
+            _allApps.value = it.allApps
         }
     }
 

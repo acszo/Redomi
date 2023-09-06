@@ -53,7 +53,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -331,7 +331,7 @@ private fun SongInfoDisplay(
             Icon(
                 modifier = Modifier
                     .size(24.dp)
-                    .rotate(rotation.value),
+                    .graphicsLayer { rotationZ = rotation.value },
                 painter = painterResource(id = R.drawable.settings_icon),
                 tint = MaterialTheme.colorScheme.secondary,
                 contentDescription = stringResource(id = R.string.settings)
