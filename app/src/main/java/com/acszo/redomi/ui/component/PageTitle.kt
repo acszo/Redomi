@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -16,13 +17,12 @@ fun PageTitle(
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
     Text(
+        text = title,
         modifier = Modifier
             .padding(top = 18.dp)
-            .padding(horizontal = 28.dp, vertical = 28.dp),
-        text = title,
+            .padding(horizontal = 28.dp, vertical = 28.dp)
+            .graphicsLayer { alpha = (1f - scrollBehavior.state.overlappedFraction) },
         style = MaterialTheme.typography.displaySmall,
-        color = MaterialTheme.colorScheme.onSurface.copy(
-            alpha = (1f - scrollBehavior.state.overlappedFraction)
-        ),
+        color = MaterialTheme.colorScheme.onSurface,
     )
 }

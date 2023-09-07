@@ -6,6 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -18,9 +20,8 @@ fun SmallTopAppBar(
         title = {
             Text(
                 text = title,
-                color = MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = scrollBehavior.state.overlappedFraction
-                ),
+                modifier = Modifier.graphicsLayer { alpha = scrollBehavior.state.overlappedFraction },
+                color = MaterialTheme.colorScheme.onSurface,
             )
         },
         scrollBehavior = scrollBehavior,
