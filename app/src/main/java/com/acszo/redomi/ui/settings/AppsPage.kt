@@ -2,7 +2,6 @@ package com.acszo.redomi.ui.settings
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -46,7 +45,6 @@ fun AppsPage(
     dataStoreViewModel: DataStoreViewModel = hiltViewModel(),
     backButton: @Composable () -> Unit
 ) {
-    Log.d("DIOCANE", "SCREEN RECOMPOSING")
     val pageTitle: String = stringResource(id = R.string.apps)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val tabs: List<String> = listOf(

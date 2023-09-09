@@ -62,7 +62,7 @@ fun SettingsPage(navController: NavController) {
     val modelName = "Model: ${Build.MODEL}"
     val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
 
-    val openThemeDialog = remember { mutableStateOf(false)  }
+    val openThemeDialog = remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

@@ -25,7 +25,8 @@ enum class AppList {
 
 @HiltViewModel
 class SongViewModel @Inject constructor(
-    private val dataStoreRepository: DataStoreRepository
+    private val dataStoreRepository: DataStoreRepository,
+    private val songRepository: SongRepository
 ): ViewModel() {
 
     private val _songInfo: MutableStateFlow<SongInfo?> = MutableStateFlow(null)
@@ -41,7 +42,7 @@ class SongViewModel @Inject constructor(
         try {
             _isLoading.update { true }
 
-            val response: Providers = SongRepository().getSongs(url)
+            val response: Providers = songRepository.getSongs(url)
             _songInfo.update { response.entitiesByUniqueId[response.entitiesByUniqueId.keys.first().toString()] }
 
             val apps = Platform.platforms.filter {
