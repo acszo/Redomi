@@ -88,8 +88,8 @@ fun SongInfoDisplay(
             verticalArrangement = Arrangement.spacedBy(5.dp, Alignment.CenterVertically),
         ) {
             Text(
-                modifier = Modifier.basicMarquee(),
                 text = title,
+                modifier = Modifier.basicMarquee(),
                 maxLines = 2,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.headlineSmall.copy(

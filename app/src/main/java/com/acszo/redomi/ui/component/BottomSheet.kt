@@ -87,11 +87,7 @@ fun BottomSheet(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp)
-                    .padding(
-                        bottom = WindowInsets.systemBars
-                            .asPaddingValues()
-                            .calculateBottomPadding()
-                    ),
+                    .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
@@ -100,11 +96,7 @@ fun BottomSheet(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-                        bottom = WindowInsets.systemBars
-                            .asPaddingValues()
-                            .calculateBottomPadding()
-                    ),
+                    .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 if (platforms.size > 1 || platforms.size == 1 && isActionsRequired) {

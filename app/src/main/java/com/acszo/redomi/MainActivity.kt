@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
@@ -15,11 +16,13 @@ import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.nav.RootNavigation
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.DataStoreViewModel
+import com.acszo.redomi.viewmodel.GithubViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var dataStoreViewModel: DataStoreViewModel
+    private lateinit var githubViewModel: GithubViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,13 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             dataStoreViewModel = viewModel()
+            githubViewModel = viewModel()
+            val versionName = BuildConfig.VERSION_NAME
+            LaunchedEffect(Unit) {
+                githubViewModel.getLatestRelease(versionName)
+            }
+            val isNotLatest = githubViewModel.isNotLatest.collectAsState().value
+
             val context = LocalContext.current
             val dataStore = SettingsDataStore(context)
             val theme = dataStore.getThemeMode.collectAsState(initial = SYSTEM_THEME)
@@ -40,7 +50,9 @@ class MainActivity : ComponentActivity() {
                 darkTheme = getTheme
             ) {
                 RootNavigation(
-                    dataStoreViewModel = dataStoreViewModel
+                    dataStoreViewModel = dataStoreViewModel,
+                    githubViewModel = githubViewModel,
+                    isNotLatest = isNotLatest,
                 )
             }
         }

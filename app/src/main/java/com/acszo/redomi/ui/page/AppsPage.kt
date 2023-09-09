@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.settings
+package com.acszo.redomi.ui.page
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -31,10 +31,10 @@ import com.acszo.redomi.R
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.AppCheckBoxItem
-import com.acszo.redomi.ui.component.PageBottomInfo
-import com.acszo.redomi.ui.component.PageDescription
-import com.acszo.redomi.ui.component.PageTitle
-import com.acszo.redomi.ui.component.SmallTopAppBar
+import com.acszo.redomi.ui.component.common_page.PageBottomInfo
+import com.acszo.redomi.ui.component.common_page.PageDescription
+import com.acszo.redomi.ui.component.common_page.PageTitle
+import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
 import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import kotlinx.coroutines.launch

@@ -42,8 +42,8 @@ fun AppCheckBoxItem(
             contentDescription = title,
         )
         Text(
-            modifier = Modifier.weight(1f),
             text = title,
+            modifier = Modifier.weight(1f),
         )
         Checkbox(
             checked = isChecked,

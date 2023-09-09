@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.component.common_page
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -12,8 +12,8 @@ fun PageDescription(
     description: String
 ) {
     Text(
-        modifier = Modifier.padding(horizontal = 28.dp),
         text = description,
+        modifier = Modifier.padding(horizontal = 28.dp),
         color = MaterialTheme.colorScheme.onSurfaceVariant
     )
 }

@@ -41,6 +41,12 @@
     </string>
     <string name="layout_grid_size">Dimensione griglia</string>
 
+    <string name="update_description_page">Gli aggiornamenti vengono controllati ad ogni avvio dell\'applicazione.</string>
+    <string name="title_changelogs_current">Questa versione</string>
+    <string name="title_changelogs_new">Nuova versione</string>
+    <string name="check_updates">Controlla aggiornamenti</string>
+    <string name="do_update">Aggiorna</string>
+
     <string name="system_theme">Predefinito</string>
     <string name="dark_theme">Scuro</string>
     <string name="light_theme">Chiaro</string>

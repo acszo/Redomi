@@ -78,8 +78,8 @@ fun Tabs(
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
-                    modifier = Modifier.padding(vertical = 15.dp),
                     text = text,
+                    modifier = Modifier.padding(vertical = 15.dp),
                     maxLines = 1,
                     color = if (selectedTab.value == text) {
                         MaterialTheme.colorScheme.onPrimary

@@ -3,6 +3,7 @@ package com.acszo.redomi.ui.component
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,13 +16,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.acszo.redomi.R
 
 @Composable
 fun SettingsItem(
     title: String,
     icon: Int,
     description: String,
+    isAlertIconVisible: Boolean = false,
     onClick: () -> Unit
 ) {
     Row(
@@ -52,6 +56,15 @@ fun SettingsItem(
                 maxLines = 1,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        if (isAlertIconVisible) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                painter = painterResource(id = R.drawable.outline_new_releases_icon),
+                tint = MaterialTheme.colorScheme.error,
+                contentDescription = stringResource(id = R.string.update),
             )
         }
     }

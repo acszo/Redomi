@@ -18,16 +18,20 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.acszo.redomi.ui.component.BackButton
-import com.acszo.redomi.ui.settings.AppsPage
-import com.acszo.redomi.ui.settings.LayoutPage
-import com.acszo.redomi.ui.settings.SettingsPage
+import com.acszo.redomi.ui.page.AppsPage
+import com.acszo.redomi.ui.page.LayoutPage
+import com.acszo.redomi.ui.page.SettingsPage
+import com.acszo.redomi.ui.page.UpdatePage
 import com.acszo.redomi.viewmodel.DataStoreViewModel
+import com.acszo.redomi.viewmodel.GithubViewModel
 
 const val initialOffset = 0.10f
 
 @Composable
 fun RootNavigation(
-    dataStoreViewModel: DataStoreViewModel
+    dataStoreViewModel: DataStoreViewModel,
+    githubViewModel: GithubViewModel,
+    isNotLatest: Boolean
 ) {
     val navController: NavHostController = rememberNavController()
 
@@ -38,7 +42,10 @@ fun RootNavigation(
         navigationComposable(
             route = Route.SettingsPage.route
         ) {
-            SettingsPage(navController = navController)
+            SettingsPage(
+                navController = navController,
+                isNotLatest = isNotLatest
+            )
         }
         navigationComposable(
             route = Route.AppsPage.route
@@ -53,6 +60,15 @@ fun RootNavigation(
             route = Route.LayoutPage.route
         ) {
             LayoutPage {
+                BackButton { navController.popBackStack() }
+            }
+        }
+        navigationComposable(
+            route = Route.UpdatePage.route
+        ) {
+            UpdatePage(
+                githubViewModel = githubViewModel
+            ) {
                 BackButton { navController.popBackStack() }
             }
         }

@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.settings
+package com.acszo.redomi.ui.page
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -40,10 +40,10 @@ import com.acszo.redomi.data.DataStoreConst.getListType
 import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
-import com.acszo.redomi.ui.component.PageDescription
-import com.acszo.redomi.ui.component.PageTitle
+import com.acszo.redomi.ui.component.common_page.PageDescription
+import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.SmallTopAppBar
+import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +51,7 @@ import kotlinx.coroutines.launch
 fun LayoutPage(
     backButton: @Composable () -> Unit
 ) {
-    val pageTitle: String = stringResource(id = R.string.layout)
+    val pageTitle: String = stringResource(id = R.string.update)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     val context = LocalContext.current
@@ -116,8 +116,8 @@ fun LayoutPage(
                         verticalArrangement = Arrangement.spacedBy(28.dp)
                     ) {
                         Text(
-                            modifier = Modifier.padding(horizontal = 28.dp),
                             text = stringResource(id = R.string.layout_grid_size),
+                            modifier = Modifier.padding(horizontal = 28.dp),
                             style = MaterialTheme.typography.titleLarge,
                         )
                         Row(

@@ -40,6 +40,12 @@
     </string>
     <string name="layout_grid_size">Grid size</string>
 
+    <string name="update_description_page">Updates are checked every time you start the app.</string>
+    <string name="title_changelogs_current">This version</string>
+    <string name="title_changelogs_new">New version</string>
+    <string name="check_updates">Check updates</string>
+    <string name="do_update">Update</string>
+
     <string name="system_theme">System default</string>
     <string name="dark_theme">Dark</string>
     <string name="light_theme">Light</string>

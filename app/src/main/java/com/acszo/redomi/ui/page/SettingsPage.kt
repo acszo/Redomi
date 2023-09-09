@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.settings
+package com.acszo.redomi.ui.page
 
 import android.os.Build
 import androidx.compose.foundation.layout.WindowInsets
@@ -32,19 +32,23 @@ import com.acszo.redomi.data.DataStoreConst.getListType
 import com.acszo.redomi.data.DataStoreConst.getThemeMode
 import com.acszo.redomi.data.DataStoreConst.themes
 import com.acszo.redomi.data.SettingsDataStore
-import com.acszo.redomi.ui.component.PageTitle
+import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.RedomiAlertDialog
 import com.acszo.redomi.ui.component.SettingsItem
-import com.acszo.redomi.ui.component.SmallTopAppBar
+import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
 import com.acszo.redomi.ui.nav.Pages.appsPage
 import com.acszo.redomi.ui.nav.Pages.layoutPage
+import com.acszo.redomi.ui.nav.Pages.updatePage
 import com.acszo.redomi.util.Clipboard
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsPage(navController: NavController) {
+fun SettingsPage(
+    navController: NavController,
+    isNotLatest: Boolean
+) {
     val pageTitle: String = stringResource(id = R.string.app_name)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -125,9 +129,10 @@ fun SettingsPage(navController: NavController) {
                 SettingsItem(
                     title = stringResource(id = R.string.update),
                     icon = R.drawable.update_icon,
-                    description = stringResource(id = R.string.update_description)
+                    description = stringResource(id = R.string.update_description),
+                    isAlertIconVisible = isNotLatest
                 ) {
-
+                    navController.navigate(updatePage)
                 }
             }
             item {
