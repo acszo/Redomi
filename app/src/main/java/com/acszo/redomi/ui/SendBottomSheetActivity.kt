@@ -18,12 +18,14 @@ import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.AppList
+import com.acszo.redomi.viewmodel.GithubViewModel
 import com.acszo.redomi.viewmodel.SongViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SendBottomSheetActivity: ComponentActivity() {
     private lateinit var songViewModel: SongViewModel
+    private lateinit var githubViewModel: GithubViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +33,20 @@ class SendBottomSheetActivity: ComponentActivity() {
         setContent {
             val context = LocalContext.current
             val sendIntent: String? = intent?.getStringExtra(Intent.EXTRA_TEXT)
+
             songViewModel = viewModel()
-            LaunchedEffect(Unit) { songViewModel.getPlatforms(sendIntent.toString(), AppList.ALL) }
+            LaunchedEffect(Unit) {
+                songViewModel.getPlatforms(sendIntent.toString(), AppList.ALL)
+            }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
             val platforms: Map<AppDetails, String> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
+
+            githubViewModel = viewModel()
+            LaunchedEffect(Unit) {
+                githubViewModel.latestRelease
+            }
+            val isNotLatest = githubViewModel.isNotLatest.collectAsState().value
 
             val dataStore = SettingsDataStore(context)
             val theme = dataStore.getThemeMode.collectAsState(initial = DataStoreConst.SYSTEM_THEME)
@@ -53,7 +64,8 @@ class SendBottomSheetActivity: ComponentActivity() {
                     songInfo = songInfo,
                     platforms = platforms,
                     isLoading = isLoading,
-                    isActionsRequired = true
+                    isActionsRequired = true,
+                    isNotLatest = isNotLatest
                 )
             }
         }

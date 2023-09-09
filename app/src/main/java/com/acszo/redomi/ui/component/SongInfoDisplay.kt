@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -47,10 +50,15 @@ import com.acszo.redomi.R
 fun SongInfoDisplay(
     thumbnail: String,
     title: String,
-    artist: String
+    artist: String,
+    isNotLatest: Boolean
 ) {
     val context = LocalContext.current
     val image = rememberAsyncImagePainter(model = thumbnail)
+
+    val surfaceColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
+    val errorColor = MaterialTheme.colorScheme.error
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -134,6 +142,19 @@ fun SongInfoDisplay(
                 tint = MaterialTheme.colorScheme.secondary,
                 contentDescription = stringResource(id = R.string.settings)
             )
+
+            if (isNotLatest) {
+                Canvas(
+                    modifier = Modifier.size(14.dp).offset(9.dp, -(6.dp))
+                ) {
+                    drawCircle(color = surfaceColor)
+                }
+                Canvas(
+                    modifier = Modifier.size(8.dp).offset(9.dp, -(6.dp))
+                ) {
+                    drawCircle(color = errorColor)
+                }
+            }
         }
     }
 }

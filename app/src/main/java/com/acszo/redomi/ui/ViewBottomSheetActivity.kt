@@ -19,12 +19,14 @@ import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.AppList
+import com.acszo.redomi.viewmodel.GithubViewModel
 import com.acszo.redomi.viewmodel.SongViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ViewBottomSheetActivity: ComponentActivity() {
     private lateinit var songViewModel: SongViewModel
+    private lateinit var githubViewModel: GithubViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +34,20 @@ class ViewBottomSheetActivity: ComponentActivity() {
         setContent {
             val context = LocalContext.current
             val viewIntent: Uri? = intent?.data
+
             songViewModel = viewModel()
-            LaunchedEffect(Unit) { songViewModel.getPlatforms(viewIntent.toString(), AppList.INSTALLED) }
+            LaunchedEffect(Unit) {
+                songViewModel.getPlatforms(viewIntent.toString(), AppList.INSTALLED)
+            }
             val songInfo: SongInfo? = songViewModel.songInfo.collectAsState().value
             val platforms: Map<AppDetails, String> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
+
+            githubViewModel = viewModel()
+            LaunchedEffect(Unit) {
+                githubViewModel.latestRelease
+            }
+            val isNotLatest = githubViewModel.isNotLatest.collectAsState().value
 
             val installedApps: Map<AppDetails, String> = platforms.filter {
                 var isInstalled = false
@@ -62,7 +73,8 @@ class ViewBottomSheetActivity: ComponentActivity() {
                     songInfo = songInfo,
                     platforms = installedApps,
                     isLoading = isLoading,
-                    isActionsRequired = false
+                    isActionsRequired = false,
+                    isNotLatest = isNotLatest
                 )
             }
         }

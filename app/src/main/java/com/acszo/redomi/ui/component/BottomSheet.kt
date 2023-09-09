@@ -67,7 +67,8 @@ fun BottomSheet(
     songInfo: SongInfo?,
     platforms: Map<AppDetails, String>,
     isLoading: Boolean,
-    isActionsRequired: Boolean
+    isActionsRequired: Boolean,
+    isNotLatest: Boolean
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bringActions = remember { mutableStateOf(false) }
@@ -103,7 +104,8 @@ fun BottomSheet(
                     SongInfoDisplay(
                         thumbnail = songInfo?.thumbnailUrl ?: "",
                         title = songInfo?.title ?: "",
-                        artist = songInfo?.artistName ?: ""
+                        artist = songInfo?.artistName ?: "",
+                        isNotLatest
                     )
                 }
 

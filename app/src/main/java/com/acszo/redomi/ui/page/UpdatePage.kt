@@ -100,7 +100,7 @@ fun UpdatePage(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 28.dp, vertical = 10.dp),
+                    .padding(horizontal = 28.dp, vertical = 16.dp),
                 onClick = {  }
             ) {
                 Text(
