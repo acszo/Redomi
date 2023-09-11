@@ -51,7 +51,7 @@ import kotlinx.coroutines.launch
 fun LayoutPage(
     backButton: @Composable () -> Unit
 ) {
-    val pageTitle: String = stringResource(id = R.string.update)
+    val pageTitle: String = stringResource(id = R.string.layout)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     val context = LocalContext.current
