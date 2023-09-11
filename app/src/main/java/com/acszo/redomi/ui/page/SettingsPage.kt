@@ -40,7 +40,7 @@ import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
 import com.acszo.redomi.ui.nav.Pages.appsPage
 import com.acszo.redomi.ui.nav.Pages.layoutPage
 import com.acszo.redomi.ui.nav.Pages.updatePage
-import com.acszo.redomi.util.Clipboard
+import com.acszo.redomi.utils.ClipboardUtils.copyText
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -141,7 +141,7 @@ fun SettingsPage(
                     icon = R.drawable.info_filled_icon,
                     description = versionName
                 ) {
-                    Clipboard().copyText(
+                    copyText(
                         clipboardManager = clipboardManager,
                         text = appVersion + '\n' + modelName + '\n' + androidVersion
                     )

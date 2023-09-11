@@ -58,7 +58,7 @@ import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
-import com.acszo.redomi.util.Clipboard
+import com.acszo.redomi.utils.ClipboardUtils.copyText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -159,7 +159,7 @@ fun BottomSheet(
                             )
                         }
                         ActionsMenuItem(R.string.copy, R.drawable.link_fill_icon) {
-                            Clipboard().copyText(
+                            copyText(
                                 clipboardManager = clipboardManager,
                                 text = selectedPlatformLink.value,
                                 onDismiss = onDismiss

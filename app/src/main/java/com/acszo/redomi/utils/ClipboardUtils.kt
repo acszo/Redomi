@@ -1,9 +1,9 @@
-package com.acszo.redomi.util
+package com.acszo.redomi.utils
 
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 
-class Clipboard {
+object ClipboardUtils {
 
     fun copyText(clipboardManager: ClipboardManager, text: String, onDismiss: () -> Unit = { }) {
         clipboardManager.setText(AnnotatedString(text))
