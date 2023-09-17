@@ -31,8 +31,8 @@ fun AppCheckBoxItem(
         horizontalArrangement = Arrangement.spacedBy(18.dp),
     ) {
         Icon(
-            modifier = Modifier.size(20.dp),
             painter = painterResource(id = R.drawable.menu_icon),
+            modifier = Modifier.size(20.dp),
             contentDescription = title,
             tint = MaterialTheme.colorScheme.secondary,
         )

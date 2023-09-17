@@ -282,7 +282,7 @@ private fun ActionsMenuItem(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painterResource(id = icon),
+                    painter = painterResource(id = icon),
                     modifier = Modifier
                         .size(50.dp)
                         .padding(8.dp),

@@ -75,8 +75,8 @@ fun SongInfoDisplay(
         ) {
             if (image.state is AsyncImagePainter.State.Loading) {
                 Icon(
-                    modifier = Modifier.size(35.dp),
                     painter = painterResource(id = R.drawable.song_fill_icon),
+                    modifier = Modifier.size(35.dp),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     contentDescription = stringResource(id = R.string.placeholder)
                 )
@@ -135,10 +135,10 @@ fun SongInfoDisplay(
             }
 
             Icon(
+                painter = painterResource(id = R.drawable.settings_icon),
                 modifier = Modifier
                     .size(24.dp)
                     .graphicsLayer { rotationZ = rotation.value },
-                painter = painterResource(id = R.drawable.settings_icon),
                 tint = MaterialTheme.colorScheme.secondary,
                 contentDescription = stringResource(id = R.string.settings)
             )

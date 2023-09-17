@@ -37,8 +37,8 @@ fun SettingsItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(24.dp),
             painter = painterResource(id = icon),
+            modifier = Modifier.size(24.dp),
             tint = MaterialTheme.colorScheme.secondary,
             contentDescription = title,
         )
@@ -61,8 +61,8 @@ fun SettingsItem(
         Spacer(modifier = Modifier.weight(1f))
         if (isAlertIconVisible) {
             Icon(
-                modifier = Modifier.size(24.dp),
                 painter = painterResource(id = R.drawable.outline_new_releases_icon),
+                modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.error,
                 contentDescription = stringResource(id = R.string.update),
             )
