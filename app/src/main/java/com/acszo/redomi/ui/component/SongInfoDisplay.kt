@@ -51,7 +51,7 @@ fun SongInfoDisplay(
     thumbnail: String,
     title: String,
     artist: String,
-    isNotLatest: Boolean
+    isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
     val image = rememberAsyncImagePainter(model = thumbnail)
@@ -143,7 +143,7 @@ fun SongInfoDisplay(
                 contentDescription = stringResource(id = R.string.settings)
             )
 
-            if (isNotLatest) {
+            if (isUpdateAvailable) {
                 Canvas(
                     modifier = Modifier.size(14.dp).offset(9.dp, -(6.dp))
                 ) {

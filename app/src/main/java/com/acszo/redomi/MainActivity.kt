@@ -16,13 +16,13 @@ import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.nav.RootNavigation
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.DataStoreViewModel
-import com.acszo.redomi.viewmodel.GithubViewModel
+import com.acszo.redomi.viewmodel.UpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var dataStoreViewModel: DataStoreViewModel
-    private lateinit var githubViewModel: GithubViewModel
+    private lateinit var updateViewModel: UpdateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +30,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             dataStoreViewModel = viewModel()
-            githubViewModel = viewModel()
+            updateViewModel = viewModel()
             val versionName = BuildConfig.VERSION_NAME
             LaunchedEffect(Unit) {
-                githubViewModel.getLatestRelease(versionName)
+                updateViewModel.getLatestRelease(versionName)
             }
-            val isNotLatest = githubViewModel.isNotLatest.collectAsState().value
+            val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
 
             val context = LocalContext.current
             val dataStore = SettingsDataStore(context)
@@ -51,8 +51,8 @@ class MainActivity : ComponentActivity() {
             ) {
                 RootNavigation(
                     dataStoreViewModel = dataStoreViewModel,
-                    githubViewModel = githubViewModel,
-                    isNotLatest = isNotLatest,
+                    updateViewModel = updateViewModel,
+                    isUpdateAvailable = isUpdateAvailable,
                 )
             }
         }

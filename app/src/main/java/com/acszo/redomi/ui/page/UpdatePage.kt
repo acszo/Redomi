@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.page
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.animation.core.Animatable
@@ -29,6 +30,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
@@ -41,23 +43,29 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
+import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.component.common_page.PageDescription
 import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
-import com.acszo.redomi.viewmodel.GithubViewModel
+import com.acszo.redomi.viewmodel.UpdateViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdatePage(
-    githubViewModel: GithubViewModel = hiltViewModel(),
+    updateViewModel: UpdateViewModel = hiltViewModel(),
     backButton: @Composable () -> Unit
 ) {
     val pageTitle: String = stringResource(id = R.string.update)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val latestRelease = githubViewModel.latestRelease.collectAsState().value
-    val isNotLatest = githubViewModel.isNotLatest.collectAsState().value
+    val latestRelease = updateViewModel.latestRelease.collectAsState().value
+    val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
 
     val context = LocalContext.current
     val display = context.resources.displayMetrics
@@ -65,6 +73,8 @@ fun UpdatePage(
     val height = display.heightPixels.dp / display.density
     val widthOffset = width / 1.5f
     val heightOffset = width / 1.1f
+
+    val scope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -77,7 +87,7 @@ fun UpdatePage(
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
-        if (isNotLatest) {
+        if (isUpdateAvailable) {
             val currentRotation by remember { mutableFloatStateOf(0f) }
             val rotation = remember { Animatable(currentRotation) }
 
@@ -131,9 +141,9 @@ fun UpdatePage(
                 }
                 item {
                     Text(
-                        text = if (isNotLatest) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
+                        text = if (isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
                         modifier = Modifier.padding(horizontal = 28.dp),
-                        color = if (isNotLatest) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                        color = if (isUpdateAvailable) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
@@ -156,25 +166,51 @@ fun UpdatePage(
                     .fillMaxWidth()
                     .padding(horizontal = 28.dp, vertical = 16.dp),
                 onClick = {
-                    if (context.packageManager.canRequestPackageInstalls()) {
-                        // TODO
-                    } else {
-                        context.startActivity(
-                            Intent(
-                                android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                                Uri.parse("package:${context.packageName}")
+                    if (isUpdateAvailable) {
+                        if (context.packageManager.canRequestPackageInstalls()) {
+                            scope.launch(Dispatchers.IO) {
+                                if (latestRelease != null) {
+                                    updateViewModel.downloadApk(context, latestRelease).collect { downloadStatus ->
+                                        if (downloadStatus is DownloadStatus.Finished) {
+                                            installApk(context, latestRelease.assets[0].name)
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            context.startActivity(
+                                Intent(
+                                    android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                                    Uri.parse("package:${context.packageName}")
+                                )
                             )
-                        )
+                        }
+                    } else {
+                        updateViewModel.getLatestRelease(BuildConfig.VERSION_NAME)
                     }
                 }
             ) {
                 Text(
-                    text = if (isNotLatest) stringResource(id = R.string.do_update)
+                    text = if (isUpdateAvailable) stringResource(id = R.string.do_update)
                     else stringResource(id = R.string.check_updates)
                 )
             }
         }
     }
+}
+
+private fun installApk(context: Context, apkName: String) {
+    val latestApkUri = FileProvider.getUriForFile(
+        context,
+        "${context.packageName}.provider",
+        File(context.getExternalFilesDir("apk"), apkName)
+    )
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        setDataAndType(latestApkUri, "application/vnd.android.package-archive")
+    }
+    context.startActivity(intent)
 }
 
 fun Modifier.fadingEdge() = this

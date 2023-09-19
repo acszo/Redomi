@@ -42,6 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.ViewBottomSheetActivity"
             android:exported="true"
@@ -136,6 +137,7 @@
                 <data android:pathPrefix="/track"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.SendBottomSheetActivity"
             android:exported="true"
@@ -151,6 +153,17 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.acszo.redomi.provider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
     </application>
 
 </manifest>

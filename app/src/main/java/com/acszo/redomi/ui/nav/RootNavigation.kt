@@ -23,15 +23,15 @@ import com.acszo.redomi.ui.page.LayoutPage
 import com.acszo.redomi.ui.page.SettingsPage
 import com.acszo.redomi.ui.page.UpdatePage
 import com.acszo.redomi.viewmodel.DataStoreViewModel
-import com.acszo.redomi.viewmodel.GithubViewModel
+import com.acszo.redomi.viewmodel.UpdateViewModel
 
 const val initialOffset = 0.10f
 
 @Composable
 fun RootNavigation(
     dataStoreViewModel: DataStoreViewModel,
-    githubViewModel: GithubViewModel,
-    isNotLatest: Boolean
+    updateViewModel: UpdateViewModel,
+    isUpdateAvailable: Boolean
 ) {
     val navController: NavHostController = rememberNavController()
 
@@ -44,7 +44,7 @@ fun RootNavigation(
         ) {
             SettingsPage(
                 navController = navController,
-                isNotLatest = isNotLatest
+                isUpdateAvailable = isUpdateAvailable
             )
         }
         navigationComposable(
@@ -67,7 +67,7 @@ fun RootNavigation(
             route = Route.UpdatePage.route
         ) {
             UpdatePage(
-                githubViewModel = githubViewModel
+                updateViewModel = updateViewModel
             ) {
                 BackButton { navController.popBackStack() }
             }

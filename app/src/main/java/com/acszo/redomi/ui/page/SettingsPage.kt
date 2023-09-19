@@ -47,7 +47,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SettingsPage(
     navController: NavController,
-    isNotLatest: Boolean
+    isUpdateAvailable: Boolean
 ) {
     val pageTitle: String = stringResource(id = R.string.app_name)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -130,7 +130,7 @@ fun SettingsPage(
                     title = stringResource(id = R.string.update),
                     icon = R.drawable.update_icon,
                     description = stringResource(id = R.string.update_description),
-                    isAlertIconVisible = isNotLatest
+                    isAlertIconVisible = isUpdateAvailable
                 ) {
                     navController.navigate(updatePage)
                 }

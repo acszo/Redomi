@@ -18,14 +18,14 @@ import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.AppList
-import com.acszo.redomi.viewmodel.GithubViewModel
+import com.acszo.redomi.viewmodel.UpdateViewModel
 import com.acszo.redomi.viewmodel.SongViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SendBottomSheetActivity: ComponentActivity() {
     private lateinit var songViewModel: SongViewModel
-    private lateinit var githubViewModel: GithubViewModel
+    private lateinit var updateViewModel: UpdateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +42,11 @@ class SendBottomSheetActivity: ComponentActivity() {
             val platforms: Map<AppDetails, String> = songViewModel.platforms.collectAsState().value
             val isLoading: Boolean = songViewModel.isLoading.collectAsState().value
 
-            githubViewModel = viewModel()
+            updateViewModel = viewModel()
             LaunchedEffect(Unit) {
-                githubViewModel.latestRelease
+                updateViewModel.latestRelease
             }
-            val isNotLatest = githubViewModel.isNotLatest.collectAsState().value
+            val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
 
             val dataStore = SettingsDataStore(context)
             val theme = dataStore.getThemeMode.collectAsState(initial = DataStoreConst.SYSTEM_THEME)
@@ -65,7 +65,7 @@ class SendBottomSheetActivity: ComponentActivity() {
                     platforms = platforms,
                     isLoading = isLoading,
                     isActionsRequired = true,
-                    isNotLatest = isNotLatest
+                    isUpdateAvailable = isUpdateAvailable
                 )
             }
         }
