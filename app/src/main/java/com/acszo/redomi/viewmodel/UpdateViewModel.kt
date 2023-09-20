@@ -64,7 +64,17 @@ class UpdateViewModel @Inject constructor(
         val apkFile = File(context.getExternalFilesDir("apk"), assetName)
         byteStream().use { inputStream ->
             apkFile.outputStream().use { outputStream ->
-                inputStream.copyTo(outputStream)
+                val totalBytes = contentLength()
+                val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+                var progressBytes = 0L
+                var bytes = inputStream.read(buffer)
+
+                while (bytes >= 0) {
+                    outputStream.write(buffer, 0, bytes)
+                    progressBytes += bytes
+                    bytes = inputStream.read(buffer)
+                    emit(DownloadStatus.Downloading(((progressBytes * 100) / totalBytes).toInt()))
+                }
             }
         }
 

@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -66,6 +68,7 @@ fun UpdatePage(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val latestRelease = updateViewModel.latestRelease.collectAsState().value
     val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
+    val progressDownloadStatus = remember { mutableStateOf(DownloadStatus.Finished as DownloadStatus) }
 
     val context = LocalContext.current
     val display = context.resources.displayMetrics
@@ -161,6 +164,13 @@ fun UpdatePage(
                     )
                 }
             }
+
+            if (progressDownloadStatus.value is DownloadStatus.Downloading) {
+                LinearProgressIndicator(
+                    progress = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toFloat()
+                )
+            }
+
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -171,6 +181,7 @@ fun UpdatePage(
                             scope.launch(Dispatchers.IO) {
                                 if (latestRelease != null) {
                                     updateViewModel.downloadApk(context, latestRelease).collect { downloadStatus ->
+                                        progressDownloadStatus.value = downloadStatus
                                         if (downloadStatus is DownloadStatus.Finished) {
                                             installApk(context, latestRelease.assets[0].name)
                                         }
