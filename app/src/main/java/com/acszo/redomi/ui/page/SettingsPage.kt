@@ -68,9 +68,9 @@ fun SettingsPage(
     ScaffoldWithTopAppBar(
         title = pageTitle,
         scrollBehavior = scrollBehavior
-    ) {
+    ) { padding, _ ->
         LazyColumn(
-            Modifier.padding(it),
+            Modifier.padding(padding),
             contentPadding = WindowInsets.navigationBars.asPaddingValues()
         ) {
             item {
@@ -79,6 +79,7 @@ fun SettingsPage(
                     scrollBehavior = scrollBehavior
                 )
             }
+
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.apps),
@@ -88,6 +89,7 @@ fun SettingsPage(
                     navController.navigate(appsPage)
                 }
             }
+
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
@@ -97,6 +99,7 @@ fun SettingsPage(
                     navController.navigate(layoutPage)
                 }
             }
+
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.theme),
@@ -106,6 +109,7 @@ fun SettingsPage(
                     openThemeDialog.value = true
                 }
             }
+
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.github),
@@ -115,6 +119,7 @@ fun SettingsPage(
                     uriHandle.openUri("https://github.com/acszo/Redomi")
                 }
             }
+
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.update),
@@ -125,6 +130,7 @@ fun SettingsPage(
                     navController.navigate(updatePage)
                 }
             }
+
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.version),

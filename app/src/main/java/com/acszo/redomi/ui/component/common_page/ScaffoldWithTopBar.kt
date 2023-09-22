@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.component.common_page
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,9 +14,10 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 @Composable
 fun ScaffoldWithTopAppBar(
     title: String,
+    description: String = "",
     scrollBehavior: TopAppBarScrollBehavior,
     backButton: @Composable () -> Unit = {},
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (PaddingValues, @Composable () -> Unit) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -28,6 +30,14 @@ fun ScaffoldWithTopAppBar(
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
-        content(it)
+        content(it) {
+            Column {
+                PageTitle(
+                    title = title,
+                    scrollBehavior = scrollBehavior
+                )
+                PageDescription(description = description)
+            }
+        }
     }
 }

@@ -38,8 +38,6 @@ import com.acszo.redomi.data.DataStoreConst.getListType
 import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
-import com.acszo.redomi.ui.component.common_page.PageDescription
-import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import kotlinx.coroutines.launch
@@ -61,22 +59,17 @@ fun LayoutPage(
 
     ScaffoldWithTopAppBar(
         title = pageTitle,
+        description = stringResource(id = R.string.layout_description_page),
         scrollBehavior = scrollBehavior,
         backButton = { backButton() }
-    ) {
+    ) { padding, titleWithDescription ->
         LazyColumn(
-            modifier = Modifier.padding(it),
+            modifier = Modifier.padding(padding),
             verticalArrangement = Arrangement.spacedBy(28.dp),
             contentPadding = WindowInsets.navigationBars.asPaddingValues()
         ) {
             item {
-                Column {
-                    PageTitle(
-                        title = pageTitle,
-                        scrollBehavior = scrollBehavior
-                    )
-                    PageDescription(description = stringResource(id = R.string.layout_description_page))
-                }
+                titleWithDescription()
             }
 
             listTypes.forEach { item ->

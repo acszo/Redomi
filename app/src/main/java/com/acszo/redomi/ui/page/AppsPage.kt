@@ -3,7 +3,6 @@ package com.acszo.redomi.ui.page
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,8 +28,6 @@ import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.common_page.PageBottomInfo
-import com.acszo.redomi.ui.component.common_page.PageDescription
-import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import com.acszo.redomi.viewmodel.DataStoreViewModel
@@ -72,9 +69,10 @@ fun AppsPage(
 
     ScaffoldWithTopAppBar(
         title = pageTitle,
+        description = stringResource(id = R.string.apps_description_page),
         scrollBehavior = scrollBehavior,
         backButton = { backButton() }
-    ) { padding ->
+    ) { padding, titleWithDescription ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
@@ -83,20 +81,16 @@ fun AppsPage(
             contentPadding = WindowInsets.navigationBars.asPaddingValues()
         ) {
             item {
-                Column {
-                    PageTitle(
-                        title = pageTitle,
-                        scrollBehavior = scrollBehavior
-                    )
-                    PageDescription(description = stringResource(id = R.string.apps_description_page))
-                }
+                titleWithDescription()
             }
+
             item {
                 Tabs(
                     tabs = tabs,
                     selectedTab = selectedTab
                 )
             }
+
             item {
                 if (selectedTab.value == tabs.first()) {
                     for (app in checkInstalled) {
@@ -146,11 +140,13 @@ fun AppsPage(
                     }
                 }
             }
+
             item {
                 HorizontalDivider(
                     modifier = Modifier.padding(horizontal = 28.dp)
                 )
             }
+
             item {
                 PageBottomInfo(
                     if (selectedTab.value == tabs[0])

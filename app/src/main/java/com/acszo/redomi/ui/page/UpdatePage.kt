@@ -49,8 +49,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
-import com.acszo.redomi.ui.component.common_page.PageDescription
-import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -80,9 +78,10 @@ fun UpdatePage(
 
     ScaffoldWithTopAppBar(
         title = pageTitle,
+        description = stringResource(id = R.string.update_description_page),
         scrollBehavior = scrollBehavior,
         backButton = { backButton() }
-    ) {
+    ) { padding, titleWithDescription ->
         if (isUpdateAvailable) {
             val currentRotation by remember { mutableFloatStateOf(0f) }
             val rotation = remember { Animatable(currentRotation) }
@@ -120,21 +119,16 @@ fun UpdatePage(
         ) {
             LazyColumn(
                 modifier = Modifier
-                    .padding(it)
+                    .padding(padding)
                     .weight(1f)
                     .fadingEdge(),
                 verticalArrangement = Arrangement.spacedBy(28.dp),
                 contentPadding = WindowInsets.navigationBars.asPaddingValues()
             ) {
                 item {
-                    Column {
-                        PageTitle(
-                            title = pageTitle,
-                            scrollBehavior = scrollBehavior
-                        )
-                        PageDescription(description = stringResource(id = R.string.update_description_page))
-                    }
+                    titleWithDescription()
                 }
+
                 item {
                     Text(
                         text = if (isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
@@ -143,6 +137,7 @@ fun UpdatePage(
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
+
                 item {
                     Text(
                         text = latestRelease?.name ?: "",
@@ -150,6 +145,7 @@ fun UpdatePage(
                         style = MaterialTheme.typography.headlineMedium
                     )
                 }
+
                 item {
                     Text(
                         text = latestRelease?.body ?: "",
