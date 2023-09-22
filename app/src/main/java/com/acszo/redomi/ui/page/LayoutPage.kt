@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -25,7 +24,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -43,7 +41,7 @@ import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.common_page.PageDescription
 import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
+import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,16 +59,10 @@ fun LayoutPage(
     val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
     val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = MEDIUM_GRID)
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            SmallTopAppBar(
-                title = pageTitle,
-                scrollBehavior = scrollBehavior,
-                navigationIcon = { backButton() }
-            )
-        },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+    ScaffoldWithTopAppBar(
+        title = pageTitle,
+        scrollBehavior = scrollBehavior,
+        backButton = { backButton() }
     ) {
         LazyColumn(
             modifier = Modifier.padding(it),

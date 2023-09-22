@@ -3,6 +3,7 @@ package com.acszo.redomi.ui.page
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.provider.Settings
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.infiniteRepeatable
@@ -22,7 +23,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -40,7 +40,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -52,7 +51,7 @@ import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.component.common_page.PageDescription
 import com.acszo.redomi.ui.component.common_page.PageTitle
-import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
+import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -79,16 +78,10 @@ fun UpdatePage(
 
     val scope = rememberCoroutineScope()
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            SmallTopAppBar(
-                title = pageTitle,
-                scrollBehavior = scrollBehavior,
-                navigationIcon = { backButton() }
-            )
-        },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+    ScaffoldWithTopAppBar(
+        title = pageTitle,
+        scrollBehavior = scrollBehavior,
+        backButton = { backButton() }
     ) {
         if (isUpdateAvailable) {
             val currentRotation by remember { mutableFloatStateOf(0f) }
@@ -191,7 +184,7 @@ fun UpdatePage(
                         } else {
                             context.startActivity(
                                 Intent(
-                                    android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                                    Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
                                     Uri.parse("package:${context.packageName}")
                                 )
                             )

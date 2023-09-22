@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,7 +14,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -36,7 +33,7 @@ import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.RedomiAlertDialog
 import com.acszo.redomi.ui.component.SettingsItem
-import com.acszo.redomi.ui.component.common_page.SmallTopAppBar
+import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import com.acszo.redomi.ui.nav.Pages.appsPage
 import com.acszo.redomi.ui.nav.Pages.layoutPage
 import com.acszo.redomi.ui.nav.Pages.updatePage
@@ -68,16 +65,9 @@ fun SettingsPage(
 
     val openThemeDialog = remember { mutableStateOf(false) }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        containerColor = MaterialTheme.colorScheme.surface,
-        topBar = {
-            SmallTopAppBar(
-                title = pageTitle,
-                scrollBehavior = scrollBehavior
-            )
-        },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+    ScaffoldWithTopAppBar(
+        title = pageTitle,
+        scrollBehavior = scrollBehavior
     ) {
         LazyColumn(
             Modifier.padding(it),
