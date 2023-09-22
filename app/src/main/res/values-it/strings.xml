@@ -53,4 +53,10 @@
 
     <string name="dialog_dismiss">Annulla</string>
     <string name="dialog_confirm">Ok</string>
+
+    <string name="dialog_setup_title">Importante</string>
+    <string name="dialog_setup_description">
+        Di base Redomi non può aprire link esterni.\nVerrai reindirizzato alle impostazioni per farlo funzionare, lascia deselezionati i link di applicazioni installete
+        nel tuo sistema (es. se use Spotify lascialo deselezionato) e seleziona tutto il resto, così che Redomi
+        possa funzionare come previsto.</string>
 </resources>

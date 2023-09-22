@@ -3,6 +3,7 @@ package com.acszo.redomi.data
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -16,9 +17,21 @@ class SettingsDataStore(private val context: Context) {
 
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("SettingsDataStore")
+        val FIRST_TIME = booleanPreferencesKey("first_time")
         val LAYOUT_LIST_TYPE = intPreferencesKey("list_type")
         val LAYOUT_GRID_SIZE = intPreferencesKey("grid_size")
         val THEME_MODE = intPreferencesKey("theme_mode")
+    }
+
+    val getIsFirstTime: Flow<Boolean?> = context.dataStore.data
+        .map { preferences ->
+            preferences[FIRST_TIME] ?: true
+        }
+
+    suspend fun saveIsFirstTime(isFirstTime: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[FIRST_TIME] = isFirstTime
+        }
     }
 
     val getLayoutListType: Flow<Int?> = context.dataStore.data

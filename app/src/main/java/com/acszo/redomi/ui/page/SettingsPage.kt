@@ -1,12 +1,16 @@
 package com.acszo.redomi.ui.page
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -53,6 +57,7 @@ fun SettingsPage(
     val scope = rememberCoroutineScope()
 
     val dataStore = SettingsDataStore(context)
+    val isFirstTime = dataStore.getIsFirstTime.collectAsState(initial = false)
     val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
     val themeMode = dataStore.getThemeMode.collectAsState(initial = SYSTEM_THEME)
 
@@ -144,6 +149,36 @@ fun SettingsPage(
                 }
             }
         }
+    }
+
+    if (isFirstTime.value!!) {
+        RedomiAlertDialog(
+            icon =  R.drawable.outline_new_releases_icon,
+            title = stringResource(id = R.string.dialog_setup_title),
+            content = {
+                Text(text = stringResource(id = R.string.dialog_setup_description))
+            },
+            confirmAction = {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    context.startActivity(
+                        Intent(
+                            Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
+                            Uri.parse("package:${context.packageName}")
+                        )
+                    )
+                } else {
+                    context.startActivity(
+                        Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:${context.packageName}")
+                        )
+                    )
+                }
+                scope.launch {
+                    dataStore.saveIsFirstTime(false)
+                }
+            }
+        )
     }
 
     if (openThemeDialog.value) {

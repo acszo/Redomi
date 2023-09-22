@@ -52,4 +52,10 @@
 
     <string name="dialog_dismiss">Cancel</string>
     <string name="dialog_confirm">Ok</string>
+
+    <string name="dialog_setup_title">Important</string>
+    <string name="dialog_setup_description">
+        By default Redomi can\'t open external links.\nYou will get redirected to the settings to make it work, leave unchecked the links from apps installed in your system
+        (e.g., if you use Spotify leave it unchecked) and check all the others so Redomi can open them
+        and work as intended.</string>
 </resources>
