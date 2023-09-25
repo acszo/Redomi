@@ -40,7 +40,7 @@ class UpdateViewModel @Inject constructor(
                 githubRepository.getLatest()
             }
             _isUpdateAvailable.update {
-                currentVersion != _latestRelease.value?.tag_name
+                currentVersion < _latestRelease.value?.tag_name.toString()
             }
         }  catch (e: Exception) {
             print(e.message)
