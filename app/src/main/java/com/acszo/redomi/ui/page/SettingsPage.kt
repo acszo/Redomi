@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.navigationBars
@@ -33,6 +35,7 @@ import com.acszo.redomi.data.DataStoreConst.getListType
 import com.acszo.redomi.data.DataStoreConst.getThemeMode
 import com.acszo.redomi.data.DataStoreConst.themes
 import com.acszo.redomi.data.SettingsDataStore
+import com.acszo.redomi.ui.component.IconItemDialog
 import com.acszo.redomi.ui.component.common_page.PageTitle
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.RedomiAlertDialog
@@ -153,10 +156,22 @@ fun SettingsPage(
 
     if (isFirstTime.value!!) {
         RedomiAlertDialog(
-            icon =  R.drawable.outline_new_releases_icon,
+            icon =  R.drawable.description_icon,
             title = stringResource(id = R.string.dialog_setup_title),
             content = {
-                Text(text = stringResource(id = R.string.dialog_setup_description))
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Text(text = stringResource(id = R.string.dialog_setup_description))
+                    IconItemDialog(
+                        icon = R.drawable.done_all_icon,
+                        description = stringResource(id = R.string.dialog_setup_description_checked)
+                    )
+                    IconItemDialog(
+                        icon = R.drawable.remove_done_icon,
+                        description = stringResource(id = R.string.dialog_setup_description_unchecked)
+                    )
+                }
             },
             confirmAction = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
