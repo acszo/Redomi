@@ -1,9 +1,7 @@
 package com.acszo.redomi.ui.component
 
 import android.content.Intent
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -25,14 +23,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -124,23 +117,14 @@ fun SongInfoDisplay(
                 context.startActivity(Intent(context, MainActivity::class.java))
             }
         ) {
-            val currentRotation by remember { mutableFloatStateOf(120f) }
-            val rotation = remember { Animatable(currentRotation) }
-
-            LaunchedEffect(currentRotation) {
-                rotation.animateTo(
-                    targetValue = 180f,
-                    animationSpec = tween(300, easing = LinearOutSlowInEasing),
-                )
-            }
-
-            Icon(
-                painter = painterResource(id = R.drawable.settings_icon),
-                modifier = Modifier
-                    .size(24.dp)
-                    .graphicsLayer { rotationZ = rotation.value },
-                tint = MaterialTheme.colorScheme.secondary,
-                contentDescription = stringResource(id = R.string.settings)
+            RotatingIcon(
+                icon = R.drawable.settings_icon,
+                size = 24.dp,
+                contentDescription = stringResource(id = R.string.settings),
+                startValue = 120f,
+                targetValue = 180f,
+                duration = 300,
+                easing = LinearOutSlowInEasing
             )
 
             if (isUpdateAvailable) {

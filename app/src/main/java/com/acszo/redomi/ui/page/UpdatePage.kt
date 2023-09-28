@@ -4,10 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -26,10 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -49,6 +43,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
+import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -83,25 +78,15 @@ fun UpdatePage(
         backButton = { backButton() }
     ) { padding, titleWithDescription ->
         if (isUpdateAvailable) {
-            val currentRotation by remember { mutableFloatStateOf(0f) }
-            val rotation = remember { Animatable(currentRotation) }
-
-            LaunchedEffect(currentRotation) {
-                rotation.animateTo(
-                    targetValue = 360f,
-                    animationSpec = infiniteRepeatable(
-                        animation = tween(180000, easing = LinearEasing)
-                    ),
-                )
-            }
-            Icon(
-                painter = painterResource(id = R.drawable.out_new_releases_icon),
-                modifier = Modifier
-                    .size(width)
-                    .offset(width - widthOffset, height - heightOffset)
-                    .graphicsLayer { rotationZ = rotation.value },
+            RotatingIcon(
+                modifier = Modifier.offset(width - widthOffset, height - heightOffset),
+                icon = R.drawable.out_new_releases_icon,
+                size = width,
                 tint = MaterialTheme.colorScheme.secondaryContainer,
-                contentDescription = null
+                startValue = 0f,
+                targetValue = 360f,
+                duration = 180000,
+                easing = LinearEasing
             )
 
             Icon(

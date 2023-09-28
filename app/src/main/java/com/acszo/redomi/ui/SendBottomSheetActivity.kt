@@ -15,7 +15,7 @@ import com.acszo.redomi.data.DataStoreConst.LIGHT_THEME
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
-import com.acszo.redomi.ui.component.BottomSheet
+import com.acszo.redomi.ui.component.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.AppList
 import com.acszo.redomi.viewmodel.UpdateViewModel

@@ -30,6 +30,7 @@ import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.common_page.PageBottomInfo
 import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
+import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import kotlinx.coroutines.launch
 
@@ -94,8 +95,7 @@ fun AppsPage(
             item {
                 if (selectedTab.value == tabs.first()) {
                     for (app in checkInstalled) {
-                        val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
-                                .replaceFirstChar { it.uppercase() }
+                        val title: String = separateUppercase(app.title)
                         AppCheckBoxItem(
                             icon = app.icon,
                             title = title,
@@ -117,8 +117,7 @@ fun AppsPage(
                     }
                 } else {
                     for (app in platforms) {
-                        val title: String = app.title.replace("(?<=[^A-Z])(?=[A-Z])".toRegex(), " ")
-                                .replaceFirstChar { it.uppercase() }
+                        val title: String = separateUppercase(app.title)
                         AppCheckBoxItem(
                             icon = app.icon,
                             title = title,
