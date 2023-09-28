@@ -156,7 +156,8 @@ fun UpdatePage(
 
             if (progressDownloadStatus.value is DownloadStatus.Downloading) {
                 LinearProgressIndicator(
-                    progress = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toFloat()
+                    progress = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toFloat() / 100,
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
 
