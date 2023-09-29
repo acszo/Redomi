@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -71,9 +72,16 @@ fun Tabs(
                     .clickable {
                         selectedTab.value = text
                     }
-                    // TODO: Fix recomposition from padding
-                    .padding(horizontal = padding.value)
                     .clip(MaterialTheme.shapes.extraLarge)
+                    .layout { measurable, constraints ->
+                        val size = width.value.toPx() - padding.value.toPx()
+                        val placeable = measurable.measure(
+                            constraints.copy(minWidth = size.toInt())
+                        )
+                        layout(placeable.width, placeable.height) {
+                            placeable.placeRelative(0, 0)
+                        }
+                    }
                     .drawBehind { drawRect(selectedTabColor.value) },
                 contentAlignment = Alignment.Center,
             ) {
