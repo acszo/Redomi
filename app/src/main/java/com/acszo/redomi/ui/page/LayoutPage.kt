@@ -15,10 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -42,14 +40,10 @@ import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LayoutPage(
     backButton: @Composable () -> Unit
 ) {
-    val pageTitle: String = stringResource(id = R.string.layout)
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -58,18 +52,17 @@ fun LayoutPage(
     val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = MEDIUM_GRID)
 
     ScaffoldWithTopAppBar(
-        title = pageTitle,
+        title = stringResource(id = R.string.layout),
         description = stringResource(id = R.string.layout_description_page),
-        scrollBehavior = scrollBehavior,
         backButton = { backButton() }
-    ) { padding, titleWithDescription ->
+    ) { padding, pageTitleWithDescription ->
         LazyColumn(
             modifier = Modifier.padding(padding),
             verticalArrangement = Arrangement.spacedBy(28.dp),
             contentPadding = WindowInsets.navigationBars.asPaddingValues()
         ) {
             item {
-                titleWithDescription()
+                pageTitleWithDescription()
             }
 
             listTypes.forEach { item ->

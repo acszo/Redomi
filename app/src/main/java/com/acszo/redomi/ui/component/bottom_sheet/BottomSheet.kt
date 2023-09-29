@@ -110,7 +110,7 @@ fun BottomSheet(
                     }
                 } else {
                     if (!isActionsRequired) {
-                        // if I don't, only the handle will be visible and it sucks
+                        // if I don't, only the handle will be visible and it sucks >:(
                         Column(
                             modifier = Modifier.height(150.dp)
                         ) {

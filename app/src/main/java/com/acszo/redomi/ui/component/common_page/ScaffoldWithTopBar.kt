@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -14,11 +14,12 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 @Composable
 fun ScaffoldWithTopAppBar(
     title: String,
-    description: String = "",
-    scrollBehavior: TopAppBarScrollBehavior,
+    description: String? = null,
     backButton: @Composable () -> Unit = {},
     content: @Composable (PaddingValues, @Composable () -> Unit) -> Unit
 ) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -36,7 +37,9 @@ fun ScaffoldWithTopAppBar(
                     title = title,
                     scrollBehavior = scrollBehavior
                 )
-                PageDescription(description = description)
+                if (description != null) {
+                    PageDescription(description = description)
+                }
             }
         }
     }

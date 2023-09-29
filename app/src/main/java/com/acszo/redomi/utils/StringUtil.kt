@@ -7,4 +7,8 @@ object StringUtil {
             .replaceFirstChar { it.uppercase() }
     }
 
+    fun splitSpaceToWords(text: String): List<String> {
+        return text.split("\\s+".toRegex())
+    }
+
 }

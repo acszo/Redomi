@@ -1,9 +1,5 @@
 package com.acszo.redomi.ui.page
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,12 +12,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -38,45 +32,41 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
+import com.acszo.redomi.utils.IntentUtil.onIntentManageUnknownAppSources
+import com.acszo.redomi.utils.PackageUtil.installApk
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.File
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdatePage(
     updateViewModel: UpdateViewModel = hiltViewModel(),
     backButton: @Composable () -> Unit
 ) {
-    val pageTitle: String = stringResource(id = R.string.update)
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     val latestRelease = updateViewModel.latestRelease.collectAsState().value
     val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
     val progressDownloadStatus = remember { mutableStateOf(DownloadStatus.Finished as DownloadStatus) }
 
-    val context = LocalContext.current
     val display = context.resources.displayMetrics
     val width = display.widthPixels.dp / display.density
     val height = display.heightPixels.dp / display.density
     val widthOffset = width / 1.5f
     val heightOffset = width / 1.1f
 
-    val scope = rememberCoroutineScope()
-
     ScaffoldWithTopAppBar(
-        title = pageTitle,
+        title = stringResource(id = R.string.update),
         description = stringResource(id = R.string.update_description_page),
-        scrollBehavior = scrollBehavior,
         backButton = { backButton() }
-    ) { padding, titleWithDescription ->
+    ) { padding, pageTitleWithDescription ->
         if (isUpdateAvailable) {
             RotatingIcon(
                 modifier = Modifier.offset(width - widthOffset, height - heightOffset),
@@ -111,7 +101,7 @@ fun UpdatePage(
                 contentPadding = WindowInsets.navigationBars.asPaddingValues()
             ) {
                 item {
-                    titleWithDescription()
+                    pageTitleWithDescription()
                 }
 
                 item {
@@ -164,12 +154,7 @@ fun UpdatePage(
                                 }
                             }
                         } else {
-                            context.startActivity(
-                                Intent(
-                                    Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                                    Uri.parse("package:${context.packageName}")
-                                )
-                            )
+                            onIntentManageUnknownAppSources(context)
                         }
                     } else {
                         updateViewModel.getLatestRelease(BuildConfig.VERSION_NAME)
@@ -185,21 +170,7 @@ fun UpdatePage(
     }
 }
 
-private fun installApk(context: Context, apkName: String) {
-    val latestApkUri = FileProvider.getUriForFile(
-        context,
-        "${context.packageName}.provider",
-        File(context.getExternalFilesDir("apk"), apkName)
-    )
-    val intent = Intent(Intent.ACTION_VIEW).apply {
-        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        setDataAndType(latestApkUri, "application/vnd.android.package-archive")
-    }
-    context.startActivity(intent)
-}
-
-fun Modifier.fadingEdge() = this
+private fun Modifier.fadingEdge() = this
     .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
     .drawWithContent {
         drawContent()

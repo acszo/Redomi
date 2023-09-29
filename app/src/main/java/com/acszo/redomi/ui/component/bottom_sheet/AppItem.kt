@@ -17,6 +17,7 @@ import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.utils.IntentUtil.onIntentView
 import com.acszo.redomi.utils.StringUtil.separateUppercase
+import com.acszo.redomi.utils.StringUtil.splitSpaceToWords
 
 @Composable
 fun AppItem(
@@ -28,7 +29,7 @@ fun AppItem(
 ) {
     val context = LocalContext.current
     val title: String = separateUppercase(appDetail.title)
-    val titleWords: List<String> = title.split("\\s+".toRegex())
+    val titleWords: List<String> = splitSpaceToWords(title)
 
     ClickableItem(
         @Composable {

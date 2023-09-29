@@ -1,6 +1,5 @@
 package com.acszo.redomi.ui.component
 
-import android.content.Intent
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -35,8 +34,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
-import com.acszo.redomi.MainActivity
 import com.acszo.redomi.R
+import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -114,7 +113,7 @@ fun SongInfoDisplay(
 
         IconButton(
             onClick = {
-                context.startActivity(Intent(context, MainActivity::class.java))
+                onIntentSettingsPage(context)
             }
         ) {
             RotatingIcon(

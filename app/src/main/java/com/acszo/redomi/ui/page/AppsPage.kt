@@ -1,7 +1,5 @@
 package com.acszo.redomi.ui.page
 
-import android.content.Context
-import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -9,9 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -30,26 +26,24 @@ import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.common_page.PageBottomInfo
 import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
+import com.acszo.redomi.utils.PackageUtil.isAppInstalled
 import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppsPage(
     dataStoreViewModel: DataStoreViewModel = hiltViewModel(),
     backButton: @Composable () -> Unit
 ) {
-    val pageTitle: String = stringResource(id = R.string.apps)
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     val tabs: List<String> = listOf(
         stringResource(id = R.string.installed),
         stringResource(id = R.string.all)
     )
     val selectedTab = remember { mutableStateOf(tabs[0]) }
-
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         dataStoreViewModel.getInstalledApps()
@@ -69,11 +63,10 @@ fun AppsPage(
     val checkInstalledSize = installedApps.filter { it in checkInstalled }.size
 
     ScaffoldWithTopAppBar(
-        title = pageTitle,
+        title = stringResource(id = R.string.apps),
         description = stringResource(id = R.string.apps_description_page),
-        scrollBehavior = scrollBehavior,
         backButton = { backButton() }
-    ) { padding, titleWithDescription ->
+    ) { padding, pageTitleWithDescription ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
@@ -82,7 +75,7 @@ fun AppsPage(
             contentPadding = WindowInsets.navigationBars.asPaddingValues()
         ) {
             item {
-                titleWithDescription()
+                pageTitleWithDescription()
             }
 
             item {
@@ -95,10 +88,9 @@ fun AppsPage(
             item {
                 if (selectedTab.value == tabs.first()) {
                     for (app in checkInstalled) {
-                        val title: String = separateUppercase(app.title)
                         AppCheckBoxItem(
                             icon = app.icon,
-                            title = title,
+                            title = separateUppercase(app.title),
                             size = checkInstalledSize,
                             isChecked = installedApps.contains(app),
                             onCheckedAction = {
@@ -117,10 +109,9 @@ fun AppsPage(
                     }
                 } else {
                     for (app in platforms) {
-                        val title: String = separateUppercase(app.title)
                         AppCheckBoxItem(
                             icon = app.icon,
-                            title = title,
+                            title = separateUppercase(app.title),
                             size = allApps.size,
                             isChecked = allApps.contains(app),
                             onCheckedAction = {
@@ -155,14 +146,5 @@ fun AppsPage(
                 )
             }
         }
-    }
-}
-
-private fun isAppInstalled(context: Context, packageName: String): Boolean {
-    return try {
-        context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-        true
-    } catch (e: PackageManager.NameNotFoundException) {
-        false
     }
 }
