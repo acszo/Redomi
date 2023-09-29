@@ -9,8 +9,11 @@
         <package android:name="com.google.android.apps.youtube.music"/>
         <package android:name="app.revanced.android.apps.youtube.music"/>
         <package android:name="com.zionhuang.music"/>
+        <package android:name="it.vfsfitvnm.vimusic"/>
         <package android:name="com.google.android.youtube"/>
         <package android:name="app.revanced.android.youtube"/>
+        <package android:name="org.schabi.newpipe"/>
+        <package android:name="com.github.libretube"/>
         <package android:name="com.spotify.music"/>
         <package android:name="deezer.android.app"/>
         <package android:name="com.aspiro.tidal"/>

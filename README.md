@@ -42,8 +42,8 @@ music platforms *THAT ARE NOT INSTALLED*
 
 ## Supported services (+ 3rd party apps)
 
-- Youtube music (+ Revanced, InnerTune)
-- Youtube (+ Revanced)
+- Youtube music (+ Revanced, InnerTune, ViMusic)
+- Youtube (+ Revanced, NewPipe, LibreTube)
 - Spotify
 - Deezer
 - Tidal

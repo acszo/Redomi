@@ -99,7 +99,7 @@ fun BottomSheet(
 
                 if (platforms.size > 1) {
                     if (!bringActions.value) {
-                        LazyListType(
+                        ItemsList(
                             listType = listType.value!!,
                             gridSize = gridSize.value!!,
                             platforms = platforms,
@@ -168,7 +168,7 @@ fun BottomSheet(
 }
 
 @Composable
-private fun LazyListType(
+private fun ItemsList(
     listType: Int,
     gridSize: Int,
     platforms: Map<AppDetails, String>,
