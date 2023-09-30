@@ -2,17 +2,13 @@
 <resources>
     <string name="app_name">Redomi</string>
     <string name="title_bottom_sheet">Converti canzone</string>
-
     <string name="open">Apri</string>
     <string name="copy">Copia</string>
     <string name="share">Condividi</string>
-
     <string name="placeholder">placeholder</string>
     <string name="song_cover">Cover Canzone</string>
-
     <string name="settings">Impostazioni</string>
     <string name="back">Indietro</string>
-
     <string name="apps">Applicazioni</string>
     <string name="apps_description">Seleziona l\'ordine e quali applicazioni visualizzare</string>
     <string name="layout">Aspetto</string>
@@ -25,7 +21,6 @@
     <string name="update_description">Verifica la presenza di aggiornamenti</string>
     <string name="version">Versione</string>
     <string name="info">informazioni</string>
-
     <string name="installed">Installate</string>
     <string name="all">Tutte</string>
     <string name="apps_description_page">
@@ -35,25 +30,20 @@
     </string>
     <string name="installed_tab_info">Selezionando un app la apre direttamente.</string>
     <string name="all_tab_info">Selezionando un app apre le azioni direttamente.</string>
-
     <string name="layout_description_page">
         Decidi come visualizzare le applicazioni che vedi quando converti una canzone.
     </string>
     <string name="layout_grid_size">Dimensione griglia</string>
-
     <string name="update_description_page">Gli aggiornamenti vengono controllati ad ogni avvio dell\'applicazione.</string>
     <string name="title_changelogs_current">Questa versione</string>
     <string name="title_changelogs_new">Nuova versione</string>
     <string name="check_updates">Controlla aggiornamenti</string>
     <string name="do_update">Aggiorna</string>
-
     <string name="system_theme">Predefinito</string>
     <string name="dark_theme">Scuro</string>
     <string name="light_theme">Chiaro</string>
-
     <string name="dialog_dismiss">Annulla</string>
     <string name="dialog_confirm">Ok</string>
-
     <string name="dialog_setup_title">Guida</string>
     <string name="dialog_setup_description">Di base Redomi non può aprire link esterni. Verrai reindirizzato alle impostazioni per farlo funzionare.</string>
     <string name="dialog_setup_description_checked">Seleziona i link così che Redomi possa aprirli e funzionare.</string>

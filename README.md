@@ -56,7 +56,6 @@ music platforms *THAT ARE NOT INSTALLED*
 
 - Reordering apps
 - Vertical list needs to pin first row and then expand on scroll
-- Update tab
 
 Sometimes the song.link is slow to convert songs
 
