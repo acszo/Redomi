@@ -7,6 +7,8 @@ import java.io.File
 
 object PackageUtil {
 
+    fun Context.getApk() = File(getExternalFilesDir("apk"), "latest-release")
+
     fun isAppInstalled(context: Context, packageName: String): Boolean {
         return try {
             context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
@@ -16,13 +18,20 @@ object PackageUtil {
         }
     }
 
-    fun installApk(context: Context, apkName: String) {
+    fun installApk(context: Context) {
         val latestApkUri = FileProvider.getUriForFile(
             context,
             "${context.packageName}.provider",
-            File(context.getExternalFilesDir("apk"), apkName)
+            context.getApk()
         )
         IntentUtil.onIntentPackageInstaller(context, latestApkUri)
+    }
+
+    fun deleteApk(context: Context) = context.runCatching {
+        val apk = context.getApk()
+        if (apk.exists()) {
+            apk.delete()
+        }
     }
 
 }

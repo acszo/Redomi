@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.model.Release
 import com.acszo.redomi.repository.GithubRepository
+import com.acszo.redomi.utils.PackageUtil.getApk
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
-import java.io.File
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -48,20 +48,19 @@ class UpdateViewModel @Inject constructor(
     }
 
     suspend fun downloadApk(context: Context, release: Release): Flow<DownloadStatus> = withContext(Dispatchers.IO) {
-        val assetName = release.assets[0].name
         val assetUrl = release.assets[0].browser_download_url
         try {
-            return@withContext githubRepository.getLatestApk(assetUrl).saveApk(context, assetName)
+            return@withContext githubRepository.getLatestApk(assetUrl).saveApk(context)
         } catch (e: Exception) {
             print(e.message)
         }
         emptyFlow()
     }
 
-    private fun ResponseBody.saveApk(context: Context, assetName: String): Flow<DownloadStatus> = flow {
+    private fun ResponseBody.saveApk(context: Context): Flow<DownloadStatus> = flow {
         emit(DownloadStatus.Downloading(0))
 
-        val apkFile = File(context.getExternalFilesDir("apk"), assetName)
+        val apkFile = context.getApk()
         byteStream().use { inputStream ->
             apkFile.outputStream().use { outputStream ->
                 val totalBytes = contentLength()

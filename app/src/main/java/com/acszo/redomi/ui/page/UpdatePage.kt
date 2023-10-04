@@ -148,14 +148,15 @@ fun UpdatePage(
                                     updateViewModel.downloadApk(context, latestRelease).collect { downloadStatus ->
                                         progressDownloadStatus.value = downloadStatus
                                         if (downloadStatus is DownloadStatus.Finished) {
-                                            installApk(context, latestRelease.assets[0].name)
+                                            installApk(context)
                                         }
                                     }
                                 }
                             }
-                        } else {
-                            onIntentManageUnknownAppSources(context)
+                            return@Button
                         }
+
+                        onIntentManageUnknownAppSources(context)
                     } else {
                         updateViewModel.getLatestRelease(BuildConfig.VERSION_NAME)
                     }
