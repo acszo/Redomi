@@ -15,7 +15,6 @@ import com.acszo.redomi.data.DataStoreConst.SYSTEM_THEME
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.nav.RootNavigation
 import com.acszo.redomi.ui.theme.RedomiTheme
-import com.acszo.redomi.utils.PackageUtil.deleteApk
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,8 +45,6 @@ class MainActivity : ComponentActivity() {
                 LIGHT_THEME -> false
                 else -> isSystemInDarkTheme()
             }
-
-            deleteApk(context)
 
             RedomiTheme(
                 darkTheme = getTheme

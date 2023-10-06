@@ -23,24 +23,6 @@ object IntentUtil {
         onDismiss()
     }
 
-    fun onIntentManageUnknownAppSources(context: Context) {
-        context.startActivity(
-            Intent(
-                Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                Uri.parse("package:${context.packageName}")
-            )
-        )
-    }
-
-    fun onIntentPackageInstaller(context: Context, apkUri: Uri?) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            setDataAndType(apkUri, "application/vnd.android.package-archive")
-        }
-        context.startActivity(intent)
-    }
-
     fun onIntentDefaultsApp(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             context.startActivity(

@@ -38,7 +38,6 @@ import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
-import com.acszo.redomi.utils.IntentUtil.onIntentManageUnknownAppSources
 import com.acszo.redomi.utils.PackageUtil.installApk
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -142,21 +141,16 @@ fun UpdatePage(
                     .padding(horizontal = 28.dp, vertical = 16.dp),
                 onClick = {
                     if (isUpdateAvailable) {
-                        if (context.packageManager.canRequestPackageInstalls()) {
-                            scope.launch(Dispatchers.IO) {
-                                if (latestRelease != null) {
-                                    updateViewModel.downloadApk(context, latestRelease).collect { downloadStatus ->
-                                        progressDownloadStatus.value = downloadStatus
-                                        if (downloadStatus is DownloadStatus.Finished) {
-                                            installApk(context)
-                                        }
+                        scope.launch(Dispatchers.IO) {
+                            if (latestRelease != null) {
+                                updateViewModel.downloadApk(context, latestRelease).collect { downloadStatus ->
+                                    progressDownloadStatus.value = downloadStatus
+                                    if (downloadStatus is DownloadStatus.Finished) {
+                                        installApk(context)
                                     }
                                 }
                             }
-                            return@Button
                         }
-
-                        onIntentManageUnknownAppSources(context)
                     } else {
                         updateViewModel.getLatestRelease(BuildConfig.VERSION_NAME)
                     }
