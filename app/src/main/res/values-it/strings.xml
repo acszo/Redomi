@@ -52,4 +52,6 @@
     <string name="update_completed">Aggiornamento completato</string>
     <string name="update_aborted">Accetta il permesso per aggiornare</string>
     <string name="update_failed">Aggiornamento fallito</string>
+    <string name="update_available">Nuova versione disponibile</string>
+    <string name="no_update_available">Nessun aggiornamento trovato</string>
 </resources>

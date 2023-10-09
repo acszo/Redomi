@@ -2,10 +2,14 @@ package com.acszo.redomi.ui.page
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -21,6 +25,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
@@ -31,6 +36,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.acszo.redomi.BuildConfig
@@ -38,7 +44,8 @@ import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
-import com.acszo.redomi.utils.PackageUtil.installApk
+import com.acszo.redomi.utils.UpdateUtil.getApk
+import com.acszo.redomi.utils.UpdateUtil.installApk
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,6 +60,7 @@ fun UpdatePage(
 
     val latestRelease = updateViewModel.latestRelease.collectAsState().value
     val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
+    val isLoading = updateViewModel.isLoading.collectAsState().value
     val progressDownloadStatus = remember { mutableStateOf(DownloadStatus.Finished as DownloadStatus) }
 
     val display = context.resources.displayMetrics
@@ -128,37 +136,58 @@ fun UpdatePage(
                 }
             }
 
-            if (progressDownloadStatus.value is DownloadStatus.Downloading) {
-                LinearProgressIndicator(
-                    progress = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toFloat() / 100,
-                    modifier = Modifier.fillMaxWidth()
-                )
+            if (isLoading) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
 
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(75.dp)
                     .padding(horizontal = 28.dp, vertical = 16.dp),
+                contentPadding = PaddingValues(0.dp),
+                enabled = progressDownloadStatus.value !is DownloadStatus.Downloading,
                 onClick = {
                     if (isUpdateAvailable) {
                         scope.launch(Dispatchers.IO) {
-                            if (latestRelease != null) {
-                                updateViewModel.downloadApk(context, latestRelease).collect { downloadStatus ->
-                                    progressDownloadStatus.value = downloadStatus
-                                    if (downloadStatus is DownloadStatus.Finished) {
-                                        installApk(context)
+                            if (latestRelease != null && !context.getApk().exists()) {
+                                updateViewModel.downloadApk(context, latestRelease)
+                                    .collect { downloadStatus ->
+                                        progressDownloadStatus.value = downloadStatus
+                                        if (downloadStatus is DownloadStatus.Finished) {
+                                            installApk(context)
+                                        }
                                     }
-                                }
-                            }
+                            } else {
+                                 installApk(context)
+                             }
                         }
                     } else {
-                        updateViewModel.getLatestRelease(BuildConfig.VERSION_NAME)
+                        updateViewModel.checkUpdate(BuildConfig.VERSION_NAME)
                     }
                 }
             ) {
+                if (progressDownloadStatus.value is DownloadStatus.Downloading) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        LinearProgressIndicator(
+                            progress = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toFloat() / 100,
+                            modifier = Modifier.fillMaxSize(),
+                        )
+
+                        Text(
+                            text = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toString() + " %",
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                }
+
                 Text(
                     text = if (isUpdateAvailable) stringResource(id = R.string.do_update)
-                    else stringResource(id = R.string.check_updates)
+                    else stringResource(id = R.string.check_updates),
+                    textAlign = TextAlign.Center
                 )
             }
         }

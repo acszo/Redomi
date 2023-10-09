@@ -7,7 +7,7 @@ import android.content.pm.PackageInstaller
 import android.widget.Toast
 import com.acszo.redomi.R
 import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
-import com.acszo.redomi.utils.PackageUtil.deleteApk
+import com.acszo.redomi.utils.UpdateUtil.deleteApk
 
 class UpdateReceiver: BroadcastReceiver() {
 

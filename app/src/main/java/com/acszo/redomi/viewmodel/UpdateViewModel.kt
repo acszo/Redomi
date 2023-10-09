@@ -6,12 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.model.Release
 import com.acszo.redomi.repository.GithubRepository
-import com.acszo.redomi.utils.PackageUtil.getApk
+import com.acszo.redomi.utils.UpdateUtil.getApk
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
@@ -34,7 +35,11 @@ class UpdateViewModel @Inject constructor(
     private val _isUpdateAvailable: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isUpdateAvailable: StateFlow<Boolean> = _isUpdateAvailable
 
-    fun getLatestRelease(currentVersion: String) = viewModelScope.launch {
+    private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    fun checkUpdate(currentVersion: String) = viewModelScope.launch {
+        _isLoading.update { true }
         try {
             _latestRelease.update {
                 githubRepository.getLatest()
@@ -44,6 +49,8 @@ class UpdateViewModel @Inject constructor(
             }
         }  catch (e: Exception) {
             print(e.message)
+        } finally {
+            _isLoading.update { false }
         }
     }
 

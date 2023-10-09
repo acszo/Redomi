@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 
-object PackageUtil {
+object UpdateUtil {
 
     fun Context.getApk() = File(getExternalFilesDir("apk"), "latest-release")
 
@@ -35,8 +35,7 @@ object PackageUtil {
         val resolver = context.contentResolver
 
         val apkUri = apkUri(context)
-
-        val length = resolver.openAssetFileDescriptor(apkUri, "r")?.use { it.length } ?: -1L
+        val apkSize = resolver.openAssetFileDescriptor(apkUri, "r")?.use { it.length } ?: -1L
 
         resolver.openInputStream(apkUri)?.use { apkStream ->
 
@@ -48,7 +47,7 @@ object PackageUtil {
                 sessionParams.setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED)
             }
 
-            session.openWrite(context.packageName, 0, length).use { sessionStream ->
+            session.openWrite(context.packageName, 0, apkSize).use { sessionStream ->
                 apkStream.copyTo(sessionStream)
                 session.fsync(sessionStream)
             }

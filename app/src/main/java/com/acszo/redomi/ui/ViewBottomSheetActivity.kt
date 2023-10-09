@@ -17,7 +17,7 @@ import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
-import com.acszo.redomi.utils.PackageUtil.isAppInstalled
+import com.acszo.redomi.utils.UpdateUtil.isAppInstalled
 import com.acszo.redomi.viewmodel.AppList
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import com.acszo.redomi.viewmodel.SongViewModel

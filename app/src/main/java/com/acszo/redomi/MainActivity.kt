@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
             updateViewModel = viewModel()
             val versionName = BuildConfig.VERSION_NAME
             LaunchedEffect(Unit) {
-                updateViewModel.getLatestRelease(versionName)
+                updateViewModel.checkUpdate(versionName)
             }
             val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
 

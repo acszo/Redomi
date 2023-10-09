@@ -51,4 +51,6 @@
     <string name="update_completed">Update completed</string>
     <string name="update_aborted">Accept the permission to update</string>
     <string name="update_failed">Update failed</string>
+    <string name="update_available">New version available</string>
+    <string name="no_update_available">No update found</string>
 </resources>
