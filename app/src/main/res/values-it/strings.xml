@@ -48,6 +48,7 @@
     <string name="dialog_setup_description">Di base Redomi non può aprire link esterni. Verrai reindirizzato alle impostazioni per farlo funzionare.</string>
     <string name="dialog_setup_description_checked">Seleziona i link così che Redomi possa aprirli e funzionare.</string>
     <string name="dialog_setup_description_unchecked">Lascia deselezionati quelli che fanno parte di servizi di musica che usi. (es. se use Spotify lascialo deselezionato)</string>
+    <string name="update_info_failed">Impossibile caricare i dati sull\'aggiornamento</string>
     <string name="updating">Aggiornamento in corso</string>
     <string name="update_completed">Aggiornamento completato</string>
     <string name="update_aborted">Accetta il permesso per aggiornare</string>

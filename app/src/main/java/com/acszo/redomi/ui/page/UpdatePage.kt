@@ -72,7 +72,7 @@ fun UpdatePage(
     ScaffoldWithTopAppBar(
         title = stringResource(id = R.string.update),
         description = stringResource(id = R.string.update_description_page),
-        backButton = { backButton() }
+        backButton = { backButton() },
     ) { padding, pageTitleWithDescription ->
         if (isUpdateAvailable) {
             RotatingIcon(
@@ -83,7 +83,7 @@ fun UpdatePage(
                 startValue = 0f,
                 targetValue = 360f,
                 duration = 180000,
-                easing = LinearEasing
+                easing = LinearEasing,
             )
 
             Icon(
@@ -92,7 +92,7 @@ fun UpdatePage(
                     .size(width)
                     .offset(width - widthOffset, height - heightOffset),
                 tint = MaterialTheme.colorScheme.secondaryContainer,
-                contentDescription = null
+                contentDescription = null,
             )
         }
 
@@ -105,34 +105,52 @@ fun UpdatePage(
                     .weight(1f)
                     .fadingEdge(),
                 verticalArrangement = Arrangement.spacedBy(28.dp),
-                contentPadding = WindowInsets.navigationBars.asPaddingValues()
+                contentPadding = WindowInsets.navigationBars.asPaddingValues(),
             ) {
                 item {
                     pageTitleWithDescription()
                 }
 
-                item {
-                    Text(
-                        text = if (isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
-                        modifier = Modifier.padding(horizontal = 28.dp),
-                        color = if (isUpdateAvailable) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.titleMedium
-                    )
+                if (!isLoading && latestRelease == null) {
+                    item {
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.update_info_failed),
+                                modifier = Modifier.padding(horizontal = 28.dp),
+                                style = MaterialTheme.typography.titleMedium,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
                 }
 
-                item {
-                    Text(
-                        text = latestRelease?.name ?: "",
-                        modifier = Modifier.padding(horizontal = 28.dp),
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                }
+                if (latestRelease != null) {
+                    item {
+                        Text(
+                            text = if (isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
+                            modifier = Modifier.padding(horizontal = 28.dp),
+                            color = if (isUpdateAvailable) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                    }
 
-                item {
-                    Text(
-                        text = latestRelease?.body ?: "",
-                        modifier = Modifier.padding(horizontal = 38.dp),
-                    )
+                    item {
+                        Text(
+                            text = latestRelease.name,
+                            modifier = Modifier.padding(horizontal = 28.dp),
+                            style = MaterialTheme.typography.headlineMedium,
+                        )
+                    }
+
+                    item {
+                        Text(
+                            text = latestRelease.body,
+                            modifier = Modifier.padding(horizontal = 38.dp),
+                        )
+                    }
                 }
             }
 
@@ -165,7 +183,7 @@ fun UpdatePage(
                     } else {
                         updateViewModel.checkUpdate(BuildConfig.VERSION_NAME)
                     }
-                }
+                },
             ) {
                 if (progressDownloadStatus.value is DownloadStatus.Downloading) {
                     Box(
@@ -179,7 +197,7 @@ fun UpdatePage(
 
                         Text(
                             text = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toString() + " %",
-                            color = MaterialTheme.colorScheme.onPrimary
+                            color = MaterialTheme.colorScheme.onPrimary,
                         )
                     }
                 }
@@ -187,7 +205,6 @@ fun UpdatePage(
                 Text(
                     text = if (isUpdateAvailable) stringResource(id = R.string.do_update)
                     else stringResource(id = R.string.check_updates),
-                    textAlign = TextAlign.Center
                 )
             }
         }
