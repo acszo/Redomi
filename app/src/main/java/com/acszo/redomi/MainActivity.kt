@@ -5,9 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.acszo.redomi.data.DataStoreConst.DARK_THEME
 import com.acszo.redomi.data.DataStoreConst.LIGHT_THEME
@@ -35,12 +36,12 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(Unit) {
                 updateViewModel.checkUpdate(versionName)
             }
-            val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
+            val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
 
             val context = LocalContext.current
             val dataStore = SettingsDataStore(context)
-            val theme = dataStore.getThemeMode.collectAsState(initial = SYSTEM_THEME)
-            val getTheme = when (theme.value) {
+            val theme by dataStore.getThemeMode.collectAsStateWithLifecycle(initialValue = SYSTEM_THEME)
+            val getTheme = when (theme) {
                 DARK_THEME -> true
                 LIGHT_THEME -> false
                 else -> isSystemInDarkTheme()

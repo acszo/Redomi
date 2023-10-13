@@ -27,7 +27,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -36,6 +36,7 @@ import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
@@ -64,8 +65,8 @@ fun BottomSheet(
 
     val context = LocalContext.current
     val dataStore = SettingsDataStore(context)
-    val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
-    val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = MEDIUM_GRID)
+    val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
+    val gridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -100,8 +101,8 @@ fun BottomSheet(
                 if (platforms.size > 1) {
                     if (!bringActions.value) {
                         ItemsList(
-                            listType = listType.value!!,
-                            gridSize = gridSize.value!!,
+                            listType = listType!!,
+                            gridSize = gridSize!!,
                             platforms = platforms,
                             isActionsRequired = isActionsRequired,
                             bringActions = bringActions,

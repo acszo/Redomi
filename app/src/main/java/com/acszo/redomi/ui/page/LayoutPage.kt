@@ -18,7 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.BIG_GRID
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
@@ -48,8 +49,8 @@ fun LayoutPage(
     val scope = rememberCoroutineScope()
 
     val dataStore = SettingsDataStore(context)
-    val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
-    val gridSize = dataStore.getLayoutGridSize.collectAsState(initial = MEDIUM_GRID)
+    val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
+    val gridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
 
     ScaffoldWithTopAppBar(
         title = stringResource(id = R.string.layout),
@@ -68,7 +69,7 @@ fun LayoutPage(
             listTypes.forEach { item ->
                 item {
                     RadioButtonItem(
-                        value = getListType(listType.value!!),
+                        value = getListType(listType!!),
                         text = item.value,
                         fontSize = 20.sp
                     ) {
@@ -81,7 +82,7 @@ fun LayoutPage(
 
             item {
                 AnimatedVisibility(
-                    visible = listType.value == VERTICAL_LIST,
+                    visible = listType == VERTICAL_LIST,
                     enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
                     exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(
                         animationSpec = tween(
@@ -105,15 +106,15 @@ fun LayoutPage(
                         ) {
                             for (grid in SMALL_GRID..BIG_GRID) {
                                 AnimatedRadiusButton(
-                                    isSelected = gridSize.value == grid,
+                                    isSelected = gridSize == grid,
                                     size = 80.dp,
-                                    backgroundColor = if (gridSize.value == grid) {
+                                    backgroundColor = if (gridSize == grid) {
                                         MaterialTheme.colorScheme.primary
                                     } else {
                                         MaterialTheme.colorScheme.surfaceVariant
                                     },
                                     text = grid.toString(),
-                                    textColor = if (gridSize.value == grid) {
+                                    textColor = if (gridSize == grid) {
                                         MaterialTheme.colorScheme.onPrimary
                                     } else {
                                         MaterialTheme.colorScheme.onSurfaceVariant

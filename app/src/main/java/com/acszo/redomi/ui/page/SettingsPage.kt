@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.acszo.redomi.R
 import com.acszo.redomi.BuildConfig
@@ -51,9 +52,9 @@ fun SettingsPage(
     val scope = rememberCoroutineScope()
 
     val dataStore = SettingsDataStore(context)
-    val isFirstTime = dataStore.getIsFirstTime.collectAsState(initial = false)
-    val listType = dataStore.getLayoutListType.collectAsState(initial = HORIZONTAL_LIST)
-    val themeMode = dataStore.getThemeMode.collectAsState(initial = SYSTEM_THEME)
+    val isFirstTime by dataStore.getIsFirstTime.collectAsStateWithLifecycle(initialValue = false)
+    val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
+    val themeMode by dataStore.getThemeMode.collectAsStateWithLifecycle(initialValue = SYSTEM_THEME)
 
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
@@ -89,7 +90,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
                     icon = R.drawable.format_list_bulleted_icon,
-                    description = stringResource(id = getListType(listType.value!!))
+                    description = stringResource(id = getListType(listType!!))
                 ) {
                     navController.navigate(layoutPage)
                 }
@@ -99,7 +100,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.theme),
                     icon = R.drawable.color_lens_filled_icon,
-                    description = stringResource(id = getThemeMode(themeMode.value!!))
+                    description = stringResource(id = getThemeMode(themeMode!!))
                 ) {
                     openThemeDialog.value = true
                 }
@@ -141,7 +142,7 @@ fun SettingsPage(
         }
     }
 
-    if (isFirstTime.value!!) {
+    if (isFirstTime!!) {
         RedomiAlertDialog(
             icon =  R.drawable.description_icon,
             title = stringResource(id = R.string.dialog_setup_title),
@@ -176,7 +177,7 @@ fun SettingsPage(
             content = {
                 themes.forEach { item ->
                     RadioButtonItem(
-                        value = getThemeMode(themeMode.value!!),
+                        value = getThemeMode(themeMode!!),
                         text = item.value,
                         padding = 0.dp
                     ) {

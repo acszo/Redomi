@@ -12,12 +12,12 @@ import com.acszo.redomi.utils.UpdateUtil.deleteApk
 class UpdateReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
+        Toast.makeText(context, R.string.updating, Toast.LENGTH_LONG).show()
         when (intent.getIntExtra(PackageInstaller.EXTRA_STATUS, -1)) {
             PackageInstaller.STATUS_PENDING_USER_ACTION -> {
                 val userAction = intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)
                 userAction?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(userAction)
-                Toast.makeText(context, R.string.updating, Toast.LENGTH_LONG).show()
             }
             PackageInstaller.STATUS_FAILURE_ABORTED -> {
                 Toast.makeText(context, R.string.update_aborted, Toast.LENGTH_LONG).show()

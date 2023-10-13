@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -19,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.Platform.platforms
@@ -50,8 +50,8 @@ fun AppsPage(
         dataStoreViewModel.getAllApps()
     }
 
-    val installedApps = dataStoreViewModel.installedApps.collectAsState().value.toMutableList()
-    val allApps = dataStoreViewModel.allApps.collectAsState().value.toMutableList()
+    val installedApps = dataStoreViewModel.installedApps.collectAsStateWithLifecycle().value.toMutableList()
+    val allApps = dataStoreViewModel.allApps.collectAsStateWithLifecycle().value.toMutableList()
 
     val checkInstalled: List<AppDetails> = platforms.filter {
         var isInstalled = false

@@ -21,7 +21,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,6 +39,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
@@ -58,9 +59,9 @@ fun UpdatePage(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    val latestRelease = updateViewModel.latestRelease.collectAsState().value
-    val isUpdateAvailable = updateViewModel.isUpdateAvailable.collectAsState().value
-    val isLoading = updateViewModel.isLoading.collectAsState().value
+    val latestRelease by updateViewModel.latestRelease.collectAsStateWithLifecycle()
+    val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
+    val isLoading by updateViewModel.isLoading.collectAsStateWithLifecycle()
     val progressDownloadStatus = remember { mutableStateOf(DownloadStatus.Finished as DownloadStatus) }
 
     val display = context.resources.displayMetrics
@@ -111,22 +112,6 @@ fun UpdatePage(
                     pageTitleWithDescription()
                 }
 
-                if (!isLoading && latestRelease == null) {
-                    item {
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.update_info_failed),
-                                modifier = Modifier.padding(horizontal = 28.dp),
-                                style = MaterialTheme.typography.titleMedium,
-                                textAlign = TextAlign.Center,
-                            )
-                        }
-                    }
-                }
-
                 if (latestRelease != null) {
                     item {
                         Text(
@@ -139,7 +124,7 @@ fun UpdatePage(
 
                     item {
                         Text(
-                            text = latestRelease.name,
+                            text = latestRelease!!.name,
                             modifier = Modifier.padding(horizontal = 28.dp),
                             style = MaterialTheme.typography.headlineMedium,
                         )
@@ -147,10 +132,24 @@ fun UpdatePage(
 
                     item {
                         Text(
-                            text = latestRelease.body,
+                            text = latestRelease!!.body,
                             modifier = Modifier.padding(horizontal = 38.dp),
                         )
                     }
+                }
+            }
+
+            if (!isLoading && latestRelease == null) {
+                Box(
+                    modifier = Modifier.weight(2f).fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.update_info_failed),
+                        modifier = Modifier.padding(horizontal = 28.dp),
+                        style = MaterialTheme.typography.titleMedium,
+                        textAlign = TextAlign.Center,
+                    )
                 }
             }
 
@@ -168,8 +167,8 @@ fun UpdatePage(
                 onClick = {
                     if (isUpdateAvailable) {
                         scope.launch(Dispatchers.IO) {
-                            if (latestRelease != null && !context.getApk().exists()) {
-                                updateViewModel.downloadApk(context, latestRelease)
+                            if (!context.getApk().exists()) {
+                                updateViewModel.downloadApk(context, latestRelease!!)
                                     .collect { downloadStatus ->
                                         progressDownloadStatus.value = downloadStatus
                                         if (downloadStatus is DownloadStatus.Finished) {
@@ -178,7 +177,7 @@ fun UpdatePage(
                                     }
                             } else {
                                  installApk(context)
-                             }
+                            }
                         }
                     } else {
                         updateViewModel.checkUpdate(BuildConfig.VERSION_NAME)
