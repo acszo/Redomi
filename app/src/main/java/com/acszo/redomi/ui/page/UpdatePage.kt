@@ -185,17 +185,18 @@ fun UpdatePage(
                 },
             ) {
                 if (progressDownloadStatus.value is DownloadStatus.Downloading) {
+                    val progress = (progressDownloadStatus.value as DownloadStatus.Downloading).progress
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center,
                     ) {
                         LinearProgressIndicator(
-                            progress = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toFloat() / 100,
+                            progress = progress.toFloat() / 100,
                             modifier = Modifier.fillMaxSize(),
                         )
 
                         Text(
-                            text = (progressDownloadStatus.value as DownloadStatus.Downloading).progress.toString() + " %",
+                            text = "$progress %",
                             color = MaterialTheme.colorScheme.onPrimary,
                         )
                     }

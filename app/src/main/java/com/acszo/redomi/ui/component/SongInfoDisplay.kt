@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -74,7 +75,7 @@ fun SongInfoDisplay(
                 )
             }
             Image(
-                modifier = Modifier.size(80.dp),
+                modifier = Modifier.fillMaxSize(),
                 painter = image,
                 contentScale = ContentScale.FillHeight,
                 contentDescription = stringResource(id = R.string.song_cover),
@@ -128,12 +129,16 @@ fun SongInfoDisplay(
 
             if (isUpdateAvailable) {
                 Canvas(
-                    modifier = Modifier.size(14.dp).offset(9.dp, -(6.dp))
+                    modifier = Modifier
+                        .size(14.dp)
+                        .offset(9.dp, -(6.dp))
                 ) {
                     drawCircle(color = surfaceColor)
                 }
                 Canvas(
-                    modifier = Modifier.size(8.dp).offset(9.dp, -(6.dp))
+                    modifier = Modifier
+                        .size(8.dp)
+                        .offset(9.dp, -(6.dp))
                 ) {
                     drawCircle(color = errorColor)
                 }

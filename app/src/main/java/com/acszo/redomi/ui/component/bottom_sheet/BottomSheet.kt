@@ -4,11 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -32,12 +30,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ClipboardManager
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
@@ -45,8 +40,6 @@ import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.SongInfoDisplay
-import com.acszo.redomi.utils.ClipboardUtils.copyText
-import com.acszo.redomi.utils.IntentUtil.onIntentSend
 import com.acszo.redomi.utils.IntentUtil.onIntentView
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,7 +71,7 @@ fun BottomSheet(
                     .fillMaxWidth()
                     .height(150.dp)
                     .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator()
             }
@@ -113,7 +106,7 @@ fun BottomSheet(
                     if (!isActionsRequired) {
                         // if I don't, only the handle will be visible and it sucks >:(
                         Column(
-                            modifier = Modifier.height(150.dp)
+                            modifier = Modifier.height(150.dp),
                         ) {
                             Spacer(modifier = Modifier.weight(1f))
                         }
@@ -131,36 +124,10 @@ fun BottomSheet(
                             durationMillis = 200,
                             easing = LinearEasing
                         )
-                    )
+                    ),
                 ) {
-                    val clipboardManager: ClipboardManager = LocalClipboardManager.current
-                    Row(
-                        modifier = Modifier
-                            .padding(vertical = 15.dp)
-                            .height(150.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
-                    ) {
-                        ActionsMenuItem(R.string.open, R.drawable.play_fill_icon) {
-                            onIntentView(
-                                context = context,
-                                url = selectedPlatformLink.value
-                            )
-                        }
-                        ActionsMenuItem(R.string.copy, R.drawable.link_fill_icon) {
-                            copyText(
-                                clipboardManager = clipboardManager,
-                                text = selectedPlatformLink.value,
-                                onDismiss = onDismiss
-                            )
-                        }
-                        ActionsMenuItem(R.string.share, R.drawable.share_fill_icon) {
-                            onIntentSend(
-                                context = context,
-                                url = selectedPlatformLink.value,
-                                onDismiss = onDismiss
-                            )
-                        }
+                    ActionsMenu(url = selectedPlatformLink.value) {
+                        onDismiss()
                     }
                 }
             }
@@ -189,7 +156,7 @@ private fun ItemsList(
                     link = link,
                     isActionsRequired = isActionsRequired,
                     bringActions = bringActions,
-                    selectedPlatformLink = selectedPlatformLink
+                    selectedPlatformLink = selectedPlatformLink,
                 )
             }
         }
@@ -206,7 +173,7 @@ private fun ItemsList(
                     link = link,
                     isActionsRequired = isActionsRequired,
                     bringActions = bringActions,
-                    selectedPlatformLink = selectedPlatformLink
+                    selectedPlatformLink = selectedPlatformLink,
                 )
             }
         }

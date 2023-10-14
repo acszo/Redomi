@@ -108,22 +108,22 @@ fun SettingsPage(
 
             item {
                 SettingsItem(
-                    title = stringResource(id = R.string.github),
-                    icon = R.drawable.github_icon,
-                    description = stringResource(id = R.string.github_description)
-                ) {
-                    uriHandle.openUri("https://github.com/acszo/Redomi")
-                }
-            }
-
-            item {
-                SettingsItem(
                     title = stringResource(id = R.string.update),
                     icon = R.drawable.update_icon,
                     description = stringResource(id = R.string.update_description),
                     isAlertIconVisible = isUpdateAvailable
                 ) {
                     navController.navigate(updatePage)
+                }
+            }
+
+            item {
+                SettingsItem(
+                    title = stringResource(id = R.string.github),
+                    icon = R.drawable.github_icon,
+                    description = stringResource(id = R.string.github_description)
+                ) {
+                    uriHandle.openUri("https://github.com/acszo/Redomi")
                 }
             }
 
