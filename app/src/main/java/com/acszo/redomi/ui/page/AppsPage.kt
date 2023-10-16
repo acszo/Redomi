@@ -1,13 +1,19 @@
 package com.acszo.redomi.ui.page
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +37,7 @@ import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AppsPage(
     dataStoreViewModel: DataStoreViewModel = hiltViewModel(),
@@ -71,7 +78,6 @@ fun AppsPage(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(28.dp),
             contentPadding = WindowInsets.navigationBars.asPaddingValues()
         ) {
             item {
@@ -79,62 +85,82 @@ fun AppsPage(
             }
 
             item {
-                Tabs(
-                    tabs = tabs,
-                    selectedTab = selectedTab
-                )
+                Spacer(modifier = Modifier.height(14.dp))
+            }
+
+            stickyHeader {
+                Column(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.surface)
+                        .padding(14.dp),
+                ) {
+                    Tabs(
+                        tabs = tabs,
+                        selectedTab = selectedTab
+                    )
+                }
             }
 
             item {
-                if (selectedTab.value == tabs.first()) {
-                    for (app in checkInstalled) {
-                        AppCheckBoxItem(
-                            icon = app.icon,
-                            title = separateUppercase(app.title),
-                            size = checkInstalledSize,
-                            isChecked = installedApps.contains(app),
-                            onCheckedAction = {
-                                scope.launch {
-                                    installedApps.add(app)
-                                    dataStoreViewModel.setInstalledApps(installedApps.toList())
-                                }
-                            },
-                            onUnCheckedAction = {
-                                scope.launch {
-                                    installedApps.remove(app)
-                                    dataStoreViewModel.setInstalledApps(installedApps.toList())
-                                }
+                Spacer(modifier = Modifier.height(14.dp))
+            }
+
+            if (selectedTab.value == tabs.first()) {
+                items(checkInstalled) { app ->
+                    AppCheckBoxItem(
+                        icon = app.icon,
+                        title = separateUppercase(app.title),
+                        size = checkInstalledSize,
+                        isChecked = installedApps.contains(app),
+                        onCheckedAction = {
+                            scope.launch {
+                                installedApps.add(app)
+                                dataStoreViewModel.setInstalledApps(installedApps.toList())
                             }
-                        )
-                    }
-                } else {
-                    for (app in platforms) {
-                        AppCheckBoxItem(
-                            icon = app.icon,
-                            title = separateUppercase(app.title),
-                            size = allApps.size,
-                            isChecked = allApps.contains(app),
-                            onCheckedAction = {
-                                scope.launch {
-                                    allApps.add(app)
-                                    dataStoreViewModel.setAllApps(allApps.toList())
-                                }
-                            },
-                            onUnCheckedAction = {
-                                scope.launch {
-                                    allApps.remove(app)
-                                    dataStoreViewModel.setAllApps(allApps.toList())
-                                }
+                        },
+                        onUnCheckedAction = {
+                            scope.launch {
+                                installedApps.remove(app)
+                                dataStoreViewModel.setInstalledApps(installedApps.toList())
                             }
-                        )
-                    }
+                        }
+                    )
                 }
+            } else {
+                items(platforms) { app ->
+                    AppCheckBoxItem(
+                        icon = app.icon,
+                        title = separateUppercase(app.title),
+                        size = allApps.size,
+                        isChecked = allApps.contains(app),
+                        onCheckedAction = {
+                            scope.launch {
+                                allApps.add(app)
+                                dataStoreViewModel.setAllApps(allApps.toList())
+                            }
+                        },
+                        onUnCheckedAction = {
+                            scope.launch {
+                                allApps.remove(app)
+                                dataStoreViewModel.setAllApps(allApps.toList())
+                            }
+                        }
+                    )
+                }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(28.dp))
             }
 
             item {
                 HorizontalDivider(
                     modifier = Modifier.padding(horizontal = 28.dp)
                 )
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(28.dp))
             }
 
             item {
