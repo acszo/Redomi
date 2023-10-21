@@ -13,7 +13,6 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -33,7 +32,7 @@ fun RootNavigation(
     updateViewModel: UpdateViewModel,
     isUpdateAvailable: Boolean
 ) {
-    val navController: NavHostController = rememberNavController()
+    val navController = rememberNavController()
 
     NavHost(
         navController = navController,

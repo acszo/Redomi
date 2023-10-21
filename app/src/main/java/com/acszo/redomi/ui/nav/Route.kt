@@ -7,9 +7,9 @@ import com.acszo.redomi.ui.nav.Pages.updatePage
 
 sealed class Route(var route: String) {
 
-    object SettingsPage: Route(settingsPage)
-    object AppsPage: Route(appsPage)
-    object LayoutPage: Route(layoutPage)
-    object UpdatePage: Route(updatePage)
+    data object SettingsPage: Route(settingsPage)
+    data object AppsPage: Route(appsPage)
+    data object LayoutPage: Route(layoutPage)
+    data object UpdatePage: Route(updatePage)
 
 }
