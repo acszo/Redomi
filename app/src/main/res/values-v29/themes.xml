@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.Redomi" parent="android:Theme.Material.NoActionBar">
-        <item name="android:windowBackground">@color/splash_screen_color</item>
+        <item name="android:windowBackground">@color/splash_screen_bg_color</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:enforceStatusBarContrast">false</item>

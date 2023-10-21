@@ -26,17 +26,16 @@
 
     <application
         android:name=".App"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Redomi"
+        android:theme="@style/Theme.Redomi.SplashScreen"
         android:localeConfig="@xml/locales_config"
         tools:targetApi="tiramisu">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Redomi">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

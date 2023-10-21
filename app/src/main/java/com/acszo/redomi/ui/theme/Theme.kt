@@ -10,19 +10,18 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.acszo.redomi.MainActivity
 
-private val DarkColorScheme = darkColorScheme(
+private val darkColorScheme = darkColorScheme(
     primary = PrimaryLight,
     secondary = SecondaryLight,
     tertiary = TertiaryLight
 )
 
-private val LightColorScheme = lightColorScheme(
+private val lightColorScheme = lightColorScheme(
     primary = PrimaryDark,
     secondary = SecondaryDark,
     tertiary = TertiaryDark
@@ -40,8 +39,8 @@ fun RedomiTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkColorScheme
+        else -> lightColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
@@ -50,7 +49,6 @@ fun RedomiTheme(
             val window = (activity).window
             when (activity) {
                 is MainActivity -> {
-                    window.decorView.setBackgroundColor(colorScheme.surface.toArgb())
                     WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
                 }
             }

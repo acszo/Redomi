@@ -2,9 +2,14 @@
 <resources>
 
     <style name="Theme.Redomi" parent="android:Theme.Material.NoActionBar">
-        <item name="android:windowBackground">@color/splash_screen_color</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Redomi.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_screen_bg_color</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_screen</item>
+        <item name="postSplashScreenTheme">@style/Theme.Redomi</item>
     </style>
 
     <style name="Theme.Redomi.BottomSheet" parent="android:Theme.Material.NoActionBar">

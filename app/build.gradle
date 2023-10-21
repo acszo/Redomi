@@ -83,6 +83,10 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
+    // Splash Screen
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.core:core-splashscreen:1.1.0-alpha02'
+
     // Dagger Hilt
     implementation 'com.google.dagger:hilt-android:2.47'
     kapt 'com.google.dagger:hilt-compiler:2.47'
