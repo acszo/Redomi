@@ -61,7 +61,7 @@ fun SettingsItem(
         Spacer(modifier = Modifier.weight(1f))
         if (isAlertIconVisible) {
             Icon(
-                painter = painterResource(id = R.drawable.outline_new_releases_icon),
+                painter = painterResource(id = R.drawable.ic_new_releases_outline),
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.error,
                 contentDescription = stringResource(id = R.string.update),

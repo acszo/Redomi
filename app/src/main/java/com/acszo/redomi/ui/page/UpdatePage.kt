@@ -73,7 +73,7 @@ fun UpdatePage(
         if (isUpdateAvailable) {
             RotatingIcon(
                 modifier = Modifier.offset(width - widthOffset, height - heightOffset),
-                icon = R.drawable.out_new_releases_icon,
+                icon = R.drawable.ic_new_releases_outside,
                 size = width,
                 tint = MaterialTheme.colorScheme.secondaryContainer,
                 startValue = 0f,
@@ -83,7 +83,7 @@ fun UpdatePage(
             )
 
             Icon(
-                painter = painterResource(id = R.drawable.in_new_releases_icon),
+                painter = painterResource(id = R.drawable.ic_new_releases_inside),
                 modifier = Modifier
                     .size(width)
                     .offset(width - widthOffset, height - heightOffset),

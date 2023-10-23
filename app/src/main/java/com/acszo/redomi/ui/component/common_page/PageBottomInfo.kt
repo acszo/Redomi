@@ -24,7 +24,7 @@ fun PageBottomInfo(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.info_outline_icon),
+            painter = painterResource(id = R.drawable.ic_info_outline),
             contentDescription = stringResource(id = R.string.info),
             tint = MaterialTheme.colorScheme.onSurfaceVariant
         )

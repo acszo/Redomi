@@ -79,7 +79,7 @@ fun SettingsPage(
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.apps),
-                    icon = R.drawable.grid_view_icon,
+                    icon = R.drawable.ic_grid_view,
                     description = stringResource(id = R.string.apps_description)
                 ) {
                     navController.navigate(appsPage)
@@ -89,7 +89,7 @@ fun SettingsPage(
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
-                    icon = R.drawable.format_list_bulleted_icon,
+                    icon = R.drawable.ic_format_list_bulleted,
                     description = stringResource(id = getListType(listType!!))
                 ) {
                     navController.navigate(layoutPage)
@@ -99,7 +99,7 @@ fun SettingsPage(
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.theme),
-                    icon = R.drawable.color_lens_filled_icon,
+                    icon = R.drawable.ic_color_lens_filled,
                     description = stringResource(id = getThemeMode(themeMode!!))
                 ) {
                     openThemeDialog.value = true
@@ -109,7 +109,7 @@ fun SettingsPage(
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.update),
-                    icon = R.drawable.update_icon,
+                    icon = R.drawable.ic_update,
                     description = stringResource(id = R.string.update_description),
                     isAlertIconVisible = isUpdateAvailable
                 ) {
@@ -120,7 +120,7 @@ fun SettingsPage(
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.github),
-                    icon = R.drawable.github_icon,
+                    icon = R.drawable.ic_github,
                     description = stringResource(id = R.string.github_description)
                 ) {
                     uriHandle.openUri("https://github.com/acszo/Redomi")
@@ -130,7 +130,7 @@ fun SettingsPage(
             item {
                 SettingsItem(
                     title = stringResource(id = R.string.version),
-                    icon = R.drawable.info_filled_icon,
+                    icon = R.drawable.ic_info_filled,
                     description = versionName
                 ) {
                     copyText(
@@ -144,7 +144,7 @@ fun SettingsPage(
 
     if (isFirstTime!!) {
         RedomiAlertDialog(
-            icon =  R.drawable.description_icon,
+            icon =  R.drawable.ic_description,
             title = stringResource(id = R.string.dialog_setup_title),
             content = {
                 Column(
@@ -152,11 +152,11 @@ fun SettingsPage(
                 ) {
                     Text(text = stringResource(id = R.string.dialog_setup_description))
                     IconItemDialog(
-                        icon = R.drawable.done_all_icon,
+                        icon = R.drawable.ic_done_all,
                         description = stringResource(id = R.string.dialog_setup_description_checked)
                     )
                     IconItemDialog(
-                        icon = R.drawable.remove_done_icon,
+                        icon = R.drawable.ic_remove_done,
                         description = stringResource(id = R.string.dialog_setup_description_unchecked)
                     )
                 }
@@ -172,7 +172,7 @@ fun SettingsPage(
 
     if (openThemeDialog.value) {
         RedomiAlertDialog(
-            icon =  R.drawable.color_lens_outline_icon,
+            icon =  R.drawable.ic_color_lens_outline,
             title = stringResource(id = R.string.theme),
             content = {
                 themes.forEach { item ->

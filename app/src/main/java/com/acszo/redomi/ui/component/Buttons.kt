@@ -38,7 +38,7 @@ fun BackButton(
         onClick = { backAction() }
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.back_arrow_icon),
+            painter = painterResource(id = R.drawable.ic_back_arrow),
             contentDescription = stringResource(id = R.string.back)
         )
     }

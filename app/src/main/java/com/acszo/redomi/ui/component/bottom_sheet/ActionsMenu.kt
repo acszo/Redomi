@@ -43,20 +43,20 @@ fun ActionsMenu(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
     ) {
-        ActionsMenuItem(R.string.open, R.drawable.play_fill_icon) {
+        ActionsMenuItem(R.string.open, R.drawable.ic_play) {
             IntentUtil.onIntentView(
                 context = context,
                 url = url
             )
         }
-        ActionsMenuItem(R.string.copy, R.drawable.link_fill_icon) {
+        ActionsMenuItem(R.string.copy, R.drawable.ic_link) {
             ClipboardUtils.copyText(
                 clipboardManager = clipboardManager,
                 text = url,
                 onDismiss = onDismiss
             )
         }
-        ActionsMenuItem(R.string.share, R.drawable.share_fill_icon) {
+        ActionsMenuItem(R.string.share, R.drawable.ic_share) {
             IntentUtil.onIntentSend(
                 context = context,
                 url = url,
