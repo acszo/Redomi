@@ -9,22 +9,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.acszo.redomi.data.DataStoreConst.DARK_THEME
 import com.acszo.redomi.data.DataStoreConst.LIGHT_THEME
 import com.acszo.redomi.data.DataStoreConst.SYSTEM_THEME
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.nav.RootNavigation
 import com.acszo.redomi.ui.theme.RedomiTheme
-import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private lateinit var dataStoreViewModel: DataStoreViewModel
-    private lateinit var updateViewModel: UpdateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +29,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
 
         setContent {
-            dataStoreViewModel = viewModel()
-            updateViewModel = viewModel()
+            val updateViewModel: UpdateViewModel = hiltViewModel()
             val versionName = BuildConfig.VERSION_NAME
             LaunchedEffect(Unit) {
                 updateViewModel.checkUpdate(versionName)
@@ -53,7 +49,6 @@ class MainActivity : ComponentActivity() {
                 darkTheme = getTheme
             ) {
                 RootNavigation(
-                    dataStoreViewModel = dataStoreViewModel,
                     updateViewModel = updateViewModel,
                     isUpdateAvailable = isUpdateAvailable,
                 )

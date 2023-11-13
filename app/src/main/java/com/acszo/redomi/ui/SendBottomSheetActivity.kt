@@ -8,8 +8,8 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.acszo.redomi.data.DataStoreConst
 import com.acszo.redomi.data.DataStoreConst.DARK_THEME
 import com.acszo.redomi.data.DataStoreConst.LIGHT_THEME
@@ -23,8 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SendBottomSheetActivity: ComponentActivity() {
-    private lateinit var songViewModel: SongViewModel
-    private lateinit var updateViewModel: UpdateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +31,17 @@ class SendBottomSheetActivity: ComponentActivity() {
             val context = LocalContext.current
             val sendIntent = intent?.getStringExtra(Intent.EXTRA_TEXT)
 
-            songViewModel = viewModel()
+            val songViewModel: SongViewModel = hiltViewModel()
+            val updateViewModel: UpdateViewModel = hiltViewModel()
+
             LaunchedEffect(Unit) {
                 songViewModel.getPlatforms(sendIntent.toString(), AppList.ALL)
+                updateViewModel.latestRelease
             }
+
             val songInfo by songViewModel.songInfo.collectAsStateWithLifecycle()
             val platforms by songViewModel.platforms.collectAsStateWithLifecycle()
             val isLoading by songViewModel.isLoading.collectAsStateWithLifecycle()
-
-            updateViewModel = viewModel()
-            LaunchedEffect(Unit) {
-                updateViewModel.latestRelease
-            }
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
 
             val dataStore = SettingsDataStore(context)

@@ -38,7 +38,7 @@ import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.component.RotatingIcon
-import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
+import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.fadingEdge
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk
@@ -65,7 +65,7 @@ fun UpdatePage(
     val widthOffset = width / 1.5f
     val heightOffset = width / 1.1f
 
-    ScaffoldWithTopAppBar(
+    ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.update),
         description = stringResource(id = R.string.update_description_page),
         backButton = { backButton() },

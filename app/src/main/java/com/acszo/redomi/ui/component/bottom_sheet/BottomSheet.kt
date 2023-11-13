@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
-import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
@@ -52,14 +51,14 @@ fun BottomSheet(
     isActionsRequired: Boolean,
     isUpdateAvailable: Boolean
 ) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    val bringActions = remember { mutableStateOf(false) }
-    val selectedPlatformLink = remember { mutableStateOf("") }
-
     val context = LocalContext.current
     val dataStore = SettingsDataStore(context)
     val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
     val gridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
+
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = listType == HORIZONTAL_LIST)
+    val bringActions = remember { mutableStateOf(false) }
+    val selectedPlatformLink = remember { mutableStateOf("") }
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -144,10 +143,11 @@ private fun ItemsList(
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
-    if (listType == VERTICAL_LIST) {
-        LazyVerticalGrid(
-            modifier = Modifier.padding(vertical = 15.dp),
-            columns = GridCells.Fixed(gridSize),
+    if (listType == HORIZONTAL_LIST) {
+        LazyRow(
+            modifier = Modifier
+                .padding(vertical = 15.dp)
+                .height(150.dp),
             contentPadding = PaddingValues(horizontal = 10.dp),
         ) {
             items(items = platforms.toList()) { (app, link) ->
@@ -161,10 +161,9 @@ private fun ItemsList(
             }
         }
     } else {
-        LazyRow(
-            modifier = Modifier
-                .padding(vertical = 15.dp)
-                .height(150.dp),
+        LazyVerticalGrid(
+            modifier = Modifier.padding(vertical = 15.dp),
+            columns = GridCells.Fixed(gridSize),
             contentPadding = PaddingValues(horizontal = 10.dp),
         ) {
             items(items = platforms.toList()) { (app, link) ->

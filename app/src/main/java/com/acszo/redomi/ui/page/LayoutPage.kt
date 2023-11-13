@@ -38,7 +38,7 @@ import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
+import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -52,7 +52,7 @@ fun LayoutPage(
     val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
     val gridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
 
-    ScaffoldWithTopAppBar(
+    ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.layout),
         description = stringResource(id = R.string.layout_description_page),
         backButton = { backButton() }

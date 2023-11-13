@@ -35,7 +35,7 @@ import com.acszo.redomi.ui.component.IconItemDialog
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.RedomiAlertDialog
 import com.acszo.redomi.ui.component.SettingsItem
-import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
+import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.nav.Pages.appsPage
 import com.acszo.redomi.ui.nav.Pages.layoutPage
 import com.acszo.redomi.ui.nav.Pages.updatePage
@@ -65,7 +65,7 @@ fun SettingsPage(
 
     val openThemeDialog = remember { mutableStateOf(false) }
 
-    ScaffoldWithTopAppBar(
+    ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.app_name)
     ) { padding, pageTitle ->
         LazyColumn(

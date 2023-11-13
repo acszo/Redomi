@@ -31,7 +31,7 @@ import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.common_page.PageBottomInfo
 import com.acszo.redomi.ui.component.Tabs
-import com.acszo.redomi.ui.component.common_page.ScaffoldWithTopAppBar
+import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.utils.UpdateUtil.isAppInstalled
 import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
@@ -69,7 +69,7 @@ fun AppsPage(
     }
     val checkInstalledSize = installedApps.filter { it in checkInstalled }.size
 
-    ScaffoldWithTopAppBar(
+    ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.apps),
         description = stringResource(id = R.string.apps_description_page),
         backButton = { backButton() }

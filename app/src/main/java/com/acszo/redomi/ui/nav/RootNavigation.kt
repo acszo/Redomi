@@ -21,14 +21,12 @@ import com.acszo.redomi.ui.page.AppsPage
 import com.acszo.redomi.ui.page.LayoutPage
 import com.acszo.redomi.ui.page.SettingsPage
 import com.acszo.redomi.ui.page.UpdatePage
-import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 
 const val initialOffset = 0.10f
 
 @Composable
 fun RootNavigation(
-    dataStoreViewModel: DataStoreViewModel,
     updateViewModel: UpdateViewModel,
     isUpdateAvailable: Boolean
 ) {
@@ -49,9 +47,7 @@ fun RootNavigation(
         navigationComposable(
             route = Route.AppsPage.route
         ) {
-            AppsPage(
-                dataStoreViewModel = dataStoreViewModel
-            ) {
+            AppsPage {
                 BackButton { navController.popBackStack() }
             }
         }
