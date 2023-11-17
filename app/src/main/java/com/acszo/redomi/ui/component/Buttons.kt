@@ -57,14 +57,14 @@ fun RadioButtonItem(
             .fillMaxWidth()
             .selectable(
                 selected = (value == text),
-                onClick = { onClick() }
+                onClick = onClick
             )
             .padding(horizontal = padding),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         RadioButton(
             selected = (value == text),
-            onClick = { onClick() }
+            onClick = onClick
         )
         Text(
             text = stringResource(id = text),

@@ -161,7 +161,7 @@ fun SettingsPage(
                     )
                 }
             },
-            confirmAction = {
+            onConfirmAction = {
                 onIntentDefaultsApp(context)
                 scope.launch {
                     dataStore.saveIsFirstTime(false)
@@ -187,7 +187,8 @@ fun SettingsPage(
                     }
                 }
             },
-            confirmAction = { openThemeDialog.value = false }
+            onDismissRequest = { openThemeDialog.value = false },
+            onConfirmAction = { openThemeDialog.value = false }
         )
     }
 }

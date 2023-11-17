@@ -19,10 +19,10 @@ fun RedomiAlertDialog(
     icon: Int,
     title: String,
     content: @Composable () -> Unit,
-    confirmAction: () -> Unit,
+    onDismissRequest: () -> Unit = {},
+    onConfirmAction: () -> Unit,
 ) {
     AlertDialog(
-        onDismissRequest = { },
         icon = {
             Icon(
                 painter = painterResource(id = icon),
@@ -36,9 +36,10 @@ fun RedomiAlertDialog(
                 content()
             }
         },
+        onDismissRequest = onDismissRequest,
         confirmButton = {
             DialogTextButton(
-                onClick = { confirmAction() },
+                onClick = onConfirmAction,
                 text = stringResource(id = R.string.dialog_confirm)
             )
         }
