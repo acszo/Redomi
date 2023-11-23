@@ -177,9 +177,10 @@ fun SettingsPage(
             content = {
                 themes.forEach { item ->
                     RadioButtonItem(
+                        modifier = Modifier.padding(start = 15.dp),
                         value = getThemeMode(themeMode!!),
                         text = item.value,
-                        padding = 0.dp
+                        horizontalPadding = 0.dp
                     ) {
                         scope.launch {
                             dataStore.saveThemeMode(item.key)

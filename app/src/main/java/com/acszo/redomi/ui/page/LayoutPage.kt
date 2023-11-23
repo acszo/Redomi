@@ -66,11 +66,13 @@ fun LayoutPage(
                 pageTitleWithDescription()
             }
 
-            listTypes.forEach { item ->
-                item {
+
+            item {
+                listTypes.forEach { item ->
                     RadioButtonItem(
                         value = getListType(listType!!),
                         text = item.value,
+                        verticalPadding = 24.dp,
                         fontSize = 20.sp
                     ) {
                         scope.launch {

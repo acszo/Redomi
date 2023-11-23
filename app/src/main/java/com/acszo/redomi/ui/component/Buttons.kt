@@ -5,9 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -46,9 +48,11 @@ fun BackButton(
 
 @Composable
 fun RadioButtonItem(
+    modifier: Modifier = Modifier,
     value: Int,
     text: Int,
-    padding: Dp = 28.dp,
+    verticalPadding: Dp = 10.dp,
+    horizontalPadding: Dp = 28.dp,
     fontSize: TextUnit = MaterialTheme.typography.bodyLarge.fontSize,
     onClick: () -> Unit
 ) {
@@ -59,13 +63,15 @@ fun RadioButtonItem(
                 selected = (value == text),
                 onClick = onClick
             )
-            .padding(horizontal = padding),
+            .padding(vertical = verticalPadding, horizontal = horizontalPadding),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         RadioButton(
+            modifier = modifier,
             selected = (value == text),
-            onClick = onClick
+            onClick = null,
         )
+        Spacer(modifier = Modifier.width(15.dp))
         Text(
             text = stringResource(id = text),
             style = MaterialTheme.typography.bodyLarge.copy(
@@ -73,7 +79,7 @@ fun RadioButtonItem(
                 platformStyle = PlatformTextStyle(
                     includeFontPadding = false
                 ),
-            )
+            ),
         )
     }
 }
