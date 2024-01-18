@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="180" height="180" src="app/src/main/res/mipmap-anydpi-v26/ic_launcher_image.png">
+  <img width="180" height="180" src="/preview/logo.png">
   <h1>Redomi</h1>
   <p><a href="https://song.link/">Song.link</a> client made in Jetpack Compose and Material You</p>
 </div>
