@@ -53,10 +53,10 @@ fun BottomSheet(
 ) {
     val context = LocalContext.current
     val dataStore = SettingsDataStore(context)
-    val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
-    val gridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
+    val currentListType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
+    val currentGridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
 
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = listType == HORIZONTAL_LIST)
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = currentListType == HORIZONTAL_LIST)
     val bringActions = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
 
@@ -93,8 +93,8 @@ fun BottomSheet(
                 if (platforms.size > 1) {
                     if (!bringActions.value) {
                         ItemsList(
-                            listType = listType!!,
-                            gridSize = gridSize!!,
+                            listType = currentListType!!,
+                            gridSize = currentGridSize!!,
                             platforms = platforms,
                             isActionsRequired = isActionsRequired,
                             bringActions = bringActions,

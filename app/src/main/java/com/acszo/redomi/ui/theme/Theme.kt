@@ -15,6 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.acszo.redomi.MainActivity
+import com.acszo.redomi.data.DataStoreConst.DARK_THEME
+import com.acszo.redomi.data.DataStoreConst.LIGHT_THEME
 
 private val darkColorScheme = darkColorScheme(
     primary = PrimaryLight,
@@ -30,19 +32,25 @@ private val lightColorScheme = lightColorScheme(
 
 @Composable
 fun RedomiTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    currentTheme: Int,
     content: @Composable () -> Unit
 ) {
+    val getTheme = when (currentTheme) {
+        DARK_THEME -> true
+        LIGHT_THEME -> false
+        else -> isSystemInDarkTheme()
+    }
+
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+         Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (getTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> darkColorScheme
+        getTheme -> darkColorScheme
         else -> lightColorScheme
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
@@ -51,7 +59,7 @@ fun RedomiTheme(
             when (activity) {
                 is MainActivity -> {
                     window.decorView.setBackgroundColor(colorScheme.surface.toArgb())
-                    WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+                    WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !getTheme
                 }
             }
         }

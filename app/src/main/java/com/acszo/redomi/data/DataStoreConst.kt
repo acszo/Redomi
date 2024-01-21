@@ -20,25 +20,10 @@ object DataStoreConst {
         VERTICAL_LIST to R.string.vertical_list
     )
 
-    fun getListType(listType: Int): Int {
-        return when (listType) {
-            HORIZONTAL_LIST -> R.string.horizontal_list
-            else -> R.string.vertical_list
-        }
-    }
-
     val themes = mapOf(
         SYSTEM_THEME to R.string.system_theme,
         DARK_THEME to R.string.dark_theme,
         LIGHT_THEME to R.string.light_theme
     )
-
-    fun getThemeMode(themeMode: Int): Int {
-        return when (themeMode) {
-            DARK_THEME -> R.string.dark_theme
-            LIGHT_THEME -> R.string.light_theme
-            else -> R.string.system_theme
-        }
-    }
 
 }

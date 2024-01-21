@@ -33,7 +33,6 @@ import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.DataStoreConst.SMALL_GRID
 import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
-import com.acszo.redomi.data.DataStoreConst.getListType
 import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
@@ -49,8 +48,8 @@ fun LayoutPage(
     val scope = rememberCoroutineScope()
 
     val dataStore = SettingsDataStore(context)
-    val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
-    val gridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
+    val currentListType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
+    val currentGridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.layout),
@@ -66,11 +65,10 @@ fun LayoutPage(
                 pageTitleWithDescription()
             }
 
-
             item {
                 listTypes.forEach { item ->
                     RadioButtonItem(
-                        value = getListType(listType!!),
+                        value = listTypes[currentListType]!!,
                         text = item.value,
                         verticalPadding = 24.dp,
                         fontSize = 20.sp
@@ -84,7 +82,7 @@ fun LayoutPage(
 
             item {
                 AnimatedVisibility(
-                    visible = listType == VERTICAL_LIST,
+                    visible = currentListType == VERTICAL_LIST,
                     enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
                     exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(
                         animationSpec = tween(
@@ -108,15 +106,15 @@ fun LayoutPage(
                         ) {
                             for (grid in SMALL_GRID..BIG_GRID) {
                                 AnimatedRadiusButton(
-                                    isSelected = gridSize == grid,
+                                    isSelected = currentGridSize == grid,
                                     size = 80.dp,
-                                    backgroundColor = if (gridSize == grid) {
+                                    backgroundColor = if (currentGridSize == grid) {
                                         MaterialTheme.colorScheme.primary
                                     } else {
                                         MaterialTheme.colorScheme.surfaceVariant
                                     },
                                     text = grid.toString(),
-                                    textColor = if (gridSize == grid) {
+                                    textColor = if (currentGridSize == grid) {
                                         MaterialTheme.colorScheme.onPrimary
                                     } else {
                                         MaterialTheme.colorScheme.onSurfaceVariant

@@ -27,8 +27,7 @@ import com.acszo.redomi.R
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.SYSTEM_THEME
-import com.acszo.redomi.data.DataStoreConst.getListType
-import com.acszo.redomi.data.DataStoreConst.getThemeMode
+import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.DataStoreConst.themes
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.IconItemDialog
@@ -53,8 +52,8 @@ fun SettingsPage(
 
     val dataStore = SettingsDataStore(context)
     val isFirstTime by dataStore.getIsFirstTime.collectAsStateWithLifecycle(initialValue = false)
-    val listType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
-    val themeMode by dataStore.getThemeMode.collectAsStateWithLifecycle(initialValue = SYSTEM_THEME)
+    val currentListType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
+    val currentThemeMode by dataStore.getThemeMode.collectAsStateWithLifecycle(initialValue = SYSTEM_THEME)
 
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
@@ -90,7 +89,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
                     icon = R.drawable.ic_format_list_bulleted,
-                    description = stringResource(id = getListType(listType!!))
+                    description = stringResource(id = listTypes[currentListType]!!)
                 ) {
                     navController.navigate(layoutPage)
                 }
@@ -100,7 +99,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.theme),
                     icon = R.drawable.ic_color_lens_filled,
-                    description = stringResource(id = getThemeMode(themeMode!!))
+                    description = stringResource(id = themes[currentThemeMode]!!)
                 ) {
                     openThemeDialog.value = true
                 }
@@ -178,7 +177,7 @@ fun SettingsPage(
                 themes.forEach { item ->
                     RadioButtonItem(
                         modifier = Modifier.padding(start = 15.dp),
-                        value = getThemeMode(themeMode!!),
+                        value = themes[currentThemeMode]!!,
                         text = item.value,
                         horizontalPadding = 0.dp
                     ) {

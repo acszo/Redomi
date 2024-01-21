@@ -4,15 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.data.DataStoreConst
-import com.acszo.redomi.data.DataStoreConst.DARK_THEME
-import com.acszo.redomi.data.DataStoreConst.LIGHT_THEME
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
@@ -45,15 +42,10 @@ class SendBottomSheetActivity: ComponentActivity() {
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
 
             val dataStore = SettingsDataStore(context)
-            val theme by dataStore.getThemeMode.collectAsStateWithLifecycle(initialValue = DataStoreConst.SYSTEM_THEME)
-            val getTheme = when (theme) {
-                DARK_THEME -> true
-                LIGHT_THEME -> false
-                else -> isSystemInDarkTheme()
-            }
+            val currentTheme by dataStore.getThemeMode.collectAsStateWithLifecycle(initialValue = DataStoreConst.SYSTEM_THEME)
 
             RedomiTheme(
-                darkTheme = getTheme
+                currentTheme = currentTheme!!
             ) {
                 BottomSheet(
                     onDismiss = { this.finish() },
