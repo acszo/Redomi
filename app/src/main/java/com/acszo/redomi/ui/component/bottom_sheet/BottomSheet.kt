@@ -7,7 +7,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +21,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -31,8 +31,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.SettingsDataStore
@@ -64,23 +66,20 @@ fun BottomSheet(
         onDismissRequest = { onDismiss() },
         sheetState = sheetState,
     ) {
-        if (isLoading) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
-                contentAlignment = Alignment.Center,
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            if (isLoading) {
+                Box(
+                    modifier = Modifier.height(150.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator()
+                }
+            } else {
                 if (platforms.size > 1 || platforms.size == 1 && isActionsRequired) {
                     SongInfoDisplay(
                         thumbnail = songInfo?.thumbnailUrl ?: "",
@@ -102,17 +101,20 @@ fun BottomSheet(
                         )
                     }
                 } else {
-                    if (!isActionsRequired) {
-                        // if I don't, only the handle will be visible and it sucks >:(
-                        Column(
-                            modifier = Modifier.height(150.dp),
-                        ) {
-                            Spacer(modifier = Modifier.weight(1f))
+                    Box(
+                        modifier = Modifier.height(150.dp),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        if (platforms.isNotEmpty()) {
+                            if (!isActionsRequired) {
+                                onIntentView(context, platforms.values.first())
+                            } else {
+                                bringActions.value = true
+                                selectedPlatformLink.value = platforms.values.first()
+                            }
+                        } else {
+                            Text(stringResource(id = R.string.no_result_found))
                         }
-                        onIntentView(context, platforms.values.first())
-                    } else {
-                        bringActions.value = true
-                        selectedPlatformLink.value = platforms.values.first()
                     }
                 }
 

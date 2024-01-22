@@ -54,4 +54,5 @@
     <string name="update_failed">Update failed</string>
     <string name="update_available">New version available</string>
     <string name="no_update_available">No update found</string>
+    <string name="no_result_found">No result found</string>
 </resources>
