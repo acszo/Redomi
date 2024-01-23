@@ -1,0 +1,58 @@
+name: 🕷️ Bug report
+description: Create a report to help me fix problems I created 😭🙏
+labels: [bug]
+body:
+  - type: textarea
+    id: descripe-steps-bug
+    attributes:
+      label: Describe the bug
+      description: What did you do when it happened?
+      placeholder: |
+        Example:
+          1. Go to '...'
+          2. Click on '....'
+          3. Scroll down to '....'
+          4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen
+      placeholder: |
+        Example:
+          "This should happen..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: device-app-info
+    attributes:
+      label: Device
+      description: |
+        Inside Redomi click on **Version** and past it here
+    validations:
+      required: true
+
+  - type: textarea
+    id: screen-shots
+    attributes:
+      label: Screenshots
+      description: |
+        Add an image or video to help explaining your problem
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Use `adb logcat` or other ways to provide logs
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      placeholder: |
+        Add any other context about the problem here

@@ -1,0 +1,26 @@
+name: ⭐ Feature request
+description: Suggest a cool idea you have for the app 😎
+labels: [enhancement]
+body:
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature description
+      description: What feature you want in the app? It can be something new or even improve existing stuff
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-do-you-want-it
+    attributes:
+      label: Why do you want it?
+      description: Shortly explain why the app or the user could benefit from it
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      placeholder: |
+        Add any other context about the feature here
