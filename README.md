@@ -6,39 +6,38 @@
 
 ## Description
 
-Don't you hate when your friend uses a different music platform than you (they always use the mid ones 👎👎👎) and you can't open it in your favourite app or viceversa???? <br/>
-This app got you covered, you will be able to click on those links and see the song open in your favourite music streaming service! <br/>
-And you will also be able to share the song you want to anyone by converting the link to their prefered platform <br/> <br/>
+Don't you hate when you receive music links from friends who use different platforms than you (they always use the bad ones 👎👎👎) and you can't tap and play them in your favourite music service???? <br/>
+This app is here to solve that problem! <br/>
+And you can also share the songs you want to anyone by converting the link to their preferred platform. <br/> <br/>
 <b> All of this is done like it's integrated into your system! </b>
 
 ## Features
 
-- Open supported links from different services into your favourite one
-- Share song by converting it to different available services
-- Customize Bottom Sheet in different ways:
-  - Choose which apps you want to see and their order 
-  - Decide between a horizontal or vertical list, and it's grid size
+- Open supported links from different music services in your favourite streaming app
+- Convert links and share songs with others on their preferred platforms
+- Customize Sharesheet in different ways:
+  - Choose which apps to display and their order 
+  - Decide between a horizontal or vertical list, and its grid size
 - Material You
 - Light/Dark Theme
 
 ## Screenshots
 
 <p align="center">
-  <img src="/preview/screenshot_5.png" width="200" />
-  <img src="/preview/screenshot_6.png" width="200" />
-  <img src="/preview/screenshot_1.png" width="200" />
-</p>
-<p align="center">
-  <img src="/preview/screenshot_2.png" width="200" />
-  <img src="/preview/screenshot_4.png" width="200" />
-  <img src="/preview/screenshot_3.png" width="200" />
+  <img src="/preview/screenshot_5.png" width="33%" />
+  <img src="/preview/screenshot_6.png" width="33%" />
+  <img src="/preview/screenshot_1.png" width="33%" />
+  <img src="/preview/screenshot_2.png" width="33%" />
+  <img src="/preview/screenshot_4.png" width="33%" />
+  <img src="/preview/screenshot_3.png" width="33%" />
 </p>
 
 ## HOW TO MAKE IT WORK
 
-By default Redomi can't open external links, to do so long press on the app's icon and open the info page,
-from there open "Set/Open by default" (might be called a bit differently on some devices), and then check all the
-music platforms *THAT ARE NOT INSTALLED*
+By default Redomi is unable to open links, in case the guide inside the app is not understandable, do as follows:
+1. Long-press on Redomi and open its info page
+2. Navigate to "Set/Open by default" (this may have a different naming on some devices)
+3. Check all the music platforms that are *NOT* installed
 
 ## Supported services (+ 3rd party apps)
 
@@ -57,7 +56,7 @@ music platforms *THAT ARE NOT INSTALLED*
 - Reordering apps
 - Vertical list needs to pin first row and then expand on scroll
 
-Sometimes the song.link is slow to convert songs
+Sometimes song.link is slow to convert songs
 
 ## Credits
 
