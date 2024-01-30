@@ -15,7 +15,7 @@ object IntentUtil {
         context.startActivity(intent)
     }
 
-    fun onIntentSend(context: Context, url: String, onDismiss: () -> Unit) {
+    fun onIntentSend(context: Context, url: String, onDismiss: () -> Unit = { }) {
         val intent = Intent(Intent.ACTION_SEND)
             .putExtra(Intent.EXTRA_TEXT, url)
             .setType("text/plain")

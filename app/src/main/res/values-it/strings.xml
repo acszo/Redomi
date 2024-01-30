@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Redomi</string>
     <string name="title_bottom_sheet">Converti canzone</string>
+    <string name="title_share_general_link">Share general link</string>
     <string name="open">Apri</string>
     <string name="copy">Copia</string>
     <string name="share">Condividi</string>
