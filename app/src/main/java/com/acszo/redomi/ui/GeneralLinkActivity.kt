@@ -12,7 +12,7 @@ class GeneralLinkActivity: ComponentActivity() {
 
         val generalLink = "https://song.link/${intent?.getStringExtra(Intent.EXTRA_TEXT)}"
 
-        IntentUtil.onIntentSend(this@GeneralLinkActivity, generalLink)
+        IntentUtil.onIntentSend(this@GeneralLinkActivity, generalLink) { this.finish() }
 
     }
 }

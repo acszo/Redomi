@@ -186,7 +186,7 @@ fun UpdatePage(
                         contentAlignment = Alignment.Center,
                     ) {
                         LinearProgressIndicator(
-                            progress = progress.toFloat() / 100,
+                            progress = { progress.toFloat() / 100 },
                             modifier = Modifier.fillMaxSize(),
                         )
 
