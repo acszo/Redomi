@@ -134,7 +134,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.acszo.redomi.provider"
+            android:authorities="com.acszo.redomi.${applicationId}.provider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data
