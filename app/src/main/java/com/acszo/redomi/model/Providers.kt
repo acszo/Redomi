@@ -10,6 +10,7 @@ data class Link(
 )
 
 data class SongInfo(
+    val type: String,
     val title: String,
     val artistName: String,
     val thumbnailUrl: String

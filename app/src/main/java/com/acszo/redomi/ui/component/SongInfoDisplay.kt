@@ -41,6 +41,7 @@ import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SongInfoDisplay(
+    type: String,
     thumbnail: String,
     title: String,
     artist: String,
@@ -68,7 +69,8 @@ fun SongInfoDisplay(
         ) {
             if (image.state is AsyncImagePainter.State.Loading) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_music_note),
+                    painter = if (type == "album") painterResource(id = R.drawable.ic_album)
+                        else painterResource(id = R.drawable.ic_music_note),
                     modifier = Modifier.size(35.dp),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     contentDescription = stringResource(id = R.string.placeholder)

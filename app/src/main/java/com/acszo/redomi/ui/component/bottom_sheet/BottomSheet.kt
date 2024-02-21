@@ -82,6 +82,7 @@ fun BottomSheet(
             } else {
                 if (platforms.size > 1 || platforms.size == 1 && isActionsRequired) {
                     SongInfoDisplay(
+                        type = songInfo?.type ?: "",
                         thumbnail = songInfo?.thumbnailUrl ?: "",
                         title = songInfo?.title ?: "",
                         artist = songInfo?.artistName ?: "",

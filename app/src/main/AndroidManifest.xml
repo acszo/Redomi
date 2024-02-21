@@ -60,43 +60,13 @@
                 <data android:scheme="https"/>
                 <data android:host="music.youtube.com"/>
                 <data android:host="www.youtube.com"/>
-                <data android:pathPrefix="/watch"/>
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https"/>
                 <data android:host="open.spotify.com"/>
                 <data android:host="www.deezer.com"/>
                 <data android:host="listen.tidal.com"/>
-                <data android:host="play.napster.com"/>
-                <data android:pathPrefix="/track"/>
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https"/>
                 <data android:host="music.amazon.com"/>
-                <data android:pathPrefix="/album"/>
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https"/>
-                <data android:host="soundcloud.com"/>
                 <data android:host="music.apple.com"/>
+                <data android:host="soundcloud.com"/>
+                <data android:host="play.napster.com"/>
             </intent-filter>
         </activity>
 
