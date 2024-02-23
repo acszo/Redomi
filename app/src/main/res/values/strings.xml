@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Redomi</string>
     <string name="title_bottom_sheet">Convert song</string>
-    <string name="title_share_general_link">Share general link</string>
+    <string name="title_share_universal_link">Share universal link</string>
     <string name="open">Open</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
-    <string name="placeholder">placeholder</string>
+    <string name="placeholder">Placeholder</string>
     <string name="song_cover">Song Cover</string>
     <string name="settings">Settings</string>
     <string name="back">Back</string>
@@ -20,19 +20,17 @@
     <string name="update">Update</string>
     <string name="update_description">Check if there are any updates</string>
     <string name="version">Version</string>
-    <string name="info">info</string>
+    <string name="info">Info</string>
     <string name="installed">Installed</string>
     <string name="all">All</string>
     <string name="apps_description_page">
         Choose the order and which apps you want to see when converting a song.
         \'Installed apps\' are shown when opening a link.
-        \'All apps\' are shown when converting from a music platform.
+        \'All apps\' are shown when sharing a link from a music platform.
     </string>
-    <string name="installed_tab_info">Selecting only 1 app will open it directly.</string>
-    <string name="all_tab_info">Selecting only 1 app will open it\'s actions directly.</string>
-    <string name="layout_description_page">
-        Choose the way you want to display the apps you see when converting a song.
-    </string>
+    <string name="installed_tab_info">Selecting only one app will open it directly.</string>
+    <string name="all_tab_info">Selecting only one app will open the actions directly.</string>
+    <string name="layout_description_page">Choose the way you want to display the apps you see when converting a song.</string>
     <string name="layout_grid_size">Grid size</string>
     <string name="update_description_page">Updates are checked every time you start the app.</string>
     <string name="title_changelogs_current">This version</string>
@@ -46,7 +44,7 @@
     <string name="dialog_confirm">OK</string>
     <string name="dialog_setup_title">Guide</string>
     <string name="dialog_setup_description">By default Redomi can\'t open external links. You will get redirected to the settings to make it work.</string>
-    <string name="dialog_setup_description_checked">Check the links so Redomi can open them and work.</string>
+    <string name="dialog_setup_description_checked">Check the links so Redomi can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Couldn\'t load update info</string>
     <string name="updating">Updating</string>

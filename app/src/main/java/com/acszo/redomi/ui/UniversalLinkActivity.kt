@@ -5,14 +5,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.acszo.redomi.utils.IntentUtil
 
-class GeneralLinkActivity: ComponentActivity() {
+class UniversalLinkActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val generalLink = "https://song.link/${intent?.getStringExtra(Intent.EXTRA_TEXT)}"
+        val universalLink = "https://song.link/${intent?.getStringExtra(Intent.EXTRA_TEXT)}"
 
-        IntentUtil.onIntentSend(this@GeneralLinkActivity, generalLink) { this.finish() }
+        IntentUtil.onIntentSend(this@UniversalLinkActivity, universalLink) { this.finish() }
 
     }
 }

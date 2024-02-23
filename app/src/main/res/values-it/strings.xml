@@ -2,11 +2,11 @@
 <resources>
     <string name="app_name">Redomi</string>
     <string name="title_bottom_sheet">Converti canzone</string>
-    <string name="title_share_general_link">Share general link</string>
+    <string name="title_share_universal_link">Condividi link universale</string>
     <string name="open">Apri</string>
     <string name="copy">Copia</string>
     <string name="share">Condividi</string>
-    <string name="placeholder">placeholder</string>
+    <string name="placeholder">Placeholder</string>
     <string name="song_cover">Cover Canzone</string>
     <string name="settings">Impostazioni</string>
     <string name="back">Indietro</string>
@@ -21,19 +21,17 @@
     <string name="update">Aggiornamento</string>
     <string name="update_description">Verifica la presenza di aggiornamenti</string>
     <string name="version">Versione</string>
-    <string name="info">informazioni</string>
+    <string name="info">Informazioni</string>
     <string name="installed">Installate</string>
     <string name="all">Tutte</string>
     <string name="apps_description_page">
         Scegli l\'ordine e quali app vuoi mostrare quando converti una canzone.
         \'App Installate\' sono mostrate quando apri un link.
-        \'Tutte le app\' sono mostrate quando converti da una piattaforma.
+        \'Tutte le app\' sono mostrate quando condividi un link da una piattaforma musicale.
     </string>
-    <string name="installed_tab_info">Selezionando un app la apre direttamente.</string>
-    <string name="all_tab_info">Selezionando un app apre le azioni direttamente.</string>
-    <string name="layout_description_page">
-        Decidi come visualizzare le applicazioni che vedi quando converti una canzone.
-    </string>
+    <string name="installed_tab_info">Selezionando una sola app la apre direttamente.</string>
+    <string name="all_tab_info">Selezionando una sola app apre le azioni direttamente.</string>
+    <string name="layout_description_page">Decidi come visualizzare le applicazioni che vedi quando converti una canzone.</string>
     <string name="layout_grid_size">Dimensione griglia</string>
     <string name="update_description_page">Gli aggiornamenti vengono controllati ad ogni avvio dell\'applicazione.</string>
     <string name="title_changelogs_current">Questa versione</string>
@@ -44,12 +42,12 @@
     <string name="dark_theme">Scuro</string>
     <string name="light_theme">Chiaro</string>
     <string name="dialog_dismiss">Annulla</string>
-    <string name="dialog_confirm">Ok</string>
+    <string name="dialog_confirm">OK</string>
     <string name="dialog_setup_title">Guida</string>
     <string name="dialog_setup_description">Di base Redomi non può aprire link esterni. Verrai reindirizzato alle impostazioni per farlo funzionare.</string>
-    <string name="dialog_setup_description_checked">Seleziona i link così che Redomi possa aprirli e funzionare.</string>
-    <string name="dialog_setup_description_unchecked">Lascia deselezionati quelli che fanno parte di servizi di musica che usi. (es. se use Spotify lascialo deselezionato)</string>
-    <string name="update_info_failed">Impossibile caricare i dati sull\'aggiornamento</string>
+    <string name="dialog_setup_description_checked">Seleziona i link così che Redomi possa aprirli correttamente.</string>
+    <string name="dialog_setup_description_unchecked">Lascia deselezionati quelli che fanno parte dei servizi di musica che usi. (es. se usi Spotify lascialo deselezionato)</string>
+    <string name="update_info_failed">Impossibile caricare le informazioni sull\'aggiornamento</string>
     <string name="updating">Aggiornamento in corso</string>
     <string name="update_completed">Aggiornamento completato</string>
     <string name="update_aborted">Accetta il permesso per aggiornare</string>

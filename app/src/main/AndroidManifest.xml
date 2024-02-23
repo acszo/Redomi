@@ -87,9 +87,9 @@
         </activity>
 
         <activity
-            android:name=".ui.GeneralLinkActivity"
+            android:name=".ui.UniversalLinkActivity"
             android:exported="true"
-            android:label="@string/title_share_general_link"
+            android:label="@string/title_share_universal_link"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.Redomi.BottomSheet" >
