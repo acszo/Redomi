@@ -88,15 +88,17 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
+    implementation "androidx.compose.animation:animation-graphics:1.6.2"
+
     // Splash Screen
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.core:core-splashscreen:1.1.0-alpha02'
 
     // Dagger Hilt
-    implementation 'com.google.dagger:hilt-android:2.48'
+    implementation 'com.google.dagger:hilt-android:2.49'
     kapt 'com.google.dagger:hilt-compiler:2.47'
-    kapt "androidx.hilt:hilt-compiler:1.1.0"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
+    kapt "androidx.hilt:hilt-compiler:1.2.0"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.2.0'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

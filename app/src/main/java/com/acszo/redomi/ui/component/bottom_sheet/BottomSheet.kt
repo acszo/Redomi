@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -31,10 +30,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.SettingsDataStore
@@ -69,12 +66,16 @@ fun BottomSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()),
+                .padding(
+                    bottom = WindowInsets.systemBars
+                        .asPaddingValues()
+                        .calculateBottomPadding()
+                ),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             if (isLoading) {
                 Box(
-                    modifier = Modifier.height(150.dp),
+                    modifier = Modifier.height(200.dp),
                     contentAlignment = Alignment.Center,
                 ) {
                     CircularProgressIndicator()
@@ -103,8 +104,7 @@ fun BottomSheet(
                     }
                 } else {
                     Box(
-                        modifier = Modifier.height(150.dp),
-                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.height(200.dp),
                     ) {
                         if (platforms.isNotEmpty()) {
                             if (!isActionsRequired) {
@@ -114,7 +114,7 @@ fun BottomSheet(
                                 selectedPlatformLink.value = platforms.values.first()
                             }
                         } else {
-                            Text(stringResource(id = R.string.no_result_found))
+                            ResultNotFound()
                         }
                     }
                 }

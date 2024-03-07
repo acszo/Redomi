@@ -1,0 +1,89 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="56dp"
+            android:height="56dp"
+            android:viewportWidth="56"
+            android:viewportHeight="56">
+            <path
+                android:name="music_note"
+                android:pathData="M 31.52 6 C 28.471 6 26 8.471 26 11.52 C 26 11.547 26 11.573 26.001 11.6 L 26 11.6 L 26 28.799 C 24.5 28.033 22.8 27.6 21 27.6 C 14.925 27.6 10 32.525 10 38.6 C 10 44.675 14.925 49.6 21 49.6 C 27.075 49.6 32 44.675 32 38.6 C 32 38.263 31.985 37.929 31.955 37.6 L 32 37.6 L 32 17.04 L 40.64 17.04 C 43.689 17.04 46.16 14.569 46.16 11.52 C 46.16 8.471 43.689 6 40.64 6 L 31.52 6 Z"
+                android:fillColor="#ffffff"
+                android:strokeWidth="1"
+                android:fillType="evenOdd"/>
+            <path
+                android:name="pentagram_bottom_line"
+                android:pathData="M 49.6 36.24 L 6.4 36.24 C 5.075 36.24 4 37.315 4 38.64 C 4 39.965 5.075 41.04 6.4 41.04 L 49.6 41.04 C 50.925 41.04 52 39.965 52 38.64 C 52 37.315 50.925 36.24 49.6 36.24 Z"
+                android:fillColor="#ffffff"
+                android:strokeWidth="1"/>
+            <path
+                android:name="pentagram_top_line"
+                android:pathData="M 49.6 22.8 L 6.4 22.8 C 5.075 22.8 4 23.875 4 25.2 C 4 26.526 5.075 27.6 6.4 27.6 L 49.6 27.6 C 50.925 27.6 52 26.526 52 25.2 C 52 23.875 50.925 22.8 49.6 22.8 Z"
+                android:fillColor="#ffffff"
+                android:strokeWidth="1"/>
+        </vector>
+    </aapt:attr>
+    <target android:name="music_note">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:duration="500"
+                    android:valueFrom="M 31.52 6 C 28.471 6 26 8.471 26 11.52 C 26 11.547 26 11.573 26.001 11.6 L 26 11.6 L 26 28.799 C 24.5 28.033 22.8 27.6 21 27.6 C 14.925 27.6 10 32.525 10 38.6 C 10 44.675 14.925 49.6 21 49.6 C 27.075 49.6 32 44.675 32 38.6 C 32 38.263 31.985 37.929 31.955 37.6 L 32 37.6 L 32 17.04 L 40.64 17.04 C 43.689 17.04 46.16 14.569 46.16 11.52 C 46.16 8.471 43.689 6 40.64 6 L 31.52 6 Z"
+                    android:valueTo="M 31.307 10 C 28.835 10 26.832 12.003 26.832 14.475 C 26.832 14.496 26.832 14.518 26.832 14.54 L 26.832 14.54 L 26.832 28.482 C 25.629 27.86 24.266 27.51 22.822 27.51 C 17.95 27.51 14 31.502 14 36.427 C 14 41.352 17.95 45.344 22.822 45.344 C 27.694 45.344 31.644 41.352 31.644 36.427 C 31.644 36.154 31.632 35.883 31.608 35.616 L 31.644 35.616 L 31.644 18.949 L 38.525 18.949 C 40.997 18.949 43 16.946 43 14.475 C 43 12.003 40.997 10 38.525 10 L 31.307 10 Z"
+                    android:valueType="pathType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="fillAlpha"
+                    android:duration="500"
+                    android:valueFrom="1"
+                    android:valueTo="0.75"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="pentagram_top_line">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:duration="500"
+                    android:valueFrom="M 49.6 22.8 L 6.4 22.8 C 5.075 22.8 4 23.875 4 25.2 C 4 26.526 5.075 27.6 6.4 27.6 L 49.6 27.6 C 50.925 27.6 52 26.526 52 25.2 C 52 23.875 50.925 22.8 49.6 22.8 Z"
+                    android:valueTo="M 47.012 43.77 L 12.364 9.121 C 11.192 7.95 9.293 7.95 8.121 9.121 C 6.95 10.293 6.95 12.192 8.121 13.364 L 42.77 48.012 C 43.941 49.184 45.841 49.184 47.012 48.012 C 48.184 46.841 48.184 44.941 47.012 43.77 Z"
+                    android:valueType="pathType"
+                    android:interpolator="@android:anim/overshoot_interpolator"/>
+                <objectAnimator
+                    android:propertyName="fillAlpha"
+                    android:duration="500"
+                    android:valueFrom="0.75"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="pentagram_bottom_line">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:duration="500"
+                    android:valueFrom="M 49.6 36.24 L 6.4 36.24 C 5.075 36.24 4 37.315 4 38.64 C 4 39.965 5.075 41.04 6.4 41.04 L 49.6 41.04 C 50.925 41.04 52 39.965 52 38.64 C 52 37.315 50.925 36.24 49.6 36.24 Z"
+                    android:valueTo="M 42.77 9.121 L 8.121 43.77 C 6.95 44.941 6.95 46.841 8.121 48.012 C 9.293 49.184 11.192 49.184 12.364 48.012 L 47.012 13.364 C 48.184 12.192 48.184 10.293 47.012 9.121 C 45.841 7.95 43.941 7.95 42.77 9.121 Z"
+                    android:valueType="pathType"
+                    android:interpolator="@android:anim/overshoot_interpolator"/>
+                <objectAnimator
+                    android:propertyName="fillAlpha"
+                    android:duration="500"
+                    android:valueFrom="0.75"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
