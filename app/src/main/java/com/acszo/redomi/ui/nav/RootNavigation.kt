@@ -21,12 +21,14 @@ import com.acszo.redomi.ui.page.AppsPage
 import com.acszo.redomi.ui.page.LayoutPage
 import com.acszo.redomi.ui.page.SettingsPage
 import com.acszo.redomi.ui.page.UpdatePage
+import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 
 const val initialOffset = 0.10f
 
 @Composable
 fun RootNavigation(
+    dataStoreViewModel: DataStoreViewModel,
     updateViewModel: UpdateViewModel,
     isUpdateAvailable: Boolean
 ) {
@@ -40,6 +42,7 @@ fun RootNavigation(
             route = Route.SettingsPage.route
         ) {
             SettingsPage(
+                dataStoreViewModel = dataStoreViewModel,
                 navController = navController,
                 isUpdateAvailable = isUpdateAvailable
             )
@@ -47,14 +50,18 @@ fun RootNavigation(
         navigationComposable(
             route = Route.AppsPage.route
         ) {
-            AppsPage {
+            AppsPage(
+                dataStoreViewModel = dataStoreViewModel,
+            ) {
                 BackButton { navController.popBackStack() }
             }
         }
         navigationComposable(
             route = Route.LayoutPage.route
         ) {
-            LayoutPage {
+            LayoutPage(
+                dataStoreViewModel = dataStoreViewModel,
+            ) {
                 BackButton { navController.popBackStack() }
             }
         }

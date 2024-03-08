@@ -33,17 +33,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
-import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
-import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.component.SongInfoDisplay
 import com.acszo.redomi.utils.IntentUtil.onIntentView
+import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(
     onDismiss: () -> Unit,
+    dataStoreViewModel: DataStoreViewModel,
     songInfo: SongInfo?,
     platforms: Map<AppDetails, String>,
     isLoading: Boolean,
@@ -51,9 +51,8 @@ fun BottomSheet(
     isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
-    val dataStore = SettingsDataStore(context)
-    val currentListType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
-    val currentGridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
+    val currentListType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
+    val currentGridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = currentListType == HORIZONTAL_LIST)
     val bringActions = remember { mutableStateOf(false) }
@@ -94,8 +93,8 @@ fun BottomSheet(
                 if (platforms.size > 1) {
                     if (!bringActions.value) {
                         ItemsList(
-                            listType = currentListType!!,
-                            gridSize = currentGridSize!!,
+                            listType = currentListType,
+                            gridSize = currentGridSize,
                             platforms = platforms,
                             isActionsRequired = isActionsRequired,
                             bringActions = bringActions,

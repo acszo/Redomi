@@ -1,6 +1,7 @@
 package com.acszo.redomi.di
 
 import android.content.Context
+import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.repository.DataStoreRepository
 import com.acszo.redomi.repository.GithubRepository
 import com.acszo.redomi.repository.SongRepository
@@ -46,6 +47,12 @@ object AppModule {
     @Singleton
     fun provideGithubService(@Named("Github") retrofit: Retrofit): GithubService =
         retrofit.create(GithubService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSettingsDataStore(
+        @ApplicationContext context: Context
+    ): SettingsDataStore = SettingsDataStore(context)
 
     @Provides
     @Singleton

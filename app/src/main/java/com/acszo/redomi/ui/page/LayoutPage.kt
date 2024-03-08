@@ -22,34 +22,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.BIG_GRID
-import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
-import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.DataStoreConst.SMALL_GRID
 import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
 import com.acszo.redomi.data.DataStoreConst.listTypes
-import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.viewmodel.DataStoreViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun LayoutPage(
+    dataStoreViewModel: DataStoreViewModel,
     backButton: @Composable () -> Unit
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
-
-    val dataStore = SettingsDataStore(context)
-    val currentListType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
-    val currentGridSize by dataStore.getLayoutGridSize.collectAsStateWithLifecycle(initialValue = MEDIUM_GRID)
+    val currentListType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
+    val currentGridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.layout),
@@ -74,7 +69,7 @@ fun LayoutPage(
                         fontSize = 20.sp
                     ) {
                         scope.launch {
-                            dataStore.saveLayoutListType(item.key)
+                            dataStoreViewModel.setLayoutListType(item.key)
                         }
                     }
                 }
@@ -121,7 +116,7 @@ fun LayoutPage(
                                     }
                                 ) {
                                     scope.launch {
-                                        dataStore.saveLayoutGridSize(grid)
+                                        dataStoreViewModel.setLayoutGridSize(grid)
                                     }
                                 }
                             }

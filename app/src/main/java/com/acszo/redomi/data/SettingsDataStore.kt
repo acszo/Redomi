@@ -13,7 +13,9 @@ import com.acszo.redomi.data.DataStoreConst.SYSTEM_THEME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class SettingsDataStore(private val context: Context) {
+class SettingsDataStore(
+    private val context: Context
+) {
 
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("SettingsDataStore")
@@ -28,9 +30,9 @@ class SettingsDataStore(private val context: Context) {
             preferences[FIRST_TIME] ?: true
         }
 
-    suspend fun saveIsFirstTime(isFirstTime: Boolean) {
+    suspend fun saveIsFirstTime() {
         context.dataStore.edit { preferences ->
-            preferences[FIRST_TIME] = isFirstTime
+            preferences[FIRST_TIME] = false
         }
     }
 

@@ -18,33 +18,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.AppCheckBoxItem
-import com.acszo.redomi.ui.component.common_page.PageBottomInfo
 import com.acszo.redomi.ui.component.Tabs
+import com.acszo.redomi.ui.component.common_page.PageBottomInfo
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
-import com.acszo.redomi.utils.UpdateUtil.isAppInstalled
 import com.acszo.redomi.utils.StringUtil.separateUppercase
+import com.acszo.redomi.utils.UpdateUtil.isAppInstalled
 import com.acszo.redomi.viewmodel.DataStoreViewModel
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AppsPage(
-    dataStoreViewModel: DataStoreViewModel = hiltViewModel(),
+    dataStoreViewModel: DataStoreViewModel,
     backButton: @Composable () -> Unit
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
     val tabs: List<String> = listOf(
         stringResource(id = R.string.installed),
@@ -113,16 +109,12 @@ fun AppsPage(
                         size = checkInstalledSize,
                         isChecked = installedApps.contains(app),
                         onCheckedAction = {
-                            scope.launch {
-                                installedApps.add(app)
-                                dataStoreViewModel.setInstalledApps(installedApps.toList())
-                            }
+                            installedApps.add(app)
+                            dataStoreViewModel.setInstalledApps(installedApps.toList())
                         },
                         onUnCheckedAction = {
-                            scope.launch {
-                                installedApps.remove(app)
-                                dataStoreViewModel.setInstalledApps(installedApps.toList())
-                            }
+                            installedApps.remove(app)
+                            dataStoreViewModel.setInstalledApps(installedApps.toList())
                         }
                     )
                 }
@@ -134,16 +126,12 @@ fun AppsPage(
                         size = allApps.size,
                         isChecked = allApps.contains(app),
                         onCheckedAction = {
-                            scope.launch {
-                                allApps.add(app)
-                                dataStoreViewModel.setAllApps(allApps.toList())
-                            }
+                            allApps.add(app)
+                            dataStoreViewModel.setAllApps(allApps.toList())
                         },
                         onUnCheckedAction = {
-                            scope.launch {
-                                allApps.remove(app)
-                                dataStoreViewModel.setAllApps(allApps.toList())
-                            }
+                            allApps.remove(app)
+                            dataStoreViewModel.setAllApps(allApps.toList())
                         }
                     )
                 }

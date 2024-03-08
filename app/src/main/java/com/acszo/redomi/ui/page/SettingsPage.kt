@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -23,13 +22,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.acszo.redomi.R
 import com.acszo.redomi.BuildConfig
-import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
-import com.acszo.redomi.data.DataStoreConst.SYSTEM_THEME
+import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.DataStoreConst.themes
-import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.ui.component.IconItemDialog
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.RedomiAlertDialog
@@ -40,20 +36,19 @@ import com.acszo.redomi.ui.nav.Pages.layoutPage
 import com.acszo.redomi.ui.nav.Pages.updatePage
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentDefaultsApp
-import kotlinx.coroutines.launch
+import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable
 fun SettingsPage(
+    dataStoreViewModel: DataStoreViewModel,
     navController: NavController,
     isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
-    val dataStore = SettingsDataStore(context)
-    val isFirstTime by dataStore.getIsFirstTime.collectAsStateWithLifecycle(initialValue = false)
-    val currentListType by dataStore.getLayoutListType.collectAsStateWithLifecycle(initialValue = HORIZONTAL_LIST)
-    val currentThemeMode by dataStore.getThemeMode.collectAsStateWithLifecycle(initialValue = SYSTEM_THEME)
+    val isFirstTime by dataStoreViewModel.isFirstTime.collectAsStateWithLifecycle()
+    val currentListType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
+    val currentThemeMode by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
@@ -141,7 +136,7 @@ fun SettingsPage(
         }
     }
 
-    if (isFirstTime!!) {
+    if (isFirstTime) {
         RedomiAlertDialog(
             icon =  R.drawable.ic_description,
             title = stringResource(id = R.string.dialog_setup_title),
@@ -162,9 +157,7 @@ fun SettingsPage(
             },
             onConfirmAction = {
                 onIntentDefaultsApp(context)
-                scope.launch {
-                    dataStore.saveIsFirstTime(false)
-                }
+                dataStoreViewModel.setIsFirstTime()
             }
         )
     }
@@ -181,9 +174,7 @@ fun SettingsPage(
                         text = item.value,
                         horizontalPadding = 0.dp
                     ) {
-                        scope.launch {
-                            dataStore.saveThemeMode(item.key)
-                        }
+                        dataStoreViewModel.setThemeMode(item.key)
                     }
                 }
             },
