@@ -2,9 +2,13 @@ package com.acszo.redomi.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.acszo.redomi.data.DataStoreConst.FIRST_TIME
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
+import com.acszo.redomi.data.DataStoreConst.LAYOUT_GRID_SIZE
+import com.acszo.redomi.data.DataStoreConst.LAYOUT_LIST_TYPE
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.DataStoreConst.SYSTEM_THEME
+import com.acszo.redomi.data.DataStoreConst.THEME_MODE
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.repository.DataStoreRepository
@@ -28,8 +32,8 @@ class DataStoreViewModel @Inject constructor(
     private val _allApps: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
     val allApps: StateFlow<List<AppDetails>> = _allApps.asStateFlow()
 
-    private val _isFirstTime: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isFirstTime: StateFlow<Boolean> = _isFirstTime.asStateFlow()
+    private val _isFirstTime: MutableStateFlow<Boolean?> = MutableStateFlow(false)
+    val isFirstTime: StateFlow<Boolean?> = _isFirstTime.asStateFlow()
 
     private val _layoutListType: MutableStateFlow<Int> = MutableStateFlow(HORIZONTAL_LIST)
     val layoutListType: StateFlow<Int> = _layoutListType.asStateFlow()
@@ -61,40 +65,43 @@ class DataStoreViewModel @Inject constructor(
     }
 
     fun getIsFirstTime() = viewModelScope.launch {
-        settingsDataStore.getIsFirstTime.collectLatest {
-            _isFirstTime.value = it!!
+        settingsDataStore.getBoolean(FIRST_TIME).collectLatest {
+            _isFirstTime.value = it ?: true
         }
     }
 
     fun setIsFirstTime() = viewModelScope.launch {
-        settingsDataStore.saveIsFirstTime()
+        settingsDataStore.setBoolean(FIRST_TIME, false)
     }
 
     fun getLayoutListType() = viewModelScope.launch {
-        settingsDataStore.getLayoutListType.collectLatest {
-            _layoutListType.value = it!!
+        settingsDataStore.getInt(LAYOUT_LIST_TYPE).collectLatest {
+            _layoutListType.value = it ?: HORIZONTAL_LIST
         }
     }
 
     fun setLayoutListType(layoutListType: Int) = viewModelScope.launch {
-        settingsDataStore.saveLayoutListType(layoutListType)
+        settingsDataStore.setInt(LAYOUT_LIST_TYPE, layoutListType)
     }
+
     fun getLayoutGridSize() = viewModelScope.launch {
-        settingsDataStore.getLayoutGridSize.collectLatest {
-            _layoutGridSize.value = it!!
+        settingsDataStore.getInt(LAYOUT_GRID_SIZE).collectLatest {
+            _layoutGridSize.value = it ?: MEDIUM_GRID
         }
     }
 
     fun setLayoutGridSize(layoutGridSize: Int) = viewModelScope.launch {
-        settingsDataStore.saveLayoutGridSize(layoutGridSize)
+        settingsDataStore.setInt(LAYOUT_GRID_SIZE, layoutGridSize)
     }
+
     fun getThemeMode() = viewModelScope.launch {
-        settingsDataStore.getThemeMode.collectLatest {
-            _themeMode.value = it!!
+        settingsDataStore.getInt(THEME_MODE).collectLatest {
+            _themeMode.value = it ?: SYSTEM_THEME
         }
     }
 
     fun setThemeMode(themeMode: Int) = viewModelScope.launch {
-        settingsDataStore.saveThemeMode(themeMode)
+        settingsDataStore.setInt(THEME_MODE, themeMode)
     }
+
 }

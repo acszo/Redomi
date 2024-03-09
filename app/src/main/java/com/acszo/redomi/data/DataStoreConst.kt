@@ -4,6 +4,11 @@ import com.acszo.redomi.R
 
 object DataStoreConst {
 
+    const val FIRST_TIME = "first_time"
+    const val LAYOUT_LIST_TYPE = "list_type"
+    const val LAYOUT_GRID_SIZE = "grid_size"
+    const val THEME_MODE = "theme_mode"
+
     const val HORIZONTAL_LIST = 0
     const val VERTICAL_LIST = 1
 

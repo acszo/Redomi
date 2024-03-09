@@ -136,7 +136,7 @@ fun SettingsPage(
         }
     }
 
-    if (isFirstTime) {
+    if (isFirstTime!!) {
         RedomiAlertDialog(
             icon =  R.drawable.ic_description,
             title = stringResource(id = R.string.dialog_setup_title),
