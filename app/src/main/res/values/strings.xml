@@ -18,7 +18,7 @@
     <string name="github">Github</string>
     <string name="github_description">Check out the repository at acszo/Redomi</string>
     <string name="update">Update</string>
-    <string name="update_description">Check if there are any updates</string>
+    <string name="update_description">Check available updates</string>
     <string name="version">Version</string>
     <string name="info">Info</string>
     <string name="installed">Installed</string>
