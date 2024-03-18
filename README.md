@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="180" height="180" src="/preview/logo.png">
+  <img width="180" height="180" src="/preview/logo.svg">
   <h1>Redomi</h1>
   <p><a href="https://song.link/">Song.link</a> client made in Jetpack Compose and Material You</p>
 </div>
