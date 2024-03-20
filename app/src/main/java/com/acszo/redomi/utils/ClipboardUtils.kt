@@ -5,9 +5,8 @@ import androidx.compose.ui.text.AnnotatedString
 
 object ClipboardUtils {
 
-    fun copyText(clipboardManager: ClipboardManager, text: String, onDismiss: () -> Unit = { }) {
+    fun copyText(clipboardManager: ClipboardManager, text: String) {
         clipboardManager.setText(AnnotatedString(text))
-        onDismiss()
     }
 
 }

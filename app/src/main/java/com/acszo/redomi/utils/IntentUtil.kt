@@ -15,12 +15,11 @@ object IntentUtil {
         context.startActivity(intent)
     }
 
-    fun onIntentSend(context: Context, url: String, onDismiss: () -> Unit = { }) {
+    fun onIntentSend(context: Context, url: String) {
         val intent = Intent(Intent.ACTION_SEND)
             .putExtra(Intent.EXTRA_TEXT, url)
             .setType("text/plain")
         context.startActivity(Intent.createChooser(intent, null))
-        onDismiss()
     }
 
     fun onIntentDefaultsApp(context: Context) {

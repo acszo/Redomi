@@ -52,16 +52,16 @@ fun ActionsMenu(
         ActionsMenuItem(R.string.copy, R.drawable.ic_link) {
             ClipboardUtils.copyText(
                 clipboardManager = clipboardManager,
-                text = url,
-                onDismiss = onDismiss
+                text = url
             )
+            onDismiss()
         }
         ActionsMenuItem(R.string.share, R.drawable.ic_share) {
             IntentUtil.onIntentSend(
                 context = context,
-                url = url,
-                onDismiss = onDismiss
+                url = url
             )
+            onDismiss()
         }
     }
 }
