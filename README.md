@@ -21,6 +21,13 @@ And you can also share the songs you want to anyone by converting the link to th
 - Material You
 - Light/Dark Theme
 
+## In action 😎
+
+<p align="center">
+  <img src="/preview/open.gif" width="30%">
+  <img src="/preview/share.gif" width="30%">
+</p>
+
 ## Screenshots
 
 <p align="center">
@@ -50,13 +57,6 @@ By default Redomi is unable to open links, in case the guide inside the app is n
 - Apple Music
 - Soundcloud
 - Napster
-
-## What still needs to be done?
-
-- Reordering apps
-- Vertical list needs to pin first row and then expand on scroll
-
-Sometimes song.link is slow to convert songs
 
 ## Credits
 
