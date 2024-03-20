@@ -15,4 +15,5 @@ class UniversalLinkActivity: ComponentActivity() {
         IntentUtil.onIntentSend(this@UniversalLinkActivity, universalLink)
         this.finish()
     }
+
 }

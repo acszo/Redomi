@@ -5,8 +5,8 @@ import com.acszo.redomi.R
 object Platform {
 
     val platforms: List<AppDetails> = listOf(
-        AppDetails("youtubeMusic", R.drawable.ic_youtube_music, listOf("com.google.android.apps.youtube.music", "app.revanced.android.apps.youtube.music", "com.zionhuang.music", "it.vfsfitvnm.vimusic")),
-        AppDetails("youtube", R.drawable.ic_youtube, listOf("com.google.android.youtube", "app.revanced.android.youtube", "org.schabi.newpipe" , "com.github.libretube")),
+        AppDetails("youtubeMusic", R.drawable.ic_youtube_music, listOf("com.google.android.apps.youtube.music", "app.revanced.android.apps.youtube.music", "app.rvx.android.apps.youtube.music", "com.zionhuang.music", "it.vfsfitvnm.vimusic")),
+        AppDetails("youtube", R.drawable.ic_youtube, listOf("com.google.android.youtube", "app.revanced.android.youtube", "app.rvx.android.youtube", "org.schabi.newpipe" , "com.github.libretube")),
         AppDetails("spotify", R.drawable.ic_spotify, listOf("com.spotify.music")),
         AppDetails("deezer", R.drawable.ic_deezer, listOf("deezer.android.app")),
         AppDetails("tidal", R.drawable.ic_tidal, listOf("com.aspiro.tidal")),
