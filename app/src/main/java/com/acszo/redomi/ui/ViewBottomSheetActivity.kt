@@ -11,7 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.ui.component.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
-import com.acszo.redomi.utils.UpdateUtil.isAppInstalled
+import com.acszo.redomi.utils.PackageUtil.isPackagePresent
 import com.acszo.redomi.viewmodel.AppList
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.SongViewModel
@@ -45,11 +45,7 @@ class ViewBottomSheetActivity: ComponentActivity() {
             val currentTheme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
             val installedApps: Map<AppDetails, String> = platforms.filter {
-                var isInstalled = false
-                for (packageName in it.key.packageName) {
-                    if (isAppInstalled(context, packageName)) isInstalled = true
-                }
-                isInstalled
+                isPackagePresent(context, it.key.packageName)
             }
 
             RedomiTheme(

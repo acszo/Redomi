@@ -4,7 +4,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInstaller
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
@@ -20,15 +19,6 @@ object UpdateUtil {
         "${context.packageName}.provider",
         context.getApk()
     )
-
-    fun isAppInstalled(context: Context, packageName: String): Boolean {
-        return try {
-            context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-            true
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
-        }
-    }
 
     suspend fun installApk(context: Context) = withContext(Dispatchers.IO) {
         val installer = context.packageManager.packageInstaller

@@ -30,8 +30,8 @@ import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.ui.component.common_page.PageBottomInfo
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.utils.PackageUtil.isPackagePresent
 import com.acszo.redomi.utils.StringUtil.separateUppercase
-import com.acszo.redomi.utils.UpdateUtil.isAppInstalled
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -53,17 +53,13 @@ fun AppsPage(
         dataStoreViewModel.getAllApps()
     }
 
-    val installedApps = dataStoreViewModel.installedApps.collectAsStateWithLifecycle().value.toMutableList()
-    val allApps = dataStoreViewModel.allApps.collectAsStateWithLifecycle().value.toMutableList()
+    val installedAppsSelection = dataStoreViewModel.installedApps.collectAsStateWithLifecycle().value.toMutableList()
+    val allAppsSelection = dataStoreViewModel.allApps.collectAsStateWithLifecycle().value.toMutableList()
 
-    val checkInstalled: List<AppDetails> = platforms.filter {
-        var isInstalled = false
-        for (packageName in it.packageName) {
-            if (isAppInstalled(context, packageName)) isInstalled = true
-        }
-        isInstalled
+    val installedApps: List<AppDetails> = platforms.filter {
+        isPackagePresent(context, it.packageName)
     }
-    val checkInstalledSize = installedApps.filter { it in checkInstalled }.size
+    val installedAppsSize = installedAppsSelection.filter { it in installedApps }.size
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.apps),
@@ -102,19 +98,19 @@ fun AppsPage(
             }
 
             if (selectedTab.value == tabs.first()) {
-                items(checkInstalled) { app ->
+                items(installedApps) { app ->
                     AppCheckBoxItem(
                         icon = app.icon,
                         title = separateUppercase(app.title),
-                        size = checkInstalledSize,
-                        isChecked = installedApps.contains(app),
+                        size = installedAppsSize,
+                        isChecked = installedAppsSelection.contains(app),
                         onCheckedAction = {
-                            installedApps.add(app)
-                            dataStoreViewModel.setInstalledApps(installedApps.toList())
+                            installedAppsSelection.add(app)
+                            dataStoreViewModel.setInstalledApps(installedAppsSelection.toList())
                         },
                         onUnCheckedAction = {
-                            installedApps.remove(app)
-                            dataStoreViewModel.setInstalledApps(installedApps.toList())
+                            installedAppsSelection.remove(app)
+                            dataStoreViewModel.setInstalledApps(installedAppsSelection.toList())
                         }
                     )
                 }
@@ -123,15 +119,15 @@ fun AppsPage(
                     AppCheckBoxItem(
                         icon = app.icon,
                         title = separateUppercase(app.title),
-                        size = allApps.size,
-                        isChecked = allApps.contains(app),
+                        size = allAppsSelection.size,
+                        isChecked = allAppsSelection.contains(app),
                         onCheckedAction = {
-                            allApps.add(app)
-                            dataStoreViewModel.setAllApps(allApps.toList())
+                            allAppsSelection.add(app)
+                            dataStoreViewModel.setAllApps(allAppsSelection.toList())
                         },
                         onUnCheckedAction = {
-                            allApps.remove(app)
-                            dataStoreViewModel.setAllApps(allApps.toList())
+                            allAppsSelection.remove(app)
+                            dataStoreViewModel.setAllApps(allAppsSelection.toList())
                         }
                     )
                 }
