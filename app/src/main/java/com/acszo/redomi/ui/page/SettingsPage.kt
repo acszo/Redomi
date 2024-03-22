@@ -35,7 +35,7 @@ import com.acszo.redomi.ui.nav.Pages.appsPage
 import com.acszo.redomi.ui.nav.Pages.layoutPage
 import com.acszo.redomi.ui.nav.Pages.updatePage
 import com.acszo.redomi.utils.ClipboardUtils.copyText
-import com.acszo.redomi.utils.IntentUtil.onIntentDefaultsApp
+import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable
@@ -156,7 +156,7 @@ fun SettingsPage(
                 }
             },
             onConfirmAction = {
-                onIntentDefaultsApp(context)
+                onIntentOpenDefaultsApp(context)
                 dataStoreViewModel.setIsFirstTime()
             }
         )

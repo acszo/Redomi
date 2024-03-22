@@ -5,13 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.ui.component.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
-import com.acszo.redomi.utils.PackageUtil.isPackagePresent
 import com.acszo.redomi.viewmodel.AppList
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.SongViewModel
@@ -25,7 +22,6 @@ class ViewBottomSheetActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val context = LocalContext.current
             val viewIntent = intent?.data
 
             val songViewModel: SongViewModel = hiltViewModel()
@@ -44,10 +40,6 @@ class ViewBottomSheetActivity: ComponentActivity() {
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
             val currentTheme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
-            val installedApps: Map<AppDetails, String> = platforms.filter {
-                isPackagePresent(context, it.key.packageName)
-            }
-
             RedomiTheme(
                 currentTheme = currentTheme
             ) {
@@ -55,7 +47,7 @@ class ViewBottomSheetActivity: ComponentActivity() {
                     onDismiss = { this.finish() },
                     dataStoreViewModel = dataStoreViewModel,
                     songInfo = songInfo,
-                    platforms = installedApps,
+                    platforms = platforms,
                     isLoading = isLoading,
                     isActionsRequired = false,
                     isUpdateAvailable = isUpdateAvailable

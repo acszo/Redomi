@@ -2,6 +2,7 @@ package com.acszo.redomi.utils
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -11,8 +12,20 @@ object IntentUtil {
 
     fun onIntentView(context: Context, url: String) {
         val uri: Uri = Uri.parse(url)
-        val intent = Intent(Intent.ACTION_VIEW, uri).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+        val intent = Intent(Intent.ACTION_VIEW)
+            .setData(uri)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        // checks which app is the default to open the uri in question with MATCH_DEFAULT_ONLY
+        val resolveInfo = context.packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        val packageName = resolveInfo?.activityInfo?.packageName ?: ""
+
+        if (packageName != context.packageName) {
+            context.startActivity(intent)
+        } else {
+            val browserIntent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
+                .setData(uri)
+            context.startActivity(browserIntent)
+        }
     }
 
     fun onIntentSend(context: Context, url: String) {
@@ -22,7 +35,7 @@ object IntentUtil {
         context.startActivity(Intent.createChooser(intent, null))
     }
 
-    fun onIntentDefaultsApp(context: Context) {
+    fun onIntentOpenDefaultsApp(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             context.startActivity(
                 Intent(

@@ -25,8 +25,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
 import com.acszo.redomi.ui.component.ClickableItem
-import com.acszo.redomi.utils.ClipboardUtils
-import com.acszo.redomi.utils.IntentUtil
+import com.acszo.redomi.utils.ClipboardUtils.copyText
+import com.acszo.redomi.utils.IntentUtil.onIntentSend
+import com.acszo.redomi.utils.IntentUtil.onIntentView
 
 @Composable
 fun ActionsMenu(
@@ -44,20 +45,20 @@ fun ActionsMenu(
         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
     ) {
         ActionsMenuItem(R.string.open, R.drawable.ic_play) {
-            IntentUtil.onIntentView(
+            onIntentView(
                 context = context,
                 url = url
             )
         }
         ActionsMenuItem(R.string.copy, R.drawable.ic_link) {
-            ClipboardUtils.copyText(
+            copyText(
                 clipboardManager = clipboardManager,
                 text = url
             )
             onDismiss()
         }
         ActionsMenuItem(R.string.share, R.drawable.ic_share) {
-            IntentUtil.onIntentSend(
+            onIntentSend(
                 context = context,
                 url = url
             )

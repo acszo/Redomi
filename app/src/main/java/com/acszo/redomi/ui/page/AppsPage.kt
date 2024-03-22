@@ -19,18 +19,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
-import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.ui.component.common_page.PageBottomInfo
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
-import com.acszo.redomi.utils.PackageUtil.isPackagePresent
 import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
@@ -40,8 +37,6 @@ fun AppsPage(
     dataStoreViewModel: DataStoreViewModel,
     backButton: @Composable () -> Unit
 ) {
-    val context = LocalContext.current
-
     val tabs: List<String> = listOf(
         stringResource(id = R.string.installed),
         stringResource(id = R.string.all)
@@ -53,13 +48,8 @@ fun AppsPage(
         dataStoreViewModel.getAllApps()
     }
 
-    val installedAppsSelection = dataStoreViewModel.installedApps.collectAsStateWithLifecycle().value.toMutableList()
+    val installedApps = dataStoreViewModel.installedApps.collectAsStateWithLifecycle().value.toMutableList()
     val allAppsSelection = dataStoreViewModel.allApps.collectAsStateWithLifecycle().value.toMutableList()
-
-    val installedApps: List<AppDetails> = platforms.filter {
-        isPackagePresent(context, it.packageName)
-    }
-    val installedAppsSize = installedAppsSelection.filter { it in installedApps }.size
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.apps),
@@ -98,19 +88,19 @@ fun AppsPage(
             }
 
             if (selectedTab.value == tabs.first()) {
-                items(installedApps) { app ->
+                items(platforms) { app ->
                     AppCheckBoxItem(
                         icon = app.icon,
                         title = separateUppercase(app.title),
-                        size = installedAppsSize,
-                        isChecked = installedAppsSelection.contains(app),
+                        size = installedApps.size,
+                        isChecked = installedApps.contains(app),
                         onCheckedAction = {
-                            installedAppsSelection.add(app)
-                            dataStoreViewModel.setInstalledApps(installedAppsSelection.toList())
+                            installedApps.add(app)
+                            dataStoreViewModel.setInstalledApps(installedApps.toList())
                         },
                         onUnCheckedAction = {
-                            installedAppsSelection.remove(app)
-                            dataStoreViewModel.setInstalledApps(installedAppsSelection.toList())
+                            installedApps.remove(app)
+                            dataStoreViewModel.setInstalledApps(installedApps.toList())
                         }
                     )
                 }
