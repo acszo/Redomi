@@ -44,12 +44,12 @@ fun AppsPage(
     val selectedTab = remember { mutableStateOf(tabs[0]) }
 
     LaunchedEffect(Unit) {
-        dataStoreViewModel.getInstalledApps()
-        dataStoreViewModel.getAllApps()
+        dataStoreViewModel.getOpeningApps()
+        dataStoreViewModel.getSharingApps()
     }
 
-    val installedApps = dataStoreViewModel.installedApps.collectAsStateWithLifecycle().value.toMutableList()
-    val allAppsSelection = dataStoreViewModel.allApps.collectAsStateWithLifecycle().value.toMutableList()
+    val openingApps = dataStoreViewModel.openingApps.collectAsStateWithLifecycle().value.toMutableList()
+    val sharingApps = dataStoreViewModel.sharingApps.collectAsStateWithLifecycle().value.toMutableList()
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.apps),
@@ -92,15 +92,15 @@ fun AppsPage(
                     AppCheckBoxItem(
                         icon = app.icon,
                         title = separateUppercase(app.title),
-                        size = installedApps.size,
-                        isChecked = installedApps.contains(app),
+                        size = openingApps.size,
+                        isChecked = openingApps.contains(app),
                         onCheckedAction = {
-                            installedApps.add(app)
-                            dataStoreViewModel.setInstalledApps(installedApps.toList())
+                            openingApps.add(app)
+                            dataStoreViewModel.setOpeningApps(openingApps.toList())
                         },
                         onUnCheckedAction = {
-                            installedApps.remove(app)
-                            dataStoreViewModel.setInstalledApps(installedApps.toList())
+                            openingApps.remove(app)
+                            dataStoreViewModel.setOpeningApps(openingApps.toList())
                         }
                     )
                 }
@@ -109,15 +109,15 @@ fun AppsPage(
                     AppCheckBoxItem(
                         icon = app.icon,
                         title = separateUppercase(app.title),
-                        size = allAppsSelection.size,
-                        isChecked = allAppsSelection.contains(app),
+                        size = sharingApps.size,
+                        isChecked = sharingApps.contains(app),
                         onCheckedAction = {
-                            allAppsSelection.add(app)
-                            dataStoreViewModel.setAllApps(allAppsSelection.toList())
+                            sharingApps.add(app)
+                            dataStoreViewModel.setSharingApps(sharingApps.toList())
                         },
                         onUnCheckedAction = {
-                            allAppsSelection.remove(app)
-                            dataStoreViewModel.setAllApps(allAppsSelection.toList())
+                            sharingApps.remove(app)
+                            dataStoreViewModel.setSharingApps(sharingApps.toList())
                         }
                     )
                 }

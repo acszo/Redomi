@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AppsConfig(
-    val installedApps: List<AppDetails> = platforms,
-    val allApps: List<AppDetails> = platforms
+    val openingAppsSelection: List<AppDetails> = platforms,
+    val sharingAppsSelection: List<AppDetails> = platforms
 )

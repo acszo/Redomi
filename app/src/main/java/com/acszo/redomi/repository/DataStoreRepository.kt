@@ -17,15 +17,15 @@ class DataStoreRepository(
         return context.dataStore.data
     }
 
-    suspend fun saveInstalledApps(installedApps: List<AppDetails>) {
+    suspend fun saveOpeningApps(openingApps: List<AppDetails>) {
         context.dataStore.updateData {
-            it.copy(installedApps = installedApps)
+            it.copy(openingAppsSelection = openingApps)
         }
     }
 
-    suspend fun saveAllApps(allApps: List<AppDetails>) {
+    suspend fun saveSharingApps(sharingApps: List<AppDetails>) {
         context.dataStore.updateData {
-            it.copy(allApps = allApps)
+            it.copy(sharingAppsSelection = sharingApps)
         }
     }
 

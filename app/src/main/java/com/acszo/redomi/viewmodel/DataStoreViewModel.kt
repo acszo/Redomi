@@ -26,11 +26,11 @@ class DataStoreViewModel @Inject constructor(
     private val settingsDataStore: SettingsDataStore
 ): ViewModel() {
 
-    private val _installedApps: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
-    val installedApps: StateFlow<List<AppDetails>> = _installedApps.asStateFlow()
+    private val _openingApps: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
+    val openingApps: StateFlow<List<AppDetails>> = _openingApps.asStateFlow()
 
-    private val _allApps: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
-    val allApps: StateFlow<List<AppDetails>> = _allApps.asStateFlow()
+    private val _sharingApps: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
+    val sharingApps: StateFlow<List<AppDetails>> = _sharingApps.asStateFlow()
 
     private val _isFirstTime: MutableStateFlow<Boolean?> = MutableStateFlow(false)
     val isFirstTime: StateFlow<Boolean?> = _isFirstTime.asStateFlow()
@@ -44,24 +44,24 @@ class DataStoreViewModel @Inject constructor(
     private val _themeMode: MutableStateFlow<Int> = MutableStateFlow(SYSTEM_THEME)
     val themeMode: StateFlow<Int> = _themeMode.asStateFlow()
 
-    fun getInstalledApps() = viewModelScope.launch {
+    fun getOpeningApps() = viewModelScope.launch {
         dataStoreRepository.readDataStore().collectLatest {
-            _installedApps.value = it.installedApps
+            _openingApps.value = it.openingAppsSelection
         }
     }
 
-    fun setInstalledApps(installedApps: List<AppDetails>) = viewModelScope.launch {
-        dataStoreRepository.saveInstalledApps(installedApps)
+    fun setOpeningApps(openingApps: List<AppDetails>) = viewModelScope.launch {
+        dataStoreRepository.saveOpeningApps(openingApps)
     }
 
-    fun getAllApps() = viewModelScope.launch {
+    fun getSharingApps() = viewModelScope.launch {
         dataStoreRepository.readDataStore().collectLatest {
-            _allApps.value = it.allApps
+            _sharingApps.value = it.sharingAppsSelection
         }
     }
 
-    fun setAllApps(allApps: List<AppDetails>) = viewModelScope.launch {
-        dataStoreRepository.saveAllApps(allApps)
+    fun setSharingApps(sharingApps: List<AppDetails>) = viewModelScope.launch {
+        dataStoreRepository.saveSharingApps(sharingApps)
     }
 
     fun getIsFirstTime() = viewModelScope.launch {

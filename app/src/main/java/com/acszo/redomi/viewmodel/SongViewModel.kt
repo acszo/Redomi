@@ -47,11 +47,11 @@ class SongViewModel @Inject constructor(
 
             val apps = Platform.platforms.filter {
                 if (appList == AppList.INSTALLED) {
-                    val installedAppsDataStore = dataStoreRepository.readDataStore().first().installedApps
-                    installedAppsDataStore.contains(it)
+                    val openingApps = dataStoreRepository.readDataStore().first().openingAppsSelection
+                    openingApps.contains(it)
                 } else {
-                    val allAppsDataStore = dataStoreRepository.readDataStore().first().allApps
-                    allAppsDataStore.contains(it)
+                    val sharingApps = dataStoreRepository.readDataStore().first().sharingAppsSelection
+                    sharingApps.contains(it)
                 }
             }
 
