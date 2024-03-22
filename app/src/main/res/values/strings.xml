@@ -21,12 +21,12 @@
     <string name="update_description">Check available updates</string>
     <string name="version">Version</string>
     <string name="info">Info</string>
-    <string name="installed">Installed</string>
-    <string name="all">All</string>
+    <string name="opening">Opening</string>
+    <string name="sharing">Sharing</string>
     <string name="apps_description_page">
         Choose the order and which apps you want to see when converting a song.
-        \'Installed apps\' are shown when opening a link.
-        \'All apps\' are shown when sharing a link from a music platform.
+        Opening a link, shows \'Opening\' apps.
+        Sharing from a music platform shows \'Sharing\' instead.
     </string>
     <string name="installed_tab_info">Selecting only one app will open it directly.</string>
     <string name="all_tab_info">Selecting only one app will open the actions directly.</string>

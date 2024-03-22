@@ -38,8 +38,8 @@ fun AppsPage(
     backButton: @Composable () -> Unit
 ) {
     val tabs: List<String> = listOf(
-        stringResource(id = R.string.installed),
-        stringResource(id = R.string.all)
+        stringResource(id = R.string.opening),
+        stringResource(id = R.string.sharing)
     )
     val selectedTab = remember { mutableStateOf(tabs[0]) }
 
