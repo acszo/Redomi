@@ -1,6 +1,5 @@
 package com.acszo.redomi.ui.page
 
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,12 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,7 +24,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -37,7 +32,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
-import com.acszo.redomi.ui.component.RotatingIcon
+import com.acszo.redomi.ui.component.AnnotatedString
+import com.acszo.redomi.ui.component.NewReleaseIcon
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.fadingEdge
 import com.acszo.redomi.utils.UpdateUtil.getApk
@@ -59,37 +55,13 @@ fun UpdatePage(
     val isLoading by updateViewModel.isLoading.collectAsStateWithLifecycle()
     val progressDownloadStatus = remember { mutableStateOf(DownloadStatus.Finished as DownloadStatus) }
 
-    val display = context.resources.displayMetrics
-    val width = display.widthPixels.dp / display.density
-    val height = display.heightPixels.dp / display.density
-    val widthOffset = width / 1.5f
-    val heightOffset = width / 1.1f
-
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.update),
         description = stringResource(id = R.string.update_description_page),
         backButton = { backButton() },
     ) { padding, pageTitleWithDescription ->
         if (isUpdateAvailable) {
-            RotatingIcon(
-                modifier = Modifier.offset(width - widthOffset, height - heightOffset),
-                icon = R.drawable.ic_new_releases_outside,
-                size = width,
-                tint = MaterialTheme.colorScheme.secondaryContainer,
-                startValue = 0f,
-                targetValue = 360f,
-                duration = 180000,
-                easing = LinearEasing,
-            )
-
-            Icon(
-                painter = painterResource(id = R.drawable.ic_new_releases_inside),
-                modifier = Modifier
-                    .size(width)
-                    .offset(width - widthOffset, height - heightOffset),
-                tint = MaterialTheme.colorScheme.secondaryContainer,
-                contentDescription = null,
-            )
+            NewReleaseIcon()
         }
 
         Column(
@@ -121,22 +93,21 @@ fun UpdatePage(
                         Text(
                             text = latestRelease!!.name,
                             modifier = Modifier.padding(horizontal = 28.dp),
-                            style = MaterialTheme.typography.headlineMedium,
+                            style = MaterialTheme.typography.displaySmall,
                         )
                     }
 
                     item {
-                        Text(
-                            text = latestRelease!!.body,
-                            modifier = Modifier.padding(horizontal = 38.dp),
-                        )
+                        AnnotatedString(string = latestRelease!!.body)
                     }
                 }
             }
 
             if (!isLoading && latestRelease == null) {
                 Box(
-                    modifier = Modifier.weight(2f).fillMaxWidth(),
+                    modifier = Modifier
+                        .weight(2f)
+                        .fillMaxWidth(),
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
