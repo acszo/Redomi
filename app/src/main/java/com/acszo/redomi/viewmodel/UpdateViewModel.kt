@@ -45,7 +45,7 @@ class UpdateViewModel @Inject constructor(
                 githubRepository.getLatest()
             }
             _isUpdateAvailable.update {
-                currentVersion < _latestRelease.value?.tag_name.toString()
+                currentVersion < _latestRelease.value?.tagName.toString()
             }
         }  catch (e: Exception) {
             print(e.message)
@@ -55,7 +55,7 @@ class UpdateViewModel @Inject constructor(
     }
 
     suspend fun downloadApk(context: Context, release: Release): Flow<DownloadStatus> = withContext(Dispatchers.IO) {
-        val assetUrl = release.assets[0].browser_download_url
+        val assetUrl = release.assets[0].browserDownloadUrl
         try {
             return@withContext githubRepository.getLatestApk(assetUrl).saveApk(context)
         } catch (e: Exception) {
