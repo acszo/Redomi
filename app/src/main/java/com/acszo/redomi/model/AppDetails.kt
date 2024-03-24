@@ -5,6 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AppDetails(
     val title: String,
-    val icon: Int,
-    val packageName: List<String>
+    val icon: Int
 )
