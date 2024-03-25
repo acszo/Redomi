@@ -49,6 +49,7 @@ fun ActionsMenu(
                 context = context,
                 url = url
             )
+            onDismiss()
         }
         ActionsMenuItem(R.string.copy, R.drawable.ic_link) {
             copyText(

@@ -115,6 +115,7 @@ fun BottomSheet(
                         if (platforms.isNotEmpty()) {
                             if (!isActionsRequired) {
                                 onIntentView(context, platforms.values.first())
+                                onDismiss()
                             } else {
                                 bringActions.value = true
                                 selectedPlatformLink.value = platforms.values.first()
