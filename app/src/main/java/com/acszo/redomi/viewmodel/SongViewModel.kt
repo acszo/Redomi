@@ -19,8 +19,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 enum class AppList {
-    INSTALLED,
-    ALL
+    OPENING,
+    SHARING
 }
 
 @HiltViewModel
@@ -46,7 +46,7 @@ class SongViewModel @Inject constructor(
             _songInfo.update { response.entitiesByUniqueId[response.entitiesByUniqueId.keys.first().toString()] }
 
             val apps = Platform.platforms.filter {
-                if (appList == AppList.INSTALLED) {
+                if (appList == AppList.OPENING) {
                     val openingApps = dataStoreRepository.readDataStore().first().openingAppsSelection
                     openingApps.contains(it)
                 } else {

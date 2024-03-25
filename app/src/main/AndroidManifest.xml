@@ -27,7 +27,7 @@
         <receiver android:name=".utils.UpdateReceiver" />
 
         <activity
-            android:name=".ui.ViewBottomSheetActivity"
+            android:name=".ui.ConvertSongActivity"
             android:exported="true"
             android:label="@string/title_bottom_sheet"
             android:excludeFromRecents="true"
@@ -50,15 +50,7 @@
                 <data android:host="soundcloud.com"/>
                 <data android:host="play.napster.com"/>
             </intent-filter>
-        </activity>
 
-        <activity
-            android:name=".ui.SendBottomSheetActivity"
-            android:exported="true"
-            android:label="@string/title_bottom_sheet"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:theme="@style/Theme.Redomi.BottomSheet" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 

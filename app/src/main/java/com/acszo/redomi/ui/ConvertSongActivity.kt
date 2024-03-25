@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,21 +16,33 @@ import com.acszo.redomi.viewmodel.SongViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/*
+* ACTION_SEND -> shows sharing apps -> shows action menu
+* ACTION_VIEW -> shows opening apps -> opens app
+* */
 @AndroidEntryPoint
-class ViewBottomSheetActivity: ComponentActivity() {
+class ConvertSongActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val viewIntent = intent?.data
+            val isActionSend = (intent.action == Intent.ACTION_SEND)
+
+            val intentData = if (isActionSend) {
+                intent?.getStringExtra(Intent.EXTRA_TEXT)
+            } else {
+                intent?.data
+            }.toString()
+
+            val appList = if (isActionSend) AppList.SHARING else AppList.OPENING
 
             val songViewModel: SongViewModel = hiltViewModel()
             val updateViewModel: UpdateViewModel = hiltViewModel()
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
 
             LaunchedEffect(Unit) {
-                songViewModel.getPlatforms(viewIntent.toString(), AppList.INSTALLED)
+                songViewModel.getPlatforms(intentData, appList)
                 updateViewModel.latestRelease
                 dataStoreViewModel.getThemeMode()
             }
@@ -49,10 +62,11 @@ class ViewBottomSheetActivity: ComponentActivity() {
                     songInfo = songInfo,
                     platforms = platforms,
                     isLoading = isLoading,
-                    isActionsRequired = false,
+                    isActionsRequired = isActionSend,
                     isUpdateAvailable = isUpdateAvailable
                 )
             }
         }
     }
 }
+
