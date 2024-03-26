@@ -1,7 +1,7 @@
 package com.acszo.redomi.data
 
 import androidx.datastore.core.Serializer
-import com.acszo.redomi.model.AppsConfig
+import com.acszo.redomi.model.AppsPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
@@ -9,15 +9,15 @@ import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
-object AllAppSerializable: Serializer<AppsConfig> {
+object AllAppSerializable: Serializer<AppsPreferences> {
 
-    override val defaultValue: AppsConfig
-        get() = AppsConfig()
+    override val defaultValue: AppsPreferences
+        get() = AppsPreferences()
 
-    override suspend fun readFrom(input: InputStream): AppsConfig {
+    override suspend fun readFrom(input: InputStream): AppsPreferences {
         return try {
             Json.decodeFromString(
-                deserializer = AppsConfig.serializer(),
+                deserializer = AppsPreferences.serializer(),
                 string = input.readBytes().decodeToString()
             )
         } catch (e: SerializationException) {
@@ -26,11 +26,11 @@ object AllAppSerializable: Serializer<AppsConfig> {
         }
     }
 
-    override suspend fun writeTo(t: AppsConfig, output: OutputStream) {
+    override suspend fun writeTo(t: AppsPreferences, output: OutputStream) {
         withContext(Dispatchers.IO) {
             output.write(
                 Json.encodeToString(
-                    serializer = AppsConfig.serializer(),
+                    serializer = AppsPreferences.serializer(),
                     value = t
                 ).encodeToByteArray()
             )

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.dataStore
 import com.acszo.redomi.data.AllAppSerializable
 import com.acszo.redomi.model.AppDetails
-import com.acszo.redomi.model.AppsConfig
+import com.acszo.redomi.model.AppsPreferences
 import kotlinx.coroutines.flow.Flow
 
 val Context.dataStore by dataStore("selected-apps", AllAppSerializable)
@@ -13,7 +13,7 @@ class DataStoreRepository(
     private val context: Context
 ) {
 
-    fun readDataStore(): Flow<AppsConfig> {
+    fun readDataStore(): Flow<AppsPreferences> {
         return context.dataStore.data
     }
 
