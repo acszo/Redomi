@@ -31,12 +31,12 @@ And you can also share the songs you want to anyone by converting the link to th
 ## Screenshots
 
 <p align="center">
-  <img src="/preview/screenshot_5.png" width="30%" />
-  <img src="/preview/screenshot_6.png" width="30%" />
   <img src="/preview/screenshot_1.png" width="30%" />
-  <img src="/preview/screenshot_4.png" width="30%" />
   <img src="/preview/screenshot_2.png" width="30%" />
   <img src="/preview/screenshot_3.png" width="30%" />
+  <img src="/preview/screenshot_4.png" width="30%" />
+  <img src="/preview/screenshot_5.png" width="30%" />
+  <img src="/preview/screenshot_6.png" width="30%" />
 </p>
 
 ## HOW TO MAKE IT WORK
@@ -48,8 +48,8 @@ By default Redomi is unable to open links, in case the guide inside the app is n
 
 ## Supported services (+ 3rd party apps)
 
-- Youtube music (+ Revanced, InnerTune, ViMusic)
-- Youtube (+ Revanced, NewPipe, LibreTube)
+- Youtube music
+- Youtube
 - Spotify
 - Deezer
 - Tidal
@@ -57,6 +57,8 @@ By default Redomi is unable to open links, in case the guide inside the app is n
 - Apple Music
 - Soundcloud
 - Napster
+
+3rd party clients are also compatible, as long as they're the default app to handle the corresponding link
 
 ## Credits
 
