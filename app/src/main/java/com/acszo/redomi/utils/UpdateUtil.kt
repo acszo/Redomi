@@ -30,12 +30,13 @@ object UpdateUtil {
         resolver.openInputStream(apkUri)?.use { apkStream ->
 
             val sessionParams = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL)
-            val sessionId = installer.createSession(sessionParams)
-            val session = installer.openSession(sessionId)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 sessionParams.setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED)
             }
+
+            val sessionId = installer.createSession(sessionParams)
+            val session = installer.openSession(sessionId)
 
             session.openWrite(context.packageName, 0, apkSize).use { sessionStream ->
                 apkStream.copyTo(sessionStream)
