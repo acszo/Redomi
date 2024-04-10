@@ -1,16 +1,13 @@
 package com.acszo.redomi.utils
 
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInstaller
-import android.os.Build
 import androidx.core.content.FileProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.io.File
 
 object UpdateUtil {
+
+    private const val MIME_APK = "application/vnd.android.package-archive"
 
     fun Context.getApk() = File(getExternalFilesDir("apk"), "latest-release")
 
@@ -20,39 +17,11 @@ object UpdateUtil {
         context.getApk()
     )
 
-    suspend fun installApk(context: Context) = withContext(Dispatchers.IO) {
-        val installer = context.packageManager.packageInstaller
-        val resolver = context.contentResolver
-
-        val apkUri = apkUri(context)
-        val apkSize = resolver.openAssetFileDescriptor(apkUri, "r")?.use { it.length } ?: -1L
-
-        resolver.openInputStream(apkUri)?.use { apkStream ->
-
-            val sessionParams = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                sessionParams.setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED)
-            }
-
-            val sessionId = installer.createSession(sessionParams)
-            val session = installer.openSession(sessionId)
-
-            session.openWrite(context.packageName, 0, apkSize).use { sessionStream ->
-                apkStream.copyTo(sessionStream)
-                session.fsync(sessionStream)
-            }
-
-            val intentSender = PendingIntent.getBroadcast(
-                context,
-                sessionId,
-                Intent(context, UpdateReceiver::class.java),
-                PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-            ).intentSender
-
-            session.commit(intentSender)
-            session.close()
-        }
+    fun installApk(context: Context) {
+        val intent = Intent(Intent.ACTION_VIEW)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            .setDataAndType(apkUri(context), MIME_APK)
+        context.startActivity(intent)
     }
 
     fun deleteApk(context: Context) = context.runCatching {
