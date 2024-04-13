@@ -14,6 +14,10 @@
     <string name="layout">Layout</string>
     <string name="horizontal_list">Horizontal list</string>
     <string name="vertical_list">Vertical list</string>
+    <string name="icon_shape">Icon shape</string>
+    <string name="squircle_icon">Squircle</string>
+    <string name="circle_icon">Circle</string>
+    <string name="square_icon">Square</string>
     <string name="theme">Theme</string>
     <string name="github">Github</string>
     <string name="github_description">Check out the repository at acszo/Redomi</string>
