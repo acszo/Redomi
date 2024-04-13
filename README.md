@@ -16,7 +16,8 @@ And you can also share the songs you want to anyone by converting the link to th
 - Open supported links from different music services in your favourite streaming app
 - Convert links and share songs with others on their preferred platforms
 - Customize Sharesheet in different ways:
-  - Choose which apps to display and their order 
+  - Icon shapes
+  - Choose which apps to display
   - Decide between a horizontal or vertical list, and its grid size
 - Material You
 - Light/Dark Theme
