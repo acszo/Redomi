@@ -16,6 +16,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -48,6 +49,7 @@ fun AppsPage(
         dataStoreViewModel.getSharingApps()
     }
 
+    val currentIconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
     val openingApps = dataStoreViewModel.openingApps.collectAsStateWithLifecycle().value.toMutableList()
     val sharingApps = dataStoreViewModel.sharingApps.collectAsStateWithLifecycle().value.toMutableList()
 
@@ -91,6 +93,7 @@ fun AppsPage(
                 items(platforms) { app ->
                     AppCheckBoxItem(
                         icon = app.icon,
+                        iconShape = currentIconShape,
                         title = separateUppercase(app.title),
                         size = openingApps.size,
                         isChecked = openingApps.contains(app),
@@ -108,6 +111,7 @@ fun AppsPage(
                 items(platforms) { app ->
                     AppCheckBoxItem(
                         icon = app.icon,
+                        iconShape = currentIconShape,
                         title = separateUppercase(app.title),
                         size = sharingApps.size,
                         isChecked = sharingApps.contains(app),

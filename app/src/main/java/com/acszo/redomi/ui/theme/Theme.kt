@@ -2,7 +2,6 @@ package com.acszo.redomi.ui.theme
 
 import android.app.Activity
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -15,8 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.acszo.redomi.MainActivity
-import com.acszo.redomi.data.DataStoreConst.DARK_THEME
-import com.acszo.redomi.data.DataStoreConst.LIGHT_THEME
+import com.acszo.redomi.data.Theme
 
 private val darkColorScheme = darkColorScheme(
     primary = PrimaryLight,
@@ -35,11 +33,7 @@ fun RedomiTheme(
     currentTheme: Int,
     content: @Composable () -> Unit
 ) {
-    val getTheme = when (currentTheme) {
-        DARK_THEME -> true
-        LIGHT_THEME -> false
-        else -> isSystemInDarkTheme()
-    }
+    val getTheme = Theme.valueOf(currentTheme)!!.mode()
 
     val colorScheme = when {
          Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {

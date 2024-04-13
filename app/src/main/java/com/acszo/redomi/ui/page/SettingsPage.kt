@@ -25,7 +25,8 @@ import androidx.navigation.NavController
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.listTypes
-import com.acszo.redomi.data.DataStoreConst.themes
+import com.acszo.redomi.data.IconShape
+import com.acszo.redomi.data.Theme
 import com.acszo.redomi.ui.component.IconItemDialog
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.RedomiAlertDialog
@@ -48,6 +49,7 @@ fun SettingsPage(
 
     val isFirstTime by dataStoreViewModel.isFirstTime.collectAsStateWithLifecycle()
     val currentListType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
+    val currentIconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
     val currentThemeMode by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
     val uriHandle = LocalUriHandler.current
@@ -57,6 +59,7 @@ fun SettingsPage(
     val modelName = "Model: ${Build.MODEL}"
     val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
 
+    val openIconShapeDialog = remember { mutableStateOf(false) }
     val openThemeDialog = remember { mutableStateOf(false) }
 
     ScaffoldWithLargeTopAppBar(
@@ -92,9 +95,19 @@ fun SettingsPage(
 
             item {
                 SettingsItem(
+                    title = stringResource(id = R.string.icon_shape),
+                    icon = R.drawable.ic_category_filled,
+                    description = stringResource(id = IconShape.valueOf(currentIconShape)!!.toString)
+                ) {
+                    openIconShapeDialog.value = true
+                }
+            }
+
+            item {
+                SettingsItem(
                     title = stringResource(id = R.string.theme),
                     icon = R.drawable.ic_color_lens_filled,
-                    description = stringResource(id = themes[currentThemeMode]!!)
+                    description = stringResource(id = Theme.valueOf(currentThemeMode)!!.toString)
                 ) {
                     openThemeDialog.value = true
                 }
@@ -162,19 +175,40 @@ fun SettingsPage(
         )
     }
 
+    if (openIconShapeDialog.value) {
+        RedomiAlertDialog(
+            icon =  R.drawable.ic_category_outline,
+            title = stringResource(id = R.string.icon_shape),
+            content = {
+                IconShape.entries.forEach { item ->
+                    RadioButtonItem(
+                        modifier = Modifier.padding(start = 15.dp),
+                        value = IconShape.valueOf(currentIconShape)!!.toString,
+                        text = item.toString,
+                        horizontalPadding = 0.dp
+                    ) {
+                        dataStoreViewModel.setIconShape(item.value)
+                    }
+                }
+            },
+            onDismissRequest = { openIconShapeDialog.value = false },
+            onConfirmAction = { openIconShapeDialog.value = false }
+        )
+    }
+
     if (openThemeDialog.value) {
         RedomiAlertDialog(
             icon =  R.drawable.ic_color_lens_outline,
             title = stringResource(id = R.string.theme),
             content = {
-                themes.forEach { item ->
+                Theme.entries.forEach { item ->
                     RadioButtonItem(
                         modifier = Modifier.padding(start = 15.dp),
-                        value = themes[currentThemeMode]!!,
-                        text = item.value,
+                        value = Theme.valueOf(currentThemeMode)!!.toString,
+                        text = item.toString,
                         horizontalPadding = 0.dp
                     ) {
-                        dataStoreViewModel.setThemeMode(item.key)
+                        dataStoreViewModel.setThemeMode(item.value)
                     }
                 }
             },

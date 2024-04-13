@@ -16,11 +16,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
-import sv.lib.squircleshape.SquircleShape
+import com.acszo.redomi.data.IconShape
 
 @Composable
 fun AppCheckBoxItem(
     icon: Int,
+    iconShape: Int,
     title: String,
     size: Int,
     isChecked: Boolean,
@@ -41,7 +42,7 @@ fun AppCheckBoxItem(
         Image(
             modifier = Modifier
                 .size(40.dp)
-                .clip(SquircleShape()),
+                .clip(IconShape.valueOf(iconShape)!!.radius),
             painter = painterResource(id = icon),
             contentDescription = title,
         )

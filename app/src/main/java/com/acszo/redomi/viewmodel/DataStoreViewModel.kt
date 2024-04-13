@@ -4,12 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.data.DataStoreConst.FIRST_TIME
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
+import com.acszo.redomi.data.DataStoreConst.ICON_SHAPE
 import com.acszo.redomi.data.DataStoreConst.LAYOUT_GRID_SIZE
 import com.acszo.redomi.data.DataStoreConst.LAYOUT_LIST_TYPE
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
-import com.acszo.redomi.data.DataStoreConst.SYSTEM_THEME
 import com.acszo.redomi.data.DataStoreConst.THEME_MODE
+import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.SettingsDataStore
+import com.acszo.redomi.data.Theme
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.repository.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,7 +43,10 @@ class DataStoreViewModel @Inject constructor(
     private val _layoutGridSize: MutableStateFlow<Int> = MutableStateFlow(MEDIUM_GRID)
     val layoutGridSize: StateFlow<Int> = _layoutGridSize.asStateFlow()
 
-    private val _themeMode: MutableStateFlow<Int> = MutableStateFlow(SYSTEM_THEME)
+    private val _iconShape: MutableStateFlow<Int> = MutableStateFlow(IconShape.SQUIRCLE.value)
+    val iconShape: StateFlow<Int> = _iconShape.asStateFlow()
+
+    private val _themeMode: MutableStateFlow<Int> = MutableStateFlow(Theme.SYSTEM_THEME.value)
     val themeMode: StateFlow<Int> = _themeMode.asStateFlow()
 
     fun getOpeningApps() = viewModelScope.launch {
@@ -94,9 +99,19 @@ class DataStoreViewModel @Inject constructor(
         settingsDataStore.setInt(LAYOUT_GRID_SIZE, layoutGridSize)
     }
 
+    fun getIconShape() = viewModelScope.launch {
+        settingsDataStore.getInt(ICON_SHAPE).collectLatest {
+            _iconShape.value = it ?: IconShape.SQUIRCLE.value
+        }
+    }
+
+    fun setIconShape(iconShape: Int) = viewModelScope.launch {
+        settingsDataStore.setInt(ICON_SHAPE, iconShape)
+    }
+
     fun getThemeMode() = viewModelScope.launch {
         settingsDataStore.getInt(THEME_MODE).collectLatest {
-            _themeMode.value = it ?: SYSTEM_THEME
+            _themeMode.value = it ?: Theme.SYSTEM_THEME.value
         }
     }
 

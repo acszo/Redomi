@@ -13,16 +13,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.utils.IntentUtil.onIntentView
 import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.utils.StringUtil.splitSpaceToWords
-import sv.lib.squircleshape.SquircleShape
 
 @Composable
 fun AppItem(
     appDetail: AppDetails,
+    iconShape: Int,
     link: String,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
@@ -39,7 +40,7 @@ fun AppItem(
                 modifier = Modifier
                     .size(80.dp)
                     .padding(8.dp)
-                    .clip(SquircleShape()),
+                    .clip(IconShape.valueOf(iconShape)!!.radius),
                 contentDescription = titleWords[0],
             )
             Text(text = titleWords[0].trim())

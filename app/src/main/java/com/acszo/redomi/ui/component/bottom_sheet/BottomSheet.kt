@@ -60,6 +60,7 @@ fun BottomSheet(
 
     val currentListType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
     val currentGridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
+    val currentIconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = currentListType == HORIZONTAL_LIST)
     val bringActions = remember { mutableStateOf(false) }
@@ -102,6 +103,7 @@ fun BottomSheet(
                         ItemsList(
                             listType = currentListType,
                             gridSize = currentGridSize,
+                            iconShape = currentIconShape,
                             platforms = platforms,
                             isActionsRequired = isActionsRequired,
                             bringActions = bringActions,
@@ -148,6 +150,7 @@ fun BottomSheet(
 private fun ItemsList(
     listType: Int,
     gridSize: Int,
+    iconShape: Int,
     platforms: Map<AppDetails, String>,
     isActionsRequired: Boolean,
     bringActions: MutableState<Boolean>,
@@ -163,6 +166,7 @@ private fun ItemsList(
             items(items = platforms.toList()) { (app, link) ->
                 AppItem(
                     appDetail = app,
+                    iconShape = iconShape,
                     link = link,
                     isActionsRequired = isActionsRequired,
                     bringActions = bringActions,
@@ -179,6 +183,7 @@ private fun ItemsList(
             items(items = platforms.toList()) { (app, link) ->
                 AppItem(
                     appDetail = app,
+                    iconShape = iconShape,
                     link = link,
                     isActionsRequired = isActionsRequired,
                     bringActions = bringActions,

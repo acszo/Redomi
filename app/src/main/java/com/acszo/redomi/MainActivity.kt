@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
                 dataStoreViewModel.getIsFirstTime()
                 dataStoreViewModel.getLayoutListType()
                 dataStoreViewModel.getLayoutGridSize()
+                dataStoreViewModel.getIconShape()
                 dataStoreViewModel.getThemeMode()
                 scope.launch(Dispatchers.IO) {
                     deleteApk(context)

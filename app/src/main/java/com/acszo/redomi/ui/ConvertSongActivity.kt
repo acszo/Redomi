@@ -44,6 +44,7 @@ class ConvertSongActivity: ComponentActivity() {
             LaunchedEffect(Unit) {
                 songViewModel.getPlatforms(intentData, appList)
                 updateViewModel.latestRelease
+                dataStoreViewModel.getIconShape()
                 dataStoreViewModel.getThemeMode()
             }
 
