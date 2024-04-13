@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Shape
 import com.acszo.redomi.R
 import sv.lib.squircleshape.SquircleShape
 
@@ -29,10 +30,10 @@ object DataStoreConst {
 
 }
 
-enum class IconShape(val value: Int) {
-    SQUIRCLE(0),
-    CIRCLE(1),
-    SQUARE(2);
+enum class IconShape(val radius: Shape) {
+    SQUIRCLE(SquircleShape()),              // 👍👍👍
+    CIRCLE(CircleShape),                    // 👍👍👍
+    SQUARE(RoundedCornerShape(25)); // 👎
 
     val toString
         get() = when (this) {
@@ -41,29 +42,15 @@ enum class IconShape(val value: Int) {
             SQUARE -> R.string.square_icon
         }
 
-    val radius
-        get() = when (this) {
-            SQUIRCLE -> SquircleShape()              // 👍👍👍
-            CIRCLE -> CircleShape                    // 👍👍👍
-            SQUARE -> RoundedCornerShape(25) // 👎
-        }
-
     companion object {
-        fun valueOf(value: Int) = entries.find { it.value == value }
+        fun valueOf(value: Int) = entries.find { it.ordinal == value }
     }
 }
 
-enum class Theme(val value: Int) {
-    SYSTEM_THEME(0),
-    DARK_THEME(1),
-    LIGHT_THEME(2);
-
-    val toString
-        get() = when (this) {
-            SYSTEM_THEME -> R.string.system_theme
-            DARK_THEME -> R.string.dark_theme
-            LIGHT_THEME -> R.string.light_theme
-        }
+enum class Theme {
+    SYSTEM_THEME,
+    DARK_THEME,
+    LIGHT_THEME;
 
     @Composable
     fun mode() = when (this) {
@@ -72,7 +59,14 @@ enum class Theme(val value: Int) {
         LIGHT_THEME -> false
     }
 
+    val toString
+        get() = when (this) {
+            SYSTEM_THEME -> R.string.system_theme
+            DARK_THEME -> R.string.dark_theme
+            LIGHT_THEME -> R.string.light_theme
+        }
+
     companion object {
-        fun valueOf(value: Int) = entries.find { it.value == value }
+        fun valueOf(value: Int) = entries.find { it.ordinal == value }
     }
 }

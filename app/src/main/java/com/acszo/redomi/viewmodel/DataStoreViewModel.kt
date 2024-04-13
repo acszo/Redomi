@@ -43,10 +43,10 @@ class DataStoreViewModel @Inject constructor(
     private val _layoutGridSize: MutableStateFlow<Int> = MutableStateFlow(MEDIUM_GRID)
     val layoutGridSize: StateFlow<Int> = _layoutGridSize.asStateFlow()
 
-    private val _iconShape: MutableStateFlow<Int> = MutableStateFlow(IconShape.SQUIRCLE.value)
+    private val _iconShape: MutableStateFlow<Int> = MutableStateFlow(IconShape.SQUIRCLE.ordinal)
     val iconShape: StateFlow<Int> = _iconShape.asStateFlow()
 
-    private val _themeMode: MutableStateFlow<Int> = MutableStateFlow(Theme.SYSTEM_THEME.value)
+    private val _themeMode: MutableStateFlow<Int> = MutableStateFlow(Theme.SYSTEM_THEME.ordinal)
     val themeMode: StateFlow<Int> = _themeMode.asStateFlow()
 
     fun getOpeningApps() = viewModelScope.launch {
@@ -101,7 +101,7 @@ class DataStoreViewModel @Inject constructor(
 
     fun getIconShape() = viewModelScope.launch {
         settingsDataStore.getInt(ICON_SHAPE).collectLatest {
-            _iconShape.value = it ?: IconShape.SQUIRCLE.value
+            _iconShape.value = it ?: IconShape.SQUIRCLE.ordinal
         }
     }
 
@@ -111,7 +111,7 @@ class DataStoreViewModel @Inject constructor(
 
     fun getThemeMode() = viewModelScope.launch {
         settingsDataStore.getInt(THEME_MODE).collectLatest {
-            _themeMode.value = it ?: Theme.SYSTEM_THEME.value
+            _themeMode.value = it ?: Theme.SYSTEM_THEME.ordinal
         }
     }
 

@@ -187,7 +187,7 @@ fun SettingsPage(
                         text = item.toString,
                         horizontalPadding = 0.dp
                     ) {
-                        dataStoreViewModel.setIconShape(item.value)
+                        dataStoreViewModel.setIconShape(item.ordinal)
                     }
                 }
             },
@@ -208,7 +208,7 @@ fun SettingsPage(
                         text = item.toString,
                         horizontalPadding = 0.dp
                     ) {
-                        dataStoreViewModel.setThemeMode(item.value)
+                        dataStoreViewModel.setThemeMode(item.ordinal)
                     }
                 }
             },
