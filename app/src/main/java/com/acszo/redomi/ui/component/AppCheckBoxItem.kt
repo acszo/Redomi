@@ -12,9 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
+import sv.lib.squircleshape.SquircleShape
 
 @Composable
 fun AppCheckBoxItem(
@@ -37,7 +39,9 @@ fun AppCheckBoxItem(
             tint = MaterialTheme.colorScheme.secondary,
         )
         Image(
-            modifier = Modifier.size(40.dp),
+            modifier = Modifier
+                .size(40.dp)
+                .clip(SquircleShape()),
             painter = painterResource(id = icon),
             contentDescription = title,
         )

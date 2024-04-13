@@ -18,6 +18,7 @@ import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.utils.IntentUtil.onIntentView
 import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.utils.StringUtil.splitSpaceToWords
+import sv.lib.squircleshape.SquircleShape
 
 @Composable
 fun AppItem(
@@ -37,7 +38,8 @@ fun AppItem(
                 painterResource(id = appDetail.icon),
                 modifier = Modifier
                     .size(80.dp)
-                    .padding(8.dp),
+                    .padding(8.dp)
+                    .clip(SquircleShape()),
                 contentDescription = titleWords[0],
             )
             Text(text = titleWords[0].trim())
