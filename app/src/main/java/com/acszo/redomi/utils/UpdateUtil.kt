@@ -17,6 +17,8 @@ object UpdateUtil {
         context.getApk()
     )
 
+    // much shorter than my previous PackageInstaller solution, but not safe.
+    // Fellas hope that I don't get hacked 👍
     fun installApk(context: Context) {
         val intent = Intent(Intent.ACTION_VIEW)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION)
