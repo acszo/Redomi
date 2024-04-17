@@ -2,6 +2,10 @@
   <img width="180" height="180" src="/preview/logo.svg">
   <h1>Redomi</h1>
   <p><a href="https://song.link/">Song.link</a> client made in Jetpack Compose and Material You</p>
+  
+  [![Latest release](https://img.shields.io/github/v/release/acszo/Redomi?logo=github&label=Latest&color=blue)](https://github.com/acszo/Redomi/releases/latest/)
+  ![Supported versions](https://img.shields.io/badge/Support-9_%2B-green?logo=android)
+  
 </div>
 
 ## Description
