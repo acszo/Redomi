@@ -32,7 +32,7 @@ object DataStoreConst {
 
 enum class IconShape(val radius: Shape) {
     SQUIRCLE(SquircleShape()),              // 👍👍👍
-    CIRCLE(CircleShape),                    // 👍👍👍
+    CIRCLE(CircleShape),                    // 👍👍
     SQUARE(RoundedCornerShape(25)); // 👎
 
     val toString
