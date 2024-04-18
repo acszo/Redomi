@@ -13,8 +13,10 @@
     <string name="apps">Applicazioni</string>
     <string name="apps_description">Seleziona l\'ordine e quali applicazioni visualizzare</string>
     <string name="layout">Aspetto</string>
-    <string name="horizontal_list">Lista orizzontale</string>
-    <string name="vertical_list">Lista verticale</string>
+    <string name="list">Lista</string>
+    <string name="list_format">Lista %s</string>
+    <string name="horizontal">Orizzontale</string>
+    <string name="vertical">Verticale</string>
     <string name="icon_shape">Forma icona</string>
     <string name="squircle_icon">Squircle</string>
     <string name="circle_icon">Cerchio</string>

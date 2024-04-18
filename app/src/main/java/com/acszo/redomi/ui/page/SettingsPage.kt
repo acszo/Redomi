@@ -84,10 +84,11 @@ fun SettingsPage(
             }
 
             item {
+                val listType =  stringResource(id = R.string.list_format, stringResource(listTypes[currentListType]!!))
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
                     icon = R.drawable.ic_format_list_bulleted,
-                    description = stringResource(id = listTypes[currentListType]!!)
+                    description = listType.lowercase().replaceFirstChar { it.uppercase() }
                 ) {
                     navController.navigate(layoutPage)
                 }

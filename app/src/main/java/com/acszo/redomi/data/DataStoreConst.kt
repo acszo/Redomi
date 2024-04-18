@@ -24,8 +24,8 @@ object DataStoreConst {
     const val BIG_GRID = 4
 
     val listTypes = mapOf(
-        HORIZONTAL_LIST to R.string.horizontal_list,
-        VERTICAL_LIST to R.string.vertical_list
+        HORIZONTAL_LIST to R.string.horizontal,
+        VERTICAL_LIST to R.string.vertical
     )
 
 }

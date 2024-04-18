@@ -61,6 +61,15 @@ fun LayoutPage(
             }
 
             item {
+                Text(
+                    text = stringResource(id = R.string.list),
+                    modifier = Modifier.padding(horizontal = 28.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
+
+            item {
                 listTypes.forEach { item ->
                     RadioButtonItem(
                         value = listTypes[currentListType]!!,
@@ -92,7 +101,8 @@ fun LayoutPage(
                         Text(
                             text = stringResource(id = R.string.layout_grid_size),
                             modifier = Modifier.padding(horizontal = 28.dp),
-                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            style = MaterialTheme.typography.titleMedium,
                         )
                         Row(
                             modifier = Modifier.fillMaxWidth(),
