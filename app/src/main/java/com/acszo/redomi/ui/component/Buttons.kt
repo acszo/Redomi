@@ -53,11 +53,12 @@ fun RadioButtonItem(
     text: Int,
     verticalPadding: Dp = 10.dp,
     horizontalPadding: Dp = 28.dp,
+    startPadding: Dp = 0.dp,
     fontSize: TextUnit = MaterialTheme.typography.bodyLarge.fontSize,
     onClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .selectable(
                 selected = (value == text),
@@ -67,7 +68,7 @@ fun RadioButtonItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         RadioButton(
-            modifier = modifier,
+            modifier = Modifier.padding(start = startPadding),
             selected = (value == text),
             onClick = null,
         )

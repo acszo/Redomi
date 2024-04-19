@@ -83,7 +83,6 @@ fun UpdatePage(
                     item {
                         Text(
                             text = if (isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
-                            modifier = Modifier.padding(horizontal = 28.dp),
                             color = if (isUpdateAvailable) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
                             style = MaterialTheme.typography.titleMedium,
                         )
@@ -92,7 +91,6 @@ fun UpdatePage(
                     item {
                         Text(
                             text = latestRelease!!.name,
-                            modifier = Modifier.padding(horizontal = 28.dp),
                             style = MaterialTheme.typography.displaySmall,
                         )
                     }
@@ -112,7 +110,6 @@ fun UpdatePage(
                 ) {
                     Text(
                         text = stringResource(id = R.string.update_info_failed),
-                        modifier = Modifier.padding(horizontal = 28.dp),
                         style = MaterialTheme.typography.titleMedium,
                         textAlign = TextAlign.Center,
                     )

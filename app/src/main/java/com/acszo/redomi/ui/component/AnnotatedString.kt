@@ -32,6 +32,6 @@ fun AnnotatedString(string: String) {
                 }
             }
         },
-        modifier = Modifier.padding(horizontal = 38.dp),
+        modifier = Modifier.padding(horizontal = 10.dp),
     )
 }

@@ -76,7 +76,8 @@ fun AppsPage(
                 Column(
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.surface)
-                        .padding(14.dp),
+                        // requiredWidth(LocalConfiguration.current.screenWidthDp.dp) crashes here >:(
+                        .padding(vertical = 14.dp),
                 ) {
                     Tabs(
                         tabs = tabs,
@@ -132,9 +133,7 @@ fun AppsPage(
             }
 
             item {
-                HorizontalDivider(
-                    modifier = Modifier.padding(horizontal = 28.dp)
-                )
+                HorizontalDivider()
             }
 
             item {

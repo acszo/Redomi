@@ -29,7 +29,7 @@ import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.Theme
 import com.acszo.redomi.ui.component.IconItemDialog
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.RedomiAlertDialog
+import com.acszo.redomi.ui.component.DefaultDialog
 import com.acszo.redomi.ui.component.SettingsItem
 import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.nav.Pages.appsPage
@@ -151,7 +151,7 @@ fun SettingsPage(
     }
 
     if (isFirstTime!!) {
-        RedomiAlertDialog(
+        DefaultDialog(
             icon =  R.drawable.ic_description,
             title = stringResource(id = R.string.dialog_setup_title),
             content = {
@@ -177,16 +177,16 @@ fun SettingsPage(
     }
 
     if (openIconShapeDialog.value) {
-        RedomiAlertDialog(
+        DefaultDialog(
             icon =  R.drawable.ic_category_outline,
             title = stringResource(id = R.string.icon_shape),
             content = {
                 IconShape.entries.forEach { item ->
                     RadioButtonItem(
-                        modifier = Modifier.padding(start = 15.dp),
                         value = IconShape.valueOf(currentIconShape)!!.toString,
                         text = item.toString,
-                        horizontalPadding = 0.dp
+                        horizontalPadding = 0.dp,
+                        startPadding = 15.dp
                     ) {
                         dataStoreViewModel.setIconShape(item.ordinal)
                     }
@@ -198,16 +198,16 @@ fun SettingsPage(
     }
 
     if (openThemeDialog.value) {
-        RedomiAlertDialog(
+        DefaultDialog(
             icon =  R.drawable.ic_color_lens_outline,
             title = stringResource(id = R.string.theme),
             content = {
                 Theme.entries.forEach { item ->
                     RadioButtonItem(
-                        modifier = Modifier.padding(start = 15.dp),
                         value = Theme.valueOf(currentThemeMode)!!.toString,
                         text = item.toString,
-                        horizontalPadding = 0.dp
+                        horizontalPadding = 0.dp,
+                        startPadding = 15.dp
                     ) {
                         dataStoreViewModel.setThemeMode(item.ordinal)
                     }

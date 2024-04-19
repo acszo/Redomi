@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,7 +39,7 @@ fun ScaffoldWithLargeTopAppBar(
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
-        content(it) {
+        content(it.addHorizontalPadding(28.dp)) {
             Column {
                 PageTitle(
                     title = title,
@@ -82,7 +83,7 @@ fun PageTitle(
         text = title,
         modifier = Modifier
             .padding(top = 18.dp)
-            .padding(horizontal = 28.dp, vertical = 28.dp)
+            .padding(vertical = 28.dp)
             .graphicsLayer { alpha = (1f - scrollBehavior.state.overlappedFraction) },
         style = MaterialTheme.typography.displaySmall,
         color = MaterialTheme.colorScheme.onSurface,
@@ -95,7 +96,17 @@ fun PageDescription(
 ) {
     Text(
         text = description,
-        modifier = Modifier.padding(horizontal = 28.dp),
         color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+}
+
+fun PaddingValues.addHorizontalPadding(
+    padding: Dp
+): PaddingValues {
+    return PaddingValues(
+        start = padding,
+        top = this.calculateTopPadding(),
+        end = padding,
+        bottom = this.calculateBottomPadding()
     )
 }

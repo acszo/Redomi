@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
 
 @Composable
-fun RedomiAlertDialog(
+fun DefaultDialog(
     icon: Int,
     title: String,
     content: @Composable () -> Unit,

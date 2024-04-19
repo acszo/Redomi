@@ -29,7 +29,7 @@ fun AppCheckBoxItem(
     onUnCheckedAction: () -> Unit,
 ) {
     Row(
-        modifier = Modifier.padding(horizontal = 28.dp, vertical = 8.dp),
+        modifier = Modifier.padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(18.dp),
     ) {

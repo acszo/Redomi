@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,7 +65,6 @@ fun LayoutPage(
             item {
                 Text(
                     text = stringResource(id = R.string.list),
-                    modifier = Modifier.padding(horizontal = 28.dp),
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.titleMedium,
                 )
@@ -72,6 +73,7 @@ fun LayoutPage(
             item {
                 listTypes.forEach { item ->
                     RadioButtonItem(
+                        modifier = Modifier.requiredWidth(LocalConfiguration.current.screenWidthDp.dp),
                         value = listTypes[currentListType]!!,
                         text = item.value,
                         verticalPadding = 24.dp,
@@ -100,13 +102,12 @@ fun LayoutPage(
                     ) {
                         Text(
                             text = stringResource(id = R.string.layout_grid_size),
-                            modifier = Modifier.padding(horizontal = 28.dp),
                             color = MaterialTheme.colorScheme.primary,
                             style = MaterialTheme.typography.titleMedium,
                         )
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            horizontalArrangement = Arrangement.SpaceAround,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             for (grid in SMALL_GRID..BIG_GRID) {
