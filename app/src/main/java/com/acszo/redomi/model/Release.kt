@@ -1,16 +1,19 @@
 package com.acszo.redomi.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Release(
     val assets: List<Asset>,
     val body: String,
     val name: String,
-    @SerializedName("tag_name")
+    @SerialName("tag_name")
     val tagName: String,
 )
 
+@Serializable
 data class Asset(
-    @SerializedName("browser_download_url")
+    @SerialName("browser_download_url")
     val browserDownloadUrl: String,
 )
