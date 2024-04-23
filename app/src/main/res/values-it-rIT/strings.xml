@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Redomi</string>
     <string name="title_bottom_sheet">Converti canzone</string>
     <string name="title_share_universal_link">Condividi link universale</string>
     <string name="open">Apri</string>
@@ -22,7 +21,6 @@
     <string name="circle_icon">Cerchio</string>
     <string name="square_icon">Quadrato</string>
     <string name="theme">Tema</string>
-    <string name="github">Github</string>
     <string name="github_description">Fai un salto nella repository in acszo/Redomi</string>
     <string name="update">Aggiornamento</string>
     <string name="update_description">Verifica la presenza di aggiornamenti</string>
