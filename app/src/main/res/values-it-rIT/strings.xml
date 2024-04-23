@@ -17,7 +17,7 @@
     <string name="horizontal">Orizzontale</string>
     <string name="vertical">Verticale</string>
     <string name="icon_shape">Forma icona</string>
-    <string name="squircle_icon">Squircle</string>
+    <string name="squircle_icon">Supercerchio</string>
     <string name="circle_icon">Cerchio</string>
     <string name="square_icon">Quadrato</string>
     <string name="theme">Tema</string>
