@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Redomi</string>
     <string name="title_bottom_sheet">Şarkıyı dönüştür</string>
@@ -29,8 +30,7 @@
     <string name="info">Bilgi</string>
     <string name="opening">Açılma</string>
     <string name="sharing">Paylaşma</string>
-    <string name="apps_description_page">
-        Bir şarkıyı dönüştürürken sırayı ve hangi uygulamaları görmek istediğinizi seçin.
+    <string name="apps_description_page">        Bir şarkıyı dönüştürürken sırayı ve hangi uygulamaları görmek istediğinizi seçin.
         Bir bağlantı açıldığında \'Açılma\' uygulamaları gösterilir.
         Bir müzik platformundan yapılan paylaşımlarda bunun yerine \'Paylaşma\' gösterilir.
     </string>
