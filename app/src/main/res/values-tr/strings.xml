@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Redomi</string>
+    <string name="title_bottom_sheet">Şarkıyı dönüştür</string>
+    <string name="title_share_universal_link">Evrensel bağlantıyı paylaş</string>
+    <string name="open">Aç</string>
+    <string name="copy">Kopyala</string>
+    <string name="share">Paylaş</string>
+    <string name="placeholder">Yer tutucu</string>
+    <string name="song_cover">Şarkı kapağı</string>
+    <string name="settings">Settings</string>
+    <string name="back">Geri</string>
+    <string name="apps">Uygulamalar</string>
+    <string name="apps_description">Sırayı ve görüntülenecek uygulamaları seçin</string>
+    <string name="layout">Düzen</string>
+    <string name="list">Liste</string>
+    <string name="list_format">%s Liste</string>
+    <string name="horizontal">Yatay</string>
+    <string name="vertical">Dikey</string>
+    <string name="icon_shape">Simge şekli</string>
+    <string name="squircle_icon">Oval kare</string>
+    <string name="circle_icon">Daire</string>
+    <string name="square_icon">Kare</string>
+    <string name="theme">Tema</string>
+    <string name="github">Github</string>
+    <string name="github_description">acszo/Redomi adresindeki depoyu inceleyin</string>
+    <string name="update">Güncellemeler</string>
+    <string name="update_description">Mevcut güncellemeleri kontrol edin</string>
+    <string name="version">Sürüm</string>
+    <string name="info">Bilgi</string>
+    <string name="opening">Açılma</string>
+    <string name="sharing">Paylaşma</string>
+    <string name="apps_description_page">
+        Bir şarkıyı dönüştürürken sırayı ve hangi uygulamaları görmek istediğinizi seçin.
+        Bir bağlantı açıldığında \'Açılma\' uygulamaları gösterilir.
+        Bir müzik platformundan yapılan paylaşımlarda bunun yerine \'Paylaşma\' gösterilir.
+    </string>
+    <string name="installed_tab_info">Yalnızca bir uygulama seçildiğinde doğrudan o uygulama açılır.</string>
+    <string name="all_tab_info">Yalnızca bir uygulama seçildiğinde eylemler doğrudan açılır.</string>
+    <string name="layout_description_page">Bir şarkıyı dönüştürürken gördüğünüz uygulamaları nasıl görüntülemek istediğinizi seçin.</string>
+    <string name="layout_grid_size">Izgara boyutu</string>
+    <string name="update_description_page">Uygulamayı her başlattığınızda güncellemeler kontrol edilir.</string>
+    <string name="title_changelogs_current">Mevcut sürüm</string>
+    <string name="title_changelogs_new">Yeni sürüm</string>
+    <string name="check_updates">Güncellemeleri kontrol et</string>
+    <string name="do_update">Güncelle</string>
+    <string name="system_theme">Sistem varsayılanı</string>
+    <string name="dark_theme">Karanlık</string>
+    <string name="light_theme">Aydınlık</string>
+    <string name="dialog_dismiss">İptal</string>
+    <string name="dialog_confirm">Tamam</string>
+    <string name="dialog_setup_title">Rehber</string>
+    <string name="dialog_setup_description">Varsayılan olarak Redomi harici bağlantıları açamaz. Çalıştırmak için ayarlara yönlendirileceksiniz.</string>
+    <string name="dialog_setup_description_checked">Redomi\'nin doğru şekilde açabilmesi için bağlantıları kontrol edin.</string>
+    <string name="dialog_setup_description_unchecked">Kullandığınız müzik hizmetlerinden olanları işaretlemeyin. (örneğin Spotify kullanıyorsanız işareti kaldırın)</string>
+    <string name="update_info_failed">Güncelleme bilgisi yüklenemedi</string>
+    <string name="updating">Güncelleniyor</string>
+    <string name="update_completed">Güncelleme tamamlandı</string>
+    <string name="update_aborted">Güncelleme iznini kabul et</string>
+    <string name="update_failed">Güncelleme başarısız oldu</string>
+    <string name="update_available">Yeni sürüm mevcut</string>
+    <string name="no_update_available">Güncelleme bulunamadı</string>
+    <string name="no_result_found">Sonuç bulunamadı</string>
+</resources>
