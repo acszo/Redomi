@@ -6,7 +6,7 @@
     <string name="open">Apri</string>
     <string name="copy">Copia</string>
     <string name="share">Condividi</string>
-    <string name="placeholder">Placeholder</string>
+    <string name="placeholder">Segnaposto</string>
     <string name="song_cover">Cover Canzone</string>
     <string name="settings">Impostazioni</string>
     <string name="back">Indietro</string>
@@ -30,8 +30,7 @@
     <string name="info">Informazioni</string>
     <string name="opening">Apri</string>
     <string name="sharing">Condividi</string>
-    <string name="apps_description_page">
-        Scegli l\'ordine e quali app vuoi mostrare quando converti una canzone.
+    <string name="apps_description_page">        Scegli l\'ordine e quali app vuoi mostrare quando converti una canzone.
         Aprendo un link, vengono mostrate le app in \'Apri\'.
         Condividendo da una piattaforma musicale mostra \'Condividi\' invece.
     </string>
