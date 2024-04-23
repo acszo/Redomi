@@ -6,7 +6,7 @@
   [![Latest release](https://img.shields.io/github/v/release/acszo/Redomi?logo=github&label=Latest&color=blue)](https://github.com/acszo/Redomi/releases/latest/)
   ![Supported versions](https://img.shields.io/badge/Support-9%2B-green?logo=android)
   [![Download count](https://img.shields.io/github/downloads/acszo/Redomi/total?label=Downloads&logo=github)](https://github.com/acszo/Redomi/releases/latest/)
-
+  [![Crowdin](https://badges.crowdin.net/redomi/localized.svg)](https://crowdin.com/project/redomi)
   
 </div>
 
