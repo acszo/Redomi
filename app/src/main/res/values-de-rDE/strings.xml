@@ -23,7 +23,7 @@
     <string name="theme">Erscheinungsbild</string>
     <string name="github_description">Schau dir die repository bei acszo/Redomi an</string>
     <string name="update">Update</string>
-    <string name="update_description">Nach verfügbaren Aktualisierungen suchen</string>
+    <string name="update_description">Nach verfügbaren Update suchen</string>
     <string name="version">Version</string>
     <string name="info">Info</string>
     <string name="opening">Öffnen</string>
