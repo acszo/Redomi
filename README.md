@@ -1,7 +1,7 @@
 <div align="center">
   <img width="180" height="180" src="/preview/logo.svg">
   <h1>Redomi</h1>
-  <p><a href="https://song.link/">Song.link</a> client made in Jetpack Compose and Material You</p>
+  <p>Unofficial <a href="https://song.link/">song.link</a> client made in Jetpack Compose and Material You</p>
   
   [![Latest release](https://img.shields.io/github/v/release/acszo/Redomi?logo=github&label=Latest&color=blue)](https://github.com/acszo/Redomi/releases/latest/)
   ![Supported versions](https://img.shields.io/badge/Support-9%2B-green?logo=android)
@@ -48,7 +48,7 @@ And you can also share the songs you want to anyone by converting the link to th
 
 ## HOW TO MAKE IT WORK
 
-By default Redomi is unable to open links, in case the guide inside the app is not understandable, do as follows:
+By default Redomi is unable to open links, do as follows:
 1. Long-press on Redomi and open its info page
 2. Navigate to "Set/Open by default" (this may have a different naming on some devices)
 3. Check all the music platforms that are *NOT* installed
@@ -66,6 +66,10 @@ By default Redomi is unable to open links, in case the guide inside the app is n
 - Napster
 
 3rd party clients are also compatible, as long as they're the default app to handle the corresponding link
+
+## Translations
+
+You can contribute by translating via [Crowdin](https://crowdin.com/project/redomi)
 
 ## Credits
 
