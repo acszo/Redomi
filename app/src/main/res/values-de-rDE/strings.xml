@@ -48,7 +48,7 @@ Das Teilen ausgehend von einer Musikplattform, zeigt dir stattdessen deine vorau
     <string name="dialog_setup_title">Anleitung</string>
     <string name="dialog_setup_description">Standardmäßig kann Redomi keine externen Links öffnen. Du wirst zu den Einstellungen weitergeleitet, damit es funktioniert.</string>
     <string name="dialog_setup_description_checked">Überprüfe die Links, damit Redomi sie korrekt öffnen kann.</string>
-    <string name="dialog_setup_description_unchecked">Wenn du z.B. Spotify verwendest, brauchst du die Auswahl der von dir genutzten Musikdienste nicht tätigen</string>
+    <string name="dialog_setup_description_unchecked">Lasse diejenigen Links aus, die du als Musikdienst bereits nutzt (wenn du z.B. Spotify nutzt, brauchst du es hier nicht auswählen)</string>
     <string name="update_info_failed">Update-Informationen konnten nicht geladen werden</string>
     <string name="updating">Am aktualisieren</string>
     <string name="update_completed">Update abgeschlossen</string>
