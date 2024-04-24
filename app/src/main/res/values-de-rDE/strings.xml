@@ -8,9 +8,9 @@
     <string name="placeholder">Platzhalter</string>
     <string name="song_cover">Titelbild</string>
     <string name="settings">Einstellungen</string>
-    <string name="back">Zurück zur vorherigen Seite</string>
+    <string name="back">Zurück</string>
     <string name="apps">Anwendungen</string>
-    <string name="apps_description">Wählen Sie die Reihenfolge und welche Apps angezeigt werden sollen</string>
+    <string name="apps_description">Wähle die Reihenfolge und welche Anwendungen angezeigt werden sollen</string>
     <string name="layout">Anordnung</string>
     <string name="list">Liste</string>
     <string name="list_format">%s Liste</string>
@@ -21,40 +21,40 @@
     <string name="circle_icon">Kreis</string>
     <string name="square_icon">Quadrat</string>
     <string name="theme">Erscheinungsbild</string>
-    <string name="github_description">Schau dir die Quelle bei acszo/Redomi an</string>
-    <string name="update">Aktualisierung</string>
-    <string name="update_description">Nach verfügbaren Updates suchen</string>
+    <string name="github_description">Schau dir die Datenquelle bei acszo/Redomi an</string>
+    <string name="update">Update</string>
+    <string name="update_description">Nach verfügbaren Aktualisierungen suchen</string>
     <string name="version">Version</string>
     <string name="info">Info</string>
-    <string name="opening">Wird geöffnet</string>
+    <string name="opening">Öffnen</string>
     <string name="sharing">Teilen</string>
-    <string name="apps_description_page">Wählen Sie die Reihenfolge und welche Apps Sie angezeigt bekommen möchten, wenn Sie ein Lied konvertieren. 
-Beim Öffnen eines Links wird Ihnen \"öffnen\" angezeigt. 
-Das Teilen von einer Musikplattform zeigt Ihnen stattdessen \"teilen\" an. </string>
-    <string name="installed_tab_info">Wenn nur eine App ausgewählt wird, wird sie direkt geöffnet.</string>
-    <string name="all_tab_info">Wenn Sie nur eine App auswählen, wird das Fenster der Aktionen geöffnet.</string>
-    <string name="layout_description_page">Wählen Sie die Art und Weise, wie Sie die Apps angezeigt haben möchten, die Sie bei der Umwandlung eines Titels sehen.</string>
+    <string name="apps_description_page">Wähle die Reihenfolge und welche Anwendungen du angezeigt bekommen möchtest, wenn du ein Lied konvertierst. 
+Beim Öffnen eines Links wird dir unter \"Öffnen\" angezeigt, mit welcher Anwendung du diesen Link öffnen kannst. 
+Das Teilen ausgehend von einer Musikplattform, zeigt dir stattdessen deine vorausgewählten Anwendungen unter \"Teilen\" an. </string>
+    <string name="installed_tab_info">Wenn nur eine Anwendung ausgewählt wird, wird sie direkt geöffnet.</string>
+    <string name="all_tab_info">Wenn du nur eine App auswählst, wird das Fenster der Aktionen geöffnet.</string>
+    <string name="layout_description_page">Wähle die Art und Weise, wie du die Apps angezeigt haben möchtest, die du bei der Konvertierung eines Titels siehst.</string>
     <string name="layout_grid_size">Rastergröße</string>
-    <string name="update_description_page">Auf Aktualisierungen wird bei jedem Start der App geprüft.</string>
+    <string name="update_description_page">Auf Updates wird bei jedem Start der App geprüft.</string>
     <string name="title_changelogs_current">Diese Version</string>
     <string name="title_changelogs_new">Neue Version</string>
     <string name="check_updates">Auf Aktualisierungen prüfen</string>
-    <string name="do_update">Aktualisierung</string>
+    <string name="do_update">Update</string>
     <string name="system_theme">Systemstandard</string>
     <string name="dark_theme">Dunkel</string>
     <string name="light_theme">Hell</string>
     <string name="dialog_dismiss">Abbrechen</string>
     <string name="dialog_confirm">OK</string>
     <string name="dialog_setup_title">Anleitung</string>
-    <string name="dialog_setup_description">Standardmäßig kann Redomi keine externen Links öffnen. Sie werden zu den Einstellungen weitergeleitet, damit es funktioniert.</string>
-    <string name="dialog_setup_description_checked">Überprüfen Sie die Links, damit Redomi sie korrekt öffnen kann.</string>
-    <string name="dialog_setup_description_unchecked">Wenn Sie Spotify verwenden, brauchen Sie die Auswahl der von Ihnen genutzten Musikdienste nicht tätigen</string>
-    <string name="update_info_failed">Aktualisierungsinformationen konnten nicht geladen werden</string>
-    <string name="updating">Updating</string>
-    <string name="update_completed">Update completed</string>
-    <string name="update_aborted">Accept the permission to update</string>
-    <string name="update_failed">Update failed</string>
-    <string name="update_available">New version available</string>
-    <string name="no_update_available">No update found</string>
-    <string name="no_result_found">No result found</string>
+    <string name="dialog_setup_description">Standardmäßig kann Redomi keine externen Links öffnen. Du wirst zu den Einstellungen weitergeleitet, damit es funktioniert.</string>
+    <string name="dialog_setup_description_checked">Überprüfe die Links, damit Redomi sie korrekt öffnen kann.</string>
+    <string name="dialog_setup_description_unchecked">Wenn du z.B. Spotify verwendest, brauchst du die Auswahl der von dir genutzten Musikdienste nicht tätigen</string>
+    <string name="update_info_failed">Update-Informationen konnten nicht geladen werden</string>
+    <string name="updating">am aktualisieren</string>
+    <string name="update_completed">Update abgeschlossen</string>
+    <string name="update_aborted">Update-Berechtigung akzeptieren</string>
+    <string name="update_failed">Update fehlgeschlagen</string>
+    <string name="update_available">Eine neue Version ist verfügbar</string>
+    <string name="no_update_available">Kein Update gefunden</string>
+    <string name="no_result_found">Keine Ergebnisse gefunden</string>
 </resources>
