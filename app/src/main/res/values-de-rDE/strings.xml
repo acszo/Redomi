@@ -21,7 +21,7 @@
     <string name="circle_icon">Kreis</string>
     <string name="square_icon">Quadrat</string>
     <string name="theme">Erscheinungsbild</string>
-    <string name="github_description">Schau dir die Datenquelle bei acszo/Redomi an</string>
+    <string name="github_description">Schau dir die repository bei acszo/Redomi an</string>
     <string name="update">Update</string>
     <string name="update_description">Nach verfügbaren Aktualisierungen suchen</string>
     <string name="version">Version</string>
@@ -50,7 +50,7 @@ Das Teilen ausgehend von einer Musikplattform, zeigt dir stattdessen deine vorau
     <string name="dialog_setup_description_checked">Überprüfe die Links, damit Redomi sie korrekt öffnen kann.</string>
     <string name="dialog_setup_description_unchecked">Wenn du z.B. Spotify verwendest, brauchst du die Auswahl der von dir genutzten Musikdienste nicht tätigen</string>
     <string name="update_info_failed">Update-Informationen konnten nicht geladen werden</string>
-    <string name="updating">am aktualisieren</string>
+    <string name="updating">Am aktualisieren</string>
     <string name="update_completed">Update abgeschlossen</string>
     <string name="update_aborted">Update-Berechtigung akzeptieren</string>
     <string name="update_failed">Update fehlgeschlagen</string>
