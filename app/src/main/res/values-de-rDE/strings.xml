@@ -32,7 +32,7 @@
 Beim Öffnen eines Links wird Ihnen \"öffnen\" angezeigt. 
 Das Teilen von einer Musikplattform zeigt Ihnen stattdessen \"teilen\" an. </string>
     <string name="installed_tab_info">Wenn nur eine App ausgewählt wird, wird sie direkt geöffnet.</string>
-    <string name="all_tab_info">Selecting only one app will open the actions directly.</string>
+    <string name="all_tab_info">Wenn Sie nur eine App auswählen, wird das Fenster der Aktionen geöffnet.</string>
     <string name="layout_description_page">Wählen Sie die Art und Weise, wie Sie die Apps angezeigt haben möchten, die Sie bei der Umwandlung eines Titels sehen.</string>
     <string name="layout_grid_size">Rastergröße</string>
     <string name="update_description_page">Auf Aktualisierungen wird bei jedem Start der App geprüft.</string>
@@ -46,10 +46,10 @@ Das Teilen von einer Musikplattform zeigt Ihnen stattdessen \"teilen\" an. </str
     <string name="dialog_dismiss">Abbrechen</string>
     <string name="dialog_confirm">OK</string>
     <string name="dialog_setup_title">Anleitung</string>
-    <string name="dialog_setup_description">By default Redomi can\'t open external links. You will get redirected to the settings to make it work.</string>
+    <string name="dialog_setup_description">Standardmäßig kann Redomi keine externen Links öffnen. Sie werden zu den Einstellungen weitergeleitet, damit es funktioniert.</string>
     <string name="dialog_setup_description_checked">Überprüfen Sie die Links, damit Redomi sie korrekt öffnen kann.</string>
-    <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
-    <string name="update_info_failed">Couldn\'t load update info</string>
+    <string name="dialog_setup_description_unchecked">Wenn Sie Spotify verwenden, brauchen Sie die Auswahl der von Ihnen genutzten Musikdienste nicht tätigen</string>
+    <string name="update_info_failed">Aktualisierungsinformationen konnten nicht geladen werden</string>
     <string name="updating">Updating</string>
     <string name="update_completed">Update completed</string>
     <string name="update_aborted">Accept the permission to update</string>
