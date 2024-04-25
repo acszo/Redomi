@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.component.bottom_sheet
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.foundation.Canvas
@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.acszo.redomi.R
+import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
 
 @OptIn(ExperimentalFoundationApi::class)

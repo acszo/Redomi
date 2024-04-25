@@ -36,7 +36,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
-import com.acszo.redomi.ui.component.SongInfoDisplay
 import com.acszo.redomi.utils.IntentUtil.onIntentView
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
