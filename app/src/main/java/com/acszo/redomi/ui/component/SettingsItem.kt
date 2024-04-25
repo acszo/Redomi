@@ -50,13 +50,11 @@ fun SettingsItem(
         ) {
             Text(
                 text = title,
-                maxLines = 1,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleLarge
             )
             Text(
                 text = description,
-                maxLines = 1,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyMedium,
             )
