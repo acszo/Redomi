@@ -27,8 +27,8 @@ import com.acszo.redomi.R
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.Tabs
-import com.acszo.redomi.ui.component.common_page.PageBottomInfo
-import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.ui.common.PageBottomInfo
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 

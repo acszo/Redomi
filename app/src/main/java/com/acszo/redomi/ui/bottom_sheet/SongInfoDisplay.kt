@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component.bottom_sheet
+package com.acszo.redomi.ui.bottom_sheet
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.foundation.Canvas

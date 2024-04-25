@@ -34,7 +34,7 @@ import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.component.AnnotatedString
 import com.acszo.redomi.ui.component.NewReleaseIcon
-import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.fadingEdge
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk

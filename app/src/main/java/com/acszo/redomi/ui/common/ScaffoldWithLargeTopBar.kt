@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component.common_page
+package com.acszo.redomi.ui.common
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

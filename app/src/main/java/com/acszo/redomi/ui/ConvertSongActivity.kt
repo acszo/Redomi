@@ -8,7 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.ui.component.bottom_sheet.BottomSheet
+import com.acszo.redomi.ui.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.AppList
 import com.acszo.redomi.viewmodel.DataStoreViewModel

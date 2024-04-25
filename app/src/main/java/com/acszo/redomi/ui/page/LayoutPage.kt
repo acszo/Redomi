@@ -35,7 +35,7 @@ import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
 import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.common_page.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import kotlinx.coroutines.launch
 
