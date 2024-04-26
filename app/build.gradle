@@ -94,7 +94,6 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.9.0'
 
     // Splash Screen
-    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.core:core-splashscreen:1.1.0-rc01'
 
     // Dagger Hilt
@@ -112,7 +111,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
 
     // Coil
-    implementation 'io.coil-kt:coil-compose:2.4.0'
+    implementation 'io.coil-kt:coil-compose:2.6.0'
 
     // Data Store
     implementation 'androidx.datastore:datastore-preferences:1.1.0'
