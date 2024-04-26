@@ -27,11 +27,11 @@ import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.Theme
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.ui.component.DefaultDialog
 import com.acszo.redomi.ui.component.IconItemDialog
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.DefaultDialog
 import com.acszo.redomi.ui.component.SettingsItem
-import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.nav.Pages.appsPage
 import com.acszo.redomi.ui.nav.Pages.layoutPage
 import com.acszo.redomi.ui.nav.Pages.updatePage
@@ -150,7 +150,7 @@ fun SettingsPage(
         }
     }
 
-    if (isFirstTime!!) {
+    if (isFirstTime!! && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         DefaultDialog(
             icon =  R.drawable.ic_description,
             title = stringResource(id = R.string.dialog_setup_title),

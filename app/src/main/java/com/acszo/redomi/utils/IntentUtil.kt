@@ -36,20 +36,14 @@ object IntentUtil {
     }
 
     fun onIntentOpenDefaultsApp(context: Context) {
+        val uri = Uri.parse("package:${context.packageName}")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            context.startActivity(
-                Intent(
-                    Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-                    Uri.parse("package:${context.packageName}")
-                )
-            )
-        } else {
-            context.startActivity(
-                Intent(
-                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    Uri.parse("package:${context.packageName}")
-                )
-            )
+            // Work around for One UI 4, because ACTION_APP_OPEN_BY_DEFAULT_SETTING crashes, kpop company moment 🫰
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.S && Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
+                context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri))
+            } else {
+                context.startActivity(Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri))
+            }
         }
     }
 
