@@ -13,7 +13,7 @@
     <string name="apps_description">Wähle die Reihenfolge und welche Anwendungen angezeigt werden sollen</string>
     <string name="layout">Anordnung</string>
     <string name="list">Liste</string>
-    <string name="list_format">%s Liste</string>
+    <string name="list_format">%se Liste</string>
     <string name="horizontal">Horizontal</string>
     <string name="vertical">Vertikal</string>
     <string name="icon_shape">Symbolform</string>
@@ -23,7 +23,7 @@
     <string name="theme">Erscheinungsbild</string>
     <string name="github_description">Schau dir die repository bei acszo/Redomi an</string>
     <string name="update">Update</string>
-    <string name="update_description">Nach verfügbaren Aktualisierungen suchen</string>
+    <string name="update_description">Nach verfügbaren Update suchen</string>
     <string name="version">Version</string>
     <string name="info">Info</string>
     <string name="opening">Öffnen</string>
