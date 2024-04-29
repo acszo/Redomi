@@ -3,6 +3,7 @@ package com.acszo.redomi.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.model.AppDetails
+import com.acszo.redomi.model.AppList
 import com.acszo.redomi.model.Platform
 import com.acszo.redomi.model.Providers
 import com.acszo.redomi.model.SongInfo
@@ -17,11 +18,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
-
-enum class AppList {
-    OPENING,
-    SHARING
-}
 
 @HiltViewModel
 class SongViewModel @Inject constructor(

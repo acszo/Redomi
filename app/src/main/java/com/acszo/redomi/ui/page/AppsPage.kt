@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
+import com.acszo.redomi.model.AppList
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.Tabs
@@ -38,18 +39,14 @@ fun AppsPage(
     dataStoreViewModel: DataStoreViewModel,
     backButton: @Composable () -> Unit
 ) {
-    val tabs: List<String> = listOf(
-        stringResource(id = R.string.opening),
-        stringResource(id = R.string.sharing)
-    )
-    val selectedTab = remember { mutableStateOf(tabs[0]) }
+    val selectedTab = remember { mutableStateOf(AppList.OPENING) }
 
     LaunchedEffect(Unit) {
         dataStoreViewModel.getOpeningApps()
         dataStoreViewModel.getSharingApps()
     }
 
-    val currentIconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
+    val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
     val openingApps = dataStoreViewModel.openingApps.collectAsStateWithLifecycle().value.toMutableList()
     val sharingApps = dataStoreViewModel.sharingApps.collectAsStateWithLifecycle().value.toMutableList()
 
@@ -76,13 +73,10 @@ fun AppsPage(
                 Column(
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.surface)
-                        // requiredWidth(LocalConfiguration.current.screenWidthDp.dp) crashes here >:(
+                        //.requiredWidth(LocalConfiguration.current.screenWidthDp.dp) crashes here >:(
                         .padding(vertical = 14.dp),
                 ) {
-                    Tabs(
-                        tabs = tabs,
-                        selectedTab = selectedTab
-                    )
+                    Tabs(selectedTab = selectedTab)
                 }
             }
 
@@ -90,11 +84,11 @@ fun AppsPage(
                 Spacer(modifier = Modifier.height(14.dp))
             }
 
-            if (selectedTab.value == tabs.first()) {
-                items(platforms) { app ->
+            items(platforms) { app ->
+                if (selectedTab.value == AppList.OPENING) {
                     AppCheckBoxItem(
                         icon = app.icon,
-                        iconShape = currentIconShape,
+                        iconShape = iconShape,
                         title = separateUppercase(app.title),
                         size = openingApps.size,
                         isChecked = openingApps.contains(app),
@@ -107,12 +101,10 @@ fun AppsPage(
                             dataStoreViewModel.setOpeningApps(openingApps.toList())
                         }
                     )
-                }
-            } else {
-                items(platforms) { app ->
+                } else {
                     AppCheckBoxItem(
                         icon = app.icon,
-                        iconShape = currentIconShape,
+                        iconShape = iconShape,
                         title = separateUppercase(app.title),
                         size = sharingApps.size,
                         isChecked = sharingApps.contains(app),
@@ -142,7 +134,7 @@ fun AppsPage(
 
             item {
                 PageBottomInfo(
-                    if (selectedTab.value == tabs[0])
+                    if (selectedTab.value == AppList.OPENING)
                         stringResource(id = R.string.opening_apps_tab_info)
                     else
                         stringResource(id = R.string.sharing_apps_tab_info)

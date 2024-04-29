@@ -50,10 +50,10 @@ class MainActivity : ComponentActivity() {
             }
 
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
-            val currentTheme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
+            val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
             RedomiTheme(
-                currentTheme = currentTheme
+                theme = theme
             ) {
                 RootNavigation(
                     dataStoreViewModel = dataStoreViewModel,

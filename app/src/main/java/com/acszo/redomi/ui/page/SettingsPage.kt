@@ -48,9 +48,9 @@ fun SettingsPage(
     val context = LocalContext.current
 
     val isFirstTime by dataStoreViewModel.isFirstTime.collectAsStateWithLifecycle()
-    val currentListType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
-    val currentIconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
-    val currentThemeMode by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
+    val listType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
+    val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
+    val themeMode by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
     val redomi = stringResource(id = R.string.app_name)
 
@@ -86,11 +86,11 @@ fun SettingsPage(
             }
 
             item {
-                val listType =  stringResource(id = R.string.list_format, stringResource(listTypes[currentListType]!!))
+                val listName = stringResource(id = R.string.list_format, stringResource(listTypes[listType]!!))
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
                     icon = R.drawable.ic_format_list_bulleted,
-                    description = listType.lowercase().replaceFirstChar { it.uppercase() }
+                    description = listName.lowercase().replaceFirstChar { it.uppercase() }
                 ) {
                     navController.navigate(layoutPage)
                 }
@@ -100,7 +100,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.icon_shape),
                     icon = R.drawable.ic_category_filled,
-                    description = stringResource(id = IconShape.valueOf(currentIconShape)!!.toString)
+                    description = stringResource(id = IconShape.valueOf(iconShape)!!.toRes)
                 ) {
                     openIconShapeDialog.value = true
                 }
@@ -110,7 +110,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.theme),
                     icon = R.drawable.ic_color_lens_filled,
-                    description = stringResource(id = Theme.valueOf(currentThemeMode)!!.toString)
+                    description = stringResource(id = Theme.valueOf(themeMode)!!.toRes)
                 ) {
                     openThemeDialog.value = true
                 }
@@ -186,8 +186,8 @@ fun SettingsPage(
             content = {
                 IconShape.entries.forEach { item ->
                     RadioButtonItem(
-                        value = IconShape.valueOf(currentIconShape)!!.toString,
-                        text = item.toString,
+                        value = IconShape.valueOf(iconShape)!!.toRes,
+                        text = item.toRes,
                         horizontalPadding = 0.dp,
                         startPadding = 15.dp
                     ) {
@@ -207,8 +207,8 @@ fun SettingsPage(
             content = {
                 Theme.entries.forEach { item ->
                     RadioButtonItem(
-                        value = Theme.valueOf(currentThemeMode)!!.toString,
-                        text = item.toString,
+                        value = Theme.valueOf(themeMode)!!.toRes,
+                        text = item.toRes,
                         horizontalPadding = 0.dp,
                         startPadding = 15.dp
                     ) {

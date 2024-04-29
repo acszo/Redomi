@@ -35,7 +35,7 @@ enum class IconShape(val radius: Shape) {
     CIRCLE(CircleShape),                    // 👍👍
     SQUARE(RoundedCornerShape(25)); // 👎
 
-    val toString
+    val toRes
         get() = when (this) {
             SQUIRCLE -> R.string.squircle_icon
             CIRCLE -> R.string.circle_icon
@@ -59,7 +59,7 @@ enum class Theme {
         LIGHT_THEME -> false
     }
 
-    val toString
+    val toRes
         get() = when (this) {
             SYSTEM_THEME -> R.string.system_theme
             DARK_THEME -> R.string.dark_theme

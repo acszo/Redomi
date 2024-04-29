@@ -30,10 +30,10 @@ private val lightColorScheme = lightColorScheme(
 
 @Composable
 fun RedomiTheme(
-    currentTheme: Int,
+    theme: Int,
     content: @Composable () -> Unit
 ) {
-    val getTheme = Theme.valueOf(currentTheme)!!.mode()
+    val getTheme = Theme.valueOf(theme)!!.mode()
 
     val colorScheme = when {
          Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {

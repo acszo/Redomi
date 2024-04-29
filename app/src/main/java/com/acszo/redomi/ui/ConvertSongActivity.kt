@@ -8,9 +8,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.acszo.redomi.model.AppList
 import com.acszo.redomi.ui.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
-import com.acszo.redomi.viewmodel.AppList
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.SongViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
@@ -52,10 +52,10 @@ class ConvertSongActivity: ComponentActivity() {
             val platforms by songViewModel.platforms.collectAsStateWithLifecycle()
             val isLoading by songViewModel.isLoading.collectAsStateWithLifecycle()
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
-            val currentTheme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
+            val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
             RedomiTheme(
-                currentTheme = currentTheme
+                theme = theme
             ) {
                 BottomSheet(
                     onDismiss = { this.finish() },

@@ -45,8 +45,8 @@ fun LayoutPage(
     backButton: @Composable () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val currentListType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
-    val currentGridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
+    val listType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
+    val gridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.layout),
@@ -74,7 +74,7 @@ fun LayoutPage(
                 listTypes.forEach { item ->
                     RadioButtonItem(
                         modifier = Modifier.requiredWidth(LocalConfiguration.current.screenWidthDp.dp),
-                        value = listTypes[currentListType]!!,
+                        value = listTypes[listType]!!,
                         text = item.value,
                         verticalPadding = 24.dp,
                         fontSize = 20.sp
@@ -88,7 +88,7 @@ fun LayoutPage(
 
             item {
                 AnimatedVisibility(
-                    visible = currentListType == VERTICAL_LIST,
+                    visible = listType == VERTICAL_LIST,
                     enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
                     exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(
                         animationSpec = tween(
@@ -112,15 +112,15 @@ fun LayoutPage(
                         ) {
                             for (grid in SMALL_GRID..BIG_GRID) {
                                 AnimatedRadiusButton(
-                                    isSelected = currentGridSize == grid,
+                                    isSelected = gridSize == grid,
                                     size = 80.dp,
-                                    backgroundColor = if (currentGridSize == grid) {
+                                    backgroundColor = if (gridSize == grid) {
                                         MaterialTheme.colorScheme.primary
                                     } else {
                                         MaterialTheme.colorScheme.surfaceVariant
                                     },
                                     text = grid.toString(),
-                                    textColor = if (currentGridSize == grid) {
+                                    textColor = if (gridSize == grid) {
                                         MaterialTheme.colorScheme.onPrimary
                                     } else {
                                         MaterialTheme.colorScheme.onSurfaceVariant

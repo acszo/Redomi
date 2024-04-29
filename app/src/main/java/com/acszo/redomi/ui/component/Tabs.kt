@@ -24,13 +24,14 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.acszo.redomi.model.AppList
 
 @Composable
 fun Tabs(
-    tabs: List<String>,
-    selectedTab: MutableState<String>
+    selectedTab: MutableState<AppList>
 ) {
     val width = remember { mutableStateOf(0.dp) }
     val density = LocalDensity.current
@@ -43,9 +44,9 @@ fun Tabs(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        tabs.forEach { text ->
+        AppList.entries.forEach { tab ->
             val selectedTabColor = animateColorAsState(
-                targetValue = if (selectedTab.value == text)
+                targetValue = if (selectedTab.value.res == tab.res)
                     MaterialTheme.colorScheme.primary
                 else
                     MaterialTheme.colorScheme.surfaceVariant,
@@ -54,7 +55,7 @@ fun Tabs(
             )
 
             val padding = animateDpAsState(
-                targetValue = if (selectedTab.value == text) 0.dp else width.value / 8,
+                targetValue = if (selectedTab.value.res == tab.res) 0.dp else width.value / 8,
                 label = ""
             )
 
@@ -70,7 +71,7 @@ fun Tabs(
                     }
                     .clip(MaterialTheme.shapes.extraLarge)
                     .clickable {
-                        selectedTab.value = text
+                        selectedTab.value = tab
                     }
                     .clip(MaterialTheme.shapes.extraLarge)
                     .layout { measurable, constraints ->
@@ -86,10 +87,10 @@ fun Tabs(
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
-                    text = text,
+                    text = stringResource(id = tab.res),
                     modifier = Modifier.padding(vertical = 15.dp),
                     maxLines = 1,
-                    color = if (selectedTab.value == text) {
+                    color = if (selectedTab.value.res == tab.res) {
                         MaterialTheme.colorScheme.onPrimary
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
