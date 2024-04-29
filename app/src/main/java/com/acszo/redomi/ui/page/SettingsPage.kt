@@ -52,6 +52,8 @@ fun SettingsPage(
     val currentIconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
     val currentThemeMode by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
+    val redomi = stringResource(id = R.string.app_name)
+
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     val versionName = BuildConfig.VERSION_NAME
@@ -63,7 +65,7 @@ fun SettingsPage(
     val openThemeDialog = remember { mutableStateOf(false) }
 
     ScaffoldWithLargeTopAppBar(
-        title = stringResource(id = R.string.app_name)
+        title = redomi
     ) { padding, pageTitle ->
         LazyColumn(
             Modifier.padding(padding),
@@ -126,10 +128,11 @@ fun SettingsPage(
             }
 
             item {
+                val repository = stringResource(id = R.string.repository)
                 SettingsItem(
                     title = stringResource(id = R.string.github),
                     icon = R.drawable.ic_github,
-                    description = stringResource(id = R.string.github_description)
+                    description = stringResource(id = R.string.github_description, repository)
                 ) {
                     uriHandle.openUri("https://github.com/acszo/Redomi")
                 }
@@ -158,10 +161,10 @@ fun SettingsPage(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Text(text = stringResource(id = R.string.dialog_setup_description))
+                    Text(text = stringResource(id = R.string.dialog_setup_description, redomi))
                     IconItemDialog(
                         icon = R.drawable.ic_done_all,
-                        description = stringResource(id = R.string.dialog_setup_description_checked)
+                        description = stringResource(id = R.string.dialog_setup_description_checked, redomi)
                     )
                     IconItemDialog(
                         icon = R.drawable.ic_remove_done,

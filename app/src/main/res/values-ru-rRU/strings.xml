@@ -5,7 +5,6 @@
     <string name="open">Открыть</string>
     <string name="copy">Копировать</string>
     <string name="share">Поделиться</string>
-    <string name="placeholder">Заполнитель</string>
     <string name="song_cover">Обложка песни</string>
     <string name="settings">Настройки</string>
     <string name="back">Назад</string>
@@ -21,19 +20,16 @@
     <string name="circle_icon">Круг</string>
     <string name="square_icon">Квадрат</string>
     <string name="theme">Тема</string>
-    <string name="github_description">Посмотрите репозиторий acszo/Redomi</string>
+    <string name="github_description">Посмотрите репозиторий %s</string>
     <string name="update">Обновление</string>
     <string name="update_description">Проверить доступные обновления</string>
     <string name="version">Версия</string>
     <string name="info">Инфо</string>
     <string name="opening">Открытие</string>
     <string name="sharing">Совместное использование</string>
-    <string name="apps_description_page">        Выберите порядок и приложения, которые вы хотите видеть при преобразовании песни.
-        При открытии ссылки отображается приложение \"Открытие\".
-        При совместном использовании с музыкальной платформой вместо этого отображается \"Совместное использование\".
-    </string>
-    <string name="installed_tab_info">Выбрав только одно приложение, вы откроете его напрямую.</string>
-    <string name="all_tab_info">При выборе только одного приложения действия будут открываться напрямую.</string>
+    <string name="apps_description_page">Выберите порядок и приложения, которые вы хотите видеть при преобразовании песни.</string>
+    <string name="opening_apps_tab_info">При открытии ссылки отображаются эти выбранные приложения. Выбрав только одно приложение, вы откроете его напрямую.</string>
+    <string name="sharing_apps_tab_info">При публикации с музыкальной платформы показаны выбранные приложения. При выборе только одного приложения действия будут открываться напрямую.</string>
     <string name="layout_description_page">Выберите способ отображения приложений, которые вы видите при преобразовании песни.</string>
     <string name="layout_grid_size">Размер сетки</string>
     <string name="update_description_page">Обновления проверяются каждый раз, когда вы запускаете приложение.</string>
@@ -47,8 +43,8 @@
     <string name="dialog_dismiss">Отмена</string>
     <string name="dialog_confirm">ОК</string>
     <string name="dialog_setup_title">Руководство</string>
-    <string name="dialog_setup_description">По умолчанию Redomi не может открывать внешние ссылки. Вы будете перенаправлены в настройки, чтобы заставить её работать.</string>
-    <string name="dialog_setup_description_checked">Проверьте ссылки, чтобы Redomi могла открывать их правильно.</string>
+    <string name="dialog_setup_description">По умолчанию %s не может открывать внешние ссылки. Вы будете перенаправлены в настройки, чтобы заставить её работать.</string>
+    <string name="dialog_setup_description_checked">Проверьте ссылки, чтобы %s могла открывать их правильно.</string>
     <string name="dialog_setup_description_unchecked">Снимите флажки с тех, которые относятся к используемым вами музыкальным сервисам. (например, если вы пользуетесь Spotify, снимите этот флажок)</string>
     <string name="update_info_failed">Не удалось загрузить информацию об обновлении</string>
     <string name="updating">Обновление</string>

@@ -143,9 +143,9 @@ fun AppsPage(
             item {
                 PageBottomInfo(
                     if (selectedTab.value == tabs[0])
-                        stringResource(id = R.string.installed_tab_info)
+                        stringResource(id = R.string.opening_apps_tab_info)
                     else
-                        stringResource(id = R.string.all_tab_info)
+                        stringResource(id = R.string.sharing_apps_tab_info)
                 )
             }
         }
