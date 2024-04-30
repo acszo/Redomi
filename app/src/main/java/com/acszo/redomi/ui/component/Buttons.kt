@@ -63,7 +63,7 @@ fun <T> RadioButtonItem(
             .fillMaxWidth()
             .selectable(
                 selected = isSelected,
-                onClick = { onClick.invoke(item.ordinal) }
+                onClick = { onClick(item.ordinal) }
             )
             .padding(vertical = verticalPadding, horizontal = horizontalPadding),
         verticalAlignment = Alignment.CenterVertically,
