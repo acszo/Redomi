@@ -186,13 +186,12 @@ fun SettingsPage(
             content = {
                 IconShape.entries.forEach { item ->
                     RadioButtonItem(
-                        value = item.toRes,
+                        item = item,
                         isSelected = item == IconShape.entries[iconShape],
                         horizontalPadding = 0.dp,
-                        startPadding = 15.dp
-                    ) {
-                        dataStoreViewModel.setIconShape(item.ordinal)
-                    }
+                        startPadding = 15.dp,
+                        onClick = dataStoreViewModel::setIconShape
+                    )
                 }
             },
             onDismissRequest = { openIconShapeDialog.value = false },
@@ -207,13 +206,12 @@ fun SettingsPage(
             content = {
                 Theme.entries.forEach { item ->
                     RadioButtonItem(
-                        value = item.toRes,
+                        item = item,
                         isSelected = item == Theme.entries[themeMode],
                         horizontalPadding = 0.dp,
-                        startPadding = 15.dp
-                    ) {
-                        dataStoreViewModel.setThemeMode(item.ordinal)
-                    }
+                        startPadding = 15.dp,
+                        onClick = dataStoreViewModel::setThemeMode
+                    )
                 }
             },
             onDismissRequest = { openThemeDialog.value = false },

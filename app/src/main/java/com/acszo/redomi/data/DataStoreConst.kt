@@ -22,23 +22,27 @@ object DataStoreConst {
 
 }
 
-enum class ListType {
+interface Resource {
+    val toRes: Int
+}
+
+enum class ListType: Resource {
     HORIZONTAL,
     VERTICAL;
 
-    val toRes
+    override val toRes
         get() = when (this) {
             HORIZONTAL -> R.string.horizontal
             VERTICAL -> R.string.vertical
         }
 }
 
-enum class IconShape(val radius: Shape) {
+enum class IconShape(val radius: Shape): Resource {
     SQUIRCLE(SquircleShape()),              // 👍👍👍
     CIRCLE(CircleShape),                    // 👍👍
     SQUARE(RoundedCornerShape(25)); // 👎
 
-    val toRes
+    override val toRes
         get() = when (this) {
             SQUIRCLE -> R.string.squircle_icon
             CIRCLE -> R.string.circle_icon
@@ -46,7 +50,7 @@ enum class IconShape(val radius: Shape) {
         }
 }
 
-enum class Theme {
+enum class Theme: Resource {
     SYSTEM_THEME,
     DARK_THEME,
     LIGHT_THEME;
@@ -58,7 +62,7 @@ enum class Theme {
         LIGHT_THEME -> false
     }
 
-    val toRes
+    override val toRes
         get() = when (this) {
             SYSTEM_THEME -> R.string.system_theme
             DARK_THEME -> R.string.dark_theme

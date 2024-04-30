@@ -1,6 +1,7 @@
 package com.acszo.redomi.model
 
 import com.acszo.redomi.R
+import com.acszo.redomi.data.Resource
 import com.acszo.redomi.model.Platform.platforms
 import kotlinx.serialization.Serializable
 
@@ -10,7 +11,13 @@ data class AppsPreferences(
     val sharingAppsSelection: List<AppDetails> = platforms
 )
 
-enum class AppList(val res: Int) {
-    OPENING(R.string.opening),
-    SHARING(R.string.sharing)
+enum class AppList: Resource {
+    OPENING,
+    SHARING;
+
+    override val toRes: Int
+        get() = when (this) {
+            OPENING -> R.string.opening
+            SHARING -> R.string.sharing
+        }
 }

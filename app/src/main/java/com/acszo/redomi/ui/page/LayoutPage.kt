@@ -71,12 +71,11 @@ fun LayoutPage(
                     RadioButtonItem(
                         modifier = Modifier.requiredWidth(LocalConfiguration.current.screenWidthDp.dp),
                         isSelected = item == ListType.entries[listType],
-                        value = item.toRes,
+                        item = item,
                         verticalPadding = 24.dp,
-                        fontSize = 20.sp
-                    ) {
-                        dataStoreViewModel.setLayoutListType(item.ordinal)
-                    }
+                        fontSize = 20.sp,
+                        onClick = dataStoreViewModel::setLayoutListType
+                    )
                 }
             }
 

@@ -46,7 +46,7 @@ fun Tabs(
     ) {
         AppList.entries.forEach { tab ->
             val selectedTabColor = animateColorAsState(
-                targetValue = if (selectedTab.value.res == tab.res)
+                targetValue = if (selectedTab.value == tab)
                     MaterialTheme.colorScheme.primary
                 else
                     MaterialTheme.colorScheme.surfaceVariant,
@@ -55,7 +55,7 @@ fun Tabs(
             )
 
             val padding = animateDpAsState(
-                targetValue = if (selectedTab.value.res == tab.res) 0.dp else width.value / 8,
+                targetValue = if (selectedTab.value == tab) 0.dp else width.value / 8,
                 label = ""
             )
 
@@ -87,10 +87,10 @@ fun Tabs(
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
-                    text = stringResource(id = tab.res),
+                    text = stringResource(id = tab.toRes),
                     modifier = Modifier.padding(vertical = 15.dp),
                     maxLines = 1,
-                    color = if (selectedTab.value.res == tab.res) {
+                    color = if (selectedTab.value == tab) {
                         MaterialTheme.colorScheme.onPrimary
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant

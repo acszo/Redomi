@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
+import com.acszo.redomi.data.Resource
 
 @Composable
 fun BackButton(
@@ -47,22 +48,22 @@ fun BackButton(
 }
 
 @Composable
-fun RadioButtonItem(
+fun <T> RadioButtonItem(
     modifier: Modifier = Modifier,
-    value: Int,
+    item: T,
     isSelected: Boolean,
     verticalPadding: Dp = 10.dp,
     horizontalPadding: Dp = 28.dp,
     startPadding: Dp = 0.dp,
     fontSize: TextUnit = MaterialTheme.typography.bodyLarge.fontSize,
-    onClick: () -> Unit
-) {
+    onClick: (Int) -> Unit
+) where T : Enum<T>, T : Resource {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .selectable(
                 selected = isSelected,
-                onClick = onClick
+                onClick = { onClick.invoke(item.ordinal) }
             )
             .padding(vertical = verticalPadding, horizontal = horizontalPadding),
         verticalAlignment = Alignment.CenterVertically,
@@ -74,7 +75,7 @@ fun RadioButtonItem(
         )
         Spacer(modifier = Modifier.width(15.dp))
         Text(
-            text = stringResource(id = value),
+            text = stringResource(id = item.toRes),
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = fontSize,
                 platformStyle = PlatformTextStyle(
