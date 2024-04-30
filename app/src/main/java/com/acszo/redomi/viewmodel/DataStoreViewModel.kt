@@ -3,13 +3,13 @@ package com.acszo.redomi.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.data.DataStoreConst.FIRST_TIME
-import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
 import com.acszo.redomi.data.DataStoreConst.ICON_SHAPE
 import com.acszo.redomi.data.DataStoreConst.LAYOUT_GRID_SIZE
 import com.acszo.redomi.data.DataStoreConst.LAYOUT_LIST_TYPE
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.DataStoreConst.THEME_MODE
 import com.acszo.redomi.data.IconShape
+import com.acszo.redomi.data.ListType
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.data.Theme
 import com.acszo.redomi.model.AppDetails
@@ -37,7 +37,7 @@ class DataStoreViewModel @Inject constructor(
     private val _isFirstTime: MutableStateFlow<Boolean?> = MutableStateFlow(false)
     val isFirstTime: StateFlow<Boolean?> = _isFirstTime.asStateFlow()
 
-    private val _layoutListType: MutableStateFlow<Int> = MutableStateFlow(HORIZONTAL_LIST)
+    private val _layoutListType: MutableStateFlow<Int> = MutableStateFlow(ListType.HORIZONTAL.ordinal)
     val layoutListType: StateFlow<Int> = _layoutListType.asStateFlow()
 
     private val _layoutGridSize: MutableStateFlow<Int> = MutableStateFlow(MEDIUM_GRID)
@@ -81,7 +81,7 @@ class DataStoreViewModel @Inject constructor(
 
     fun getLayoutListType() = viewModelScope.launch {
         settingsDataStore.getInt(LAYOUT_LIST_TYPE).collectLatest {
-            _layoutListType.value = it ?: HORIZONTAL_LIST
+            _layoutListType.value = it ?: ListType.HORIZONTAL.ordinal
         }
     }
 

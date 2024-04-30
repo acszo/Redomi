@@ -50,7 +50,7 @@ fun BackButton(
 fun RadioButtonItem(
     modifier: Modifier = Modifier,
     value: Int,
-    text: Int,
+    isSelected: Boolean,
     verticalPadding: Dp = 10.dp,
     horizontalPadding: Dp = 28.dp,
     startPadding: Dp = 0.dp,
@@ -61,7 +61,7 @@ fun RadioButtonItem(
         modifier = modifier
             .fillMaxWidth()
             .selectable(
-                selected = (value == text),
+                selected = isSelected,
                 onClick = onClick
             )
             .padding(vertical = verticalPadding, horizontal = horizontalPadding),
@@ -69,12 +69,12 @@ fun RadioButtonItem(
     ) {
         RadioButton(
             modifier = Modifier.padding(start = startPadding),
-            selected = (value == text),
+            selected = isSelected,
             onClick = null,
         )
         Spacer(modifier = Modifier.width(15.dp))
         Text(
-            text = stringResource(id = text),
+            text = stringResource(id = value),
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = fontSize,
                 platformStyle = PlatformTextStyle(

@@ -33,7 +33,7 @@ fun RedomiTheme(
     theme: Int,
     content: @Composable () -> Unit
 ) {
-    val getTheme = Theme.valueOf(theme)!!.mode()
+    val getTheme = Theme.entries[theme].mode()
 
     val colorScheme = when {
          Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {

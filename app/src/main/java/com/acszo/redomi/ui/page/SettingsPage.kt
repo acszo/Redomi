@@ -24,8 +24,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
-import com.acszo.redomi.data.DataStoreConst.listTypes
 import com.acszo.redomi.data.IconShape
+import com.acszo.redomi.data.ListType
 import com.acszo.redomi.data.Theme
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.DefaultDialog
@@ -86,7 +86,7 @@ fun SettingsPage(
             }
 
             item {
-                val listName = stringResource(id = R.string.list_format, stringResource(listTypes[listType]!!))
+                val listName = stringResource(id = R.string.list_format, stringResource(ListType.entries[listType].toRes))
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
                     icon = R.drawable.ic_format_list_bulleted,
@@ -100,7 +100,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.icon_shape),
                     icon = R.drawable.ic_category_filled,
-                    description = stringResource(id = IconShape.valueOf(iconShape)!!.toRes)
+                    description = stringResource(id = IconShape.entries[iconShape].toRes)
                 ) {
                     openIconShapeDialog.value = true
                 }
@@ -110,7 +110,7 @@ fun SettingsPage(
                 SettingsItem(
                     title = stringResource(id = R.string.theme),
                     icon = R.drawable.ic_color_lens_filled,
-                    description = stringResource(id = Theme.valueOf(themeMode)!!.toRes)
+                    description = stringResource(id = Theme.entries[themeMode].toRes)
                 ) {
                     openThemeDialog.value = true
                 }
@@ -186,8 +186,8 @@ fun SettingsPage(
             content = {
                 IconShape.entries.forEach { item ->
                     RadioButtonItem(
-                        value = IconShape.valueOf(iconShape)!!.toRes,
-                        text = item.toRes,
+                        value = item.toRes,
+                        isSelected = item == IconShape.entries[iconShape],
                         horizontalPadding = 0.dp,
                         startPadding = 15.dp
                     ) {
@@ -207,8 +207,8 @@ fun SettingsPage(
             content = {
                 Theme.entries.forEach { item ->
                     RadioButtonItem(
-                        value = Theme.valueOf(themeMode)!!.toRes,
-                        text = item.toRes,
+                        value = item.toRes,
+                        isSelected = item == Theme.entries[themeMode],
                         horizontalPadding = 0.dp,
                         startPadding = 15.dp
                     ) {

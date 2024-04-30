@@ -40,7 +40,7 @@ fun AppItem(
                 modifier = Modifier
                     .size(80.dp)
                     .padding(8.dp)
-                    .clip(IconShape.valueOf(iconShape)!!.radius),
+                    .clip(IconShape.entries[iconShape].radius),
                 contentDescription = titleWords[0],
             )
             Text(text = titleWords[0].trim())

@@ -33,7 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.data.DataStoreConst.HORIZONTAL_LIST
+import com.acszo.redomi.data.ListType
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.utils.IntentUtil.onIntentView
@@ -61,7 +61,7 @@ fun BottomSheet(
     val gridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
     val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
 
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = listType == HORIZONTAL_LIST)
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = listType == ListType.HORIZONTAL.ordinal)
     val bringActions = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
 
@@ -155,7 +155,7 @@ private fun ItemsList(
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
-    if (listType == HORIZONTAL_LIST) {
+    if (listType == ListType.HORIZONTAL.ordinal) {
         LazyRow(
             modifier = Modifier
                 .padding(vertical = 15.dp)

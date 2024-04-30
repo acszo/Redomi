@@ -42,7 +42,7 @@ fun AppCheckBoxItem(
         Image(
             modifier = Modifier
                 .size(40.dp)
-                .clip(IconShape.valueOf(iconShape)!!.radius),
+                .clip(IconShape.entries[iconShape].radius),
             painter = painterResource(id = icon),
             contentDescription = title,
         )

@@ -16,18 +16,21 @@ object DataStoreConst {
     const val ICON_SHAPE = "icon_shape"
     const val THEME_MODE = "theme_mode"
 
-    const val HORIZONTAL_LIST = 0
-    const val VERTICAL_LIST = 1
-
     const val SMALL_GRID = 2
     const val MEDIUM_GRID = 3
     const val BIG_GRID = 4
 
-    val listTypes = mapOf(
-        HORIZONTAL_LIST to R.string.horizontal,
-        VERTICAL_LIST to R.string.vertical
-    )
+}
 
+enum class ListType {
+    HORIZONTAL,
+    VERTICAL;
+
+    val toRes
+        get() = when (this) {
+            HORIZONTAL -> R.string.horizontal
+            VERTICAL -> R.string.vertical
+        }
 }
 
 enum class IconShape(val radius: Shape) {
@@ -41,10 +44,6 @@ enum class IconShape(val radius: Shape) {
             CIRCLE -> R.string.circle_icon
             SQUARE -> R.string.square_icon
         }
-
-    companion object {
-        fun valueOf(value: Int) = entries.find { it.ordinal == value }
-    }
 }
 
 enum class Theme {
@@ -65,8 +64,4 @@ enum class Theme {
             DARK_THEME -> R.string.dark_theme
             LIGHT_THEME -> R.string.light_theme
         }
-
-    companion object {
-        fun valueOf(value: Int) = entries.find { it.ordinal == value }
-    }
 }

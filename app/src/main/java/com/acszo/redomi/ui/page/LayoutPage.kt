@@ -20,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -31,20 +30,17 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.BIG_GRID
 import com.acszo.redomi.data.DataStoreConst.SMALL_GRID
-import com.acszo.redomi.data.DataStoreConst.VERTICAL_LIST
-import com.acszo.redomi.data.DataStoreConst.listTypes
+import com.acszo.redomi.data.ListType
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.viewmodel.DataStoreViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun LayoutPage(
     dataStoreViewModel: DataStoreViewModel,
     backButton: @Composable () -> Unit
 ) {
-    val scope = rememberCoroutineScope()
     val listType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
     val gridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
 
@@ -71,24 +67,22 @@ fun LayoutPage(
             }
 
             item {
-                listTypes.forEach { item ->
+                ListType.entries.forEach { item ->
                     RadioButtonItem(
                         modifier = Modifier.requiredWidth(LocalConfiguration.current.screenWidthDp.dp),
-                        value = listTypes[listType]!!,
-                        text = item.value,
+                        isSelected = item == ListType.entries[listType],
+                        value = item.toRes,
                         verticalPadding = 24.dp,
                         fontSize = 20.sp
                     ) {
-                        scope.launch {
-                            dataStoreViewModel.setLayoutListType(item.key)
-                        }
+                        dataStoreViewModel.setLayoutListType(item.ordinal)
                     }
                 }
             }
 
             item {
                 AnimatedVisibility(
-                    visible = listType == VERTICAL_LIST,
+                    visible = listType == ListType.VERTICAL.ordinal,
                     enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
                     exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(
                         animationSpec = tween(
@@ -126,9 +120,7 @@ fun LayoutPage(
                                         MaterialTheme.colorScheme.onSurfaceVariant
                                     }
                                 ) {
-                                    scope.launch {
-                                        dataStoreViewModel.setLayoutGridSize(grid)
-                                    }
+                                    dataStoreViewModel.setLayoutGridSize(grid)
                                 }
                             }
                         }
