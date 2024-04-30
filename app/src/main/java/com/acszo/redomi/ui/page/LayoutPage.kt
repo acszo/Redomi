@@ -1,11 +1,6 @@
 package com.acszo.redomi.ui.page
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +27,8 @@ import com.acszo.redomi.data.DataStoreConst.BIG_GRID
 import com.acszo.redomi.data.DataStoreConst.SMALL_GRID
 import com.acszo.redomi.data.ListType
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.ui.common.enterVerticalTransition
+import com.acszo.redomi.ui.common.exitVerticalTransition
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.viewmodel.DataStoreViewModel
@@ -82,12 +79,8 @@ fun LayoutPage(
             item {
                 AnimatedVisibility(
                     visible = listType == ListType.VERTICAL.ordinal,
-                    enter = slideInVertically(initialOffsetY = { -40 }) + fadeIn(initialAlpha = 0.3f),
-                    exit = slideOutVertically(targetOffsetY = { -40 }) + fadeOut(
-                        animationSpec = tween(
-                            200
-                        )
-                    ),
+                    enter = enterVerticalTransition(),
+                    exit = exitVerticalTransition(),
                 ) {
                     Column(
                         modifier = Modifier.padding(bottom = 28.dp),
