@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,9 +38,9 @@ class SongViewModel @Inject constructor(
             _isLoading.update { true }
 
             val response: Providers = songRepository.getSongs(url)
-            _songInfo.update { response.entitiesByUniqueId[response.entitiesByUniqueId.keys.first().toString()] }
+            _songInfo.update { response.entitiesByUniqueId.entries.first().value }
 
-            val apps = Platform.platforms.filter {
+            val selectedApps = Platform.platforms.filter {
                 if (appList == AppList.OPENING) {
                     val openingApps = dataStoreRepository.readDataStore().first().openingAppsSelection
                     openingApps.contains(it)
@@ -51,16 +50,11 @@ class SongViewModel @Inject constructor(
                 }
             }
 
-            val mapAppToLink = emptyMap<AppDetails, String>().toMutableMap()
-            for (app in apps) {
-                mapAppToLink[app] = response.linksByPlatform[app.title]?.url ?: ""
-            }
+            val mapLinkToApp: Map<AppDetails, String> = selectedApps
+                .associateWith { response.linksByPlatform[it.title]?.url ?: "" }
+                .filter { it.value.isNotEmpty() }
 
-            _platforms.update {
-                mapAppToLink.filter {
-                    it.key.title in response.linksByPlatform.keys
-                }
-            }
+            _platforms.update { mapLinkToApp }
 
             _isLoading.update { false }
         } catch (e: Exception) {
