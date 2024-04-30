@@ -107,17 +107,7 @@ fun LayoutPage(
                                 AnimatedRadiusButton(
                                     isSelected = gridSize == grid,
                                     size = 80.dp,
-                                    backgroundColor = if (gridSize == grid) {
-                                        MaterialTheme.colorScheme.primary
-                                    } else {
-                                        MaterialTheme.colorScheme.surfaceVariant
-                                    },
-                                    text = grid.toString(),
-                                    textColor = if (gridSize == grid) {
-                                        MaterialTheme.colorScheme.onPrimary
-                                    } else {
-                                        MaterialTheme.colorScheme.onSurfaceVariant
-                                    }
+                                    text = grid.toString()
                                 ) {
                                     dataStoreViewModel.setLayoutGridSize(grid)
                                 }

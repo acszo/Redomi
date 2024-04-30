@@ -90,9 +90,7 @@ fun <T> RadioButtonItem(
 fun AnimatedRadiusButton(
     isSelected: Boolean,
     size: Dp,
-    backgroundColor: Color,
     text: String,
-    textColor: Color,
     onClick: () -> Unit
 ) {
     val radius = animateDpAsState(
@@ -106,13 +104,13 @@ fun AnimatedRadiusButton(
                 shape = RoundedCornerShape(radius.value)
                 clip = true
             }
-            .background(color = backgroundColor)
+            .background(color = selectionBoxColor(isSelected))
             .clickable { onClick() },
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = textColor,
+            color = selectionTextColor(isSelected),
             style = MaterialTheme.typography.headlineLarge.copy(
                 platformStyle = PlatformTextStyle(
                     includeFontPadding = false
@@ -134,3 +132,17 @@ fun DialogTextButton(
         Text(text = text)
     }
 }
+
+@Composable
+fun selectionBoxColor(isSelected: Boolean): Color =
+    if (isSelected)
+        MaterialTheme.colorScheme.primary
+    else
+        MaterialTheme.colorScheme.surfaceVariant
+
+@Composable
+fun selectionTextColor(isSelected: Boolean): Color =
+    if (isSelected)
+        MaterialTheme.colorScheme.onPrimary
+    else
+        MaterialTheme.colorScheme.onSurfaceVariant
