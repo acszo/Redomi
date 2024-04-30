@@ -11,7 +11,8 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
-import com.acszo.redomi.ui.nav.initialOffset
+
+const val initialOffset = 0.10f
 
 enum class TransitionDirection(val value: Int) {
     FORWARD(1),

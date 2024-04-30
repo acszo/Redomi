@@ -18,8 +18,6 @@ import com.acszo.redomi.ui.page.UpdatePage
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 
-const val initialOffset = 0.10f
-
 @Composable
 fun RootNavigation(
     dataStoreViewModel: DataStoreViewModel,
