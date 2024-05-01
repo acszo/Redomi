@@ -25,7 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.BIG_GRID
 import com.acszo.redomi.data.DataStoreConst.SMALL_GRID
-import com.acszo.redomi.data.ListType
+import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.enterVerticalTransition
 import com.acszo.redomi.ui.common.exitVerticalTransition
@@ -38,8 +38,8 @@ fun LayoutPage(
     dataStoreViewModel: DataStoreViewModel,
     backButton: @Composable () -> Unit
 ) {
-    val listType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
-    val gridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
+    val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
+    val gridSize by dataStoreViewModel.gridSize.collectAsStateWithLifecycle()
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.layout),
@@ -64,21 +64,21 @@ fun LayoutPage(
             }
 
             item {
-                ListType.entries.forEach { item ->
+                ListOrientation.entries.forEach { item ->
                     RadioButtonItem(
                         modifier = Modifier.requiredWidth(LocalConfiguration.current.screenWidthDp.dp),
-                        isSelected = item == ListType.entries[listType],
+                        isSelected = item == ListOrientation.entries[listOrientation],
                         item = item,
                         verticalPadding = 24.dp,
                         fontSize = 20.sp,
-                        onClick = dataStoreViewModel::setLayoutListType
+                        onClick = dataStoreViewModel::setListOrientation
                     )
                 }
             }
 
             item {
                 AnimatedVisibility(
-                    visible = listType == ListType.VERTICAL.ordinal,
+                    visible = listOrientation == ListOrientation.VERTICAL.ordinal,
                     enter = enterVerticalTransition(),
                     exit = exitVerticalTransition(),
                 ) {
@@ -102,7 +102,7 @@ fun LayoutPage(
                                     size = 80.dp,
                                     text = grid.toString()
                                 ) {
-                                    dataStoreViewModel.setLayoutGridSize(grid)
+                                    dataStoreViewModel.setGridSize(grid)
                                 }
                             }
                         }

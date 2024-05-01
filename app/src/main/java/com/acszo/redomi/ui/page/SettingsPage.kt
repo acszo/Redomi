@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.data.IconShape
-import com.acszo.redomi.data.ListType
+import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.data.Theme
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.DefaultDialog
@@ -48,7 +48,7 @@ fun SettingsPage(
     val context = LocalContext.current
 
     val isFirstTime by dataStoreViewModel.isFirstTime.collectAsStateWithLifecycle()
-    val listType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
+    val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
     val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
     val themeMode by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
@@ -86,11 +86,12 @@ fun SettingsPage(
             }
 
             item {
-                val listName = stringResource(id = R.string.list_format, stringResource(ListType.entries[listType].toRes))
+                val orientationText = stringResource(ListOrientation.entries[listOrientation].toRes)
+                val listOrientationText = stringResource(id = R.string.list_format, orientationText)
                 SettingsItem(
                     title = stringResource(id = R.string.layout),
                     icon = R.drawable.ic_format_list_bulleted,
-                    description = listName.lowercase().replaceFirstChar { it.uppercase() }
+                    description = listOrientationText.lowercase().replaceFirstChar { it.uppercase() }
                 ) {
                     navController.navigate(layoutPage)
                 }

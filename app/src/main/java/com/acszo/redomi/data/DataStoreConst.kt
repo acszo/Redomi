@@ -11,8 +11,8 @@ import sv.lib.squircleshape.SquircleShape
 object DataStoreConst {
 
     const val FIRST_TIME = "first_time"
-    const val LAYOUT_LIST_TYPE = "list_type"
-    const val LAYOUT_GRID_SIZE = "grid_size"
+    const val LIST_ORIENTATION = "list_type"
+    const val GRID_SIZE = "grid_size"
     const val ICON_SHAPE = "icon_shape"
     const val THEME_MODE = "theme_mode"
 
@@ -26,7 +26,7 @@ interface Resource {
     val toRes: Int
 }
 
-enum class ListType: Resource {
+enum class ListOrientation: Resource {
     HORIZONTAL,
     VERTICAL;
 

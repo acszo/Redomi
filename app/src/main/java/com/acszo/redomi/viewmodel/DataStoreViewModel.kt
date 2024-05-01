@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.data.DataStoreConst.FIRST_TIME
 import com.acszo.redomi.data.DataStoreConst.ICON_SHAPE
-import com.acszo.redomi.data.DataStoreConst.LAYOUT_GRID_SIZE
-import com.acszo.redomi.data.DataStoreConst.LAYOUT_LIST_TYPE
+import com.acszo.redomi.data.DataStoreConst.GRID_SIZE
+import com.acszo.redomi.data.DataStoreConst.LIST_ORIENTATION
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.DataStoreConst.THEME_MODE
 import com.acszo.redomi.data.IconShape
-import com.acszo.redomi.data.ListType
+import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.data.Theme
 import com.acszo.redomi.model.AppDetails
@@ -37,11 +37,11 @@ class DataStoreViewModel @Inject constructor(
     private val _isFirstTime: MutableStateFlow<Boolean?> = MutableStateFlow(false)
     val isFirstTime: StateFlow<Boolean?> = _isFirstTime.asStateFlow()
 
-    private val _layoutListType: MutableStateFlow<Int> = MutableStateFlow(ListType.HORIZONTAL.ordinal)
-    val layoutListType: StateFlow<Int> = _layoutListType.asStateFlow()
+    private val _listOrientation: MutableStateFlow<Int> = MutableStateFlow(ListOrientation.HORIZONTAL.ordinal)
+    val listOrientation: StateFlow<Int> = _listOrientation.asStateFlow()
 
-    private val _layoutGridSize: MutableStateFlow<Int> = MutableStateFlow(MEDIUM_GRID)
-    val layoutGridSize: StateFlow<Int> = _layoutGridSize.asStateFlow()
+    private val _gridSize: MutableStateFlow<Int> = MutableStateFlow(MEDIUM_GRID)
+    val gridSize: StateFlow<Int> = _gridSize.asStateFlow()
 
     private val _iconShape: MutableStateFlow<Int> = MutableStateFlow(IconShape.SQUIRCLE.ordinal)
     val iconShape: StateFlow<Int> = _iconShape.asStateFlow()
@@ -79,24 +79,24 @@ class DataStoreViewModel @Inject constructor(
         settingsDataStore.setBoolean(FIRST_TIME, false)
     }
 
-    fun getLayoutListType() = viewModelScope.launch {
-        settingsDataStore.getInt(LAYOUT_LIST_TYPE).collectLatest {
-            _layoutListType.value = it ?: ListType.HORIZONTAL.ordinal
+    fun getListOrientation() = viewModelScope.launch {
+        settingsDataStore.getInt(LIST_ORIENTATION).collectLatest {
+            _listOrientation.value = it ?: ListOrientation.HORIZONTAL.ordinal
         }
     }
 
-    fun setLayoutListType(layoutListType: Int) = viewModelScope.launch {
-        settingsDataStore.setInt(LAYOUT_LIST_TYPE, layoutListType)
+    fun setListOrientation(listOrientation: Int) = viewModelScope.launch {
+        settingsDataStore.setInt(LIST_ORIENTATION, listOrientation)
     }
 
-    fun getLayoutGridSize() = viewModelScope.launch {
-        settingsDataStore.getInt(LAYOUT_GRID_SIZE).collectLatest {
-            _layoutGridSize.value = it ?: MEDIUM_GRID
+    fun getGridSize() = viewModelScope.launch {
+        settingsDataStore.getInt(GRID_SIZE).collectLatest {
+            _gridSize.value = it ?: MEDIUM_GRID
         }
     }
 
-    fun setLayoutGridSize(layoutGridSize: Int) = viewModelScope.launch {
-        settingsDataStore.setInt(LAYOUT_GRID_SIZE, layoutGridSize)
+    fun setGridSize(gridSize: Int) = viewModelScope.launch {
+        settingsDataStore.setInt(GRID_SIZE, gridSize)
     }
 
     fun getIconShape() = viewModelScope.launch {

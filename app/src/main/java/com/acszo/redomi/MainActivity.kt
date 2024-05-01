@@ -40,8 +40,8 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(Unit) {
                 updateViewModel.checkUpdate(versionName)
                 dataStoreViewModel.getIsFirstTime()
-                dataStoreViewModel.getLayoutListType()
-                dataStoreViewModel.getLayoutGridSize()
+                dataStoreViewModel.getListOrientation()
+                dataStoreViewModel.getGridSize()
                 dataStoreViewModel.getIconShape()
                 dataStoreViewModel.getThemeMode()
                 scope.launch(Dispatchers.IO) {

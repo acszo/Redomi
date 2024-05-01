@@ -33,7 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.data.ListType
+import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.utils.IntentUtil.onIntentView
@@ -53,15 +53,15 @@ fun BottomSheet(
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        dataStoreViewModel.getLayoutListType()
-        dataStoreViewModel.getLayoutGridSize()
+        dataStoreViewModel.getListOrientation()
+        dataStoreViewModel.getGridSize()
     }
 
-    val listType by dataStoreViewModel.layoutListType.collectAsStateWithLifecycle()
-    val gridSize by dataStoreViewModel.layoutGridSize.collectAsStateWithLifecycle()
+    val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
+    val gridSize by dataStoreViewModel.gridSize.collectAsStateWithLifecycle()
     val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
 
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = listType == ListType.HORIZONTAL.ordinal)
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = listOrientation == ListOrientation.HORIZONTAL.ordinal)
     val bringActions = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
 
@@ -100,7 +100,7 @@ fun BottomSheet(
                 if (platforms.size > 1) {
                     if (!bringActions.value) {
                         ItemsList(
-                            listType = listType,
+                            listOrientation = listOrientation,
                             gridSize = gridSize,
                             iconShape = iconShape,
                             platforms = platforms,
@@ -147,7 +147,7 @@ fun BottomSheet(
 
 @Composable
 private fun ItemsList(
-    listType: Int,
+    listOrientation: Int,
     gridSize: Int,
     iconShape: Int,
     platforms: Map<AppDetails, String>,
@@ -155,7 +155,7 @@ private fun ItemsList(
     bringActions: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
-    if (listType == ListType.HORIZONTAL.ordinal) {
+    if (listOrientation == ListOrientation.HORIZONTAL.ordinal) {
         LazyRow(
             modifier = Modifier
                 .padding(vertical = 15.dp)
