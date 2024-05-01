@@ -4,11 +4,8 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,10 +23,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.model.AppList
 import com.acszo.redomi.model.Platform.platforms
-import com.acszo.redomi.ui.component.AppCheckBoxItem
-import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.ui.common.PageBottomInfo
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
+import com.acszo.redomi.ui.common.removeTopPadding
+import com.acszo.redomi.ui.component.AppCheckBoxItem
+import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
@@ -57,9 +55,9 @@ fun AppsPage(
     ) { padding, pageTitleWithDescription ->
         LazyColumn(
             modifier = Modifier
-                .padding(padding)
+                .padding(top = padding.calculateTopPadding())
                 .fillMaxSize(),
-            contentPadding = WindowInsets.navigationBars.asPaddingValues()
+            contentPadding = padding.removeTopPadding()
         ) {
             item {
                 pageTitleWithDescription()
@@ -73,7 +71,7 @@ fun AppsPage(
                 Column(
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.surface)
-                        //.requiredWidth(LocalConfiguration.current.screenWidthDp.dp) crashes here >:(
+                        //.ignorePadding() crashes here >:(
                         .padding(vertical = 14.dp),
                 ) {
                     Tabs(selectedTab = selectedTab)

@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +38,7 @@ fun ScaffoldWithLargeTopAppBar(
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
-        content(it.addHorizontalPadding(28.dp)) {
+        content(it.addHorizontalPadding(28.dp).addNavigationBarsPadding()) {
             Column {
                 PageTitle(
                     title = title,
@@ -97,16 +96,5 @@ fun PageDescription(
     Text(
         text = description,
         color = MaterialTheme.colorScheme.onSurfaceVariant
-    )
-}
-
-fun PaddingValues.addHorizontalPadding(
-    padding: Dp
-): PaddingValues {
-    return PaddingValues(
-        start = padding,
-        top = this.calculateTopPadding(),
-        end = padding,
-        bottom = this.calculateBottomPadding()
     )
 }

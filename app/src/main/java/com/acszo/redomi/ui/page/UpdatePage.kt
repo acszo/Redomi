@@ -4,12 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -32,9 +29,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.AnnotatedString
 import com.acszo.redomi.ui.component.NewReleaseIcon
-import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.fadingEdge
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk
@@ -65,15 +62,14 @@ fun UpdatePage(
         }
 
         Column(
-            modifier = Modifier.padding(bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
+            modifier = Modifier.padding(bottom = padding.calculateBottomPadding())
         ) {
             LazyColumn(
                 modifier = Modifier
-                    .padding(padding)
                     .weight(1f)
                     .fadingEdge(),
                 verticalArrangement = Arrangement.spacedBy(28.dp),
-                contentPadding = WindowInsets.navigationBars.asPaddingValues(),
+                contentPadding = padding,
             ) {
                 item {
                     pageTitleWithDescription()

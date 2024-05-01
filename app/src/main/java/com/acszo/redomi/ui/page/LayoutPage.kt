@@ -4,10 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
@@ -46,9 +43,8 @@ fun LayoutPage(
         backButton = { backButton() }
     ) { padding, pageTitleWithDescription ->
         LazyColumn(
-            modifier = Modifier.padding(padding),
             verticalArrangement = Arrangement.spacedBy(28.dp),
-            contentPadding = WindowInsets.navigationBars.asPaddingValues()
+            contentPadding = padding,
         ) {
             item {
                 pageTitleWithDescription()

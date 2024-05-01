@@ -3,17 +3,12 @@ package com.acszo.redomi.ui.page
 import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -68,8 +63,7 @@ fun SettingsPage(
         title = redomi
     ) { padding, pageTitle ->
         LazyColumn(
-            Modifier.padding(padding),
-            contentPadding = WindowInsets.navigationBars.asPaddingValues()
+            contentPadding = padding,
         ) {
             item {
                 pageTitle()
