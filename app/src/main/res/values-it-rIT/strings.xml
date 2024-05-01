@@ -3,7 +3,6 @@
     <string name="title_bottom_sheet">Converti canzone</string>
     <string name="title_share_universal_link">Condividi link universale</string>
     <string name="open">Apri</string>
-    <string name="copy">Copia</string>
     <string name="share">Condividi</string>
     <string name="song_cover">Cover Canzone</string>
     <string name="settings">Impostazioni</string>
@@ -40,8 +39,6 @@
     <string name="system_theme">Predefinito</string>
     <string name="dark_theme">Scuro</string>
     <string name="light_theme">Chiaro</string>
-    <string name="dialog_dismiss">Annulla</string>
-    <string name="dialog_confirm">OK</string>
     <string name="dialog_setup_title">Guida</string>
     <string name="dialog_setup_description">Di base %s non può aprire link esterni. Verrai reindirizzato alle impostazioni per farlo funzionare.</string>
     <string name="dialog_setup_description_checked">Seleziona i link così che %s possa aprirli correttamente.</string>

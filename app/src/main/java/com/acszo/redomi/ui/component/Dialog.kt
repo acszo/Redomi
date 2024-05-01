@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.acszo.redomi.R
 
 @Composable
 fun DefaultDialog(
@@ -40,7 +39,7 @@ fun DefaultDialog(
         confirmButton = {
             DialogTextButton(
                 onClick = onConfirmAction,
-                text = stringResource(id = R.string.dialog_confirm)
+                text = stringResource(id = android.R.string.ok)
             )
         }
     )

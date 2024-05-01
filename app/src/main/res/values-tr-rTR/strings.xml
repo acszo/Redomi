@@ -3,7 +3,6 @@
     <string name="title_bottom_sheet">Şarkıyı dönüştür</string>
     <string name="title_share_universal_link">Evrensel bağlantıyı paylaş</string>
     <string name="open">Aç</string>
-    <string name="copy">Kopyala</string>
     <string name="share">Paylaş</string>
     <string name="song_cover">Şarkı kapağı</string>
     <string name="settings">Settings</string>
@@ -40,8 +39,6 @@
     <string name="system_theme">Sistem varsayılanı</string>
     <string name="dark_theme">Karanlık</string>
     <string name="light_theme">Aydınlık</string>
-    <string name="dialog_dismiss">İptal</string>
-    <string name="dialog_confirm">Tamam</string>
     <string name="dialog_setup_title">Rehber</string>
     <string name="dialog_setup_description">Varsayılan olarak %s harici bağlantıları açamaz. Çalıştırmak için ayarlara yönlendirileceksiniz.</string>
     <string name="dialog_setup_description_checked">%s\'nin doğru şekilde açabilmesi için bağlantıları kontrol edin.</string>

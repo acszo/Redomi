@@ -3,7 +3,6 @@
     <string name="title_bottom_sheet">Преобразовать песню</string>
     <string name="title_share_universal_link">Поделиться универсальной ссылкой</string>
     <string name="open">Открыть</string>
-    <string name="copy">Копировать</string>
     <string name="share">Поделиться</string>
     <string name="song_cover">Обложка песни</string>
     <string name="settings">Настройки</string>
@@ -40,8 +39,6 @@
     <string name="system_theme">Системная</string>
     <string name="dark_theme">Тёмная</string>
     <string name="light_theme">Светлая</string>
-    <string name="dialog_dismiss">Отмена</string>
-    <string name="dialog_confirm">ОК</string>
     <string name="dialog_setup_title">Руководство</string>
     <string name="dialog_setup_description">По умолчанию %s не может открывать внешние ссылки. Вы будете перенаправлены в настройки, чтобы заставить её работать.</string>
     <string name="dialog_setup_description_checked">Проверьте ссылки, чтобы %s могла открывать их правильно.</string>

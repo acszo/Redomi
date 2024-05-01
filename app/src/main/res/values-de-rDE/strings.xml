@@ -3,7 +3,6 @@
     <string name="title_bottom_sheet">Song konvertieren</string>
     <string name="title_share_universal_link">Universellen Link teilen</string>
     <string name="open">Öffnen</string>
-    <string name="copy">Kopieren</string>
     <string name="share">Teilen</string>
     <string name="song_cover">Titelbild</string>
     <string name="settings">Einstellungen</string>
@@ -40,8 +39,6 @@
     <string name="system_theme">Systemstandard</string>
     <string name="dark_theme">Dunkel</string>
     <string name="light_theme">Hell</string>
-    <string name="dialog_dismiss">Abbrechen</string>
-    <string name="dialog_confirm">OK</string>
     <string name="dialog_setup_title">Anleitung</string>
     <string name="dialog_setup_description">Standardmäßig kann %s keine externen Links öffnen. Du wirst zu den Einstellungen weitergeleitet, damit es funktioniert.</string>
     <string name="dialog_setup_description_checked">Überprüfe die Links, damit %s sie korrekt öffnen kann.</string>

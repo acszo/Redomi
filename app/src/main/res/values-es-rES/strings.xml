@@ -3,7 +3,6 @@
     <string name="title_bottom_sheet">Convert song</string>
     <string name="title_share_universal_link">Share universal link</string>
     <string name="open">Open</string>
-    <string name="copy">Copy</string>
     <string name="share">Share</string>
     <string name="song_cover">Song Cover</string>
     <string name="settings">Settings</string>
@@ -40,8 +39,6 @@
     <string name="system_theme">System default</string>
     <string name="dark_theme">Dark</string>
     <string name="light_theme">Light</string>
-    <string name="dialog_dismiss">Cancel</string>
-    <string name="dialog_confirm">OK</string>
     <string name="dialog_setup_title">Guide</string>
     <string name="dialog_setup_description">By default %s can\'t open external links. You will get redirected to the settings to make it work.</string>
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>

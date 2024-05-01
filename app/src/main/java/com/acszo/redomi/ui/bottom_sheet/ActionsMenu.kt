@@ -51,7 +51,7 @@ fun ActionsMenu(
             )
             onDismiss()
         }
-        ActionsMenuItem(R.string.copy, R.drawable.ic_link) {
+        ActionsMenuItem(android.R.string.copy, R.drawable.ic_link) {
             copyText(
                 clipboardManager = clipboardManager,
                 text = url
