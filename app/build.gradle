@@ -10,6 +10,9 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(rootProject.file('keystore.properties')))
 
 android {
+    androidResources {
+        generateLocaleConfig true
+    }
     signingConfigs {
         release {
             storeFile file(keystoreProperties['storeFile'])
