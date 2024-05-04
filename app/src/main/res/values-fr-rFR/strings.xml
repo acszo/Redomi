@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_bottom_sheet">Convert song</string>
-    <string name="title_share_universal_link">Share universal link</string>
-    <string name="open">Open</string>
-    <string name="share">Share</string>
+    <string name="title_bottom_sheet">Convertir la chanson</string>
+    <string name="title_share_universal_link">Partager le lien universel</string>
+    <string name="open">Ouvrir</string>
+    <string name="share">Partager</string>
     <string name="song_cover">Song Cover</string>
     <string name="settings">Settings</string>
     <string name="back">Back</string>
