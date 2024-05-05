@@ -39,16 +39,16 @@
     <string name="system_theme">システムのデフォルト</string>
     <string name="dark_theme">ダーク</string>
     <string name="light_theme">ライト</string>
-    <string name="dialog_setup_title">Guide</string>
+    <string name="dialog_setup_title">ガイド</string>
     <string name="dialog_setup_description">By default %s can\'t open external links. You will get redirected to the settings to make it work.</string>
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
-    <string name="update_info_failed">Couldn\'t load update info</string>
-    <string name="updating">Updating</string>
-    <string name="update_completed">Update completed</string>
-    <string name="update_aborted">Accept the permission to update</string>
-    <string name="update_failed">Update failed</string>
-    <string name="update_available">New version available</string>
-    <string name="no_update_available">No update found</string>
-    <string name="no_result_found">No result found</string>
+    <string name="update_info_failed">アップデート情報を取得できませんでした</string>
+    <string name="updating">更新中</string>
+    <string name="update_completed">アップデート完了</string>
+    <string name="update_aborted">更新する権限を承認する</string>
+    <string name="update_failed">更新失敗</string>
+    <string name="update_available">更新が利用可能</string>
+    <string name="no_update_available">アップデートは見つかりませんでした</string>
+    <string name="no_result_found">結果が見つかりません</string>
 </resources>
