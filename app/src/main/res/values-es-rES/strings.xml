@@ -20,8 +20,8 @@
     <string name="square_icon">Cuadrado</string>
     <string name="theme">Tema</string>
     <string name="github_description">Check out the repository at %s</string>
-    <string name="update">Update</string>
-    <string name="update_description">Check available updates</string>
+    <string name="update">Actualizar</string>
+    <string name="update_description">Buscar actualización disponible</string>
     <string name="version">Versión</string>
     <string name="info">Información</string>
     <string name="opening">Opening</string>
@@ -34,8 +34,8 @@
     <string name="update_description_page">Updates are checked every time you start the app.</string>
     <string name="title_changelogs_current">Esta versión</string>
     <string name="title_changelogs_new">Nueva versión</string>
-    <string name="check_updates">Check updates</string>
-    <string name="do_update">Update</string>
+    <string name="check_updates">Buscar actualizaciones</string>
+    <string name="do_update">Actualizar</string>
     <string name="system_theme">Predeterminado del sistema</string>
     <string name="dark_theme">Oscuro</string>
     <string name="light_theme">Claro</string>
@@ -43,12 +43,12 @@
     <string name="dialog_setup_description">By default %s can\'t open external links. You will get redirected to the settings to make it work.</string>
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
-    <string name="update_info_failed">Couldn\'t load update info</string>
-    <string name="updating">Updating</string>
-    <string name="update_completed">Update completed</string>
-    <string name="update_aborted">Accept the permission to update</string>
-    <string name="update_failed">Update failed</string>
-    <string name="update_available">New version available</string>
-    <string name="no_update_available">No update found</string>
-    <string name="no_result_found">No result found</string>
+    <string name="update_info_failed">No se pudo cargar la información de actualización</string>
+    <string name="updating">Actualizando</string>
+    <string name="update_completed">Actualización completada</string>
+    <string name="update_aborted">Aceptar el permiso para actualizar</string>
+    <string name="update_failed">Actualización fallida</string>
+    <string name="update_available">Nueva versión disponible</string>
+    <string name="no_update_available">No se encontraron actualizaciones</string>
+    <string name="no_result_found">No se encontraron resultados</string>
 </resources>
