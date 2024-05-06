@@ -15,7 +15,7 @@
     <string name="horizontal">Horizontalna</string>
     <string name="vertical">Vertikalna</string>
     <string name="icon_shape">Oblik ikone</string>
-    <string name="squircle_icon">Squircle</string>
+    <string name="squircle_icon">Kružni kvadrat</string>
     <string name="circle_icon">Krug</string>
     <string name="square_icon">Kvadrat</string>
     <string name="theme">Tema</string>
