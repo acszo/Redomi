@@ -14,7 +14,7 @@
     <string name="list_format">%s List</string>
     <string name="horizontal">Horizontal</string>
     <string name="vertical">Vertical</string>
-    <string name="icon_shape">Icon shape</string>
+    <string name="icon_shape">شكل الأيقونة</string>
     <string name="squircle_icon">Squircle</string>
     <string name="circle_icon">Circle</string>
     <string name="square_icon">Square</string>
