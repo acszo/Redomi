@@ -6,25 +6,18 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,7 +54,9 @@ fun BottomSheet(
     val gridSize by dataStoreViewModel.gridSize.collectAsStateWithLifecycle()
     val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
 
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = listOrientation == ListOrientation.HORIZONTAL.ordinal)
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = listOrientation == ListOrientation.HORIZONTAL.ordinal
+    )
     val bringActions = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
 
@@ -87,43 +82,59 @@ fun BottomSheet(
                     CircularProgressIndicator()
                 }
             } else {
-                if (platforms.size > 1 || platforms.size == 1 && isActionsRequired) {
-                    SongInfoDisplay(
-                        type = songInfo?.type ?: "",
-                        thumbnail = songInfo?.thumbnailUrl ?: "",
-                        title = songInfo?.title ?: "",
-                        artist = songInfo?.artistName ?: "",
-                        isUpdateAvailable = isUpdateAvailable
-                    )
-                }
-
-                if (platforms.size > 1) {
-                    if (!bringActions.value) {
-                        ItemsList(
-                            listOrientation = listOrientation,
-                            gridSize = gridSize,
-                            iconShape = iconShape,
-                            platforms = platforms,
-                            isActionsRequired = isActionsRequired,
-                            bringActions = bringActions,
-                            selectedPlatformLink = selectedPlatformLink
+                if (platforms.isNotEmpty()) {
+                    if (platforms.size > 1 || isActionsRequired) {
+                        SongInfoDisplay(
+                            type = songInfo?.type ?: "",
+                            thumbnail = songInfo?.thumbnailUrl ?: "",
+                            title = songInfo?.title ?: "",
+                            artist = songInfo?.artistName ?: "",
+                            isUpdateAvailable = isUpdateAvailable
                         )
+                    }
+
+                    if (platforms.size > 1 && !bringActions.value) {
+                        when (ListOrientation.entries[listOrientation]) {
+                            ListOrientation.HORIZONTAL -> {
+                                HorizontalList(
+                                    iconShape = iconShape,
+                                    platforms = platforms,
+                                    isActionsRequired = isActionsRequired,
+                                    bringActions = bringActions,
+                                    selectedPlatformLink = selectedPlatformLink
+                                )
+                            }
+                            ListOrientation.VERTICAL -> {
+                                VerticalList(
+                                    gridSize = gridSize,
+                                    iconShape = iconShape,
+                                    platforms = platforms,
+                                    isActionsRequired = isActionsRequired,
+                                    bringActions = bringActions,
+                                    selectedPlatformLink = selectedPlatformLink
+                                )
+                            }
+                        }
+                    }
+
+                    if (platforms.size == 1) {
+                        if (!isActionsRequired) {
+                            Box(
+                                modifier = Modifier.height(200.dp),
+                            ) {
+                                onIntentView(context, platforms.values.first())
+                                onDismiss()
+                            }
+                        } else {
+                            bringActions.value = true
+                            selectedPlatformLink.value = platforms.values.first()
+                        }
                     }
                 } else {
                     Box(
                         modifier = Modifier.height(200.dp),
                     ) {
-                        if (platforms.isNotEmpty()) {
-                            if (!isActionsRequired) {
-                                onIntentView(context, platforms.values.first())
-                                onDismiss()
-                            } else {
-                                bringActions.value = true
-                                selectedPlatformLink.value = platforms.values.first()
-                            }
-                        } else {
-                            ResultNotFound()
-                        }
+                        ResultNotFound()
                     }
                 }
 
@@ -140,54 +151,6 @@ fun BottomSheet(
                         onDismiss()
                     }
                 }
-            }
-        }
-    }
-}
-
-@Composable
-private fun ItemsList(
-    listOrientation: Int,
-    gridSize: Int,
-    iconShape: Int,
-    platforms: Map<AppDetails, String>,
-    isActionsRequired: Boolean,
-    bringActions: MutableState<Boolean>,
-    selectedPlatformLink: MutableState<String>
-) {
-    if (listOrientation == ListOrientation.HORIZONTAL.ordinal) {
-        LazyRow(
-            modifier = Modifier
-                .padding(vertical = 15.dp)
-                .height(150.dp),
-            contentPadding = PaddingValues(horizontal = 10.dp),
-        ) {
-            items(items = platforms.toList()) { (app, link) ->
-                AppItem(
-                    appDetail = app,
-                    iconShape = iconShape,
-                    link = link,
-                    isActionsRequired = isActionsRequired,
-                    bringActions = bringActions,
-                    selectedPlatformLink = selectedPlatformLink,
-                )
-            }
-        }
-    } else {
-        LazyVerticalGrid(
-            modifier = Modifier.padding(vertical = 15.dp),
-            columns = GridCells.Fixed(gridSize),
-            contentPadding = PaddingValues(horizontal = 10.dp),
-        ) {
-            items(items = platforms.toList()) { (app, link) ->
-                AppItem(
-                    appDetail = app,
-                    iconShape = iconShape,
-                    link = link,
-                    isActionsRequired = isActionsRequired,
-                    bringActions = bringActions,
-                    selectedPlatformLink = selectedPlatformLink,
-                )
             }
         }
     }
