@@ -51,5 +51,5 @@
     <string name="update_available">更新が利用可能</string>
     <string name="no_update_available">アップデートは見つかりませんでした</string>
     <string name="no_result_found">結果が見つかりません</string>
-    <string name="search_on">Search on %s</string>
+    <string name="search_on">%s で検索</string>
 </resources>
