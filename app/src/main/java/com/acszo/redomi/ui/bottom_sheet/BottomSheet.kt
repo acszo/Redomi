@@ -131,11 +131,9 @@ fun BottomSheet(
                         }
                     }
                 } else {
-                    Box(
-                        modifier = Modifier.height(200.dp),
-                    ) {
-                        ResultNotFound()
-                    }
+                    ResultNotFound(
+                        songInfo?.takeUnless { isActionsRequired }?.run { "$title - $artistName" }
+                    )
                 }
 
                 AnimatedVisibility(

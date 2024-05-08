@@ -51,4 +51,5 @@
     <string name="update_available">Nuova versione disponibile</string>
     <string name="no_update_available">Nessun aggiornamento trovato</string>
     <string name="no_result_found">Nessun risultato trovato</string>
+    <string name="search_on">Cerca su %s</string>
 </resources>
