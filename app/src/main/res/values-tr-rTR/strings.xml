@@ -51,4 +51,5 @@
     <string name="update_available">Yeni sürüm mevcut</string>
     <string name="no_update_available">Güncelleme bulunamadı</string>
     <string name="no_result_found">Sonuç bulunamadı</string>
+    <string name="search_on">Search on %s</string>
 </resources>
