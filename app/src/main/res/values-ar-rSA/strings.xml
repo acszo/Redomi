@@ -51,4 +51,5 @@
     <string name="update_available">الإصدار الجديد متاح</string>
     <string name="no_update_available">لم يتم العثور على أي تحديث</string>
     <string name="no_result_found">لم يتم العثور على نتائج</string>
+    <string name="search_on">البحث على %s</string>
 </resources>
