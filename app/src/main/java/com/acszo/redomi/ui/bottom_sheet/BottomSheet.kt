@@ -40,7 +40,7 @@ fun BottomSheet(
     songInfo: SongInfo?,
     platforms: Map<AppDetails, String>,
     isLoading: Boolean,
-    isActionsRequired: Boolean,
+    isActionSend: Boolean,
     isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
@@ -57,7 +57,7 @@ fun BottomSheet(
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = listOrientation == ListOrientation.HORIZONTAL.ordinal
     )
-    val bringActions = remember { mutableStateOf(false) }
+    val showActionsMenu = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
 
     ModalBottomSheet(
@@ -83,7 +83,7 @@ fun BottomSheet(
                 }
             } else {
                 if (platforms.isNotEmpty()) {
-                    if (platforms.size > 1 || isActionsRequired) {
+                    if (platforms.size > 1 || isActionSend) {
                         SongInfoDisplay(
                             type = songInfo?.type ?: "",
                             thumbnail = songInfo?.thumbnailUrl ?: "",
@@ -93,14 +93,14 @@ fun BottomSheet(
                         )
                     }
 
-                    if (platforms.size > 1 && !bringActions.value) {
+                    if (platforms.size > 1 && !showActionsMenu.value) {
                         when (ListOrientation.entries[listOrientation]) {
                             ListOrientation.HORIZONTAL -> {
                                 HorizontalList(
                                     iconShape = iconShape,
                                     platforms = platforms,
-                                    isActionsRequired = isActionsRequired,
-                                    bringActions = bringActions,
+                                    isActionSend = isActionSend,
+                                    showActionsMenu = showActionsMenu,
                                     selectedPlatformLink = selectedPlatformLink
                                 )
                             }
@@ -109,8 +109,8 @@ fun BottomSheet(
                                     gridSize = gridSize,
                                     iconShape = iconShape,
                                     platforms = platforms,
-                                    isActionsRequired = isActionsRequired,
-                                    bringActions = bringActions,
+                                    isActionSend = isActionSend,
+                                    showActionsMenu = showActionsMenu,
                                     selectedPlatformLink = selectedPlatformLink
                                 )
                             }
@@ -118,7 +118,7 @@ fun BottomSheet(
                     }
 
                     if (platforms.size == 1) {
-                        if (!isActionsRequired) {
+                        if (!isActionSend) {
                             Box(
                                 modifier = Modifier.height(200.dp),
                             ) {
@@ -126,18 +126,18 @@ fun BottomSheet(
                                 onDismiss()
                             }
                         } else {
-                            bringActions.value = true
+                            showActionsMenu.value = true
                             selectedPlatformLink.value = platforms.values.first()
                         }
                     }
                 } else {
                     ResultNotFound(
-                        songInfo?.takeUnless { isActionsRequired }?.run { "$title - $artistName" }
+                        songInfo?.takeUnless { isActionSend }?.run { "$title - $artistName" }
                     )
                 }
 
                 AnimatedVisibility(
-                    visible = bringActions.value,
+                    visible = showActionsMenu.value,
                     enter = fadeIn(
                         tween(
                             durationMillis = 200,

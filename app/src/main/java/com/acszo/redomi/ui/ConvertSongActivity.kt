@@ -63,7 +63,7 @@ class ConvertSongActivity: ComponentActivity() {
                     songInfo = songInfo,
                     platforms = platforms,
                     isLoading = isLoading,
-                    isActionsRequired = isActionSend,
+                    isActionSend = isActionSend,
                     isUpdateAvailable = isUpdateAvailable
                 )
             }

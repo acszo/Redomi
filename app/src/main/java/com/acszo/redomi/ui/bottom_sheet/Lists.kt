@@ -30,8 +30,8 @@ import com.acszo.redomi.utils.StringUtil
 fun HorizontalList(
     iconShape: Int,
     platforms: Map<AppDetails, String>,
-    isActionsRequired: Boolean,
-    bringActions: MutableState<Boolean>,
+    isActionSend: Boolean,
+    showActionsMenu: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
     LazyRow(
@@ -45,8 +45,8 @@ fun HorizontalList(
                 appDetail = app,
                 iconShape = iconShape,
                 link = link,
-                isActionsRequired = isActionsRequired,
-                bringActions = bringActions,
+                isActionSend = isActionSend,
+                showActionsMenu = showActionsMenu,
                 selectedPlatformLink = selectedPlatformLink,
             )
         }
@@ -58,8 +58,8 @@ fun VerticalList(
     gridSize: Int,
     iconShape: Int,
     platforms: Map<AppDetails, String>,
-    isActionsRequired: Boolean,
-    bringActions: MutableState<Boolean>,
+    isActionSend: Boolean,
+    showActionsMenu: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
     LazyVerticalGrid(
@@ -72,8 +72,8 @@ fun VerticalList(
                 appDetail = app,
                 iconShape = iconShape,
                 link = link,
-                isActionsRequired = isActionsRequired,
-                bringActions = bringActions,
+                isActionSend = isActionSend,
+                showActionsMenu = showActionsMenu,
                 selectedPlatformLink = selectedPlatformLink,
             )
         }
@@ -85,8 +85,8 @@ fun AppItem(
     appDetail: AppDetails,
     iconShape: Int,
     link: String,
-    isActionsRequired: Boolean,
-    bringActions: MutableState<Boolean>,
+    isActionSend: Boolean,
+    showActionsMenu: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
     val context = LocalContext.current
@@ -97,10 +97,10 @@ fun AppItem(
         Modifier
             .clip(RoundedCornerShape(18.dp))
             .clickable {
-                if (!isActionsRequired) {
+                if (!isActionSend) {
                     IntentUtil.onIntentView(context, link)
                 } else {
-                    bringActions.value = true
+                    showActionsMenu.value = true
                     selectedPlatformLink.value = link
                 }
             }
