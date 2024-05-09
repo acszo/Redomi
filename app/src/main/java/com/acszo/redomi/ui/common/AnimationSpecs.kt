@@ -3,6 +3,7 @@ package com.acszo.redomi.ui.common
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -52,3 +53,11 @@ fun enterVerticalTransition(): EnterTransition =
 
 fun exitVerticalTransition(): ExitTransition =
     slideOutVertically(targetOffsetY = { -40 }) + fadeOut(animationSpec = tween(200))
+
+fun enterFadeInTransition(): EnterTransition =
+    fadeIn(
+        animationSpec = tween(
+            durationMillis = 200,
+            easing = LinearEasing
+        )
+    )

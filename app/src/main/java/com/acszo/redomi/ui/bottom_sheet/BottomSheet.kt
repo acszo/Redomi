@@ -1,9 +1,6 @@
 package com.acszo.redomi.ui.bottom_sheet
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -29,6 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
+import com.acszo.redomi.ui.common.enterFadeInTransition
 import com.acszo.redomi.utils.IntentUtil.onIntentView
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
@@ -138,12 +136,7 @@ fun BottomSheet(
 
                 AnimatedVisibility(
                     visible = showActionsMenu.value,
-                    enter = fadeIn(
-                        tween(
-                            durationMillis = 200,
-                            easing = LinearEasing
-                        )
-                    ),
+                    enter = enterFadeInTransition(),
                 ) {
                     ActionsMenu(url = selectedPlatformLink.value) {
                         onDismiss()
