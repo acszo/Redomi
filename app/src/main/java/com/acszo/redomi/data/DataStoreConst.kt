@@ -1,5 +1,6 @@
 package com.acszo.redomi.data
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,26 +24,26 @@ object DataStoreConst {
 }
 
 interface Resource {
-    val toRes: Int
+    @get:StringRes val toRes: Int
 }
 
 enum class ListOrientation: Resource {
     HORIZONTAL,
     VERTICAL;
 
-    override val toRes
+    override val toRes: Int
         get() = when (this) {
             HORIZONTAL -> R.string.horizontal
             VERTICAL -> R.string.vertical
         }
 }
 
-enum class IconShape(val radius: Shape): Resource {
+enum class IconShape(val shape: Shape): Resource {
     SQUIRCLE(SquircleShape()),              // 👍👍👍
     CIRCLE(CircleShape),                    // 👍👍
     SQUARE(RoundedCornerShape(25)); // 👎
 
-    override val toRes
+    override val toRes: Int
         get() = when (this) {
             SQUIRCLE -> R.string.squircle_icon
             CIRCLE -> R.string.circle_icon
@@ -56,13 +57,14 @@ enum class Theme: Resource {
     LIGHT_THEME;
 
     @Composable
-    fun mode() = when (this) {
-        SYSTEM_THEME -> isSystemInDarkTheme()
-        DARK_THEME -> true
-        LIGHT_THEME -> false
-    }
+    fun mode(): Boolean
+        = when (this) {
+            SYSTEM_THEME -> isSystemInDarkTheme()
+            DARK_THEME -> true
+            LIGHT_THEME -> false
+        }
 
-    override val toRes
+    override val toRes: Int
         get() = when (this) {
             SYSTEM_THEME -> R.string.system_theme
             DARK_THEME -> R.string.dark_theme

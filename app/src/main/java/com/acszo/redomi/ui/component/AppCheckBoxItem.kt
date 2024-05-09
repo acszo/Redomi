@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -13,15 +14,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
-import com.acszo.redomi.data.IconShape
 
 @Composable
 fun AppCheckBoxItem(
-    icon: Int,
-    iconShape: Int,
+    @DrawableRes icon: Int,
+    iconShape: Shape,
     title: String,
     size: Int,
     isChecked: Boolean,
@@ -42,7 +43,7 @@ fun AppCheckBoxItem(
         Image(
             modifier = Modifier
                 .size(40.dp)
-                .clip(IconShape.entries[iconShape].radius),
+                .clip(iconShape),
             painter = painterResource(id = icon),
             contentDescription = title,
         )

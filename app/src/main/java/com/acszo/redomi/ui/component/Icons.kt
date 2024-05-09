@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.LinearEasing
@@ -25,7 +26,7 @@ import com.acszo.redomi.R
 @Composable
 fun RotatingIcon(
     modifier: Modifier = Modifier,
-    icon: Int,
+    @DrawableRes icon: Int,
     size: Dp,
     tint: Color = MaterialTheme.colorScheme.secondary,
     contentDescription: String? = null,
@@ -61,7 +62,7 @@ fun NewReleaseIcon() {
     val width = display.widthPixels.dp / display.density
     val height = display.heightPixels.dp / display.density
     val widthOffset = width / 1.5f
-    val heightOffset = width / 1.1f
+    val heightOffset = height / 2.2f
 
     RotatingIcon(
         modifier = Modifier.offset(width - widthOffset, height - heightOffset),

@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
@@ -95,7 +96,7 @@ fun BottomSheet(
                         when (ListOrientation.entries[listOrientation]) {
                             ListOrientation.HORIZONTAL -> {
                                 HorizontalList(
-                                    iconShape = iconShape,
+                                    iconShape = IconShape.entries[iconShape].shape,
                                     platforms = platforms,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,
@@ -105,7 +106,7 @@ fun BottomSheet(
                             ListOrientation.VERTICAL -> {
                                 VerticalList(
                                     gridSize = gridSize,
-                                    iconShape = iconShape,
+                                    iconShape = IconShape.entries[iconShape].shape,
                                     platforms = platforms,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,

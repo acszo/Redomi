@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -17,8 +18,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DefaultDialog(
-    icon: Int,
-    title: Int,
+    @DrawableRes icon: Int,
+    title: String,
     verticalSpaceBy: Dp = 0.dp,
     content: @Composable ColumnScope.() -> Unit,
     onDismissRequest: () -> Unit = {},
@@ -32,7 +33,7 @@ fun DefaultDialog(
                 contentDescription = null
             )
         },
-        title = { Text(text = stringResource(id = title)) },
+        title = { Text(text = title) },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(verticalSpaceBy)
@@ -52,7 +53,7 @@ fun DefaultDialog(
 
 @Composable
 fun IconItemDialog(
-    icon: Int,
+    @DrawableRes icon: Int,
     description: String,
 ) {
     Row(

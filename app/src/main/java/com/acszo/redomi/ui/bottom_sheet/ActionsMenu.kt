@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.bottom_sheet
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -44,25 +45,25 @@ fun ActionsMenu(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
     ) {
-        ActionsMenuItem(R.drawable.ic_play, R.string.open) {
-            onIntentView(
-                context = context,
-                url = url
-            )
+        ActionsMenuItem(
+            icon = R.drawable.ic_play,
+            title = stringResource(id = R.string.open)
+        ) {
+            onIntentView(context, url)
             onDismiss()
         }
-        ActionsMenuItem(R.drawable.ic_link, android.R.string.copy) {
-            copyText(
-                clipboardManager = clipboardManager,
-                text = url
-            )
+        ActionsMenuItem(
+            icon = R.drawable.ic_link,
+            title = stringResource(id = android.R.string.copy)
+        ) {
+            copyText(clipboardManager, url)
             onDismiss()
         }
-        ActionsMenuItem(R.drawable.ic_share, R.string.share) {
-            onIntentSend(
-                context = context,
-                url = url
-            )
+        ActionsMenuItem(
+            icon = R.drawable.ic_share,
+            title = stringResource(id = R.string.share)
+        ) {
+            onIntentSend(context, url)
             onDismiss()
         }
     }
@@ -70,8 +71,8 @@ fun ActionsMenu(
 
 @Composable
 fun ActionsMenuItem(
-    icon: Int,
-    title: Int,
+    @DrawableRes icon: Int,
+    title: String,
     onClickAction: () -> Unit
 ) {
     ClickableItem {
@@ -90,12 +91,12 @@ fun ActionsMenuItem(
                     .size(50.dp)
                     .padding(8.dp),
                 tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                contentDescription = stringResource(title)
+                contentDescription = title
             )
         }
 
         Text(
-            text = stringResource(title),
+            text = title,
             style = MaterialTheme.typography.bodyLarge
         )
     }

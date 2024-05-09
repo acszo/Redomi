@@ -17,10 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.utils.IntentUtil
@@ -28,7 +28,7 @@ import com.acszo.redomi.utils.StringUtil
 
 @Composable
 fun HorizontalList(
-    iconShape: Int,
+    iconShape: Shape,
     platforms: Map<AppDetails, String>,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
@@ -56,7 +56,7 @@ fun HorizontalList(
 @Composable
 fun VerticalList(
     gridSize: Int,
-    iconShape: Int,
+    iconShape: Shape,
     platforms: Map<AppDetails, String>,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
@@ -83,7 +83,7 @@ fun VerticalList(
 @Composable
 fun AppItem(
     appDetail: AppDetails,
-    iconShape: Int,
+    iconShape: Shape,
     link: String,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
@@ -110,7 +110,7 @@ fun AppItem(
             modifier = Modifier
                 .size(80.dp)
                 .padding(8.dp)
-                .clip(IconShape.entries[iconShape].radius),
+                .clip(iconShape),
             contentDescription = titleWords[0],
         )
         Text(text = titleWords[0].trim())

@@ -1,5 +1,6 @@
 package com.acszo.redomi.ui.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,7 +24,7 @@ import com.acszo.redomi.R
 @Composable
 fun SettingsItem(
     title: String,
-    icon: Int,
+    @DrawableRes icon: Int,
     description: String,
     isAlertIconVisible: Boolean = false,
     onClick: () -> Unit

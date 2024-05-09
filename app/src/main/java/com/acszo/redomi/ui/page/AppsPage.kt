@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
+import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.model.AppList
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.common.PageBottomInfo
@@ -86,7 +87,7 @@ fun AppsPage(
                 if (selectedTab.value == AppList.OPENING) {
                     AppCheckBoxItem(
                         icon = app.icon,
-                        iconShape = iconShape,
+                        iconShape = IconShape.entries[iconShape].shape,
                         title = separateUppercase(app.title),
                         size = openingApps.size,
                         isChecked = openingApps.contains(app),
@@ -102,7 +103,7 @@ fun AppsPage(
                 } else {
                     AppCheckBoxItem(
                         icon = app.icon,
-                        iconShape = iconShape,
+                        iconShape = IconShape.entries[iconShape].shape,
                         title = separateUppercase(app.title),
                         size = sharingApps.size,
                         isChecked = sharingApps.contains(app),
