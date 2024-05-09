@@ -44,21 +44,21 @@ fun ActionsMenu(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
     ) {
-        ActionsMenuItem(R.string.open, R.drawable.ic_play) {
+        ActionsMenuItem(R.drawable.ic_play, R.string.open) {
             onIntentView(
                 context = context,
                 url = url
             )
             onDismiss()
         }
-        ActionsMenuItem(android.R.string.copy, R.drawable.ic_link) {
+        ActionsMenuItem(R.drawable.ic_link, android.R.string.copy) {
             copyText(
                 clipboardManager = clipboardManager,
                 text = url
             )
             onDismiss()
         }
-        ActionsMenuItem(R.string.share, R.drawable.ic_share) {
+        ActionsMenuItem(R.drawable.ic_share, R.string.share) {
             onIntentSend(
                 context = context,
                 url = url
@@ -70,36 +70,33 @@ fun ActionsMenu(
 
 @Composable
 fun ActionsMenuItem(
-    label: Int,
     icon: Int,
+    title: Int,
     onClickAction: () -> Unit
 ) {
-    ClickableItem(
-        @Composable {
-            Box(
+    ClickableItem {
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable { onClickAction() }
+                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .size(70.dp)
+                .padding(8.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(id = icon),
                 modifier = Modifier
-                    .clip(CircleShape)
-                    .clickable {
-                        onClickAction()
-                    }
-                    .background(MaterialTheme.colorScheme.secondaryContainer)
-                    .size(70.dp)
+                    .size(50.dp)
                     .padding(8.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painter = painterResource(id = icon),
-                    modifier = Modifier
-                        .size(50.dp)
-                        .padding(8.dp),
-                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                    contentDescription = stringResource(label)
-                )
-            }
-            Text(
-                text = stringResource(label),
-                style = MaterialTheme.typography.bodyLarge
+                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                contentDescription = stringResource(title)
             )
         }
-    )
+
+        Text(
+            text = stringResource(title),
+            style = MaterialTheme.typography.bodyLarge
+        )
+    }
 }

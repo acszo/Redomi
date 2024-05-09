@@ -94,18 +94,6 @@ fun AppItem(
     val titleWords: List<String> = StringUtil.splitSpaceToWords(title)
 
     ClickableItem(
-        @Composable {
-            Image(
-                painterResource(id = appDetail.icon),
-                modifier = Modifier
-                    .size(80.dp)
-                    .padding(8.dp)
-                    .clip(IconShape.entries[iconShape].radius),
-                contentDescription = titleWords[0],
-            )
-            Text(text = titleWords[0].trim())
-            Text(text = if (titleWords.size > 1) titleWords[1] else "")
-        },
         Modifier
             .clip(RoundedCornerShape(18.dp))
             .clickable {
@@ -116,5 +104,16 @@ fun AppItem(
                     selectedPlatformLink.value = link
                 }
             }
-    )
+    ) {
+        Image(
+            painterResource(id = appDetail.icon),
+            modifier = Modifier
+                .size(80.dp)
+                .padding(8.dp)
+                .clip(IconShape.entries[iconShape].radius),
+            contentDescription = titleWords[0],
+        )
+        Text(text = titleWords[0].trim())
+        Text(text = if (titleWords.size > 1) titleWords[1] else "")
+    }
 }
