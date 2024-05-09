@@ -1,5 +1,6 @@
 package com.acszo.redomi.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,15 +36,14 @@ object IntentUtil {
         context.startActivity(Intent.createChooser(intent, null))
     }
 
+    @SuppressLint("InlinedApi")
     fun onIntentOpenDefaultsApp(context: Context) {
         val uri = Uri.parse("package:${context.packageName}")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // Work around for One UI 4, because ACTION_APP_OPEN_BY_DEFAULT_SETTING crashes, kpop company moment 🫰
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.S && Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
-                context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri))
-            } else {
-                context.startActivity(Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri))
-            }
+        // Work around for One UI 4, because ACTION_APP_OPEN_BY_DEFAULT_SETTING crashes, kpop company moment 🫰
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.S && Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
+            context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri))
+        } else {
+            context.startActivity(Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri))
         }
     }
 

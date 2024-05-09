@@ -1,8 +1,6 @@
 package com.acszo.redomi.ui.page
 
 import android.os.Build
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -150,22 +148,21 @@ fun SettingsPage(
 
     if (isFirstTime!! && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         DefaultDialog(
-            icon =  R.drawable.ic_description,
-            title = stringResource(id = R.string.dialog_setup_title),
+            icon = R.drawable.ic_description,
+            title = R.string.dialog_setup_title,
+            verticalSpaceBy = 16.dp,
             content = {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    Text(text = stringResource(id = R.string.dialog_setup_description, redomi))
-                    IconItemDialog(
-                        icon = R.drawable.ic_done_all,
-                        description = stringResource(id = R.string.dialog_setup_description_checked, redomi)
-                    )
-                    IconItemDialog(
-                        icon = R.drawable.ic_remove_done,
-                        description = stringResource(id = R.string.dialog_setup_description_unchecked)
-                    )
-                }
+                Text(text = stringResource(id = R.string.dialog_setup_description, redomi))
+
+                IconItemDialog(
+                    icon = R.drawable.ic_done_all,
+                    description = stringResource(id = R.string.dialog_setup_description_checked, redomi)
+                )
+
+                IconItemDialog(
+                    icon = R.drawable.ic_remove_done,
+                    description = stringResource(id = R.string.dialog_setup_description_unchecked)
+                )
             },
             onConfirmAction = {
                 onIntentOpenDefaultsApp(context)
@@ -176,8 +173,8 @@ fun SettingsPage(
 
     if (openIconShapeDialog.value) {
         DefaultDialog(
-            icon =  R.drawable.ic_category_outline,
-            title = stringResource(id = R.string.icon_shape),
+            icon = R.drawable.ic_category_outline,
+            title = R.string.icon_shape,
             content = {
                 IconShape.entries.forEach { item ->
                     RadioButtonItem(
@@ -196,8 +193,8 @@ fun SettingsPage(
 
     if (openThemeDialog.value) {
         DefaultDialog(
-            icon =  R.drawable.ic_color_lens_outline,
-            title = stringResource(id = R.string.theme),
+            icon = R.drawable.ic_color_lens_outline,
+            title = R.string.theme,
             content = {
                 Theme.entries.forEach { item ->
                     RadioButtonItem(

@@ -2,6 +2,7 @@ package com.acszo.redomi.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
@@ -11,13 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun DefaultDialog(
     icon: Int,
-    title: String,
-    content: @Composable () -> Unit,
+    title: Int,
+    verticalSpaceBy: Dp = 0.dp,
+    content: @Composable ColumnScope.() -> Unit,
     onDismissRequest: () -> Unit = {},
     onConfirmAction: () -> Unit,
 ) {
@@ -26,12 +29,14 @@ fun DefaultDialog(
             Icon(
                 painter = painterResource(id = icon),
                 tint = MaterialTheme.colorScheme.secondary,
-                contentDescription = title
+                contentDescription = null
             )
         },
-        title = { Text(text = title) },
+        title = { Text(text = stringResource(id = title)) },
         text = {
-            Column {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(verticalSpaceBy)
+            ) {
                 content()
             }
         },
@@ -59,6 +64,8 @@ fun IconItemDialog(
             tint = MaterialTheme.colorScheme.secondary,
             contentDescription = null
         )
-        Text(text = description)
+        Text(
+            text = description
+        )
     }
 }
