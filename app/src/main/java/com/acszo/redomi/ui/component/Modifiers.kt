@@ -23,5 +23,5 @@ fun Modifier.fadingEdge() = this
     }
 
 @Composable
-fun Modifier.ignorePadding() = this
+fun Modifier.ignoreHorizontalPadding() = this
     .requiredWidth(LocalConfiguration.current.screenWidthDp.dp)

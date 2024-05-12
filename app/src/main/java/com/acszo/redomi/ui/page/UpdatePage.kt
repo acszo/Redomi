@@ -33,6 +33,7 @@ import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.AnnotatedString
 import com.acszo.redomi.ui.component.NewReleaseIcon
 import com.acszo.redomi.ui.component.fadingEdge
+import com.acszo.redomi.ui.component.ignoreHorizontalPadding
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk
 import com.acszo.redomi.viewmodel.UpdateViewModel
@@ -55,21 +56,21 @@ fun UpdatePage(
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.update),
         description = stringResource(id = R.string.update_description_page),
-        backButton = { backButton() },
+        backButton = { backButton() }
     ) { padding, pageTitleWithDescription ->
         if (isUpdateAvailable) {
             NewReleaseIcon()
         }
 
         Column(
-            modifier = Modifier.padding(bottom = padding.calculateBottomPadding())
+            modifier = Modifier.padding(padding),
         ) {
             LazyColumn(
                 modifier = Modifier
                     .weight(1f)
                     .fadingEdge(),
                 verticalArrangement = Arrangement.spacedBy(28.dp),
-                contentPadding = padding,
+                contentPadding = PaddingValues(bottom = 10.dp),
             ) {
                 item {
                     pageTitleWithDescription()
@@ -113,14 +114,16 @@ fun UpdatePage(
             }
 
             if (isLoading) {
-                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                LinearProgressIndicator(
+                    modifier = Modifier.fillMaxWidth().ignoreHorizontalPadding()
+                )
             }
 
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(75.dp)
-                    .padding(horizontal = 28.dp, vertical = 16.dp),
+                    .padding(vertical = 16.dp),
                 contentPadding = PaddingValues(0.dp),
                 enabled = progressDownloadStatus.value !is DownloadStatus.Downloading,
                 onClick = {

@@ -58,7 +58,7 @@ fun AppsPage(
             modifier = Modifier
                 .padding(top = padding.calculateTopPadding())
                 .fillMaxSize(),
-            contentPadding = padding.removeTopPadding()
+            contentPadding = padding.removeTopPadding(),
         ) {
             item {
                 pageTitleWithDescription()
@@ -72,7 +72,7 @@ fun AppsPage(
                 Column(
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.surface)
-                        //.ignorePadding() crashes here >:(
+                        //.ignoreHorizontalPadding() crashes here >:(
                         .padding(vertical = 14.dp),
                 ) {
                     Tabs(selectedTab = selectedTab)

@@ -26,7 +26,7 @@ import com.acszo.redomi.ui.common.enterVerticalTransition
 import com.acszo.redomi.ui.common.exitVerticalTransition
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
 import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.ignorePadding
+import com.acszo.redomi.ui.component.ignoreHorizontalPadding
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable
@@ -61,7 +61,7 @@ fun LayoutPage(
             item {
                 ListOrientation.entries.forEach { item ->
                     RadioButtonItem(
-                        modifier = Modifier.ignorePadding(),
+                        modifier = Modifier.ignoreHorizontalPadding(),
                         isSelected = item == ListOrientation.entries[listOrientation],
                         item = item,
                         verticalPadding = 24.dp,

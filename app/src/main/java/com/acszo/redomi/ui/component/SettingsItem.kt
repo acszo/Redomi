@@ -34,7 +34,7 @@ fun SettingsItem(
             .fillMaxWidth()
             .clip(RoundedCornerShape(28.dp))
             .clickable { onClick() }
-            .ignorePadding()
+            .ignoreHorizontalPadding()
             .padding(horizontal = 28.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
