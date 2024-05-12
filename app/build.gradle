@@ -70,7 +70,7 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += ['/META-INF/**', '/okhttp3/**', '/kotlin/**', 'DebugProbesKt.bin', 'kotlin-tooling-metadata.json']
+            excludes += '**'
         }
     }
 }
