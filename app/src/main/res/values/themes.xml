@@ -7,7 +7,7 @@
     </style>
 
     <style name="Theme.Redomi.SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/splash_screen_bg_color</item>
+        <item name="windowSplashScreenBackground">@color/splash_screen_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_screen</item>
         <item name="postSplashScreenTheme">@style/Theme.Redomi</item>
     </style>

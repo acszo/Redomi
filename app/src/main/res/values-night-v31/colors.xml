@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="splash_screen_bg_color">@color/m3_ref_palette_dynamic_neutral6</color>
-    <color name="splash_screen_fg_color">@android:color/system_accent2_200</color>
+    <color name="splash_screen_background">@color/m3_ref_palette_dynamic_neutral6</color>
+    <color name="splash_screen_foreground">@android:color/system_accent2_200</color>
 </resources>
