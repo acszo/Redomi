@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui
+package com.acszo.redomi
 
 import android.content.Intent
 import android.os.Bundle
