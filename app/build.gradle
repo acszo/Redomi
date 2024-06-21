@@ -10,6 +10,17 @@ plugins {
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(rootProject.file('keystore.properties')))
 
+def versionMajor = 1
+def versionMinor = 2
+def versionPatch = 3
+
+def appVersionCode = "${versionMajor}${formatVersion(versionMinor)}${formatVersion(versionPatch)}" as Integer
+def appVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+
+static def formatVersion(version) {
+    return version < 10 ? "0${version}" : version
+}
+
 android {
     androidResources {
         generateLocaleConfig true
@@ -29,8 +40,8 @@ android {
         applicationId 'com.acszo.redomi'
         minSdk 28
         targetSdk 34
-        versionCode 7
-        versionName '1.2.3'
+        versionCode appVersionCode
+        versionName appVersionName
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables {
