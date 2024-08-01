@@ -72,7 +72,6 @@ fun AppsPage(
                 Column(
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.surface)
-                        //.ignoreHorizontalPadding() crashes here >:(
                         .padding(vertical = 14.dp),
                 ) {
                     Tabs(selectedTab = selectedTab)
@@ -83,8 +82,8 @@ fun AppsPage(
                 Spacer(modifier = Modifier.height(14.dp))
             }
 
-            items(platforms) { app ->
-                if (selectedTab.value == AppList.OPENING) {
+            if (selectedTab.value == AppList.OPENING) {
+                items(platforms) { app ->
                     AppCheckBoxItem(
                         icon = app.icon,
                         iconShape = IconShape.entries[iconShape].shape,
@@ -100,7 +99,9 @@ fun AppsPage(
                             dataStoreViewModel.setOpeningApps(openingApps.toList())
                         }
                     )
-                } else {
+                }
+            } else {
+                items(platforms) { app ->
                     AppCheckBoxItem(
                         icon = app.icon,
                         iconShape = IconShape.entries[iconShape].shape,
