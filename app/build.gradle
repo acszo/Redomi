@@ -131,9 +131,6 @@ dependencies {
     // Navigation
     implementation 'androidx.navigation:navigation-compose:2.7.7'
 
-    // Squircle
-    implementation ('com.github.stoyan-vuchev:squircle-shape:1.0.8') {
-        transitive = false
-    }
+    implementation project(':squircle')
 
 }

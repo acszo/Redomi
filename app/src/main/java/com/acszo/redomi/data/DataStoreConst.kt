@@ -7,7 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
 import com.acszo.redomi.R
-import sv.lib.squircleshape.SquircleShape
+import com.acszo.squircle.SquircleShape
 
 object DataStoreConst {
 
@@ -39,7 +39,7 @@ enum class ListOrientation: Resource {
 }
 
 enum class IconShape(val shape: Shape): Resource {
-    SQUIRCLE(SquircleShape()),              // 👍👍👍
+    SQUIRCLE(SquircleShape),                // 👍👍👍
     CIRCLE(CircleShape),                    // 👍👍
     SQUARE(RoundedCornerShape(25)); // 👎
 
