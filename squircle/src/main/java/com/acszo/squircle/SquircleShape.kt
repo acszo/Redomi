@@ -1,6 +1,5 @@
 package com.acszo.squircle
 
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
@@ -10,7 +9,6 @@ import androidx.compose.ui.unit.LayoutDirection
 
 object SquircleShape: Shape {
 
-    private val CORNER_SIZE = CornerSize(100)
     private const val CORNER_SMOOTHING = 0.72f
 
     override fun createOutline(
@@ -18,17 +16,11 @@ object SquircleShape: Shape {
         layoutDirection: LayoutDirection,
         density: Density
     ): Outline {
-        var corner = CORNER_SIZE.toPx(size, density)
-        val minDimension = size.minDimension
-
-        if (corner * 2 > minDimension) {
-            corner = minDimension / 2
-        }
-
         return Outline.Generic(
             path = Path().apply {
                 val width = size.width
                 val height = size.height
+                val corner = size.minDimension / 2
                 val smoothingFactor = corner * (1 - CORNER_SMOOTHING)
 
                 moveTo(x = corner, y = 0f)
