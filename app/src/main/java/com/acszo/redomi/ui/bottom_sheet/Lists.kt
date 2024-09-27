@@ -89,7 +89,7 @@ fun AppItem(
     selectedPlatformLink: MutableState<String>
 ) {
     val context = LocalContext.current
-    val titleWords: List<String> = splitSpaceToWords(app.title)
+    val titleWords = app.title.split(' ')
 
     ClickableItem(
         Modifier
@@ -114,8 +114,4 @@ fun AppItem(
         Text(text = titleWords[0])
         Text(text = if (titleWords.size > 1) titleWords[1] else "")
     }
-}
-
-private fun splitSpaceToWords(text: String): List<String> {
-    return text.split(' ')
 }
