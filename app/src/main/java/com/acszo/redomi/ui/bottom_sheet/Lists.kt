@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.utils.IntentUtil
-import com.acszo.redomi.utils.StringUtil
 
 @Composable
 fun HorizontalList(
@@ -42,7 +41,7 @@ fun HorizontalList(
     ) {
         items(items = platforms.toList()) { (app, link) ->
             AppItem(
-                appDetail = app,
+                app = app,
                 iconShape = iconShape,
                 link = link,
                 isActionSend = isActionSend,
@@ -69,7 +68,7 @@ fun VerticalList(
     ) {
         items(items = platforms.toList()) { (app, link) ->
             AppItem(
-                appDetail = app,
+                app = app,
                 iconShape = iconShape,
                 link = link,
                 isActionSend = isActionSend,
@@ -82,7 +81,7 @@ fun VerticalList(
 
 @Composable
 fun AppItem(
-    appDetail: AppDetails,
+    app: AppDetails,
     iconShape: Shape,
     link: String,
     isActionSend: Boolean,
@@ -90,8 +89,7 @@ fun AppItem(
     selectedPlatformLink: MutableState<String>
 ) {
     val context = LocalContext.current
-    val title: String = StringUtil.separateUppercase(appDetail.title)
-    val titleWords: List<String> = StringUtil.splitSpaceToWords(title)
+    val titleWords: List<String> = splitSpaceToWords(app.title)
 
     ClickableItem(
         Modifier
@@ -106,14 +104,18 @@ fun AppItem(
             }
     ) {
         Image(
-            painterResource(id = appDetail.icon),
+            painterResource(id = app.icon),
             modifier = Modifier
                 .size(80.dp)
                 .padding(8.dp)
                 .clip(iconShape),
-            contentDescription = titleWords[0],
+            contentDescription = app.title,
         )
-        Text(text = titleWords[0].trim())
+        Text(text = titleWords[0])
         Text(text = if (titleWords.size > 1) titleWords[1] else "")
     }
+}
+
+private fun splitSpaceToWords(text: String): List<String> {
+    return text.split(' ')
 }

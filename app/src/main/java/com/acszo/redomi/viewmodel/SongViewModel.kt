@@ -51,7 +51,7 @@ class SongViewModel @Inject constructor(
             }
 
             val mapLinkToApp: Map<AppDetails, String> = selectedApps
-                .associateWith { response.linksByPlatform[it.title]?.url ?: "" }
+                .associateWith { response.linksByPlatform[it.id]?.url ?: "" }
                 .filter { it.value.isNotEmpty() }
 
             _platforms.update { mapLinkToApp }

@@ -29,7 +29,6 @@ import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.removeTopPadding
 import com.acszo.redomi.ui.component.AppCheckBoxItem
 import com.acszo.redomi.ui.component.Tabs
-import com.acszo.redomi.utils.StringUtil.separateUppercase
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -87,7 +86,7 @@ fun AppsPage(
                     AppCheckBoxItem(
                         icon = app.icon,
                         iconShape = IconShape.entries[iconShape].shape,
-                        title = separateUppercase(app.title),
+                        title = app.title,
                         size = openingApps.size,
                         isChecked = openingApps.contains(app),
                         onCheckedAction = {
@@ -105,7 +104,7 @@ fun AppsPage(
                     AppCheckBoxItem(
                         icon = app.icon,
                         iconShape = IconShape.entries[iconShape].shape,
-                        title = separateUppercase(app.title),
+                        title = app.title,
                         size = sharingApps.size,
                         isChecked = sharingApps.contains(app),
                         onCheckedAction = {
