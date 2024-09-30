@@ -69,8 +69,8 @@ fun SettingsPage(
 
             item {
                 SettingsItem(
-                    title = stringResource(id = R.string.apps),
                     icon = R.drawable.ic_grid_view,
+                    title = stringResource(id = R.string.apps),
                     description = stringResource(id = R.string.apps_description)
                 ) {
                     navController.navigate(appsPage)
@@ -81,8 +81,8 @@ fun SettingsPage(
                 val orientationText = stringResource(ListOrientation.entries[listOrientation].toRes)
                 val listOrientationText = stringResource(id = R.string.list_format, orientationText)
                 SettingsItem(
-                    title = stringResource(id = R.string.layout),
                     icon = R.drawable.ic_format_list_bulleted,
+                    title = stringResource(id = R.string.layout),
                     description = listOrientationText.lowercase().replaceFirstChar { it.uppercase() }
                 ) {
                     navController.navigate(layoutPage)
@@ -91,8 +91,8 @@ fun SettingsPage(
 
             item {
                 SettingsItem(
-                    title = stringResource(id = R.string.icon_shape),
                     icon = R.drawable.ic_category_filled,
+                    title = stringResource(id = R.string.icon_shape),
                     description = stringResource(id = IconShape.entries[iconShape].toRes)
                 ) {
                     openIconShapeDialog.value = true
@@ -101,8 +101,8 @@ fun SettingsPage(
 
             item {
                 SettingsItem(
-                    title = stringResource(id = R.string.theme),
                     icon = R.drawable.ic_color_lens_filled,
+                    title = stringResource(id = R.string.theme),
                     description = stringResource(id = Theme.entries[themeMode].toRes)
                 ) {
                     openThemeDialog.value = true
@@ -111,8 +111,8 @@ fun SettingsPage(
 
             item {
                 SettingsItem(
-                    title = stringResource(id = R.string.update),
                     icon = R.drawable.ic_update,
+                    title = stringResource(id = R.string.update),
                     description = stringResource(id = R.string.update_description),
                     isAlertIconVisible = isUpdateAvailable
                 ) {
@@ -123,8 +123,8 @@ fun SettingsPage(
             item {
                 val repository = stringResource(id = R.string.repository)
                 SettingsItem(
-                    title = stringResource(id = R.string.github),
                     icon = R.drawable.ic_github,
+                    title = stringResource(id = R.string.github),
                     description = stringResource(id = R.string.github_description, repository)
                 ) {
                     uriHandle.openUri("https://github.com/acszo/Redomi")
@@ -133,8 +133,8 @@ fun SettingsPage(
 
             item {
                 SettingsItem(
-                    title = stringResource(id = R.string.version),
                     icon = R.drawable.ic_info_filled,
+                    title = stringResource(id = R.string.version),
                     description = versionName
                 ) {
                     copyText(

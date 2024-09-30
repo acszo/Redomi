@@ -65,8 +65,6 @@ fun IconItemDialog(
             tint = MaterialTheme.colorScheme.secondary,
             contentDescription = null
         )
-        Text(
-            text = description
-        )
+        Text(text = description)
     }
 }

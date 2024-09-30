@@ -133,10 +133,10 @@ fun AppsPage(
 
             item {
                 PageBottomInfo(
-                    if (selectedTab.value == AppList.OPENING)
-                        stringResource(id = R.string.opening_apps_tab_info)
-                    else
-                        stringResource(id = R.string.sharing_apps_tab_info)
+                    text = stringResource(
+                        id = if (selectedTab.value == AppList.OPENING) R.string.opening_apps_tab_info
+                            else R.string.sharing_apps_tab_info
+                    )
                 )
             }
         }

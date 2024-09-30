@@ -27,11 +27,11 @@ import com.acszo.redomi.utils.IntentUtil
 
 @Composable
 fun HorizontalList(
-    iconShape: Shape,
     platforms: Map<AppDetails, String>,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
-    selectedPlatformLink: MutableState<String>
+    selectedPlatformLink: MutableState<String>,
+    iconShape: Shape
 ) {
     LazyRow(
         modifier = Modifier
@@ -54,12 +54,12 @@ fun HorizontalList(
 
 @Composable
 fun VerticalList(
-    gridSize: Int,
-    iconShape: Shape,
     platforms: Map<AppDetails, String>,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
-    selectedPlatformLink: MutableState<String>
+    selectedPlatformLink: MutableState<String>,
+    iconShape: Shape,
+    gridSize: Int,
 ) {
     LazyVerticalGrid(
         modifier = Modifier.padding(vertical = 15.dp),
@@ -92,7 +92,7 @@ fun AppItem(
     val titleWords = app.title.split(' ')
 
     ClickableItem(
-        Modifier
+        modifier = Modifier
             .clip(RoundedCornerShape(18.dp))
             .clickable {
                 if (!isActionSend) {
@@ -104,7 +104,7 @@ fun AppItem(
             }
     ) {
         Image(
-            painterResource(id = app.icon),
+            painter = painterResource(id = app.icon),
             modifier = Modifier
                 .size(80.dp)
                 .padding(8.dp)

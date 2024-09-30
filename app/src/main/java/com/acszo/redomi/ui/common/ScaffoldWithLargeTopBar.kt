@@ -84,8 +84,8 @@ fun PageTitle(
             .padding(top = 18.dp)
             .padding(vertical = 28.dp)
             .graphicsLayer { alpha = (1f - scrollBehavior.state.overlappedFraction) },
-        style = MaterialTheme.typography.displaySmall,
         color = MaterialTheme.colorScheme.onSurface,
+        style = MaterialTheme.typography.displaySmall,
     )
 }
 

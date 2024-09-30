@@ -23,8 +23,8 @@ import com.acszo.redomi.R
 
 @Composable
 fun SettingsItem(
-    title: String,
     @DrawableRes icon: Int,
+    title: String,
     description: String,
     isAlertIconVisible: Boolean = false,
     onClick: () -> Unit

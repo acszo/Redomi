@@ -25,8 +25,8 @@ import com.acszo.redomi.R
 
 @Composable
 fun RotatingIcon(
-    modifier: Modifier = Modifier,
     @DrawableRes icon: Int,
+    modifier: Modifier = Modifier,
     size: Dp,
     tint: Color = MaterialTheme.colorScheme.secondary,
     contentDescription: String? = null,
@@ -65,8 +65,8 @@ fun NewReleaseIcon() {
     val heightOffset = height / 2.2f
 
     RotatingIcon(
-        modifier = Modifier.offset(width - widthOffset, height - heightOffset),
         icon = R.drawable.ic_new_releases_outside,
+        modifier = Modifier.offset(width - widthOffset, height - heightOffset),
         size = width,
         tint = MaterialTheme.colorScheme.secondaryContainer,
         startValue = 0f,

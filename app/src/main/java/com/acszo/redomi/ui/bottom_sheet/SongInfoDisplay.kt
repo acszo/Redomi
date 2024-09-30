@@ -2,7 +2,6 @@ package com.acszo.redomi.ui.bottom_sheet
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
@@ -39,7 +38,6 @@ import com.acszo.redomi.R
 import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SongInfoDisplay(
     type: String,
@@ -78,8 +76,8 @@ fun SongInfoDisplay(
                 )
             }
             Image(
-                modifier = Modifier.fillMaxSize(),
                 painter = image,
+                modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillHeight,
                 contentDescription = stringResource(id = R.string.song_cover),
             )

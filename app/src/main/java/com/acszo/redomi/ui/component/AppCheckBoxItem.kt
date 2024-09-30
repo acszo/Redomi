@@ -37,14 +37,14 @@ fun AppCheckBoxItem(
         Icon(
             painter = painterResource(id = R.drawable.ic_menu),
             modifier = Modifier.size(20.dp),
-            contentDescription = title,
             tint = MaterialTheme.colorScheme.secondary,
+            contentDescription = title,
         )
         Image(
+            painter = painterResource(id = icon),
             modifier = Modifier
                 .size(40.dp)
                 .clip(iconShape),
-            painter = painterResource(id = icon),
             contentDescription = title,
         )
         Text(

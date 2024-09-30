@@ -107,15 +107,17 @@ fun UpdatePage(
                 ) {
                     Text(
                         text = stringResource(id = R.string.update_info_failed),
-                        style = MaterialTheme.typography.titleMedium,
                         textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.titleMedium,
                     )
                 }
             }
 
             if (isLoading) {
                 LinearProgressIndicator(
-                    modifier = Modifier.fillMaxWidth().ignoreHorizontalPadding()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .ignoreHorizontalPadding()
                 )
             }
 
@@ -165,8 +167,9 @@ fun UpdatePage(
                 }
 
                 Text(
-                    text = if (isUpdateAvailable) stringResource(id = R.string.do_update)
-                    else stringResource(id = R.string.check_updates),
+                    text = stringResource(
+                        id = if (isUpdateAvailable) R.string.do_update else R.string.check_updates
+                    ),
                 )
             }
         }

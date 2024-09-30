@@ -18,18 +18,17 @@ fun PageBottomInfo(
     text: String
 ) {
     Column(
-        modifier = Modifier
-            .padding(bottom = 28.dp),
+        modifier = Modifier.padding(bottom = 28.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_info_outline),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
             contentDescription = stringResource(id = R.string.info),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
             text = text,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }

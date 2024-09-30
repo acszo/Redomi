@@ -33,7 +33,7 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
 fun ResultNotFound(
-    querySong: String?
+    query: String?
 ) {
     val context = LocalContext.current
     val animatedIcon = AnimatedImageVector.animatedVectorResource(R.drawable.anim_ic_not_found)
@@ -52,20 +52,20 @@ fun ResultNotFound(
     ) {
         Icon(
             painter = rememberAnimatedVectorPainter(animatedIcon, atEnd),
-            tint = MaterialTheme.colorScheme.secondary,
             modifier = Modifier.size(80.dp),
+            tint = MaterialTheme.colorScheme.secondary,
             contentDescription = stringResource(id = R.string.no_result_found),
         )
 
         Text(
-            stringResource(id = R.string.no_result_found),
+            text = stringResource(id = R.string.no_result_found),
             color = MaterialTheme.colorScheme.error,
             style = MaterialTheme.typography.titleMedium,
         )
 
-        if (querySong != null) {
+        if (query != null) {
             FilledTonalButton(
-                onClick = { onIntentView(context, URL_YOUTUBE_QUERY + querySong) },
+                onClick = { onIntentView(context, URL_YOUTUBE_QUERY + query) },
                 contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
             ) {
                 Icon(

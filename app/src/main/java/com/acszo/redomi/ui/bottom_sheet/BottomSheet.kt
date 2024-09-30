@@ -86,21 +86,21 @@ fun BottomSheet(
                         when (ListOrientation.entries[listOrientation]) {
                             ListOrientation.HORIZONTAL -> {
                                 HorizontalList(
-                                    iconShape = IconShape.entries[iconShape].shape,
                                     platforms = platforms,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,
-                                    selectedPlatformLink = selectedPlatformLink
+                                    selectedPlatformLink = selectedPlatformLink,
+                                    iconShape = IconShape.entries[iconShape].shape
                                 )
                             }
                             ListOrientation.VERTICAL -> {
                                 VerticalList(
-                                    gridSize = gridSize,
-                                    iconShape = IconShape.entries[iconShape].shape,
                                     platforms = platforms,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,
-                                    selectedPlatformLink = selectedPlatformLink
+                                    selectedPlatformLink = selectedPlatformLink,
+                                    iconShape = IconShape.entries[iconShape].shape,
+                                    gridSize = gridSize
                                 )
                             }
                         }
@@ -121,7 +121,7 @@ fun BottomSheet(
                     }
                 } else {
                     ResultNotFound(
-                        songInfo?.takeUnless { isActionSend }?.run { "$title - $artistName" }
+                        query = songInfo?.takeUnless { isActionSend }?.run { "$title - $artistName" }
                     )
                 }
 
