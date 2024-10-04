@@ -25,9 +25,9 @@ import com.acszo.redomi.ui.component.DefaultDialog
 import com.acszo.redomi.ui.component.IconItemDialog
 import com.acszo.redomi.ui.component.RadioButtonItem
 import com.acszo.redomi.ui.component.SettingsItem
-import com.acszo.redomi.ui.nav.Pages.appsPage
-import com.acszo.redomi.ui.nav.Pages.layoutPage
-import com.acszo.redomi.ui.nav.Pages.updatePage
+import com.acszo.redomi.ui.nav.Pages.APPS_PAGE
+import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
+import com.acszo.redomi.ui.nav.Pages.UPDATE_PAGE
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
 import com.acszo.redomi.viewmodel.DataStoreViewModel
@@ -73,7 +73,7 @@ fun SettingsPage(
                     title = stringResource(id = R.string.apps),
                     description = stringResource(id = R.string.apps_description)
                 ) {
-                    navController.navigate(appsPage)
+                    navController.navigate(APPS_PAGE)
                 }
             }
 
@@ -85,7 +85,7 @@ fun SettingsPage(
                     title = stringResource(id = R.string.layout),
                     description = listOrientationText.lowercase().replaceFirstChar { it.uppercase() }
                 ) {
-                    navController.navigate(layoutPage)
+                    navController.navigate(LAYOUT_PAGE)
                 }
             }
 
@@ -116,7 +116,7 @@ fun SettingsPage(
                     description = stringResource(id = R.string.update_description),
                     isAlertIconVisible = isUpdateAvailable
                 ) {
-                    navController.navigate(updatePage)
+                    navController.navigate(UPDATE_PAGE)
                 }
             }
 
