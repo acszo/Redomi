@@ -12,7 +12,7 @@ import com.acszo.squircle.SquircleShape
 object DataStoreConst {
 
     const val FIRST_TIME = "first_time"
-    const val LIST_ORIENTATION = "list_type"
+    const val LIST_ORIENTATION = "list_orientation"
     const val GRID_SIZE = "grid_size"
     const val ICON_SHAPE = "icon_shape"
     const val THEME_MODE = "theme_mode"
