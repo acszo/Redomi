@@ -1,6 +1,5 @@
 package com.acszo.redomi.ui.bottom_sheet
 
-import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -121,11 +120,8 @@ fun SongInfoDisplay(
             RotatingIcon(
                 icon = R.drawable.ic_settings,
                 size = 24.dp,
-                contentDescription = stringResource(id = R.string.settings),
                 startValue = 120f,
-                targetValue = 180f,
-                duration = 300,
-                easing = LinearOutSlowInEasing
+                contentDescription = stringResource(id = R.string.settings)
             )
 
             if (isUpdateAvailable) {
