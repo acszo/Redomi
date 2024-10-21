@@ -2,8 +2,7 @@ package com.acszo.redomi.ui.component
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.Easing
-import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
@@ -29,19 +28,16 @@ fun RotatingIcon(
     modifier: Modifier = Modifier,
     size: Dp,
     tint: Color = MaterialTheme.colorScheme.secondary,
-    contentDescription: String? = null,
     startValue: Float,
-    targetValue: Float,
-    duration: Int,
-    easing: Easing
+    contentDescription: String? = null
 ) {
     val currentRotation by remember { mutableFloatStateOf(startValue) }
     val rotation = remember { Animatable(currentRotation) }
 
     LaunchedEffect(currentRotation) {
         rotation.animateTo(
-            targetValue = targetValue,
-            animationSpec = tween(duration, easing = easing),
+            targetValue = 180f,
+            animationSpec = tween(300, easing = LinearOutSlowInEasing),
         )
     }
 
@@ -69,10 +65,7 @@ fun NewReleaseIcon() {
         modifier = Modifier.offset(width - widthOffset, height - heightOffset),
         size = width,
         tint = MaterialTheme.colorScheme.secondaryContainer,
-        startValue = 0f,
-        targetValue = 360f,
-        duration = 180000,
-        easing = LinearEasing,
+        startValue = 90f,
     )
 
     Icon(
