@@ -12,7 +12,7 @@ import com.acszo.redomi.model.AppList
 import com.acszo.redomi.ui.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.DataStoreViewModel
-import com.acszo.redomi.viewmodel.SongViewModel
+import com.acszo.redomi.viewmodel.SongLinkViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,20 +37,20 @@ class ConvertSongActivity: ComponentActivity() {
 
             val appList = if (isActionSend) AppList.SHARING else AppList.OPENING
 
-            val songViewModel: SongViewModel = hiltViewModel()
+            val songLinkViewModel: SongLinkViewModel = hiltViewModel()
             val updateViewModel: UpdateViewModel = hiltViewModel()
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
 
             LaunchedEffect(Unit) {
-                songViewModel.getPlatforms(intentData, appList)
+                songLinkViewModel.getPlatforms(intentData, appList)
                 updateViewModel.latestRelease
                 dataStoreViewModel.getIconShape()
                 dataStoreViewModel.getThemeMode()
             }
 
-            val songInfo by songViewModel.songInfo.collectAsStateWithLifecycle()
-            val platforms by songViewModel.platforms.collectAsStateWithLifecycle()
-            val isLoading by songViewModel.isLoading.collectAsStateWithLifecycle()
+            val songInfo by songLinkViewModel.songInfo.collectAsStateWithLifecycle()
+            val platforms by songLinkViewModel.platforms.collectAsStateWithLifecycle()
+            val isLoading by songLinkViewModel.isLoading.collectAsStateWithLifecycle()
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
             val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 

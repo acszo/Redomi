@@ -4,11 +4,11 @@ import android.content.Context
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.repository.DataStoreRepository
 import com.acszo.redomi.repository.GithubRepository
-import com.acszo.redomi.repository.SongRepository
+import com.acszo.redomi.repository.SongLinkRepository
 import com.acszo.redomi.service.Api.BASE_URL_GITHUB
 import com.acszo.redomi.service.Api.BASE_URL_SONG_LINK
 import com.acszo.redomi.service.GithubService
-import com.acszo.redomi.service.SongService
+import com.acszo.redomi.service.SongLinkService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -36,35 +35,35 @@ object AppModule {
 
     @Provides
     @Singleton
-    @Named("SongLink")
-    fun provideSongLinkRetrofit(
+    fun provideSongLinkService(
         jsonConverter: Converter.Factory
-    ): Retrofit = Retrofit.Builder()
+    ): SongLinkService = Retrofit.Builder()
         .baseUrl(BASE_URL_SONG_LINK)
         .addConverterFactory(jsonConverter)
         .build()
-
-    @Provides
-    @Singleton
-    @Named("Github")
-    fun provideGithubRetrofit(
-        jsonConverter: Converter.Factory
-    ): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL_GITHUB)
-        .addConverterFactory(jsonConverter)
-        .build()
-
-    @Provides
-    @Singleton
-    fun provideSongService(
-        @Named("SongLink") retrofit: Retrofit
-    ): SongService = retrofit.create(SongService::class.java)
+        .create(SongLinkService::class.java)
 
     @Provides
     @Singleton
     fun provideGithubService(
-        @Named("Github") retrofit: Retrofit
-    ): GithubService = retrofit.create(GithubService::class.java)
+        jsonConverter: Converter.Factory
+    ): GithubService = Retrofit.Builder()
+        .baseUrl(BASE_URL_GITHUB)
+        .addConverterFactory(jsonConverter)
+        .build()
+        .create(GithubService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSongRepository(
+        songLinkService: SongLinkService
+    ): SongLinkRepository = SongLinkRepository(songLinkService)
+
+    @Provides
+    @Singleton
+    fun provideGithubRepository(
+        githubService: GithubService
+    ): GithubRepository = GithubRepository(githubService)
 
     @Provides
     @Singleton
@@ -77,17 +76,5 @@ object AppModule {
     fun provideDataStoreRepository(
         @ApplicationContext context: Context
     ): DataStoreRepository = DataStoreRepository(context)
-
-    @Provides
-    @Singleton
-    fun provideSongRepository(
-        songService: SongService
-    ): SongRepository = SongRepository(songService)
-
-    @Provides
-    @Singleton
-    fun provideGithubRepository(
-        githubService: GithubService
-    ): GithubRepository = GithubRepository(githubService)
 
 }

@@ -8,7 +8,7 @@ import com.acszo.redomi.model.Platform
 import com.acszo.redomi.model.Providers
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.repository.DataStoreRepository
-import com.acszo.redomi.repository.SongRepository
+import com.acszo.redomi.repository.SongLinkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,9 +19,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SongViewModel @Inject constructor(
+class SongLinkViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
-    private val songRepository: SongRepository
+    private val songLinkRepository: SongLinkRepository
 ): ViewModel() {
 
     private val _songInfo: MutableStateFlow<SongInfo?> = MutableStateFlow(null)
@@ -37,17 +37,13 @@ class SongViewModel @Inject constructor(
         try {
             _isLoading.update { true }
 
-            val response: Providers = songRepository.getSongs(url)
+            val response: Providers = songLinkRepository.getSongs(url)
             _songInfo.update { response.entitiesByUniqueId.entries.first().value }
 
             val selectedApps = Platform.platforms.filter {
-                if (appList == AppList.OPENING) {
-                    val openingApps = dataStoreRepository.readDataStore().first().openingAppsSelection
-                    openingApps.contains(it)
-                } else {
-                    val sharingApps = dataStoreRepository.readDataStore().first().sharingAppsSelection
-                    sharingApps.contains(it)
-                }
+                dataStoreRepository.readDataStore().first().let { apps ->
+                    if (appList == AppList.OPENING) apps.openingAppsSelection else apps.sharingAppsSelection
+                }.contains(it)
             }
 
             val mapLinkToApp: Map<AppDetails, String> = selectedApps
