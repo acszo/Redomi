@@ -7,8 +7,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AppsPreferences(
-    val openingAppsSelection: List<AppDetails> = platforms,
-    val sharingAppsSelection: List<AppDetails> = platforms
+    val openingAppsSelection: List<String> = platforms.keys.toList(),
+    val sharingAppsSelection: List<String> = platforms.keys.toList()
 )
 
 enum class AppList: Resource {

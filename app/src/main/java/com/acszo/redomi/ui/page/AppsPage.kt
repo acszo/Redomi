@@ -82,37 +82,37 @@ fun AppsPage(
             }
 
             if (selectedTab.value == AppList.OPENING) {
-                items(platforms) { app ->
+                items(platforms.toList()) { (id, app) ->
                     AppCheckBoxItem(
                         icon = app.icon,
                         iconShape = IconShape.entries[iconShape].shape,
                         title = app.title,
                         size = openingApps.size,
-                        isChecked = openingApps.contains(app),
+                        isChecked = openingApps.contains(id),
                         onCheckedAction = {
-                            openingApps.add(app)
+                            openingApps.add(id)
                             dataStoreViewModel.setOpeningApps(openingApps.toList())
                         },
                         onUnCheckedAction = {
-                            openingApps.remove(app)
+                            openingApps.remove(id)
                             dataStoreViewModel.setOpeningApps(openingApps.toList())
                         }
                     )
                 }
             } else {
-                items(platforms) { app ->
+                items(platforms.toList()) { (id, app) ->
                     AppCheckBoxItem(
                         icon = app.icon,
                         iconShape = IconShape.entries[iconShape].shape,
                         title = app.title,
                         size = sharingApps.size,
-                        isChecked = sharingApps.contains(app),
+                        isChecked = sharingApps.contains(id),
                         onCheckedAction = {
-                            sharingApps.add(app)
+                            sharingApps.add(id)
                             dataStoreViewModel.setSharingApps(sharingApps.toList())
                         },
                         onUnCheckedAction = {
-                            sharingApps.remove(app)
+                            sharingApps.remove(id)
                             dataStoreViewModel.setSharingApps(sharingApps.toList())
                         }
                     )

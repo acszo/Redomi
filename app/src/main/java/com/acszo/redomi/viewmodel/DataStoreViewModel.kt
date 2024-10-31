@@ -3,8 +3,8 @@ package com.acszo.redomi.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.data.DataStoreConst.FIRST_TIME
-import com.acszo.redomi.data.DataStoreConst.ICON_SHAPE
 import com.acszo.redomi.data.DataStoreConst.GRID_SIZE
+import com.acszo.redomi.data.DataStoreConst.ICON_SHAPE
 import com.acszo.redomi.data.DataStoreConst.LIST_ORIENTATION
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
 import com.acszo.redomi.data.DataStoreConst.THEME_MODE
@@ -12,7 +12,6 @@ import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.data.Theme
-import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.repository.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,11 +27,11 @@ class DataStoreViewModel @Inject constructor(
     private val settingsDataStore: SettingsDataStore
 ): ViewModel() {
 
-    private val _openingApps: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
-    val openingApps: StateFlow<List<AppDetails>> = _openingApps.asStateFlow()
+    private val _openingApps: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
+    val openingApps: StateFlow<List<String>> = _openingApps.asStateFlow()
 
-    private val _sharingApps: MutableStateFlow<List<AppDetails>> = MutableStateFlow(emptyList())
-    val sharingApps: StateFlow<List<AppDetails>> = _sharingApps.asStateFlow()
+    private val _sharingApps: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
+    val sharingApps: StateFlow<List<String>> = _sharingApps.asStateFlow()
 
     private val _isFirstTime: MutableStateFlow<Boolean?> = MutableStateFlow(false)
     val isFirstTime: StateFlow<Boolean?> = _isFirstTime.asStateFlow()
@@ -55,7 +54,7 @@ class DataStoreViewModel @Inject constructor(
         }
     }
 
-    fun setOpeningApps(openingApps: List<AppDetails>) = viewModelScope.launch {
+    fun setOpeningApps(openingApps: List<String>) = viewModelScope.launch {
         dataStoreRepository.saveOpeningApps(openingApps)
     }
 
@@ -65,7 +64,7 @@ class DataStoreViewModel @Inject constructor(
         }
     }
 
-    fun setSharingApps(sharingApps: List<AppDetails>) = viewModelScope.launch {
+    fun setSharingApps(sharingApps: List<String>) = viewModelScope.launch {
         dataStoreRepository.saveSharingApps(sharingApps)
     }
 

@@ -26,7 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
-import com.acszo.redomi.service.Api.URL_YOUTUBE_QUERY
+import com.acszo.redomi.service.Api.SEARCH_QUERY_YOUTUBE
 import com.acszo.redomi.utils.IntentUtil.onIntentView
 import kotlinx.coroutines.delay
 
@@ -65,7 +65,7 @@ fun ResultNotFound(
 
         if (query != null) {
             FilledTonalButton(
-                onClick = { onIntentView(context, URL_YOUTUBE_QUERY + query) },
+                onClick = { onIntentView(context, SEARCH_QUERY_YOUTUBE + query) },
                 contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
             ) {
                 Icon(

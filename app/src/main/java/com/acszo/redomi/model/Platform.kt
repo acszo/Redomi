@@ -1,19 +1,28 @@
 package com.acszo.redomi.model
 
 import com.acszo.redomi.R
+import com.acszo.redomi.service.Api.SEARCH_QUERY_YT_MUSIC
+import com.acszo.redomi.service.Api.SEARCH_QUERY_YOUTUBE
+import com.acszo.redomi.service.Api.SEARCH_QUERY_SPOTIFY
+import com.acszo.redomi.service.Api.SEARCH_QUERY_DEEZER
+import com.acszo.redomi.service.Api.SEARCH_QUERY_TIDAL
+import com.acszo.redomi.service.Api.SEARCH_QUERY_AMAZON_MUSIC
+import com.acszo.redomi.service.Api.SEARCH_QUERY_APPLE_MUSIC
+import com.acszo.redomi.service.Api.SEARCH_QUERY_SOUNDCLOUD
+import com.acszo.redomi.service.Api.SEARCH_QUERY_NAPSTER
 
 object Platform {
 
-    val platforms: List<AppDetails> = listOf(
-        AppDetails("youtubeMusic", "Youtube Music", R.drawable.ic_youtube_music),
-        AppDetails("youtube", "Youtube", R.drawable.ic_youtube),
-        AppDetails("spotify", "Spotify", R.drawable.ic_spotify),
-        AppDetails("deezer", "Deezer", R.drawable.ic_deezer),
-        AppDetails("tidal", "Tidal", R.drawable.ic_tidal),
-        AppDetails("amazonMusic", "Amazon Music", R.drawable.ic_amazon_music),
-        AppDetails("appleMusic", "Apple Music", R.drawable.ic_apple_music),
-        AppDetails("soundcloud", "Soundcloud", R.drawable.ic_soundcloud),
-        AppDetails("napster", "Napster", R.drawable.ic_napster),
+    val platforms = mapOf(
+        "youtubeMusic" to AppDetails("Youtube Music", R.drawable.ic_youtube_music, SEARCH_QUERY_YT_MUSIC),
+        "youtube" to AppDetails("Youtube", R.drawable.ic_youtube, SEARCH_QUERY_YOUTUBE),
+        "spotify" to AppDetails("Spotify", R.drawable.ic_spotify, SEARCH_QUERY_SPOTIFY),
+        "deezer" to AppDetails("Deezer", R.drawable.ic_deezer, SEARCH_QUERY_DEEZER),
+        "tidal" to AppDetails("Tidal", R.drawable.ic_tidal, SEARCH_QUERY_TIDAL),
+        "amazonMusic" to AppDetails("Amazon Music", R.drawable.ic_amazon_music, SEARCH_QUERY_AMAZON_MUSIC),
+        "appleMusic" to AppDetails("Apple Music", R.drawable.ic_apple_music, SEARCH_QUERY_APPLE_MUSIC),
+        "soundcloud" to AppDetails("Soundcloud", R.drawable.ic_soundcloud, SEARCH_QUERY_SOUNDCLOUD),
+        "napster" to AppDetails("Napster", R.drawable.ic_napster, SEARCH_QUERY_NAPSTER),
     )
 
 }

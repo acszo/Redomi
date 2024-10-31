@@ -2,10 +2,8 @@ package com.acszo.redomi.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.AppList
-import com.acszo.redomi.model.Platform
-import com.acszo.redomi.model.Providers
+import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.repository.DataStoreRepository
 import com.acszo.redomi.repository.SongLinkRepository
@@ -27,30 +25,30 @@ class SongLinkViewModel @Inject constructor(
     private val _songInfo: MutableStateFlow<SongInfo?> = MutableStateFlow(null)
     val songInfo: StateFlow<SongInfo?> = _songInfo.asStateFlow()
 
-    private val _platforms: MutableStateFlow<Map<AppDetails, String>> = MutableStateFlow(emptyMap())
-    val platforms: StateFlow<Map<AppDetails, String>> = _platforms.asStateFlow()
+    private val _platformsLink: MutableStateFlow<Map<String, String>> = MutableStateFlow(emptyMap())
+    val platformsLink: StateFlow<Map<String, String>> = _platformsLink.asStateFlow()
 
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    fun getPlatforms(url: String, appList: AppList) = viewModelScope.launch {
+    fun getPlatformsLink(url: String, appList: AppList) = viewModelScope.launch {
         try {
             _isLoading.update { true }
 
-            val response: Providers = songLinkRepository.getSongs(url)
+            val response = songLinkRepository.getSongs(url)
             _songInfo.update { response.entitiesByUniqueId.entries.first().value }
 
-            val selectedApps = Platform.platforms.filter {
-                dataStoreRepository.readDataStore().first().let { apps ->
-                    if (appList == AppList.OPENING) apps.openingAppsSelection else apps.sharingAppsSelection
-                }.contains(it)
+            val selectedApps = dataStoreRepository.readDataStore().first().let {
+                if (appList == AppList.OPENING) it.openingAppsSelection else it.sharingAppsSelection
             }
 
-            val mapLinkToApp: Map<AppDetails, String> = selectedApps
-                .associateWith { response.linksByPlatform[it.id]?.url ?: "" }
-                .filter { it.value.isNotEmpty() }
+            val orderedApps = platforms.keys.filter { selectedApps.contains(it) }
 
-            _platforms.update { mapLinkToApp }
+            val mapLinkToApp = orderedApps.associateWith {
+                response.linksByPlatform[it]?.url ?: "${platforms[it]?.query}${_songInfo.value?.run { "$title - $artistName" }}"
+            }
+
+            _platformsLink.update { mapLinkToApp }
 
             _isLoading.update { false }
         } catch (e: Exception) {

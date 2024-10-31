@@ -21,13 +21,13 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.acszo.redomi.model.AppDetails
+import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.component.ClickableItem
 import com.acszo.redomi.utils.IntentUtil
 
 @Composable
 fun HorizontalList(
-    platforms: Map<AppDetails, String>,
+    platformsLink: Map<String, String>,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>,
@@ -39,11 +39,11 @@ fun HorizontalList(
             .height(150.dp),
         contentPadding = PaddingValues(horizontal = 10.dp),
     ) {
-        items(items = platforms.toList()) { (app, link) ->
+        items(items = platformsLink.toList()) { (platform, link) ->
             AppItem(
-                app = app,
-                iconShape = iconShape,
+                platform = platform,
                 link = link,
+                iconShape = iconShape,
                 isActionSend = isActionSend,
                 showActionsMenu = showActionsMenu,
                 selectedPlatformLink = selectedPlatformLink,
@@ -54,7 +54,7 @@ fun HorizontalList(
 
 @Composable
 fun VerticalList(
-    platforms: Map<AppDetails, String>,
+    platformsLink: Map<String, String>,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>,
@@ -66,11 +66,11 @@ fun VerticalList(
         columns = GridCells.Fixed(gridSize),
         contentPadding = PaddingValues(horizontal = 10.dp),
     ) {
-        items(items = platforms.toList()) { (app, link) ->
+        items(items = platformsLink.toList()) { (platform, link) ->
             AppItem(
-                app = app,
-                iconShape = iconShape,
+                platform = platform,
                 link = link,
+                iconShape = iconShape,
                 isActionSend = isActionSend,
                 showActionsMenu = showActionsMenu,
                 selectedPlatformLink = selectedPlatformLink,
@@ -81,14 +81,15 @@ fun VerticalList(
 
 @Composable
 fun AppItem(
-    app: AppDetails,
-    iconShape: Shape,
+    platform: String,
     link: String,
+    iconShape: Shape,
     isActionSend: Boolean,
     showActionsMenu: MutableState<Boolean>,
     selectedPlatformLink: MutableState<String>
 ) {
     val context = LocalContext.current
+    val app = platforms[platform]!!
     val titleWords = app.title.split(' ')
 
     ClickableItem(

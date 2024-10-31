@@ -10,47 +10,34 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
-import com.acszo.redomi.model.AppDetails
 import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.common.enterFadeInTransition
 import com.acszo.redomi.utils.IntentUtil.onIntentView
-import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(
     onDismiss: () -> Unit,
-    dataStoreViewModel: DataStoreViewModel,
     songInfo: SongInfo?,
-    platforms: Map<AppDetails, String>,
+    platformsLink: Map<String, String>,
     isLoading: Boolean,
     isActionSend: Boolean,
-    isUpdateAvailable: Boolean
+    isUpdateAvailable: Boolean,
+    iconShape: Shape,
+    listOrientation: ListOrientation,
+    gridSize: Int
 ) {
     val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        dataStoreViewModel.getListOrientation()
-        dataStoreViewModel.getGridSize()
-    }
-
-    val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
-    val gridSize by dataStoreViewModel.gridSize.collectAsStateWithLifecycle()
-    val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
-
     val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = listOrientation == ListOrientation.HORIZONTAL.ordinal
+        skipPartiallyExpanded = listOrientation == ListOrientation.HORIZONTAL
     )
     val showActionsMenu = remember { mutableStateOf(false) }
     val selectedPlatformLink = remember { mutableStateOf("") }
@@ -71,8 +58,8 @@ fun BottomSheet(
                     CircularProgressIndicator()
                 }
             } else {
-                if (platforms.isNotEmpty()) {
-                    if (platforms.size > 1 || isActionSend) {
+                if (platformsLink.isNotEmpty()) {
+                    if (platformsLink.size > 1 || isActionSend) {
                         SongInfoDisplay(
                             type = songInfo?.type ?: "",
                             thumbnail = songInfo?.thumbnailUrl ?: "",
@@ -82,41 +69,41 @@ fun BottomSheet(
                         )
                     }
 
-                    if (platforms.size > 1 && !showActionsMenu.value) {
-                        when (ListOrientation.entries[listOrientation]) {
+                    if (platformsLink.size > 1 && !showActionsMenu.value) {
+                        when (listOrientation) {
                             ListOrientation.HORIZONTAL -> {
                                 HorizontalList(
-                                    platforms = platforms,
+                                    platformsLink = platformsLink,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,
                                     selectedPlatformLink = selectedPlatformLink,
-                                    iconShape = IconShape.entries[iconShape].shape
+                                    iconShape = iconShape
                                 )
                             }
                             ListOrientation.VERTICAL -> {
                                 VerticalList(
-                                    platforms = platforms,
+                                    platformsLink = platformsLink,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,
                                     selectedPlatformLink = selectedPlatformLink,
-                                    iconShape = IconShape.entries[iconShape].shape,
+                                    iconShape = iconShape,
                                     gridSize = gridSize
                                 )
                             }
                         }
                     }
 
-                    if (platforms.size == 1) {
+                    if (platformsLink.size == 1) {
                         if (!isActionSend) {
                             Box(
                                 modifier = Modifier.height(200.dp),
                             ) {
-                                onIntentView(context, platforms.values.first())
+                                onIntentView(context, platformsLink.values.first())
                                 onDismiss()
                             }
                         } else {
                             showActionsMenu.value = true
-                            selectedPlatformLink.value = platforms.values.first()
+                            selectedPlatformLink.value = platformsLink.values.first()
                         }
                     }
                 } else {

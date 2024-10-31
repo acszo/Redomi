@@ -8,6 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.acszo.redomi.data.IconShape
+import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.model.AppList
 import com.acszo.redomi.ui.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
@@ -29,10 +31,8 @@ class ConvertSongActivity: ComponentActivity() {
         setContent {
             val isActionSend = (intent.action == Intent.ACTION_SEND)
 
-            val intentData = if (isActionSend) {
-                intent?.getStringExtra(Intent.EXTRA_TEXT)
-            } else {
-                intent?.data
+            val intentData = intent?.let {
+                if (isActionSend) it.getStringExtra(Intent.EXTRA_TEXT) else it.data
             }.toString()
 
             val appList = if (isActionSend) AppList.SHARING else AppList.OPENING
@@ -42,29 +42,36 @@ class ConvertSongActivity: ComponentActivity() {
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
 
             LaunchedEffect(Unit) {
-                songLinkViewModel.getPlatforms(intentData, appList)
+                songLinkViewModel.getPlatformsLink(intentData, appList)
                 updateViewModel.latestRelease
-                dataStoreViewModel.getIconShape()
                 dataStoreViewModel.getThemeMode()
+                dataStoreViewModel.getIconShape()
+                dataStoreViewModel.getListOrientation()
+                dataStoreViewModel.getGridSize()
             }
 
             val songInfo by songLinkViewModel.songInfo.collectAsStateWithLifecycle()
-            val platforms by songLinkViewModel.platforms.collectAsStateWithLifecycle()
+            val platformsLink by songLinkViewModel.platformsLink.collectAsStateWithLifecycle()
             val isLoading by songLinkViewModel.isLoading.collectAsStateWithLifecycle()
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
             val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
+            val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
+            val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
+            val gridSize by dataStoreViewModel.gridSize.collectAsStateWithLifecycle()
 
             RedomiTheme(
                 theme = theme
             ) {
                 BottomSheet(
                     onDismiss = { this.finish() },
-                    dataStoreViewModel = dataStoreViewModel,
                     songInfo = songInfo,
-                    platforms = platforms,
+                    platformsLink = platformsLink,
                     isLoading = isLoading,
                     isActionSend = isActionSend,
-                    isUpdateAvailable = isUpdateAvailable
+                    isUpdateAvailable = isUpdateAvailable,
+                    iconShape = IconShape.entries[iconShape].shape,
+                    listOrientation = ListOrientation.entries[listOrientation],
+                    gridSize = gridSize,
                 )
             }
         }
