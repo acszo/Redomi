@@ -10,8 +10,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,10 +29,9 @@ fun RotatingIcon(
     startValue: Float,
     contentDescription: String? = null
 ) {
-    val currentRotation by remember { mutableFloatStateOf(startValue) }
-    val rotation = remember { Animatable(currentRotation) }
+    val rotation = remember { Animatable(startValue) }
 
-    LaunchedEffect(currentRotation) {
+    LaunchedEffect(Unit) {
         rotation.animateTo(
             targetValue = 180f,
             animationSpec = tween(300, easing = LinearOutSlowInEasing),
