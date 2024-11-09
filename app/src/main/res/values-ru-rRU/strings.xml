@@ -15,7 +15,7 @@
     <string name="horizontal">Горизонтально</string>
     <string name="vertical">Вертикально</string>
     <string name="icon_shape">Форма значка</string>
-    <string name="squircle_icon">Круглый квадрат</string>
+    <string name="squircle_icon">Скруглённый квадрат</string>
     <string name="circle_icon">Круг</string>
     <string name="square_icon">Квадрат</string>
     <string name="theme">Тема</string>
