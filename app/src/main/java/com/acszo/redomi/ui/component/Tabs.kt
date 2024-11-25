@@ -15,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -45,13 +46,13 @@ fun Tabs(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         AppList.entries.forEach { tab ->
-            val selectedTabColor = animateColorAsState(
+            val selectedTabColor by animateColorAsState(
                 targetValue = selectionBoxColor(selectedTab.value == tab),
                 animationSpec = tween(100, 0, LinearEasing),
                 label = ""
             )
 
-            val padding = animateDpAsState(
+            val padding by animateDpAsState(
                 targetValue = if (selectedTab.value == tab) 0.dp else width.value / 8,
                 label = ""
             )
@@ -72,7 +73,7 @@ fun Tabs(
                     }
                     .clip(MaterialTheme.shapes.extraLarge)
                     .layout { measurable, constraints ->
-                        val size = width.value.toPx() - padding.value.toPx()
+                        val size = width.value.toPx() - padding.toPx()
                         val placeable = measurable.measure(
                             constraints.copy(minWidth = size.toInt())
                         )
@@ -80,7 +81,7 @@ fun Tabs(
                             placeable.placeRelative(0, 0)
                         }
                     }
-                    .drawBehind { drawRect(selectedTabColor.value) },
+                    .drawBehind { drawRect(selectedTabColor) },
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
