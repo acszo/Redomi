@@ -22,9 +22,13 @@ static def formatVersion(version) {
 }
 
 android {
+    namespace 'com.acszo.redomi'
+    compileSdk 35
+
     androidResources {
         generateLocaleConfig true
     }
+
     signingConfigs {
         release {
             storeFile file(keystoreProperties['storeFile'])
@@ -33,8 +37,6 @@ android {
             keyPassword keystoreProperties['keyPassword']
         }
     }
-    namespace 'com.acszo.redomi'
-    compileSdk 35
 
     defaultConfig {
         applicationId 'com.acszo.redomi'
