@@ -7,12 +7,13 @@ import com.acszo.redomi.data.DataStoreConst.GRID_SIZE
 import com.acszo.redomi.data.DataStoreConst.ICON_SHAPE
 import com.acszo.redomi.data.DataStoreConst.LIST_ORIENTATION
 import com.acszo.redomi.data.DataStoreConst.MEDIUM_GRID
+import com.acszo.redomi.data.DataStoreConst.OPENING_APPS
+import com.acszo.redomi.data.DataStoreConst.SHARING_APPS
 import com.acszo.redomi.data.DataStoreConst.THEME_MODE
 import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.data.Theme
-import com.acszo.redomi.repository.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,15 +24,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DataStoreViewModel @Inject constructor(
-    private val dataStoreRepository: DataStoreRepository,
     private val settingsDataStore: SettingsDataStore
 ): ViewModel() {
 
-    private val _openingApps: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
-    val openingApps: StateFlow<List<String>> = _openingApps.asStateFlow()
+    private val _openingApps: MutableStateFlow<Set<String>> = MutableStateFlow(emptySet())
+    val openingApps: StateFlow<Set<String>> = _openingApps.asStateFlow()
 
-    private val _sharingApps: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
-    val sharingApps: StateFlow<List<String>> = _sharingApps.asStateFlow()
+    private val _sharingApps: MutableStateFlow<Set<String>> = MutableStateFlow(emptySet())
+    val sharingApps: StateFlow<Set<String>> = _sharingApps.asStateFlow()
 
     private val _isFirstTime: MutableStateFlow<Boolean?> = MutableStateFlow(false)
     val isFirstTime: StateFlow<Boolean?> = _isFirstTime.asStateFlow()
@@ -49,28 +49,28 @@ class DataStoreViewModel @Inject constructor(
     val themeMode: StateFlow<Int> = _themeMode.asStateFlow()
 
     fun getOpeningApps() = viewModelScope.launch {
-        dataStoreRepository.readDataStore().collectLatest {
-            _openingApps.value = it.openingAppsSelection
+        settingsDataStore.getSetOfStrings(OPENING_APPS).collectLatest {
+            _openingApps.value = it
         }
     }
 
-    fun setOpeningApps(openingApps: List<String>) = viewModelScope.launch {
-        dataStoreRepository.saveOpeningApps(openingApps)
+    fun setOpeningApps(openingApps: Set<String>) = viewModelScope.launch {
+        settingsDataStore.setSetOfStrings(OPENING_APPS, openingApps)
     }
 
     fun getSharingApps() = viewModelScope.launch {
-        dataStoreRepository.readDataStore().collectLatest {
-            _sharingApps.value = it.sharingAppsSelection
+        settingsDataStore.getSetOfStrings(SHARING_APPS).collectLatest {
+            _sharingApps.value = it
         }
     }
 
-    fun setSharingApps(sharingApps: List<String>) = viewModelScope.launch {
-        dataStoreRepository.saveSharingApps(sharingApps)
+    fun setSharingApps(sharingApps: Set<String>) = viewModelScope.launch {
+        settingsDataStore.setSetOfStrings(SHARING_APPS, sharingApps)
     }
 
     fun getIsFirstTime() = viewModelScope.launch {
         settingsDataStore.getBoolean(FIRST_TIME).collectLatest {
-            _isFirstTime.value = it ?: true
+            _isFirstTime.value = it != false
         }
     }
 

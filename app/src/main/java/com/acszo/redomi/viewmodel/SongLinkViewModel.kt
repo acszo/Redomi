@@ -2,10 +2,10 @@ package com.acszo.redomi.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.acszo.redomi.model.AppList
+import com.acszo.redomi.data.AppList
+import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.model.SongInfo
-import com.acszo.redomi.repository.DataStoreRepository
 import com.acszo.redomi.repository.SongLinkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SongLinkViewModel @Inject constructor(
-    private val dataStoreRepository: DataStoreRepository,
+    private val settingsDataStore: SettingsDataStore,
     private val songLinkRepository: SongLinkRepository
 ): ViewModel() {
 
@@ -38,9 +38,7 @@ class SongLinkViewModel @Inject constructor(
             val response = songLinkRepository.getSongs(url)
             _songInfo.update { response.entitiesByUniqueId.entries.first().value }
 
-            val selectedApps = dataStoreRepository.readDataStore().first().let {
-                if (appList == AppList.OPENING) it.openingAppsSelection else it.sharingAppsSelection
-            }
+            val selectedApps = settingsDataStore.getSetOfStrings(appList.key).first()
 
             val orderedApps = platforms.keys.filter { selectedApps.contains(it) }
 

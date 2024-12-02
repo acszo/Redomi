@@ -2,7 +2,6 @@ package com.acszo.redomi.di
 
 import android.content.Context
 import com.acszo.redomi.data.SettingsDataStore
-import com.acszo.redomi.repository.DataStoreRepository
 import com.acszo.redomi.repository.GithubRepository
 import com.acszo.redomi.repository.SongLinkRepository
 import com.acszo.redomi.service.Api.BASE_URL_GITHUB
@@ -70,11 +69,5 @@ object AppModule {
     fun provideSettingsDataStore(
         @ApplicationContext context: Context
     ): SettingsDataStore = SettingsDataStore(context)
-
-    @Provides
-    @Singleton
-    fun provideDataStoreRepository(
-        @ApplicationContext context: Context
-    ): DataStoreRepository = DataStoreRepository(context)
 
 }

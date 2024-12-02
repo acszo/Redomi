@@ -7,10 +7,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
 import com.acszo.redomi.R
+import com.acszo.redomi.data.DataStoreConst.OPENING_APPS
+import com.acszo.redomi.data.DataStoreConst.SHARING_APPS
 import com.acszo.squircle.SquircleShape
 
 object DataStoreConst {
 
+    const val OPENING_APPS = "opening_apps"
+    const val SHARING_APPS = "sharing_apps"
     const val FIRST_TIME = "first_time"
     const val LIST_ORIENTATION = "list_orientation"
     const val GRID_SIZE = "grid_size"
@@ -27,6 +31,17 @@ interface Resource {
     @get:StringRes val toRes: Int
 }
 
+enum class AppList(val key: String): Resource {
+    OPENING(OPENING_APPS),
+    SHARING(SHARING_APPS);
+
+    override val toRes: Int
+        get() = when (this) {
+            OPENING -> R.string.opening
+            SHARING -> R.string.sharing
+        }
+}
+
 enum class ListOrientation: Resource {
     HORIZONTAL,
     VERTICAL;
@@ -41,7 +56,7 @@ enum class ListOrientation: Resource {
 enum class IconShape(val shape: Shape): Resource {
     SQUIRCLE(SquircleShape),                // 👍👍👍
     CIRCLE(CircleShape),                    // 👍👍
-    SQUARE(RoundedCornerShape(25)); // 👎
+    SQUARE(RoundedCornerShape(25));         // 👎
 
     override val toRes: Int
         get() = when (this) {

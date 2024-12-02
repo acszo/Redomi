@@ -6,7 +6,9 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.acszo.redomi.model.Platform.platforms
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -41,6 +43,19 @@ class SettingsDataStore(
     suspend fun setInt(key: String, value: Int) {
         context.dataStore.edit { preferences ->
             preferences[intPreferencesKey(key)] = value
+        }
+    }
+
+    fun getSetOfStrings(key: String): Flow<Set<String>> {
+        return context.dataStore.data
+            .map { preferences ->
+                preferences[stringSetPreferencesKey(key)] ?: platforms.keys
+            }
+    }
+
+    suspend fun setSetOfStrings(key: String, value: Set<String>) {
+        context.dataStore.edit { preferences ->
+            preferences[stringSetPreferencesKey(key)] = value
         }
     }
 

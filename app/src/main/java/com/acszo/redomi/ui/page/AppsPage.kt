@@ -21,8 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
+import com.acszo.redomi.data.AppList
 import com.acszo.redomi.data.IconShape
-import com.acszo.redomi.model.AppList
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.common.PageBottomInfo
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
@@ -45,8 +45,8 @@ fun AppsPage(
     }
 
     val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
-    val openingApps = dataStoreViewModel.openingApps.collectAsStateWithLifecycle().value.toMutableList()
-    val sharingApps = dataStoreViewModel.sharingApps.collectAsStateWithLifecycle().value.toMutableList()
+    val openingApps = dataStoreViewModel.openingApps.collectAsStateWithLifecycle().value.toMutableSet()
+    val sharingApps = dataStoreViewModel.sharingApps.collectAsStateWithLifecycle().value.toMutableSet()
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.apps),
@@ -91,11 +91,11 @@ fun AppsPage(
                         isChecked = openingApps.contains(id),
                         onCheckedAction = {
                             openingApps.add(id)
-                            dataStoreViewModel.setOpeningApps(openingApps.toList())
+                            dataStoreViewModel.setOpeningApps(openingApps.toSet())
                         },
                         onUnCheckedAction = {
                             openingApps.remove(id)
-                            dataStoreViewModel.setOpeningApps(openingApps.toList())
+                            dataStoreViewModel.setOpeningApps(openingApps.toSet())
                         }
                     )
                 }
@@ -109,11 +109,11 @@ fun AppsPage(
                         isChecked = sharingApps.contains(id),
                         onCheckedAction = {
                             sharingApps.add(id)
-                            dataStoreViewModel.setSharingApps(sharingApps.toList())
+                            dataStoreViewModel.setSharingApps(sharingApps.toSet())
                         },
                         onUnCheckedAction = {
                             sharingApps.remove(id)
-                            dataStoreViewModel.setSharingApps(sharingApps.toList())
+                            dataStoreViewModel.setSharingApps(sharingApps.toSet())
                         }
                     )
                 }
