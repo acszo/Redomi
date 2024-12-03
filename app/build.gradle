@@ -82,9 +82,9 @@ android {
         variant.outputs.configureEach { output ->
             def flavorName = variant.flavorName
             def buildType = variant.buildType.name
-            def suffix = flavorName == "repo" ? "-no-updater" : ""
+            def suffix = flavorName == "github" ? "github" : "no-updater"
 
-            outputFileName = "redomi-${buildType}${suffix}.apk"
+            outputFileName = "redomi-${buildType}-${suffix}.apk"
         }
     }
 
