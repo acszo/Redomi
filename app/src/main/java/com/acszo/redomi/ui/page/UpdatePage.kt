@@ -26,7 +26,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
@@ -36,6 +35,7 @@ import com.acszo.redomi.ui.component.fadingEdge
 import com.acszo.redomi.ui.component.ignoreHorizontalPadding
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk
+import com.acszo.redomi.versionName
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -144,7 +144,7 @@ fun UpdatePage(
                             }
                         }
                     } else {
-                        updateViewModel.checkUpdate(BuildConfig.VERSION_NAME)
+                        updateViewModel.checkUpdate(versionName)
                     }
                 },
             ) {

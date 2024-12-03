@@ -15,11 +15,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.acszo.redomi.BuildConfig
 import com.acszo.redomi.R
 import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.data.Theme
+import com.acszo.redomi.isGithubBuild
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.DefaultDialog
 import com.acszo.redomi.ui.component.IconItemDialog
@@ -30,6 +30,7 @@ import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
 import com.acszo.redomi.ui.nav.Pages.UPDATE_PAGE
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
+import com.acszo.redomi.versionName
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable
@@ -49,7 +50,6 @@ fun SettingsPage(
 
     val uriHandle = LocalUriHandler.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
-    val versionName = BuildConfig.VERSION_NAME
     val appVersion = "Version: $versionName"
     val modelName = "Model: ${Build.MODEL}"
     val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
@@ -109,14 +109,16 @@ fun SettingsPage(
                 }
             }
 
-            item {
-                SettingsItem(
-                    icon = R.drawable.ic_update,
-                    title = stringResource(id = R.string.update),
-                    description = stringResource(id = R.string.update_description),
-                    isAlertIconVisible = isUpdateAvailable
-                ) {
-                    navController.navigate(UPDATE_PAGE)
+            if (isGithubBuild) {
+                item {
+                    SettingsItem(
+                        icon = R.drawable.ic_update,
+                        title = stringResource(id = R.string.update),
+                        description = stringResource(id = R.string.update_description),
+                        isAlertIconVisible = isUpdateAvailable
+                    ) {
+                        navController.navigate(UPDATE_PAGE)
+                    }
                 }
             }
 

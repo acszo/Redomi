@@ -42,12 +42,13 @@ class ConvertSongActivity: ComponentActivity() {
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
 
             LaunchedEffect(Unit) {
-                songLinkViewModel.getPlatformsLink(intentData, appList)
-                updateViewModel.latestRelease
+                songLinkViewModel.getPlatformsLink(intentData, appList.key)
                 dataStoreViewModel.getThemeMode()
                 dataStoreViewModel.getIconShape()
                 dataStoreViewModel.getListOrientation()
                 dataStoreViewModel.getGridSize()
+
+                if (isGithubBuild) updateViewModel.checkUpdate(versionName)
             }
 
             val songInfo by songLinkViewModel.songInfo.collectAsStateWithLifecycle()

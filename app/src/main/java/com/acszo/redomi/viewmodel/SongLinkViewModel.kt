@@ -2,7 +2,6 @@ package com.acszo.redomi.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.acszo.redomi.data.AppList
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.model.SongInfo
@@ -31,14 +30,14 @@ class SongLinkViewModel @Inject constructor(
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    fun getPlatformsLink(url: String, appList: AppList) = viewModelScope.launch {
+    fun getPlatformsLink(url: String, key: String) = viewModelScope.launch {
         try {
             _isLoading.update { true }
 
             val response = songLinkRepository.getSongs(url)
             _songInfo.update { response.entitiesByUniqueId.entries.first().value }
 
-            val selectedApps = settingsDataStore.getSetOfStrings(appList.key).first()
+            val selectedApps = settingsDataStore.getSetOfStrings(key).first()
 
             val orderedApps = platforms.keys.filter { selectedApps.contains(it) }
 

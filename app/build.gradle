@@ -22,6 +22,7 @@ static def formatVersion(version) {
 }
 
 android {
+
     namespace 'com.acszo.redomi'
     compileSdk 35
 
@@ -64,26 +65,44 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("github") {
+            dimension = "version"
+        }
+        create("repo") {
+            dimension = "version"
+            applicationIdSuffix '.repo'
+            versionName = "$appVersionName-(repo)"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = '11'
     }
+
     buildFeatures {
         compose true
         buildConfig true
     }
+
     dependenciesInfo {
         includeInApk false
         includeInBundle false
     }
+
     packagingOptions {
         resources {
             excludes += '**'
         }
     }
+
 }
 
 dependencies {

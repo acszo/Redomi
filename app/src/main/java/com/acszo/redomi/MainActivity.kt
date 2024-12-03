@@ -35,17 +35,19 @@ class MainActivity : ComponentActivity() {
 
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
             val updateViewModel: UpdateViewModel = hiltViewModel()
-            val versionName = BuildConfig.VERSION_NAME
 
             LaunchedEffect(Unit) {
-                updateViewModel.checkUpdate(versionName)
                 dataStoreViewModel.getIsFirstTime()
                 dataStoreViewModel.getListOrientation()
                 dataStoreViewModel.getGridSize()
                 dataStoreViewModel.getIconShape()
                 dataStoreViewModel.getThemeMode()
-                scope.launch(Dispatchers.IO) {
-                    deleteApk(context)
+
+                if (isGithubBuild) {
+                    updateViewModel.checkUpdate(versionName)
+                    scope.launch(Dispatchers.IO) {
+                        deleteApk(context)
+                    }
                 }
             }
 

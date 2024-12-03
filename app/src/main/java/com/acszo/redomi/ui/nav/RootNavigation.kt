@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.acszo.redomi.isGithubBuild
 import com.acszo.redomi.ui.common.TransitionDirection
 import com.acszo.redomi.ui.common.enterHorizontalTransition
 import com.acszo.redomi.ui.common.exitHorizontalTransition
@@ -57,13 +58,16 @@ fun RootNavigation(
                 BackButton { navController.popBackStack() }
             }
         }
-        navigationComposable(
-            route = Route.UpdatePage.route
-        ) {
-            UpdatePage(
-                updateViewModel = updateViewModel
+
+        if (isGithubBuild) {
+            navigationComposable(
+                route = Route.UpdatePage.route
             ) {
-                BackButton { navController.popBackStack() }
+                UpdatePage(
+                    updateViewModel = updateViewModel
+                ) {
+                    BackButton { navController.popBackStack() }
+                }
             }
         }
     }
