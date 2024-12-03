@@ -44,12 +44,6 @@
     <string name="dialog_setup_description_checked">Проверьте ссылки, чтобы %s могла открывать их правильно.</string>
     <string name="dialog_setup_description_unchecked">Снимите флажки с тех, которые относятся к используемым вами музыкальным сервисам. (например, если вы пользуетесь Spotify, снимите этот флажок)</string>
     <string name="update_info_failed">Не удалось загрузить информацию об обновлении</string>
-    <string name="updating">Обновление</string>
-    <string name="update_completed">Обновление завершено</string>
-    <string name="update_aborted">Принять разрешение на обновление</string>
-    <string name="update_failed">Обновление не удалось</string>
-    <string name="update_available">Доступна новая версия</string>
-    <string name="no_update_available">Обновлений не найдено</string>
     <string name="no_result_found">Результаты не найдены</string>
     <string name="search_on">Искать в %s</string>
 </resources>
