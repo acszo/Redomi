@@ -2,12 +2,13 @@
   <img width="180" height="180" src="/preview/logo.svg">
   <h1>Redomi</h1>
   <p>Unofficial <a href="https://song.link/">song.link</a> client made in Jetpack Compose and Material You</p>
+
+  [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/acszo/Redomi/releases/latest)
+  [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.acszo.redomi.repo)
   
-  [![Latest release](https://img.shields.io/github/v/release/acszo/Redomi?logo=github&label=Latest&color=blue)](https://github.com/acszo/Redomi/releases/latest/)
   ![Supported versions](https://img.shields.io/badge/Support-9%2B-green?logo=android)
   [![Download count](https://img.shields.io/github/downloads/acszo/Redomi/total?label=Downloads&logo=github)](https://github.com/acszo/Redomi/releases/latest/)
   [![Crowdin](https://badges.crowdin.net/redomi/localized.svg)](https://crowdin.com/project/redomi)
-  
 </div>
 
 ## Description
