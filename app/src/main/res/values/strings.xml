@@ -46,12 +46,6 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Couldn\'t load update info</string>
-    <string name="updating">Updating</string>
-    <string name="update_completed">Update completed</string>
-    <string name="update_aborted">Accept the permission to update</string>
-    <string name="update_failed">Update failed</string>
-    <string name="update_available">New version available</string>
-    <string name="no_update_available">No update found</string>
     <string name="no_result_found">No result found</string>
     <string name="youtube" translatable="false">YouTube</string>
     <string name="search_on">Search on %s</string>
