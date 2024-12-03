@@ -1,0 +1,12 @@
+Unofficial song.link client
+
+<br><b>Features:</b>
+
+- Open supported links from different music services in your favourite streaming app
+- Convert links and share songs with others on their preferred platforms
+- Customize Sharesheet in different ways:
+  - Icon shapes
+  - Choose which apps to display
+  - Decide between a horizontal or vertical list, and its grid size
+- Material You
+- Light/Dark Theme

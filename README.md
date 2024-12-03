@@ -38,11 +38,11 @@ And you can also share the songs you want to anyone by converting the link to th
 ## Screenshots
 
 <p align="center">
-  <img src="/preview/screenshot_1.png" width="30%" />
-  <img src="/preview/screenshot_2.png" width="30%" />
-  <img src="/preview/screenshot_3.png" width="30%" />
-  <img src="/preview/screenshot_4.png" width="30%" />
-  <img src="/preview/screenshot_5.png" width="30%" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.png" width="30%" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.png" width="30%" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.png" width="30%" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_4.png" width="30%" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_5.png" width="30%" />
   <img src="/preview/screenshot_6.png" width="30%" />
 </p>
 
