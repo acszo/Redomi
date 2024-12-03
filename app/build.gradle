@@ -11,8 +11,8 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(rootProject.file('keystore.properties')))
 
 def versionMajor = 1
-def versionMinor = 2
-def versionPatch = 3
+def versionMinor = 3
+def versionPatch = 0
 
 def appVersionCode = "${versionMajor}${formatVersion(versionMinor)}${formatVersion(versionPatch)}" as Integer
 def appVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
@@ -75,6 +75,16 @@ android {
             dimension = "version"
             applicationIdSuffix '.repo'
             versionName = "$appVersionName-(repo)"
+        }
+    }
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            def flavorName = variant.flavorName
+            def buildType = variant.buildType.name
+            def suffix = flavorName == "repo" ? "-no-updater" : ""
+
+            outputFileName = "redomi-${buildType}${suffix}.apk"
         }
     }
 
