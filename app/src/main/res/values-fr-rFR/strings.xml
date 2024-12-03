@@ -44,12 +44,6 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Impossible de charger les informations de mise à jour</string>
-    <string name="updating">Mise à jour</string>
-    <string name="update_completed">Mise à jour terminée</string>
-    <string name="update_aborted">Accepter la permission de mettre à jour</string>
-    <string name="update_failed">Mise à jour a échoué</string>
-    <string name="update_available">Nouvelle version disponible</string>
-    <string name="no_update_available">Aucune mise à jour trouvée</string>
     <string name="no_result_found">Aucun résultat trouvé</string>
     <string name="search_on">Chercher sur %s</string>
 </resources>
