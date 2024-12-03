@@ -44,12 +44,6 @@
     <string name="dialog_setup_description_checked">Überprüfe die Links, damit %s sie korrekt öffnen kann.</string>
     <string name="dialog_setup_description_unchecked">Lasse diejenigen Links aus, die du als Musikdienst bereits nutzt (wenn du z.B. Spotify nutzt, brauchst du es hier nicht auswählen)</string>
     <string name="update_info_failed">Update-Informationen konnten nicht geladen werden</string>
-    <string name="updating">Am aktualisieren</string>
-    <string name="update_completed">Update abgeschlossen</string>
-    <string name="update_aborted">Update-Berechtigung akzeptieren</string>
-    <string name="update_failed">Update fehlgeschlagen</string>
-    <string name="update_available">Eine neue Version ist verfügbar</string>
-    <string name="no_update_available">Kein Update gefunden</string>
     <string name="no_result_found">Keine Ergebnisse gefunden</string>
     <string name="search_on">Suche auf %s</string>
 </resources>

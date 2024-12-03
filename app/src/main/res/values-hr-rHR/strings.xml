@@ -44,12 +44,6 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Ne mogu dobiti informacije o ažuriranju</string>
-    <string name="updating">Ažuriranje</string>
-    <string name="update_completed">Ažuriranje je završeno</string>
-    <string name="update_aborted">Prihvatite dozvolu za ažuriranje</string>
-    <string name="update_failed">Ažuriranje nije uspjelo</string>
-    <string name="update_available">Dostupna je nova verzija</string>
-    <string name="no_update_available">Nema pronađenih ažuriranja</string>
     <string name="no_result_found">Nema rezultata</string>
     <string name="search_on">Potražite na %s</string>
 </resources>

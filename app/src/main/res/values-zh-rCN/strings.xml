@@ -44,12 +44,6 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">无法加载更新信息</string>
-    <string name="updating">更新中</string>
-    <string name="update_completed">更新完成</string>
-    <string name="update_aborted">接受更新权限</string>
-    <string name="update_failed">更新失败</string>
-    <string name="update_available">有新版本可用</string>
-    <string name="no_update_available">未找到更新</string>
     <string name="no_result_found">没有找到结果</string>
     <string name="search_on">在 %s 上搜索</string>
 </resources>

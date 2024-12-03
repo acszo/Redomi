@@ -44,12 +44,6 @@
     <string name="dialog_setup_description_checked">%s\'nin doğru şekilde açabilmesi için bağlantıları kontrol edin.</string>
     <string name="dialog_setup_description_unchecked">Kullandığınız müzik hizmetlerinden olanları işaretlemeyin. (örneğin Spotify kullanıyorsanız işareti kaldırın)</string>
     <string name="update_info_failed">Güncelleme bilgisi yüklenemedi</string>
-    <string name="updating">Güncelleniyor</string>
-    <string name="update_completed">Güncelleme tamamlandı</string>
-    <string name="update_aborted">Güncelleme iznini kabul et</string>
-    <string name="update_failed">Güncelleme başarısız oldu</string>
-    <string name="update_available">Yeni sürüm mevcut</string>
-    <string name="no_update_available">Güncelleme bulunamadı</string>
     <string name="no_result_found">Sonuç bulunamadı</string>
     <string name="search_on">%s\'da ara</string>
 </resources>
