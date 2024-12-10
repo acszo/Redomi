@@ -23,7 +23,7 @@ import com.acszo.redomi.isGithubBuild
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.DefaultDialog
 import com.acszo.redomi.ui.component.IconItemDialog
-import com.acszo.redomi.ui.component.RadioButtonItem
+import com.acszo.redomi.ui.component.RadioButtonItemDialog
 import com.acszo.redomi.ui.component.SettingsItem
 import com.acszo.redomi.ui.nav.Pages.APPS_PAGE
 import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
@@ -179,11 +179,9 @@ fun SettingsPage(
             title = stringResource(id = R.string.icon_shape),
             content = {
                 IconShape.entries.forEach { item ->
-                    RadioButtonItem(
+                    RadioButtonItemDialog(
                         item = item,
                         isSelected = item == IconShape.entries[iconShape],
-                        horizontalPadding = 0.dp,
-                        startPadding = 15.dp,
                         onClick = dataStoreViewModel::setIconShape
                     )
                 }
@@ -199,11 +197,9 @@ fun SettingsPage(
             title = stringResource(id = R.string.theme),
             content = {
                 Theme.entries.forEach { item ->
-                    RadioButtonItem(
+                    RadioButtonItemDialog(
                         item = item,
                         isSelected = item == Theme.entries[themeMode],
-                        horizontalPadding = 0.dp,
-                        startPadding = 15.dp,
                         onClick = dataStoreViewModel::setThemeMode
                     )
                 }

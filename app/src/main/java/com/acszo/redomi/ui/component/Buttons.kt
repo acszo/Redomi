@@ -21,6 +21,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.acszo.redomi.R
 import com.acszo.redomi.data.Resource
 
@@ -48,7 +50,36 @@ fun BackButton(
 }
 
 @Composable
-fun <T> RadioButtonItem(
+fun <T> RadioButtonItemDialog(
+    item: T,
+    isSelected: Boolean,
+    onClick: (Int) -> Unit
+) where T : Enum<T>, T : Resource = RadioButtonItemPage(
+    modifier = Modifier.clip(MaterialTheme.shapes.small),
+    item = item,
+    isSelected = isSelected,
+    horizontalPadding = 0.dp,
+    startPadding = 15.dp,
+    onClick = onClick
+)
+
+
+@Composable
+fun <T> RadioButtonItemPage(
+    item: T,
+    isSelected: Boolean,
+    onClick: (Int) -> Unit
+) where T : Enum<T>, T : Resource = RadioButtonItemPage(
+    modifier = Modifier.ignoreHorizontalPadding(),
+    item = item,
+    isSelected = isSelected,
+    verticalPadding = 24.dp,
+    fontSize = 20.sp,
+    onClick = onClick
+)
+
+@Composable
+private fun <T> RadioButtonItemPage(
     modifier: Modifier = Modifier,
     item: T,
     isSelected: Boolean,

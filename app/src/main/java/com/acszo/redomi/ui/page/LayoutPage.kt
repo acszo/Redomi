@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.BIG_GRID
@@ -25,8 +24,7 @@ import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.enterVerticalTransition
 import com.acszo.redomi.ui.common.exitVerticalTransition
 import com.acszo.redomi.ui.component.AnimatedRadiusButton
-import com.acszo.redomi.ui.component.RadioButtonItem
-import com.acszo.redomi.ui.component.ignoreHorizontalPadding
+import com.acszo.redomi.ui.component.RadioButtonItemPage
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable
@@ -60,12 +58,9 @@ fun LayoutPage(
 
             item {
                 ListOrientation.entries.forEach { item ->
-                    RadioButtonItem(
-                        modifier = Modifier.ignoreHorizontalPadding(),
-                        isSelected = item == ListOrientation.entries[listOrientation],
+                    RadioButtonItemPage(
                         item = item,
-                        verticalPadding = 24.dp,
-                        fontSize = 20.sp,
+                        isSelected = item == ListOrientation.entries[listOrientation],
                         onClick = dataStoreViewModel::setListOrientation
                     )
                 }
