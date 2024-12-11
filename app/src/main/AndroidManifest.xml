@@ -41,6 +41,7 @@
                 <data android:host="www.youtube.com"/>
                 <data android:host="open.spotify.com"/>
                 <data android:host="www.deezer.com"/>
+                <data android:host="tidal.com"/>
                 <data android:host="listen.tidal.com"/>
                 <data android:host="music.amazon.com"/>
                 <data android:host="music.apple.com"/>
