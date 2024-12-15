@@ -167,8 +167,8 @@ fun SettingsPage(
                 )
             },
             onConfirmAction = {
-                onIntentOpenDefaultsApp(context)
                 dataStoreViewModel.setIsFirstTime()
+                onIntentOpenDefaultsApp(context)
             }
         )
     }
