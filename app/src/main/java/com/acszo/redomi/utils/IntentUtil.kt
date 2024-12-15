@@ -12,21 +12,23 @@ import com.acszo.redomi.MainActivity
 object IntentUtil {
 
     fun onIntentView(context: Context, url: String) {
-        val uri: Uri = Uri.parse(url)
-        val intent = Intent(Intent.ACTION_VIEW)
+        val uri = Uri.parse(url)
+        var intent = Intent(Intent.ACTION_VIEW)
             .setData(uri)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        // checks which app is the default to open the uri in question with MATCH_DEFAULT_ONLY
+
+        // Checks the default app that resolves the uri
         val resolveInfo = context.packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
         val packageName = resolveInfo?.activityInfo?.packageName ?: ""
 
-        if (packageName != context.packageName) {
-            context.startActivity(intent)
-        } else {
-            val browserIntent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
-                .setData(uri)
-            context.startActivity(browserIntent)
+        // Force to open in browser, when Redomi is the default to resolve the uri
+        if (packageName == context.packageName) {
+            intent = Intent.makeMainSelectorActivity(
+                Intent.ACTION_MAIN,
+                Intent.CATEGORY_APP_BROWSER
+            ).setData(uri)
         }
+        context.startActivity(intent)
     }
 
     fun onIntentSend(context: Context, url: String) {
@@ -39,12 +41,14 @@ object IntentUtil {
     @SuppressLint("InlinedApi")
     fun onIntentOpenDefaultsApp(context: Context) {
         val uri = Uri.parse("package:${context.packageName}")
+
         // Work around for One UI 4, because ACTION_APP_OPEN_BY_DEFAULT_SETTING crashes, kpop company moment 🫰
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.S && Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
-            context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri))
+        val settings = if (Build.VERSION.SDK_INT == Build.VERSION_CODES.S && Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
+            Settings.ACTION_APPLICATION_DETAILS_SETTINGS
         } else {
-            context.startActivity(Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri))
+            Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS
         }
+        context.startActivity(Intent(settings, uri))
     }
 
     fun onIntentSettingsPage(context: Context) {
