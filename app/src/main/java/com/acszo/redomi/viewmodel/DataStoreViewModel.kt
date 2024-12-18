@@ -33,8 +33,8 @@ class DataStoreViewModel @Inject constructor(
     private val _sharingApps: MutableStateFlow<Set<String>> = MutableStateFlow(emptySet())
     val sharingApps: StateFlow<Set<String>> = _sharingApps.asStateFlow()
 
-    private val _isFirstTime: MutableStateFlow<Boolean?> = MutableStateFlow(false)
-    val isFirstTime: StateFlow<Boolean?> = _isFirstTime.asStateFlow()
+    private val _isFirstTime: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isFirstTime: StateFlow<Boolean> = _isFirstTime.asStateFlow()
 
     private val _listOrientation: MutableStateFlow<Int> = MutableStateFlow(ListOrientation.HORIZONTAL.ordinal)
     val listOrientation: StateFlow<Int> = _listOrientation.asStateFlow()

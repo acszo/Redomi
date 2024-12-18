@@ -148,7 +148,7 @@ fun SettingsPage(
         }
     }
 
-    if (isFirstTime!! && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    if (isFirstTime && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         DefaultDialog(
             icon = R.drawable.ic_description,
             title = stringResource(id = R.string.dialog_setup_title),
