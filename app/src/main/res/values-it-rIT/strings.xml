@@ -44,4 +44,8 @@
     <string name="dialog_setup_description_checked">Seleziona i link così che %s possa aprirli correttamente.</string>
     <string name="dialog_setup_description_unchecked">Lascia deselezionati quelli che fanno parte dei servizi di musica che usi. (es. se usi Spotify lascialo deselezionato)</string>
     <string name="update_info_failed">Impossibile caricare le informazioni sull\'aggiornamento</string>
+    <string name="error_incorrect_url">The given url is incorrect</string>
+    <string name="error_no_internet_connection">No internet connection</string>
+    <string name="error_generic">An error occurred</string>
+    <string name="error_server">Server Error</string>
 </resources>
