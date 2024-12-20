@@ -16,19 +16,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.data.ListOrientation
-import com.acszo.redomi.model.SongInfo
 import com.acszo.redomi.ui.common.enterFadeInTransition
 import com.acszo.redomi.utils.IntentUtil.onIntentView
+import com.acszo.redomi.viewmodel.BottomSheetUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(
     onDismiss: () -> Unit,
-    songInfo: SongInfo?,
-    platformsLink: Map<String, String>,
-    isLoading: Boolean,
+    uiState: BottomSheetUiState,
     isActionSend: Boolean,
     isUpdateAvailable: Boolean,
     iconShape: Shape,
@@ -50,39 +49,47 @@ fun BottomSheet(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (isLoading) {
-                Box(
-                    modifier = Modifier.height(200.dp),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
+            when {
+                !uiState.isLoaded -> {
+                    Box(
+                        modifier = Modifier.height(200.dp),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        CircularProgressIndicator()
+                    }
                 }
-            } else {
-                if (platformsLink.isNotEmpty()) {
-                    if (platformsLink.size > 1 || isActionSend) {
+                uiState.error != null -> {
+                    BottomSheetError(stringResource(uiState.error))
+                }
+                uiState.songInfo != null && uiState.platformsLinks != null -> {
+                    val songInfo = uiState.songInfo
+                    val platformsLinks = uiState.platformsLinks
+
+                    if (platformsLinks.size > 1 || isActionSend) {
                         SongInfoDisplay(
-                            type = songInfo?.type ?: "",
-                            thumbnail = songInfo?.thumbnailUrl ?: "",
-                            title = songInfo?.title ?: "",
-                            artist = songInfo?.artistName ?: "",
+                            type = songInfo.type,
+                            thumbnail = songInfo.thumbnailUrl,
+                            title = songInfo.title,
+                            artist = songInfo.artistName,
                             isUpdateAvailable = isUpdateAvailable
                         )
                     }
 
-                    if (platformsLink.size > 1 && !showActionsMenu.value) {
+                    if (platformsLinks.size > 1 && !showActionsMenu.value) {
                         when (listOrientation) {
                             ListOrientation.HORIZONTAL -> {
                                 HorizontalList(
-                                    platformsLink = platformsLink,
+                                    platformsLink = platformsLinks,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,
                                     selectedPlatformLink = selectedPlatformLink,
                                     iconShape = iconShape
                                 )
                             }
+
                             ListOrientation.VERTICAL -> {
                                 VerticalList(
-                                    platformsLink = platformsLink,
+                                    platformsLink = platformsLinks,
                                     isActionSend = isActionSend,
                                     showActionsMenu = showActionsMenu,
                                     selectedPlatformLink = selectedPlatformLink,
@@ -93,31 +100,27 @@ fun BottomSheet(
                         }
                     }
 
-                    if (platformsLink.size == 1) {
+                    if (platformsLinks.size == 1) {
                         if (!isActionSend) {
                             Box(
                                 modifier = Modifier.height(200.dp),
                             ) {
-                                onIntentView(context, platformsLink.values.first())
+                                onIntentView(context, platformsLinks.values.first())
                                 onDismiss()
                             }
                         } else {
                             showActionsMenu.value = true
-                            selectedPlatformLink.value = platformsLink.values.first()
+                            selectedPlatformLink.value = platformsLinks.values.first()
                         }
                     }
-                } else {
-                    ResultNotFound(
-                        query = songInfo?.takeUnless { isActionSend }?.run { "$title - $artistName" }
-                    )
-                }
 
-                AnimatedVisibility(
-                    visible = showActionsMenu.value,
-                    enter = enterFadeInTransition(),
-                ) {
-                    ActionsMenu(url = selectedPlatformLink.value) {
-                        onDismiss()
+                    AnimatedVisibility(
+                        visible = showActionsMenu.value,
+                        enter = enterFadeInTransition(),
+                    ) {
+                        ActionsMenu(url = selectedPlatformLink.value) {
+                            onDismiss()
+                        }
                     }
                 }
             }

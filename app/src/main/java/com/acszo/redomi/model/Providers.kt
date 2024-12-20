@@ -16,7 +16,7 @@ data class Link(
 @Serializable
 data class SongInfo(
     val type: String,
-    val title: String,
-    val artistName: String,
-    val thumbnailUrl: String
+    val title: String = "",
+    val artistName: String = "",
+    val thumbnailUrl: String = ""
 )

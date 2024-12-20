@@ -44,6 +44,4 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Získání informací o aktualizaci se nezdařilo</string>
-    <string name="no_result_found">Nebyly nalezeny žádné výsledky</string>
-    <string name="search_on">Hledejte na %s</string>
 </resources>

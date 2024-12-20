@@ -51,9 +51,7 @@ class ConvertSongActivity: ComponentActivity() {
                 if (isGithubBuild) updateViewModel.checkUpdate(versionName)
             }
 
-            val songInfo by songLinkViewModel.songInfo.collectAsStateWithLifecycle()
-            val platformsLink by songLinkViewModel.platformsLink.collectAsStateWithLifecycle()
-            val isLoading by songLinkViewModel.isLoading.collectAsStateWithLifecycle()
+            val bottomSheetUiState by songLinkViewModel.bottomSheetUiState.collectAsStateWithLifecycle()
             val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
             val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
             val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
@@ -65,14 +63,12 @@ class ConvertSongActivity: ComponentActivity() {
             ) {
                 BottomSheet(
                     onDismiss = { this.finish() },
-                    songInfo = songInfo,
-                    platformsLink = platformsLink,
-                    isLoading = isLoading,
+                    uiState = bottomSheetUiState,
                     isActionSend = isActionSend,
                     isUpdateAvailable = isUpdateAvailable,
                     iconShape = IconShape.entries[iconShape].shape,
                     listOrientation = ListOrientation.entries[listOrientation],
-                    gridSize = gridSize,
+                    gridSize = gridSize
                 )
             }
         }

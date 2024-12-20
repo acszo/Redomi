@@ -44,6 +44,4 @@
     <string name="dialog_setup_description_checked">Marque os links para que o %s possa abri-los corretamente.</string>
     <string name="dialog_setup_description_unchecked">Deixe desmarcado os que são de serviços de música que você usa. (por exemplo, se você usar o Spotify o deixe desmarcado)</string>
     <string name="update_info_failed">Não foi possível carregar as informações de atualização</string>
-    <string name="no_result_found">Nenhum resultado encontrado</string>
-    <string name="search_on">Pesquisar em %s</string>
 </resources>

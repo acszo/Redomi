@@ -44,6 +44,4 @@
     <string name="dialog_setup_description_checked">Seleziona i link così che %s possa aprirli correttamente.</string>
     <string name="dialog_setup_description_unchecked">Lascia deselezionati quelli che fanno parte dei servizi di musica che usi. (es. se usi Spotify lascialo deselezionato)</string>
     <string name="update_info_failed">Impossibile caricare le informazioni sull\'aggiornamento</string>
-    <string name="no_result_found">Nessun risultato trovato</string>
-    <string name="search_on">Cerca su %s</string>
 </resources>
