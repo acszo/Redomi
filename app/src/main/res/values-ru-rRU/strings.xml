@@ -44,4 +44,8 @@
     <string name="dialog_setup_description_checked">Проверьте ссылки, чтобы %s могла открывать их правильно.</string>
     <string name="dialog_setup_description_unchecked">Снимите флажки с тех, которые относятся к используемым вами музыкальным сервисам. (например, если вы пользуетесь Spotify, снимите этот флажок)</string>
     <string name="update_info_failed">Не удалось загрузить информацию об обновлении</string>
+    <string name="error_incorrect_url">The given url is incorrect</string>
+    <string name="error_no_internet_connection">No internet connection</string>
+    <string name="error_generic">An error occurred</string>
+    <string name="error_server">Server Error</string>
 </resources>
