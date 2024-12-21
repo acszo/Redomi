@@ -44,8 +44,8 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">アップデート情報を取得できませんでした</string>
-    <string name="error_incorrect_url">The given url is incorrect</string>
-    <string name="error_no_internet_connection">No internet connection</string>
-    <string name="error_generic">An error occurred</string>
-    <string name="error_server">Server Error</string>
+    <string name="error_incorrect_url">指定された URL が間違っています</string>
+    <string name="error_no_internet_connection">インターネット接続なし</string>
+    <string name="error_generic">エラーが発生しました</string>
+    <string name="error_server">サーバーエラー</string>
 </resources>
