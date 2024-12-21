@@ -48,6 +48,7 @@
                 <data android:host="soundcloud.com"/>
                 <data android:host="play.napster.com"/>
                 <data android:host="music.yandex.ru"/>
+                <data android:host="play.anghami.com"/>
             </intent-filter>
 
             <intent-filter>

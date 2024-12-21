@@ -19,6 +19,7 @@ object Api {
     const val SEARCH_QUERY_SOUNDCLOUD = "https://soundcloud.com/search?q="
     const val SEARCH_QUERY_NAPSTER = "https://napster.com/search?query="
     const val SEARCH_QUERY_YANDEX = "https://music.yandex.ru/search?text="
+    const val SEARCH_QUERY_ANGHAMI = "https://play.anghami.com/search/"
 
 }
 

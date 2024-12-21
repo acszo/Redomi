@@ -65,7 +65,8 @@ By default Redomi is unable to open links, do as follows:
 - Apple Music
 - Soundcloud
 - Napster
-- Yandex Music
+- Yandex Music (soon)
+- Anghami (soon)
 
 3rd party clients are also compatible, as long as they're the default app to handle the corresponding link
 
