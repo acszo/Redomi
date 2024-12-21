@@ -44,8 +44,8 @@
     <string name="dialog_setup_description_checked">%s\'nin doğru şekilde açabilmesi için bağlantıları kontrol edin.</string>
     <string name="dialog_setup_description_unchecked">Kullandığınız müzik hizmetlerinden olanları işaretlemeyin. (örneğin Spotify kullanıyorsanız işareti kaldırın)</string>
     <string name="update_info_failed">Güncelleme bilgisi yüklenemedi</string>
-    <string name="error_incorrect_url">The given url is incorrect</string>
-    <string name="error_no_internet_connection">No internet connection</string>
-    <string name="error_generic">An error occurred</string>
-    <string name="error_server">Server Error</string>
+    <string name="error_incorrect_url">Verilen url yanlış</string>
+    <string name="error_no_internet_connection">İnternet bağlantısı yok</string>
+    <string name="error_generic">Bir hata oluştu</string>
+    <string name="error_server">Sunucu hatası</string>
 </resources>
