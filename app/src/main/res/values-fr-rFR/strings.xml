@@ -44,8 +44,8 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Impossible de charger les informations de mise à jour</string>
-    <string name="error_incorrect_url">The given url is incorrect</string>
-    <string name="error_no_internet_connection">No internet connection</string>
-    <string name="error_generic">An error occurred</string>
-    <string name="error_server">Server Error</string>
+    <string name="error_incorrect_url">L\'url donnée est incorrecte</string>
+    <string name="error_no_internet_connection">Aucune connexion internet</string>
+    <string name="error_generic">Une erreur est survenue</string>
+    <string name="error_server">Erreur du serveur</string>
 </resources>
