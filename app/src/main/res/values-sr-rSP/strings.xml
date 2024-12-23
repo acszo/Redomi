@@ -44,4 +44,8 @@
     <string name="dialog_setup_description_checked">Check the links so %s can open them correctly.</string>
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Нису добијени подаци о ажурирању</string>
+    <string name="error_incorrect_url">The given url is incorrect</string>
+    <string name="error_no_internet_connection">Нема интернет везе</string>
+    <string name="error_generic">Дошло је до грешке</string>
+    <string name="error_server">Серверска грешка</string>
 </resources>
