@@ -20,7 +20,7 @@
     <string name="square_icon">Carré</string>
     <string name="theme">Thème</string>
     <string name="github_description">Consultez le dépôt à %s</string>
-    <string name="update">Réactualiser</string>
+    <string name="update">Mise à jour</string>
     <string name="update_description">Vérifier les mises à jour disponibles</string>
     <string name="version">Version</string>
     <string name="info">Information</string>
@@ -36,7 +36,7 @@
     <string name="title_changelogs_new">Nouvelle version</string>
     <string name="check_updates">Rechercher les mises à jour</string>
     <string name="do_update">Mettre à jour</string>
-    <string name="system_theme">Défaut du système</string>
+    <string name="system_theme">Par défaut</string>
     <string name="dark_theme">Sombre</string>
     <string name="light_theme">Clair</string>
     <string name="dialog_setup_title">Guide</string>
