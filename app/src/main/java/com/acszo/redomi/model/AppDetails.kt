@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class AppDetails(
     val title: String,
     @DrawableRes val icon: Int,
-    val query: String
+    val searchUrl: String
 )

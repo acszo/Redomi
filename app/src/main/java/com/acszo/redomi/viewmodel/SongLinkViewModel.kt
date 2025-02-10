@@ -1,5 +1,6 @@
 package com.acszo.redomi.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.data.SettingsDataStore
@@ -41,8 +42,10 @@ class SongLinkViewModel @Inject constructor(
                 val songInfo = data.entitiesByUniqueId.entries.first().value
                 val selectedApps = settingsDataStore.getSetOfStrings(key).first()
                 val orderedApps = platforms.keys.filter { selectedApps.contains(it) }
+
+                val query = Uri.encode(songInfo.run { "$title - $artistName" })
                 val mapLinkToApp = orderedApps.associateWith {
-                    data.linksByPlatform[it]?.url ?: "${platforms[it]?.query}${songInfo.run { "$title - $artistName" }}"
+                    data.linksByPlatform[it]?.url ?: "${platforms[it]?.searchUrl}$query"
                 }
 
                 _bottomSheetUiState.update {
