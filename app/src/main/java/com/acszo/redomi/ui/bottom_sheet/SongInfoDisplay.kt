@@ -1,14 +1,12 @@
 package com.acszo.redomi.ui.bottom_sheet
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -30,8 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberAsyncImagePainter
+import coil3.compose.AsyncImage
 import com.acszo.redomi.R
 import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
@@ -45,10 +42,6 @@ fun SongInfoDisplay(
     isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
-    val image = rememberAsyncImagePainter(model = thumbnail)
-
-    val surfaceColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
-    val errorColor = MaterialTheme.colorScheme.error
 
     Row(
         modifier = Modifier
@@ -64,20 +57,18 @@ fun SongInfoDisplay(
                 .background(MaterialTheme.colorScheme.primaryContainer),
             contentAlignment = Alignment.Center
         ) {
-            if (image.state is AsyncImagePainter.State.Loading) {
-                Icon(
-                    painter = if (type == "album") painterResource(id = R.drawable.ic_album)
-                        else painterResource(id = R.drawable.ic_music_note),
-                    modifier = Modifier.size(35.dp),
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                    contentDescription = null
-                )
-            }
-            Image(
-                painter = image,
-                modifier = Modifier.fillMaxSize(),
+            Icon(
+                painter = if (type == "album") painterResource(id = R.drawable.ic_album)
+                else painterResource(id = R.drawable.ic_music_note),
+                modifier = Modifier.size(35.dp),
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                contentDescription = null
+            )
+
+            AsyncImage(
+                model = thumbnail,
                 contentScale = ContentScale.FillHeight,
-                contentDescription = stringResource(id = R.string.song_cover),
+                contentDescription = stringResource(id = R.string.song_cover)
             )
         }
 
@@ -124,6 +115,9 @@ fun SongInfoDisplay(
             )
 
             if (isUpdateAvailable) {
+                val surfaceColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
+                val errorColor = MaterialTheme.colorScheme.error
+
                 Canvas(
                     modifier = Modifier
                         .size(14.dp)
