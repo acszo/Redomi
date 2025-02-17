@@ -48,4 +48,5 @@
     <string name="error_no_internet_connection">لا يوجد اتصال بالإنترنت</string>
     <string name="error_generic">حدث خطأ ما</string>
     <string name="error_server">خطأ من الخادم</string>
+    <string name="error_timeout">Request timed out</string>
 </resources>
