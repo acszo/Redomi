@@ -48,4 +48,5 @@
     <string name="error_no_internet_connection">Nema internetske veze</string>
     <string name="error_generic">Dogodila se pogreška</string>
     <string name="error_server">Serverska greška</string>
+    <string name="error_timeout">Request timed out</string>
 </resources>
