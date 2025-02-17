@@ -3,6 +3,7 @@ package com.acszo.redomi.service
 import com.acszo.redomi.R
 import okio.IOException
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 object Api {
 
@@ -40,6 +41,8 @@ suspend fun <T: Any> apiCall(
         } else {
             ApiResult.Error(response.code())
         }
+    } catch(_: SocketTimeoutException) {
+        ApiResult.Exception(R.string.error_timeout)
     } catch (_: IOException) {
         ApiResult.Exception(R.string.error_no_internet_connection)
     } catch (_: Exception) {
