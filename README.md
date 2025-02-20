@@ -13,7 +13,7 @@
 
 ## Description
 
-Don't you hate when you receive music links from friends who use different platforms than you (they always use the bad ones 👎👎👎) and you can't tap and play them in your favourite music service???? <br/>
+Don't you hate when you receive music links from friends who use different platforms than you, and you can't tap and play them in your favourite music service???? <br/>
 This app is here to solve that problem! <br/>
 And you can also share the songs you want to anyone by converting the link to their preferred platform. <br/> <br/>
 <b> All of this is done like it's integrated into your system! </b>
@@ -47,7 +47,7 @@ And you can also share the songs you want to anyone by converting the link to th
   <img src="/preview/screenshot_6.png" width="30%" />
 </p>
 
-## HOW TO MAKE IT WORK
+## HOW TO MAKE IT WORK (on Android 12+)
 
 By default Redomi is unable to open links, do as follows:
 1. Long-press on Redomi and open its info page
@@ -65,8 +65,8 @@ By default Redomi is unable to open links, do as follows:
 - Apple Music
 - Soundcloud
 - Napster
-- Yandex Music (soon)
-- Anghami (soon)
+- Yandex Music
+- Anghami
 
 3rd party clients are also compatible, as long as they're the default app to handle the corresponding link
 

@@ -1,0 +1,8 @@
+# Improvements
+- Error handling when converting songs
+- New Czech, Portoguese and French translations
+- Correctly format search links
+
+# Added
+- Support for Yandex Music and Anghami
+- tidal.com links
