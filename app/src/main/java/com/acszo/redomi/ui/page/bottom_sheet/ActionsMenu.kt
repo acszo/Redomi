@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.bottom_sheet
+package com.acszo.redomi.ui.page.bottom_sheet
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background

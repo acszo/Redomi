@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.page.settings.apps
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
@@ -29,6 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.data.AppList
+import com.acszo.redomi.ui.component.selectionBoxColor
+import com.acszo.redomi.ui.component.selectionTextColor
 
 @Composable
 fun Tabs(

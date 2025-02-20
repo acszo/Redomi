@@ -11,7 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.data.AppList
 import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
-import com.acszo.redomi.ui.bottom_sheet.BottomSheet
+import com.acszo.redomi.ui.page.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.SongLinkViewModel

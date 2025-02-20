@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.page.settings.update
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme

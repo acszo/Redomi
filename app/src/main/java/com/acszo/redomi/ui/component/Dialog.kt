@@ -52,7 +52,7 @@ fun DefaultDialog(
 }
 
 @Composable
-fun IconItemDialog(
+fun IconDescription(
     @DrawableRes icon: Int,
     description: String,
 ) {

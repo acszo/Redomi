@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.page.settings.apps
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

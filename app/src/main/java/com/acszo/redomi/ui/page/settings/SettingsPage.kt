@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.page
+package com.acszo.redomi.ui.page.settings
 
 import android.os.Build
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,9 +22,8 @@ import com.acszo.redomi.data.Theme
 import com.acszo.redomi.isGithubBuild
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.component.DefaultDialog
-import com.acszo.redomi.ui.component.IconItemDialog
+import com.acszo.redomi.ui.component.IconDescription
 import com.acszo.redomi.ui.component.RadioButtonItemDialog
-import com.acszo.redomi.ui.component.SettingsItem
 import com.acszo.redomi.ui.nav.Pages.APPS_PAGE
 import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
 import com.acszo.redomi.ui.nav.Pages.UPDATE_PAGE
@@ -156,12 +155,12 @@ fun SettingsPage(
             content = {
                 Text(text = stringResource(id = R.string.dialog_setup_description, redomi))
 
-                IconItemDialog(
+                IconDescription(
                     icon = R.drawable.ic_done_all,
                     description = stringResource(id = R.string.dialog_setup_description_checked, redomi)
                 )
 
-                IconItemDialog(
+                IconDescription(
                     icon = R.drawable.ic_remove_done,
                     description = stringResource(id = R.string.dialog_setup_description_unchecked)
                 )

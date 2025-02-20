@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.page
+package com.acszo.redomi.ui.page.settings.update
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,7 +29,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
-import com.acszo.redomi.ui.component.AnnotatedString
 import com.acszo.redomi.ui.component.NewReleaseIcon
 import com.acszo.redomi.ui.component.fadingEdge
 import com.acszo.redomi.ui.component.ignoreHorizontalPadding

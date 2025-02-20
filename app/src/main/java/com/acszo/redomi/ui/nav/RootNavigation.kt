@@ -12,10 +12,10 @@ import com.acszo.redomi.ui.common.TransitionDirection
 import com.acszo.redomi.ui.common.enterHorizontalTransition
 import com.acszo.redomi.ui.common.exitHorizontalTransition
 import com.acszo.redomi.ui.component.BackButton
-import com.acszo.redomi.ui.page.AppsPage
-import com.acszo.redomi.ui.page.LayoutPage
-import com.acszo.redomi.ui.page.SettingsPage
-import com.acszo.redomi.ui.page.UpdatePage
+import com.acszo.redomi.ui.page.settings.apps.AppsPage
+import com.acszo.redomi.ui.page.settings.layout.LayoutPage
+import com.acszo.redomi.ui.page.settings.SettingsPage
+import com.acszo.redomi.ui.page.settings.update.UpdatePage
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 

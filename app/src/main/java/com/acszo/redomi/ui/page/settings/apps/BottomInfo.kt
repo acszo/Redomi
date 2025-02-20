@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.common
+package com.acszo.redomi.ui.page.settings.apps
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
 
 @Composable
-fun PageBottomInfo(
+fun BottomInfo(
     text: String
 ) {
     Column(

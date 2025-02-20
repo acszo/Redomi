@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.page
+package com.acszo.redomi.ui.page.settings.apps
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -24,11 +24,8 @@ import com.acszo.redomi.R
 import com.acszo.redomi.data.AppList
 import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.model.Platform.platforms
-import com.acszo.redomi.ui.common.PageBottomInfo
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.removeTopPadding
-import com.acszo.redomi.ui.component.AppCheckBoxItem
-import com.acszo.redomi.ui.component.Tabs
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -132,7 +129,7 @@ fun AppsPage(
             }
 
             item {
-                PageBottomInfo(
+                BottomInfo(
                     text = stringResource(
                         id = if (selectedTab.value == AppList.OPENING) R.string.opening_apps_tab_info
                             else R.string.sharing_apps_tab_info

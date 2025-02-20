@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.page
+package com.acszo.redomi.ui.page.settings.layout
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement

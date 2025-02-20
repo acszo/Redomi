@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.page.settings
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
+import com.acszo.redomi.ui.component.ignoreHorizontalPadding
 
 @Composable
 fun SettingsItem(
