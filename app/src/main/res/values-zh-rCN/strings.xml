@@ -48,4 +48,5 @@
     <string name="error_no_internet_connection">没有网络连接</string>
     <string name="error_generic">发生错误</string>
     <string name="error_server">服务器错误</string>
+    <string name="error_timeout">Request timed out</string>
 </resources>

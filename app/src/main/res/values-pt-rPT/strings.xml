@@ -48,4 +48,5 @@
     <string name="error_no_internet_connection">Sem ligação à Internet</string>
     <string name="error_generic">Surgiu um erro</string>
     <string name="error_server">Erro de Servidor</string>
+    <string name="error_timeout">Request timed out</string>
 </resources>
