@@ -43,11 +43,6 @@ class ConvertSongActivity: ComponentActivity() {
 
             LaunchedEffect(Unit) {
                 songLinkViewModel.getPlatformsLink(intentData, appList.key)
-                dataStoreViewModel.getThemeMode()
-                dataStoreViewModel.getIconShape()
-                dataStoreViewModel.getListOrientation()
-                dataStoreViewModel.getGridSize()
-
                 if (isGithubBuild) updateViewModel.checkUpdate(versionName)
             }
 

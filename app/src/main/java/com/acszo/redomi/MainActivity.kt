@@ -38,11 +38,6 @@ class MainActivity : ComponentActivity() {
 
             LaunchedEffect(Unit) {
                 dataStoreViewModel.getIsFirstTime()
-                dataStoreViewModel.getListOrientation()
-                dataStoreViewModel.getGridSize()
-                dataStoreViewModel.getIconShape()
-                dataStoreViewModel.getThemeMode()
-
                 if (isGithubBuild) {
                     updateViewModel.checkUpdate(versionName)
                     scope.launch(Dispatchers.IO) {

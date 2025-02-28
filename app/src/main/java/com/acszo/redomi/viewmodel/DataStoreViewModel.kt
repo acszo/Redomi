@@ -48,6 +48,32 @@ class DataStoreViewModel @Inject constructor(
     private val _themeMode: MutableStateFlow<Int> = MutableStateFlow(Theme.SYSTEM_THEME.ordinal)
     val themeMode: StateFlow<Int> = _themeMode.asStateFlow()
 
+    init {
+        viewModelScope.launch {
+            settingsDataStore.getInt(LIST_ORIENTATION).collectLatest {
+                _listOrientation.value = it ?: ListOrientation.HORIZONTAL.ordinal
+            }
+        }
+
+        viewModelScope.launch {
+            settingsDataStore.getInt(GRID_SIZE).collectLatest {
+                _gridSize.value = it ?: MEDIUM_GRID
+            }
+        }
+
+        viewModelScope.launch {
+            settingsDataStore.getInt(ICON_SHAPE).collectLatest {
+                _iconShape.value = it ?: IconShape.SQUIRCLE.ordinal
+            }
+        }
+
+        viewModelScope.launch {
+            settingsDataStore.getInt(THEME_MODE).collectLatest {
+                _themeMode.value = it ?: Theme.SYSTEM_THEME.ordinal
+            }
+        }
+    }
+
     fun getOpeningApps() = viewModelScope.launch {
         settingsDataStore.getSetOfStrings(OPENING_APPS).collectLatest {
             _openingApps.value = it
@@ -78,40 +104,16 @@ class DataStoreViewModel @Inject constructor(
         settingsDataStore.setBoolean(FIRST_TIME, false)
     }
 
-    fun getListOrientation() = viewModelScope.launch {
-        settingsDataStore.getInt(LIST_ORIENTATION).collectLatest {
-            _listOrientation.value = it ?: ListOrientation.HORIZONTAL.ordinal
-        }
-    }
-
     fun setListOrientation(listOrientation: Int) = viewModelScope.launch {
         settingsDataStore.setInt(LIST_ORIENTATION, listOrientation)
-    }
-
-    fun getGridSize() = viewModelScope.launch {
-        settingsDataStore.getInt(GRID_SIZE).collectLatest {
-            _gridSize.value = it ?: MEDIUM_GRID
-        }
     }
 
     fun setGridSize(gridSize: Int) = viewModelScope.launch {
         settingsDataStore.setInt(GRID_SIZE, gridSize)
     }
 
-    fun getIconShape() = viewModelScope.launch {
-        settingsDataStore.getInt(ICON_SHAPE).collectLatest {
-            _iconShape.value = it ?: IconShape.SQUIRCLE.ordinal
-        }
-    }
-
     fun setIconShape(iconShape: Int) = viewModelScope.launch {
         settingsDataStore.setInt(ICON_SHAPE, iconShape)
-    }
-
-    fun getThemeMode() = viewModelScope.launch {
-        settingsDataStore.getInt(THEME_MODE).collectLatest {
-            _themeMode.value = it ?: Theme.SYSTEM_THEME.ordinal
-        }
     }
 
     fun setThemeMode(themeMode: Int) = viewModelScope.launch {
