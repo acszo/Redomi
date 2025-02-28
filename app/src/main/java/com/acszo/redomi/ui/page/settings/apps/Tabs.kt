@@ -29,8 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.data.AppList
-import com.acszo.redomi.ui.component.selectionBoxColor
-import com.acszo.redomi.ui.component.selectionTextColor
+import com.acszo.redomi.ui.component.selectedBoxColor
+import com.acszo.redomi.ui.component.selectedTextColor
 
 @Composable
 fun Tabs(
@@ -48,13 +48,13 @@ fun Tabs(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         AppList.entries.forEach { tab ->
-            val selectedTabColor by animateColorAsState(
-                targetValue = selectionBoxColor(selectedTab.value == tab),
+            val tabColor by animateColorAsState(
+                targetValue = selectedBoxColor(selectedTab.value == tab),
                 animationSpec = tween(100, 0, LinearEasing),
                 label = ""
             )
 
-            val padding by animateDpAsState(
+            val animatedPadding by animateDpAsState(
                 targetValue = if (selectedTab.value == tab) 0.dp else width.value / 8,
                 label = ""
             )
@@ -75,7 +75,7 @@ fun Tabs(
                     }
                     .clip(MaterialTheme.shapes.extraLarge)
                     .layout { measurable, constraints ->
-                        val size = width.value.toPx() - padding.toPx()
+                        val size = width.value.toPx() - animatedPadding.toPx()
                         val placeable = measurable.measure(
                             constraints.copy(minWidth = size.toInt())
                         )
@@ -83,14 +83,14 @@ fun Tabs(
                             placeable.placeRelative(0, 0)
                         }
                     }
-                    .drawBehind { drawRect(selectedTabColor) },
+                    .drawBehind { drawRect(tabColor) },
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = stringResource(id = tab.toRes),
                     modifier = Modifier.padding(vertical = 15.dp),
                     maxLines = 1,
-                    color = selectionTextColor(selectedTab.value == tab),
+                    color = selectedTextColor(selectedTab.value == tab),
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontWeight = FontWeight.W500,
                     )

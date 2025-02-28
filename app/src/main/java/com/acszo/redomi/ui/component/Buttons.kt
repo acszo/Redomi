@@ -17,12 +17,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -128,6 +126,7 @@ fun AnimatedRadiusButton(
         targetValue = if (isSelected) 22.dp else size / 2,
         label = ""
     )
+
     Box(
         modifier = Modifier
             .size(size)
@@ -135,13 +134,13 @@ fun AnimatedRadiusButton(
                 shape = RoundedCornerShape(radius.value)
                 clip = true
             }
-            .background(color = selectionBoxColor(isSelected))
+            .background(color = selectedBoxColor(isSelected))
             .clickable { onClick() },
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = selectionTextColor(isSelected),
+            color = selectedTextColor(isSelected),
             style = MaterialTheme.typography.headlineLarge.copy(
                 platformStyle = PlatformTextStyle(
                     includeFontPadding = false
@@ -153,26 +152,14 @@ fun AnimatedRadiusButton(
 }
 
 @Composable
-fun DialogTextButton(
-    onClick: () -> Unit,
-    text: String
-) {
-    TextButton(
-        onClick = { onClick() }
-    ) {
-        Text(text = text)
-    }
-}
-
-@Composable
-fun selectionBoxColor(isSelected: Boolean): Color =
+fun selectedBoxColor(isSelected: Boolean) =
     if (isSelected)
         MaterialTheme.colorScheme.primary
     else
         MaterialTheme.colorScheme.surfaceVariant
 
 @Composable
-fun selectionTextColor(isSelected: Boolean): Color =
+fun selectedTextColor(isSelected: Boolean) =
     if (isSelected)
         MaterialTheme.colorScheme.onPrimary
     else
