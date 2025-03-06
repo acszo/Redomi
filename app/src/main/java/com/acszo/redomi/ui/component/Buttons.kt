@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -122,7 +123,7 @@ fun AnimatedRadiusButton(
     text: String,
     onClick: () -> Unit
 ) {
-    val radius = animateDpAsState(
+    val radius by animateDpAsState(
         targetValue = if (isSelected) 22.dp else size / 2,
         label = ""
     )
@@ -131,7 +132,7 @@ fun AnimatedRadiusButton(
         modifier = Modifier
             .size(size)
             .graphicsLayer {
-                shape = RoundedCornerShape(radius.value)
+                shape = RoundedCornerShape(radius)
                 clip = true
             }
             .background(color = selectedBoxColor(isSelected))

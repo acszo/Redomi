@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -53,8 +54,8 @@ fun SettingsPage(
     val modelName = "Model: ${Build.MODEL}"
     val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
 
-    val openIconShapeDialog = remember { mutableStateOf(false) }
-    val openThemeDialog = remember { mutableStateOf(false) }
+    var openIconShapeDialog by remember { mutableStateOf(false) }
+    var openThemeDialog by remember { mutableStateOf(false) }
 
     ScaffoldWithLargeTopAppBar(
         title = redomi
@@ -94,7 +95,7 @@ fun SettingsPage(
                     title = stringResource(id = R.string.icon_shape),
                     description = stringResource(id = IconShape.entries[iconShape].toRes)
                 ) {
-                    openIconShapeDialog.value = true
+                    openIconShapeDialog = true
                 }
             }
 
@@ -104,7 +105,7 @@ fun SettingsPage(
                     title = stringResource(id = R.string.theme),
                     description = stringResource(id = Theme.entries[themeMode].toRes)
                 ) {
-                    openThemeDialog.value = true
+                    openThemeDialog = true
                 }
             }
 
@@ -172,7 +173,7 @@ fun SettingsPage(
         )
     }
 
-    if (openIconShapeDialog.value) {
+    if (openIconShapeDialog) {
         DefaultDialog(
             icon = R.drawable.ic_category_outline,
             title = stringResource(id = R.string.icon_shape),
@@ -185,12 +186,12 @@ fun SettingsPage(
                     )
                 }
             },
-            onDismissRequest = { openIconShapeDialog.value = false },
-            onConfirmAction = { openIconShapeDialog.value = false }
+            onDismissRequest = { openIconShapeDialog = false },
+            onConfirmAction = { openIconShapeDialog = false }
         )
     }
 
-    if (openThemeDialog.value) {
+    if (openThemeDialog) {
         DefaultDialog(
             icon = R.drawable.ic_color_lens_outline,
             title = stringResource(id = R.string.theme),
@@ -203,8 +204,8 @@ fun SettingsPage(
                     )
                 }
             },
-            onDismissRequest = { openThemeDialog.value = false },
-            onConfirmAction = { openThemeDialog.value = false }
+            onDismissRequest = { openThemeDialog = false },
+            onConfirmAction = { openThemeDialog = false }
         )
     }
 }
