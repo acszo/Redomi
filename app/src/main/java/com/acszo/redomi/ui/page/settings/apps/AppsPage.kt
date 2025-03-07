@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -22,8 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.data.AppList
-import com.acszo.redomi.data.IconShape
-import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.removeTopPadding
 import com.acszo.redomi.viewmodel.DataStoreViewModel
@@ -42,8 +39,8 @@ fun AppsPage(
     }
 
     val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
-    val openingApps = dataStoreViewModel.openingApps.collectAsStateWithLifecycle().value.toMutableSet()
-    val sharingApps = dataStoreViewModel.sharingApps.collectAsStateWithLifecycle().value.toMutableSet()
+    val openingApps by dataStoreViewModel.openingApps.collectAsStateWithLifecycle()
+    val sharingApps by dataStoreViewModel.sharingApps.collectAsStateWithLifecycle()
 
     ScaffoldWithLargeTopAppBar(
         title = stringResource(id = R.string.apps),
@@ -79,41 +76,17 @@ fun AppsPage(
             }
 
             if (selectedTab.value == AppList.OPENING) {
-                items(platforms.toList()) { (id, app) ->
-                    AppCheckBoxItem(
-                        icon = app.icon,
-                        iconShape = IconShape.entries[iconShape].shape,
-                        title = app.title,
-                        size = openingApps.size,
-                        isChecked = openingApps.contains(id),
-                        onCheckedAction = {
-                            openingApps.add(id)
-                            dataStoreViewModel.setOpeningApps(openingApps.toSet())
-                        },
-                        onUnCheckedAction = {
-                            openingApps.remove(id)
-                            dataStoreViewModel.setOpeningApps(openingApps.toSet())
-                        }
-                    )
-                }
+                appsCheckBoxList(
+                    apps = openingApps,
+                    iconShape = iconShape,
+                    onCheck = { dataStoreViewModel.setOpeningApps(it) },
+                )
             } else {
-                items(platforms.toList()) { (id, app) ->
-                    AppCheckBoxItem(
-                        icon = app.icon,
-                        iconShape = IconShape.entries[iconShape].shape,
-                        title = app.title,
-                        size = sharingApps.size,
-                        isChecked = sharingApps.contains(id),
-                        onCheckedAction = {
-                            sharingApps.add(id)
-                            dataStoreViewModel.setSharingApps(sharingApps.toSet())
-                        },
-                        onUnCheckedAction = {
-                            sharingApps.remove(id)
-                            dataStoreViewModel.setSharingApps(sharingApps.toSet())
-                        }
-                    )
-                }
+                appsCheckBoxList(
+                    apps = sharingApps,
+                    iconShape = iconShape,
+                    onCheck = { dataStoreViewModel.setSharingApps(it) },
+                )
             }
 
             item {
