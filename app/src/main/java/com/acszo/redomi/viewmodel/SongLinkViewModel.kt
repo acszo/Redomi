@@ -20,7 +20,7 @@ import javax.inject.Inject
 data class BottomSheetUiState(
     val songInfo: SongInfo? = null,
     val platformsLinks: Map<String, String>? = null,
-    val isLoaded: Boolean = false,
+    val isLoading: Boolean = false,
     val error: Int? = null
 )
 
@@ -34,6 +34,7 @@ class SongLinkViewModel @Inject constructor(
     val bottomSheetUiState = _bottomSheetUiState.asStateFlow()
 
     fun getPlatformsLink(url: String, key: String) = viewModelScope.launch {
+        _bottomSheetUiState.update { it.copy(isLoading = true) }
         val response = songLinkRepository.getSongs(url)
 
         when(response) {
@@ -49,7 +50,7 @@ class SongLinkViewModel @Inject constructor(
                 }
 
                 _bottomSheetUiState.update {
-                    it.copy(songInfo = songInfo, platformsLinks = mapLinkToApp, isLoaded = true)
+                    it.copy(songInfo = songInfo, platformsLinks = mapLinkToApp, isLoading = false)
                 }
             }
             is ApiResult.Error -> {
@@ -60,12 +61,12 @@ class SongLinkViewModel @Inject constructor(
                 }
 
                 _bottomSheetUiState.update {
-                    it.copy(error = message, isLoaded = true)
+                    it.copy(error = message, isLoading = false)
                 }
             }
             is ApiResult.Exception -> {
                 _bottomSheetUiState.update {
-                    it.copy(error = response.message, isLoaded = true)
+                    it.copy(error = response.message, isLoading = false)
                 }
             }
         }

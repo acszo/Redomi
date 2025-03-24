@@ -50,7 +50,7 @@ fun BottomSheet(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             when {
-                !uiState.isLoaded -> {
+                uiState.isLoading -> {
                     Box(
                         modifier = Modifier.height(200.dp),
                         contentAlignment = Alignment.Center,
