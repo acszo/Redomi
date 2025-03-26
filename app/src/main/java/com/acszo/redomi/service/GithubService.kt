@@ -2,6 +2,7 @@ package com.acszo.redomi.service
 
 import com.acszo.redomi.model.Release
 import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Streaming
 import retrofit2.http.Url
@@ -9,7 +10,7 @@ import retrofit2.http.Url
 interface GithubService {
 
     @GET("releases/latest")
-    suspend fun getLatest(): Release
+    suspend fun getLatest(): Response<Release>
 
     @GET
     @Streaming

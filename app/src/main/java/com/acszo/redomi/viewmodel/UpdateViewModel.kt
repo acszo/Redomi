@@ -3,15 +3,16 @@ package com.acszo.redomi.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.model.Release
 import com.acszo.redomi.repository.GithubRepository
+import com.acszo.redomi.service.ApiResult
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emptyFlow
@@ -21,36 +22,55 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
-import java.lang.Exception
 import javax.inject.Inject
+
+data class UpdatePageUiState(
+    val latestRelease: Release? = null,
+    val isLoading: Boolean = false,
+    val error: Int? = null,
+)
 
 @HiltViewModel
 class UpdateViewModel @Inject constructor(
     private val githubRepository: GithubRepository
 ): ViewModel() {
 
-    private val _latestRelease: MutableStateFlow<Release?> = MutableStateFlow(null)
-    val latestRelease: StateFlow<Release?> = _latestRelease
+    private val _updatePageUiState = MutableStateFlow(UpdatePageUiState())
+    val updatePageUiState = _updatePageUiState.asStateFlow()
 
     private val _isUpdateAvailable: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isUpdateAvailable: StateFlow<Boolean> = _isUpdateAvailable
-
-    private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+    val isUpdateAvailable = _isUpdateAvailable.asStateFlow()
 
     fun checkUpdate(currentVersion: String) = viewModelScope.launch {
-        _isLoading.update { true }
-        try {
-            _latestRelease.update {
-                githubRepository.getLatest()
+        _updatePageUiState.update { it.copy(isLoading = true) }
+        val response = githubRepository.getLatest()
+
+        when (response) {
+            is ApiResult.Success -> {
+                val latestRelease = response.data
+                _isUpdateAvailable.update {
+                    currentVersion < latestRelease.tagName
+                }
+                _updatePageUiState.update {
+                    it.copy(latestRelease = latestRelease, isLoading = false, error = null)
+                }
             }
-            _isUpdateAvailable.update {
-                currentVersion < _latestRelease.value?.tagName.toString()
+            is ApiResult.Error -> {
+                var message = when  {
+                    response.code in 400..499 -> R.string.update_info_failed
+                    response.code in 500..599 -> R.string.error_server
+                    else -> R.string.error_generic
+                }
+
+                _updatePageUiState.update {
+                    it.copy(error = message, isLoading = false)
+                }
             }
-        }  catch (e: Exception) {
-            print(e.message)
-        } finally {
-            _isLoading.update { false }
+            is ApiResult.Exception -> {
+                _updatePageUiState.update {
+                    it.copy(error = response.message, isLoading = false)
+                }
+            }
         }
     }
 

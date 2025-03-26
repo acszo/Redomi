@@ -24,7 +24,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
@@ -41,15 +40,14 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun UpdatePage(
-    updateViewModel: UpdateViewModel = hiltViewModel(),
+    updateViewModel: UpdateViewModel,
     backButton: @Composable () -> Unit
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    val latestRelease by updateViewModel.latestRelease.collectAsStateWithLifecycle()
+    val uiState by updateViewModel.updatePageUiState.collectAsStateWithLifecycle()
     val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
-    val isLoading by updateViewModel.isLoading.collectAsStateWithLifecycle()
     val progressDownloadStatus = remember { mutableStateOf(DownloadStatus.Finished as DownloadStatus) }
 
     ScaffoldWithLargeTopAppBar(
@@ -75,7 +73,7 @@ fun UpdatePage(
                     pageTitleWithDescription()
                 }
 
-                if (latestRelease != null) {
+                if (uiState.latestRelease != null) {
                     item {
                         Text(
                             text = if (isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
@@ -86,18 +84,18 @@ fun UpdatePage(
 
                     item {
                         Text(
-                            text = latestRelease!!.name,
+                            text = uiState.latestRelease?.name ?: "",
                             style = MaterialTheme.typography.displaySmall,
                         )
                     }
 
                     item {
-                        AnnotatedString(string = latestRelease!!.body)
+                        AnnotatedString(string = uiState.latestRelease?.body ?: "")
                     }
                 }
             }
 
-            if (!isLoading && latestRelease == null) {
+            if (uiState.error != null) {
                 Box(
                     modifier = Modifier
                         .weight(2f)
@@ -105,14 +103,14 @@ fun UpdatePage(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = stringResource(id = R.string.update_info_failed),
+                        text = stringResource(id = uiState.error!!),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.titleMedium,
                     )
                 }
             }
 
-            if (isLoading) {
+            if (uiState.isLoading) {
                 LinearProgressIndicator(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -131,7 +129,7 @@ fun UpdatePage(
                     if (isUpdateAvailable) {
                         scope.launch(Dispatchers.IO) {
                             if (!context.getApk().exists()) {
-                                updateViewModel.downloadApk(context, latestRelease!!)
+                                updateViewModel.downloadApk(context, uiState.latestRelease!!)
                                     .collect { downloadStatus ->
                                         progressDownloadStatus.value = downloadStatus
                                         if (downloadStatus is DownloadStatus.Finished) {
