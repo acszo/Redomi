@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.Platform.platforms
-import com.acszo.redomi.model.SongInfo
+import com.acszo.redomi.model.Song
 import com.acszo.redomi.repository.SongLinkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +18,8 @@ import com.acszo.redomi.service.ApiResult
 import javax.inject.Inject
 
 data class BottomSheetUiState(
-    val songInfo: SongInfo? = null,
-    val platformsLinks: Map<String, String>? = null,
+    val sourceSong: Song? = null,
+    val songs: List<Song> = emptyList(),
     val isLoading: Boolean = false,
     val error: Int? = null
 )
@@ -40,21 +40,37 @@ class SongLinkViewModel @Inject constructor(
         when(response) {
             is ApiResult.Success -> {
                 val data = response.data
-                val songInfo = data.entitiesByUniqueId.entries.first().value
+                val sourceSong = data.entitiesByUniqueId[data.entityUniqueId]
+                val query = sourceSong?.run { Uri.encode("$title - $artistName") }
+
                 val selectedApps = settingsDataStore.getSetOfStrings(key).first()
                 val orderedApps = platforms.keys.filter { selectedApps.contains(it) }
 
-                val query = Uri.encode(songInfo.run { "$title - $artistName" })
-                val mapLinkToApp = orderedApps.associateWith {
-                    data.linksByPlatform[it]?.url ?: "${platforms[it]?.searchUrl}$query"
+                val songsInfo = orderedApps.mapNotNull { platform ->
+                    val linksByPlatform = data.linksByPlatform[platform]
+
+                    if (linksByPlatform != null) {
+                        data.entitiesByUniqueId[linksByPlatform.entityUniqueId]
+                            ?.copy(platform = platform, link = linksByPlatform.url)
+                    } else {
+                        Song(
+                            isMatched = false,
+                            platform = platform,
+                            link = "${platforms[platform]?.searchUrl}$query",
+                            type = null,
+                            title = sourceSong?.title,
+                            artistName = sourceSong?.artistName,
+                            thumbnailUrl = null
+                        )
+                    }
                 }
 
                 _bottomSheetUiState.update {
-                    it.copy(songInfo = songInfo, platformsLinks = mapLinkToApp, isLoading = false)
+                    it.copy(sourceSong = sourceSong, songs = songsInfo, isLoading = false)
                 }
             }
             is ApiResult.Error -> {
-                var message = when  {
+                var message = when {
                     response.code in 400..499 -> R.string.error_incorrect_url
                     response.code in 500..599 -> R.string.error_server
                     else -> R.string.error_generic

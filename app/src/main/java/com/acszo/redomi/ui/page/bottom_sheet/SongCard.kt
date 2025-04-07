@@ -29,16 +29,16 @@ import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.acszo.redomi.R
+import com.acszo.redomi.model.Song
 import com.acszo.redomi.ui.component.RotatingIcon
 import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
 
 @Composable
-fun SongInfoDisplay(
-    type: String,
-    thumbnail: String,
-    title: String,
-    artist: String,
+fun SongCard(
+    song: Song,
     isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
@@ -50,26 +50,31 @@ fun SongInfoDisplay(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(
-            modifier = Modifier
-                .size(80.dp)
-                .clip(MaterialTheme.shapes.medium)
-                .background(MaterialTheme.colorScheme.primaryContainer),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                painter = if (type == "album") painterResource(id = R.drawable.ic_album)
-                else painterResource(id = R.drawable.ic_music_note),
-                modifier = Modifier.size(35.dp),
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                contentDescription = null
-            )
+        if (song.isMatched) {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .clip(MaterialTheme.shapes.medium)
+                    .background(MaterialTheme.colorScheme.primaryContainer),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = if (song.type == "album") painterResource(id = R.drawable.ic_album)
+                    else painterResource(id = R.drawable.ic_music_note),
+                    modifier = Modifier.size(35.dp),
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    contentDescription = null
+                )
 
-            AsyncImage(
-                model = thumbnail,
-                contentScale = ContentScale.FillHeight,
-                contentDescription = stringResource(id = R.string.song_cover)
-            )
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(song.thumbnailUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentScale = ContentScale.FillHeight,
+                    contentDescription = stringResource(id = R.string.song_cover)
+                )
+            }
         }
 
         Column(
@@ -79,7 +84,7 @@ fun SongInfoDisplay(
             verticalArrangement = Arrangement.spacedBy(5.dp, Alignment.CenterVertically),
         ) {
             Text(
-                text = title,
+                text = song.title ?: "",
                 modifier = Modifier.basicMarquee(),
                 maxLines = 2,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -90,7 +95,7 @@ fun SongInfoDisplay(
                 )
             )
             Text(
-                text = artist,
+                text = song.artistName ?: "",
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,

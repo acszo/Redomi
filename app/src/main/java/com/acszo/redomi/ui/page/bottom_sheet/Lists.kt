@@ -14,24 +14,49 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.model.Platform.platforms
+import com.acszo.redomi.model.Song
 import com.acszo.redomi.ui.component.ClickableItem
-import com.acszo.redomi.utils.IntentUtil
 
 @Composable
-fun HorizontalList(
-    platformsLink: Map<String, String>,
-    isActionSend: Boolean,
-    showActionsMenu: MutableState<Boolean>,
-    selectedPlatformLink: MutableState<String>,
-    iconShape: Shape
+fun AppsList(
+    listOrientation: ListOrientation,
+    songs: List<Song>,
+    iconShape: Shape,
+    gridSize: Int,
+    onClick: (song: Song) -> Unit
+) {
+    when (listOrientation) {
+        ListOrientation.HORIZONTAL -> {
+            HorizontalList(
+                songs = songs,
+                iconShape = iconShape,
+                onClick = { onClick(it) }
+            )
+        }
+
+        ListOrientation.VERTICAL -> {
+            VerticalList(
+                songs = songs,
+                iconShape = iconShape,
+                gridSize = gridSize,
+                onClick = { onClick(it) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun HorizontalList(
+    songs: List<Song>,
+    iconShape: Shape,
+    onClick: (song: Song) -> Unit
 ) {
     LazyRow(
         modifier = Modifier
@@ -39,70 +64,51 @@ fun HorizontalList(
             .height(150.dp),
         contentPadding = PaddingValues(horizontal = 10.dp),
     ) {
-        items(items = platformsLink.toList()) { (platform, link) ->
+        items(items = songs) {
             AppItem(
-                platform = platform,
-                link = link,
+                platform = it.platform,
                 iconShape = iconShape,
-                isActionSend = isActionSend,
-                showActionsMenu = showActionsMenu,
-                selectedPlatformLink = selectedPlatformLink,
+                onClick = { onClick(it) }
             )
         }
     }
 }
 
 @Composable
-fun VerticalList(
-    platformsLink: Map<String, String>,
-    isActionSend: Boolean,
-    showActionsMenu: MutableState<Boolean>,
-    selectedPlatformLink: MutableState<String>,
+private fun VerticalList(
+    songs: List<Song>,
     iconShape: Shape,
     gridSize: Int,
+    onClick: (song: Song) -> Unit
 ) {
     LazyVerticalGrid(
         modifier = Modifier.padding(vertical = 15.dp),
         columns = GridCells.Fixed(gridSize),
         contentPadding = PaddingValues(horizontal = 10.dp),
     ) {
-        items(items = platformsLink.toList()) { (platform, link) ->
+        items(items = songs) {
             AppItem(
-                platform = platform,
-                link = link,
+                platform = it.platform,
                 iconShape = iconShape,
-                isActionSend = isActionSend,
-                showActionsMenu = showActionsMenu,
-                selectedPlatformLink = selectedPlatformLink,
+                onClick = { onClick(it) }
             )
         }
     }
 }
 
 @Composable
-fun AppItem(
+private fun AppItem(
     platform: String,
-    link: String,
     iconShape: Shape,
-    isActionSend: Boolean,
-    showActionsMenu: MutableState<Boolean>,
-    selectedPlatformLink: MutableState<String>
+    onClick: () -> Unit
 ) {
-    val context = LocalContext.current
     val app = platforms[platform]!!
     val titleWords = app.title.split(' ')
 
     ClickableItem(
         modifier = Modifier
             .clip(MaterialTheme.shapes.large)
-            .clickable {
-                if (!isActionSend) {
-                    IntentUtil.onIntentView(context, link)
-                } else {
-                    showActionsMenu.value = true
-                    selectedPlatformLink.value = link
-                }
-            }
+            .clickable { onClick() }
     ) {
         Image(
             painter = painterResource(id = app.icon),

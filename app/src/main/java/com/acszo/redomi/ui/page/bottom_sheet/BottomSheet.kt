@@ -38,8 +38,6 @@ fun BottomSheet(
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = listOrientation == ListOrientation.HORIZONTAL
     )
-    val showActionsMenu = remember { mutableStateOf(false) }
-    val selectedPlatformLink = remember { mutableStateOf("") }
 
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
@@ -61,56 +59,46 @@ fun BottomSheet(
                 uiState.error != null -> {
                     BottomSheetError(stringResource(uiState.error))
                 }
-                uiState.songInfo != null && uiState.platformsLinks != null -> {
-                    val songInfo = uiState.songInfo
-                    val platformsLinks = uiState.platformsLinks
+                uiState.sourceSong != null -> {
+                    val songs = uiState.songs
+                    val selectedSong = remember { mutableStateOf(uiState.sourceSong) }
+                    val showActionsMenu = remember { mutableStateOf(false) }
 
-                    if (platformsLinks.size > 1 || isActionSend) {
-                        SongInfoDisplay(
-                            type = songInfo.type,
-                            thumbnail = songInfo.thumbnailUrl,
-                            title = songInfo.title,
-                            artist = songInfo.artistName,
+                    if (songs.size > 1 || isActionSend) {
+                        SongCard(
+                            song = selectedSong.value,
                             isUpdateAvailable = isUpdateAvailable
                         )
                     }
 
-                    if (platformsLinks.size > 1 && !showActionsMenu.value) {
-                        when (listOrientation) {
-                            ListOrientation.HORIZONTAL -> {
-                                HorizontalList(
-                                    platformsLink = platformsLinks,
-                                    isActionSend = isActionSend,
-                                    showActionsMenu = showActionsMenu,
-                                    selectedPlatformLink = selectedPlatformLink,
-                                    iconShape = iconShape
-                                )
+                    if (songs.size > 1 && !showActionsMenu.value) {
+                        AppsList(
+                            listOrientation = listOrientation,
+                            songs = songs,
+                            iconShape = iconShape,
+                            gridSize = gridSize,
+                            onClick = { song ->
+                                if (!isActionSend) {
+                                    onIntentView(context, song.link)
+                                } else {
+                                    showActionsMenu.value = true
+                                    selectedSong.value = song
+                                }
                             }
-
-                            ListOrientation.VERTICAL -> {
-                                VerticalList(
-                                    platformsLink = platformsLinks,
-                                    isActionSend = isActionSend,
-                                    showActionsMenu = showActionsMenu,
-                                    selectedPlatformLink = selectedPlatformLink,
-                                    iconShape = iconShape,
-                                    gridSize = gridSize
-                                )
-                            }
-                        }
+                        )
                     }
 
-                    if (platformsLinks.size == 1) {
+                    if (songs.size == 1) {
                         if (!isActionSend) {
                             Box(
                                 modifier = Modifier.height(200.dp),
                             ) {
-                                onIntentView(context, platformsLinks.values.first())
+                                onIntentView(context, songs.first().link)
                                 onDismiss()
                             }
                         } else {
                             showActionsMenu.value = true
-                            selectedPlatformLink.value = platformsLinks.values.first()
+                            selectedSong.value = songs.first()
                         }
                     }
 
@@ -118,7 +106,7 @@ fun BottomSheet(
                         visible = showActionsMenu.value,
                         enter = enterFadeInTransition(),
                     ) {
-                        ActionsMenu(url = selectedPlatformLink.value) {
+                        ActionsMenu(url = selectedSong.value.link) {
                             onDismiss()
                         }
                     }
