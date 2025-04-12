@@ -39,14 +39,14 @@
     <string name="system_theme">Predeterminado del sistema</string>
     <string name="dark_theme">Oscuro</string>
     <string name="light_theme">Claro</string>
-    <string name="dialog_setup_title">Guia</string>
+    <string name="dialog_setup_title">Guía</string>
     <string name="dialog_setup_description">Por defecto, %s no puede abrir enlaces externos. Se le redireccionará a la configuración para hacerlo funcionar.</string>
     <string name="dialog_setup_description_checked">Selecciona los enlaces para que %s pueda abrirlos correctamente.</string>
-    <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
+    <string name="dialog_setup_description_unchecked">Dejar sin seleccionar los servicios de música que usas. (por ejemplo, si usas Spotify déjalo sin marcar)</string>
     <string name="update_info_failed">No se pudo cargar la información de actualización</string>
-    <string name="error_incorrect_url">La url dada es incorrecta</string>
+    <string name="error_incorrect_url">La URL dada es incorrecta</string>
     <string name="error_no_internet_connection">Sin conexión a internet</string>
     <string name="error_generic">Un error ha ocurrido</string>
     <string name="error_server">Error de servidor</string>
-    <string name="error_timeout">Request timed out</string>
+    <string name="error_timeout">Tiempo de solicitud agotado</string>
 </resources>
