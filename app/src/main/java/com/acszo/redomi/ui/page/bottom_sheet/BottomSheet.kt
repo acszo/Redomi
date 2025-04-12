@@ -10,8 +10,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
@@ -61,17 +64,19 @@ fun BottomSheet(
                 }
                 uiState.sourceSong != null -> {
                     val songs = uiState.songs
-                    val selectedSong = remember { mutableStateOf(uiState.sourceSong) }
-                    val showActionsMenu = remember { mutableStateOf(false) }
+                    var selectedSong by remember { mutableStateOf(
+                        if (songs.size > 1) uiState.sourceSong else songs.first()
+                    ) }
+                    var showActionsMenu by remember { mutableStateOf(songs.size == 1) }
 
                     if (songs.size > 1 || isActionSend) {
                         SongCard(
-                            song = selectedSong.value,
+                            song = selectedSong,
                             isUpdateAvailable = isUpdateAvailable
                         )
                     }
 
-                    if (songs.size > 1 && !showActionsMenu.value) {
+                    if (!showActionsMenu) {
                         AppsList(
                             listOrientation = listOrientation,
                             songs = songs,
@@ -81,33 +86,30 @@ fun BottomSheet(
                                 if (!isActionSend) {
                                     onIntentView(context, song.link)
                                 } else {
-                                    showActionsMenu.value = true
-                                    selectedSong.value = song
+                                    showActionsMenu = true
+                                    selectedSong = song
                                 }
                             }
                         )
                     }
 
-                    if (songs.size == 1) {
-                        if (!isActionSend) {
-                            Box(
-                                modifier = Modifier.height(200.dp),
-                            ) {
-                                onIntentView(context, songs.first().link)
+                    AnimatedVisibility(
+                        visible = showActionsMenu,
+                        enter = enterFadeInTransition(),
+                    ) {
+                        if (isActionSend) {
+                            ActionsMenu(url = selectedSong.link) {
                                 onDismiss()
                             }
                         } else {
-                            showActionsMenu.value = true
-                            selectedSong.value = songs.first()
-                        }
-                    }
-
-                    AnimatedVisibility(
-                        visible = showActionsMenu.value,
-                        enter = enterFadeInTransition(),
-                    ) {
-                        ActionsMenu(url = selectedSong.value.link) {
-                            onDismiss()
+                            Box(
+                                modifier = Modifier.height(200.dp),
+                            ) {
+                                LaunchedEffect(Unit) {
+                                    onIntentView(context, selectedSong.link)
+                                    onDismiss()
+                                }
+                            }
                         }
                     }
                 }
