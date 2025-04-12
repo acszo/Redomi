@@ -45,21 +45,23 @@ fun ActionsMenu(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
     ) {
-        ActionsMenuItem(
+        ActionsItem(
             icon = R.drawable.ic_play,
             title = stringResource(id = R.string.open)
         ) {
             onIntentView(context, url)
             onDismiss()
         }
-        ActionsMenuItem(
+
+        ActionsItem(
             icon = R.drawable.ic_link,
             title = stringResource(id = android.R.string.copy)
         ) {
             copyText(clipboardManager, url)
             onDismiss()
         }
-        ActionsMenuItem(
+
+        ActionsItem(
             icon = R.drawable.ic_share,
             title = stringResource(id = R.string.share)
         ) {
@@ -70,7 +72,7 @@ fun ActionsMenu(
 }
 
 @Composable
-fun ActionsMenuItem(
+private fun ActionsItem(
     @DrawableRes icon: Int,
     title: String,
     onClickAction: () -> Unit
