@@ -35,7 +35,8 @@ fun BottomSheet(
     isUpdateAvailable: Boolean,
     iconShape: Shape,
     listOrientation: ListOrientation,
-    gridSize: Int
+    gridSize: Int,
+    refresh: () -> Unit
 ) {
     val context = LocalContext.current
     val sheetState = rememberModalBottomSheetState(
@@ -60,7 +61,10 @@ fun BottomSheet(
                     }
                 }
                 uiState.error != null -> {
-                    BottomSheetError(stringResource(uiState.error))
+                    BottomSheetError(
+                        message = stringResource(uiState.error),
+                        onClick = refresh
+                    )
                 }
                 uiState.sourceSong != null -> {
                     val songs = uiState.songs

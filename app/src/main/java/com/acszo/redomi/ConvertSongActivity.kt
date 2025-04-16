@@ -63,7 +63,8 @@ class ConvertSongActivity: ComponentActivity() {
                     isUpdateAvailable = isUpdateAvailable,
                     iconShape = IconShape.entries[iconShape].shape,
                     listOrientation = ListOrientation.entries[listOrientation],
-                    gridSize = gridSize
+                    gridSize = gridSize,
+                    refresh = { songLinkViewModel.getPlatformsLink(intentData, appList.key) }
                 )
             }
         }

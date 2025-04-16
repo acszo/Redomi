@@ -66,7 +66,7 @@ class SongLinkViewModel @Inject constructor(
                 }
 
                 _bottomSheetUiState.update {
-                    it.copy(sourceSong = sourceSong, songs = songsInfo, isLoading = false)
+                    it.copy(sourceSong = sourceSong, songs = songsInfo, isLoading = false, error = null)
                 }
             }
             is ApiResult.Error -> {
