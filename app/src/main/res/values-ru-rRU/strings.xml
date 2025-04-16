@@ -49,4 +49,5 @@
     <string name="error_generic">Произошла ошибка</string>
     <string name="error_server">Ошибка сервера</string>
     <string name="error_timeout">Request timed out</string>
+    <string name="retry">Retry</string>
 </resources>
