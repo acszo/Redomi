@@ -45,7 +45,7 @@
     <string name="dialog_setup_description_unchecked">Leave unchecked the ones that are from music services you use. (e.g. if you use Spotify leave it unchecked)</string>
     <string name="update_info_failed">Nie można pobrać informacji o aktualizacji</string>
     <string name="error_incorrect_url">Podany adres url jest nieprawidłowy</string>
-    <string name="error_no_internet_connection">Brak połączenia z Internetem</string>
+    <string name="error_no_internet_connection">Brak połączenia z internetem</string>
     <string name="error_generic">Wystąpił błąd</string>
     <string name="error_server">Błąd serwera</string>
     <string name="error_timeout">Request timed out</string>
