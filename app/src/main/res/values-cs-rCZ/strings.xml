@@ -49,4 +49,5 @@
     <string name="error_generic">Vyskytla se chyba</string>
     <string name="error_server">Chyba serveru</string>
     <string name="error_timeout">Request timed out</string>
+    <string name="retry">Retry</string>
 </resources>
