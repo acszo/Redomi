@@ -48,6 +48,6 @@
     <string name="error_no_internet_connection">Aucune connexion internet</string>
     <string name="error_generic">Une erreur est survenue</string>
     <string name="error_server">Erreur du serveur</string>
-    <string name="error_timeout">Request timed out</string>
-    <string name="retry">Retry</string>
+    <string name="error_timeout">La demande a expiré</string>
+    <string name="retry">Réessayer</string>
 </resources>
