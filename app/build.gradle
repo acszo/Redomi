@@ -24,7 +24,7 @@ keystoreProperties.load(new FileInputStream(rootProject.file("keystore.propertie
 android {
 
     namespace "com.acszo.redomi"
-    compileSdk 35
+    compileSdk 36
 
     androidResources {
         generateLocaleConfig true
@@ -42,7 +42,7 @@ android {
     defaultConfig {
         applicationId "com.acszo.redomi"
         minSdk 28
-        targetSdk 35
+        targetSdk 36
         versionCode 10305
         versionName "1.3.5"
 
