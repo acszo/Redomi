@@ -49,4 +49,5 @@
     <string name="error_generic">Дошло је до грешке</string>
     <string name="error_server">Серверска грешка</string>
     <string name="error_timeout">Request timed out</string>
+    <string name="retry">Retry</string>
 </resources>
