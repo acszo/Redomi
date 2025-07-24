@@ -36,19 +36,79 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="https"/>
-                <data android:host="music.youtube.com"/>
-                <data android:host="www.youtube.com"/>
-                <data android:host="open.spotify.com"/>
-                <data android:host="www.deezer.com"/>
+                <data android:scheme="https" />
+                <data android:host="www.youtube.com" />
+                <data android:host="music.youtube.com" />
+                <data android:pathPrefix="/watch" />
+                <data android:pathPrefix="/playlist" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="open.spotify.com" />
                 <data android:host="tidal.com"/>
-                <data android:host="listen.tidal.com"/>
-                <data android:host="music.amazon.com"/>
-                <data android:host="music.apple.com"/>
-                <data android:host="soundcloud.com"/>
-                <data android:host="play.napster.com"/>
-                <data android:host="music.yandex.ru"/>
-                <data android:host="play.anghami.com"/>
+                <data android:host="listen.tidal.com" />
+                <data android:host="play.napster.com" />
+                <data android:host="music.yandex.ru" />
+                <data android:pathPrefix="/track/" />
+                <data android:pathPrefix="/album/" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="www.deezer.com" />
+                <data android:pathPattern="/.*/track/.*" />
+                <data android:pathPattern="/.*/album/.*" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="music.amazon.com" />
+                <data android:pathPrefix="/tracks/" />
+                <data android:pathPrefix="/albums/" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="music.apple.com" />
+                <data android:pathPattern="/.*/song/.*" />
+                <data android:pathPattern="/.*/album/.*" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="soundcloud.com" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="play.anghami.com" />
+                <data android:pathPrefix="/song/" />
+                <data android:pathPrefix="/album/" />
             </intent-filter>
 
             <intent-filter>
