@@ -1,17 +1,24 @@
 package com.acszo.redomi.ui.page.settings
 
 import android.os.Build
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -28,6 +35,9 @@ import com.acszo.redomi.ui.component.RadioButtonItemDialog
 import com.acszo.redomi.ui.nav.Pages.APPS_PAGE
 import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
 import com.acszo.redomi.ui.nav.Pages.UPDATE_PAGE
+import com.acszo.redomi.ui.theme.bottomItemShape
+import com.acszo.redomi.ui.theme.middleItemShape
+import com.acszo.redomi.ui.theme.topItemShape
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
 import com.acszo.redomi.versionName
@@ -49,7 +59,7 @@ fun SettingsPage(
     val redomi = stringResource(id = R.string.app_name)
 
     val uriHandle = LocalUriHandler.current
-    val clipboardManager: ClipboardManager = LocalClipboardManager.current
+    val clipboardManager = LocalClipboardManager.current
     val appVersion = "Version: $versionName"
     val modelName = "Model: ${Build.MODEL}"
     val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
@@ -62,6 +72,7 @@ fun SettingsPage(
     ) { padding, pageTitle ->
         LazyColumn(
             contentPadding = padding,
+            verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             item {
                 pageTitle()
@@ -71,7 +82,8 @@ fun SettingsPage(
                 SettingsItem(
                     icon = R.drawable.ic_grid_view,
                     title = stringResource(id = R.string.apps),
-                    description = stringResource(id = R.string.apps_description)
+                    description = stringResource(id = R.string.apps_description),
+                    itemShape = topItemShape
                 ) {
                     navController.navigate(APPS_PAGE)
                 }
@@ -83,7 +95,8 @@ fun SettingsPage(
                 SettingsItem(
                     icon = R.drawable.ic_format_list_bulleted,
                     title = stringResource(id = R.string.layout),
-                    description = listOrientationText.lowercase().replaceFirstChar { it.uppercase() }
+                    description = listOrientationText.lowercase().replaceFirstChar { it.uppercase() },
+                    itemShape = middleItemShape
                 ) {
                     navController.navigate(LAYOUT_PAGE)
                 }
@@ -93,7 +106,8 @@ fun SettingsPage(
                 SettingsItem(
                     icon = R.drawable.ic_category_filled,
                     title = stringResource(id = R.string.icon_shape),
-                    description = stringResource(id = IconShape.entries[iconShape].toRes)
+                    description = stringResource(id = IconShape.entries[iconShape].toRes),
+                    itemShape = middleItemShape
                 ) {
                     openIconShapeDialog = true
                 }
@@ -103,10 +117,15 @@ fun SettingsPage(
                 SettingsItem(
                     icon = R.drawable.ic_color_lens_filled,
                     title = stringResource(id = R.string.theme),
-                    description = stringResource(id = Theme.entries[themeMode].toRes)
+                    description = stringResource(id = Theme.entries[themeMode].toRes),
+                    itemShape = bottomItemShape
                 ) {
                     openThemeDialog = true
                 }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(12.dp))
             }
 
             if (isGithubBuild) {
@@ -115,7 +134,17 @@ fun SettingsPage(
                         icon = R.drawable.ic_update,
                         title = stringResource(id = R.string.update),
                         description = stringResource(id = R.string.update_description),
-                        isAlertIconVisible = isUpdateAvailable
+                        itemShape = topItemShape,
+                        trailingItem = {
+                            if (isUpdateAvailable) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_new_releases_outline),
+                                    modifier = Modifier.size(24.dp),
+                                    tint = MaterialTheme.colorScheme.error,
+                                    contentDescription = stringResource(id = R.string.update),
+                                )
+                            }
+                        }
                     ) {
                         navController.navigate(UPDATE_PAGE)
                     }
@@ -127,7 +156,8 @@ fun SettingsPage(
                 SettingsItem(
                     icon = R.drawable.ic_github,
                     title = stringResource(id = R.string.github),
-                    description = stringResource(id = R.string.github_description, repository)
+                    description = stringResource(id = R.string.github_description, repository),
+                    itemShape = if (isGithubBuild) middleItemShape else topItemShape
                 ) {
                     uriHandle.openUri("https://github.com/acszo/Redomi")
                 }
@@ -137,7 +167,8 @@ fun SettingsPage(
                 SettingsItem(
                     icon = R.drawable.ic_info_filled,
                     title = stringResource(id = R.string.version),
-                    description = versionName
+                    description = versionName,
+                    itemShape = bottomItemShape
                 ) {
                     copyText(
                         clipboardManager = clipboardManager,
