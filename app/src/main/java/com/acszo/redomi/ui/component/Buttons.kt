@@ -83,7 +83,7 @@ private fun <T> RadioButtonItemPage(
     item: T,
     isSelected: Boolean,
     verticalPadding: Dp = 10.dp,
-    horizontalPadding: Dp = 28.dp,
+    horizontalPadding: Dp = 18.dp,
     startPadding: Dp = 0.dp,
     fontSize: TextUnit = MaterialTheme.typography.bodyLarge.fontSize,
     onClick: (Int) -> Unit
