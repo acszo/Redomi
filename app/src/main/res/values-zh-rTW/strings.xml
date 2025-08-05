@@ -41,10 +41,10 @@
     <string name="light_theme">淺色</string>
     <string name="dialog_setup_title">導覽</string>
     <string name="dialog_setup_description">預設情況下，%s無法打開外部鏈接。您將被導向設定以使其正常工作。</string>
-    <string name="dialog_setup_description_checked">檢查連結使%s可以正確打開它</string>
+    <string name="dialog_setup_description_checked">檢查連結使%s可以正確打開它。</string>
     <string name="dialog_setup_description_unchecked">您正在使用的音樂平台保持未選擇。(例如：您使用Spotify則將其保持未選擇)</string>
     <string name="update_info_failed">無法載入更新資訊</string>
-    <string name="error_incorrect_url">URL不正確</string>
+    <string name="error_incorrect_url">Url 不正確</string>
     <string name="error_no_internet_connection">沒有網路連線</string>
     <string name="error_generic">發生錯誤</string>
     <string name="error_server">伺服器錯誤</string>
