@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.page.bottom_sheet
+package com.acszo.redomi.ui.page.bottom_sheet.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.model.Song
-import com.acszo.redomi.ui.component.ClickableItem
+import com.acszo.redomi.ui.common.ClickableItem
 
 @Composable
 fun AppsList(

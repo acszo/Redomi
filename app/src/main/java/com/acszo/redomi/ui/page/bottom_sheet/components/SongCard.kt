@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.page.bottom_sheet
+package com.acszo.redomi.ui.page.bottom_sheet.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -33,7 +33,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.acszo.redomi.R
 import com.acszo.redomi.model.Song
-import com.acszo.redomi.ui.component.RotatingIcon
+import com.acszo.redomi.ui.common.RotatingIcon
 import com.acszo.redomi.utils.IntentUtil.onIntentSettingsPage
 
 @Composable

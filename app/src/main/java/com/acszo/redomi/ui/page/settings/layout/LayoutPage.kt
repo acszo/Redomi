@@ -23,8 +23,8 @@ import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.enterVerticalTransition
 import com.acszo.redomi.ui.common.exitVerticalTransition
-import com.acszo.redomi.ui.component.AnimatedRadiusButton
-import com.acszo.redomi.ui.component.RadioButtonItemPage
+import com.acszo.redomi.ui.common.AnimatedRadiusButton
+import com.acszo.redomi.ui.common.RadioButtonItemPage
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.common
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

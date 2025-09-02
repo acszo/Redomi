@@ -11,7 +11,7 @@ import com.acszo.redomi.isGithubBuild
 import com.acszo.redomi.ui.common.TransitionDirection
 import com.acszo.redomi.ui.common.enterHorizontalTransition
 import com.acszo.redomi.ui.common.exitHorizontalTransition
-import com.acszo.redomi.ui.component.BackButton
+import com.acszo.redomi.ui.common.BackButton
 import com.acszo.redomi.ui.page.settings.apps.AppsPage
 import com.acszo.redomi.ui.page.settings.layout.LayoutPage
 import com.acszo.redomi.ui.page.settings.SettingsPage

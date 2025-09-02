@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.common
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background

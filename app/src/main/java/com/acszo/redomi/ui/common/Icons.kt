@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.common
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.Animatable
@@ -14,11 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
+import androidx.compose.ui.platform.LocalResources
 
 @Composable
 fun RotatingIcon(
@@ -50,8 +50,7 @@ fun RotatingIcon(
 
 @Composable
 fun NewReleaseIcon() {
-    val context = LocalContext.current
-    val display = context.resources.displayMetrics
+    val display = LocalResources.current.displayMetrics
     val width = display.widthPixels.dp / display.density
     val height = display.heightPixels.dp / display.density
     val widthOffset = width / 1.5f

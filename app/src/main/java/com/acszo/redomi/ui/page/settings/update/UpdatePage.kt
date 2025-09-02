@@ -28,9 +28,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
-import com.acszo.redomi.ui.component.NewReleaseIcon
-import com.acszo.redomi.ui.component.fadingEdge
-import com.acszo.redomi.ui.component.ignoreHorizontalPadding
+import com.acszo.redomi.ui.common.NewReleaseIcon
+import com.acszo.redomi.ui.common.fadingEdge
+import com.acszo.redomi.ui.common.ignoreHorizontalPadding
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk
 import com.acszo.redomi.versionName

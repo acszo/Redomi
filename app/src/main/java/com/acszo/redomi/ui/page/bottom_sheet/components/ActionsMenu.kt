@@ -1,4 +1,4 @@
-package com.acszo.redomi.ui.page.bottom_sheet
+package com.acszo.redomi.ui.page.bottom_sheet.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
@@ -25,7 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
-import com.acszo.redomi.ui.component.ClickableItem
+import com.acszo.redomi.ui.common.ClickableItem
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentSend
 import com.acszo.redomi.utils.IntentUtil.onIntentView

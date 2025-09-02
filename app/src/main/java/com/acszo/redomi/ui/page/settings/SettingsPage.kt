@@ -29,9 +29,9 @@ import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.data.Theme
 import com.acszo.redomi.isGithubBuild
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
-import com.acszo.redomi.ui.component.DefaultDialog
-import com.acszo.redomi.ui.component.IconDescription
-import com.acszo.redomi.ui.component.RadioButtonItemDialog
+import com.acszo.redomi.ui.common.DefaultDialog
+import com.acszo.redomi.ui.common.IconDescription
+import com.acszo.redomi.ui.common.RadioButtonItemDialog
 import com.acszo.redomi.ui.nav.Pages.APPS_PAGE
 import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
 import com.acszo.redomi.ui.nav.Pages.UPDATE_PAGE

@@ -23,6 +23,9 @@ import com.acszo.redomi.R
 import com.acszo.redomi.data.AppList
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.removeTopPadding
+import com.acszo.redomi.ui.page.settings.apps.components.BottomInfo
+import com.acszo.redomi.ui.page.settings.apps.components.Tabs
+import com.acszo.redomi.ui.page.settings.apps.components.appsCheckBoxList
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -105,7 +108,7 @@ fun AppsPage(
                 BottomInfo(
                     text = stringResource(
                         id = if (selectedTab.value == AppList.OPENING) R.string.opening_apps_tab_info
-                            else R.string.sharing_apps_tab_info
+                        else R.string.sharing_apps_tab_info
                     )
                 )
             }

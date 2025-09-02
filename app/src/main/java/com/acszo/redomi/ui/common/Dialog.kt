@@ -1,5 +1,6 @@
-package com.acszo.redomi.ui.component
+package com.acszo.redomi.ui.common
 
+import android.R
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -47,7 +48,7 @@ fun DefaultDialog(
             TextButton(
                 onClick = onConfirmAction,
             ) {
-                Text(text = stringResource(id = android.R.string.ok))
+                Text(text = stringResource(id = R.string.ok))
             }
         }
     )
