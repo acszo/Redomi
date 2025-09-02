@@ -54,9 +54,9 @@ enum class ListOrientation: Resource {
 }
 
 enum class IconShape(val shape: Shape): Resource {
-    SQUIRCLE(SquircleShape),                // 👍👍👍
-    CIRCLE(CircleShape),                    // 👍👍
-    SQUARE(RoundedCornerShape(25));         // 👎
+    SQUIRCLE(SquircleShape),
+    CIRCLE(CircleShape),
+    SQUARE(RoundedCornerShape(25));
 
     override val toRes: Int
         get() = when (this) {
