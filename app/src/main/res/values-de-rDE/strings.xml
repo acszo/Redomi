@@ -28,7 +28,7 @@
     <string name="sharing">Teilen</string>
     <string name="apps_description_page">Wähle die Reihenfolge und welche Anwendungen du angezeigt bekommen möchtest, wenn du ein Lied konvertierst.</string>
     <string name="opening_apps_tab_info">Wenn Sie einen Link öffnen, werden diese ausgewählten Anwendungen angezeigt. Wenn nur eine Anwendung ausgewählt wird, wird sie direkt geöffnet.</string>
-    <string name="sharing_apps_tab_info">Beim Teilen von einer Musikplattform werden diese ausgewählten Anwendungen angezeigt. Wenn du nur eine App auswählst, wird das Fenster der Aktionen geöffnet.</string>
+    <string name="sharing_apps_tab_info">Beim Teilen aus einer Musikplattformapp werden diese ausgewählten Anwendungen angezeigt. Wenn du nur eine App auswählst, wird das Fenster der Aktionen geöffnet.</string>
     <string name="layout_description_page">Wähle die Art und Weise, wie du die Apps angezeigt haben möchtest, die du bei der Konvertierung eines Titels siehst.</string>
     <string name="layout_grid_size">Rastergröße</string>
     <string name="update_description_page">Auf Updates wird bei jedem Start der App geprüft.</string>
@@ -44,9 +44,10 @@
     <string name="dialog_setup_description_checked">Überprüfe die Links, damit %s sie korrekt öffnen kann.</string>
     <string name="dialog_setup_description_unchecked">Lasse diejenigen Links aus, die du als Musikdienst bereits nutzt (wenn du z.B. Spotify nutzt, brauchst du es hier nicht auswählen)</string>
     <string name="update_info_failed">Update-Informationen konnten nicht geladen werden</string>
-    <string name="error_incorrect_url">Die angegebene url ist falsch</string>
+    <string name="error_incorrect_url">Die angegebene URL ist falsch</string>
     <string name="error_no_internet_connection">Keine Internetverbindung</string>
     <string name="error_generic">Ein Fehler ist aufgetreten</string>
     <string name="error_server">Serverfehler</string>
-    <string name="error_timeout">Request timed out</string>
+    <string name="error_timeout">Zeitüberschreitung bei Anforderung</string>
+    <string name="retry">Erneut versuchen</string>
 </resources>
