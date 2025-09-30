@@ -53,7 +53,11 @@
                 <data android:host="tidal.com"/>
                 <data android:host="listen.tidal.com" />
                 <data android:host="play.napster.com" />
+                <data android:host="music.yandex.com" />
+                <data android:host="music.yandex.by" />
+                <data android:host="music.yandex.kz"/>
                 <data android:host="music.yandex.ru" />
+                <data android:host="music.yandex.uz" />
                 <data android:pathPrefix="/track/" />
                 <data android:pathPrefix="/album/" />
             </intent-filter>
@@ -75,7 +79,18 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
+                <data android:host="music.amazon.ca" />
+                <data android:host="music.amazon.de" />
+                <data android:host="music.amazon.es" />
+                <data android:host="music.amazon.fr" />
+                <data android:host="music.amazon.in" />
+                <data android:host="music.amazon.it" />
+                <data android:host="music.amazon.co.jp" />
+                <data android:host="music.amazon.co.uk" />
                 <data android:host="music.amazon.com" />
+                <data android:host="music.amazon.com.au" />
+                <data android:host="music.amazon.com.br" />
+                <data android:host="music.amazon.com.mx" />
                 <data android:pathPrefix="/tracks/" />
                 <data android:pathPrefix="/albums/" />
             </intent-filter>
