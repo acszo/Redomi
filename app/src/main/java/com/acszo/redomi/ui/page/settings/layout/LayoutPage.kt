@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,11 +19,11 @@ import com.acszo.redomi.R
 import com.acszo.redomi.data.DataStoreConst.BIG_GRID
 import com.acszo.redomi.data.DataStoreConst.SMALL_GRID
 import com.acszo.redomi.data.ListOrientation
+import com.acszo.redomi.ui.common.AnimatedRadiusButton
+import com.acszo.redomi.ui.common.RadioButtonItemPage
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.enterVerticalTransition
 import com.acszo.redomi.ui.common.exitVerticalTransition
-import com.acszo.redomi.ui.common.AnimatedRadiusButton
-import com.acszo.redomi.ui.common.RadioButtonItemPage
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable
@@ -73,7 +72,6 @@ fun LayoutPage(
                     exit = exitVerticalTransition(),
                 ) {
                     Column(
-                        modifier = Modifier.padding(bottom = 28.dp),
                         verticalArrangement = Arrangement.spacedBy(28.dp)
                     ) {
                         Text(

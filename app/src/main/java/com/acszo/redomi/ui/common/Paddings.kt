@@ -11,25 +11,15 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-fun PaddingValues.addHorizontalPadding(
+@Composable
+fun PaddingValues.addPagePadding(
     padding: Dp
 ): PaddingValues = PaddingValues(
     start = padding,
     top = this.calculateTopPadding(),
     end = padding,
-    bottom = this.calculateBottomPadding()
+    bottom = padding + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
 )
-
-@Composable
-fun PaddingValues.addNavigationBarsPadding(): PaddingValues {
-    val layoutDirection = LocalLayoutDirection.current
-    return PaddingValues(
-        start = this.calculateStartPadding(layoutDirection),
-        top = this.calculateTopPadding(),
-        end = this.calculateEndPadding(layoutDirection),
-        bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-    )
-}
 
 @Composable
 fun PaddingValues.removeTopPadding(): PaddingValues {

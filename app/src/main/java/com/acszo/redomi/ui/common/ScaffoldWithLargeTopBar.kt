@@ -38,7 +38,7 @@ fun ScaffoldWithLargeTopAppBar(
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
-        content(it.addHorizontalPadding(18.dp).addNavigationBarsPadding()) {
+        content(it.addPagePadding(18.dp)) {
             Column {
                 PageTitle(
                     title = title,

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -27,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.acszo.redomi.R
 import com.acszo.redomi.model.DownloadStatus
-import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.NewReleaseIcon
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.fadingEdge
 import com.acszo.redomi.ui.common.ignoreHorizontalPadding
 import com.acszo.redomi.utils.UpdateUtil.getApk
@@ -67,7 +66,6 @@ fun UpdatePage(
                     .weight(1f)
                     .fadingEdge(),
                 verticalArrangement = Arrangement.spacedBy(28.dp),
-                contentPadding = PaddingValues(bottom = 10.dp),
             ) {
                 item {
                     pageTitleWithDescription()
@@ -121,8 +119,8 @@ fun UpdatePage(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(75.dp)
-                    .padding(vertical = 16.dp),
+                    .padding(top = 18.dp),
+                    //.height(40.dp),
                 contentPadding = PaddingValues(0.dp),
                 enabled = progressDownloadStatus.value !is DownloadStatus.Downloading,
                 onClick = {
