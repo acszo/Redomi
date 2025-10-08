@@ -1,7 +1,7 @@
 buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-serialization:2.2.20"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.57.1"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.57.2"
     }
 }
 
