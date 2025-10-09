@@ -70,7 +70,7 @@ class SongLinkViewModel @Inject constructor(
                 }
             }
             is ApiResult.Error -> {
-                var message = when {
+                val message = when {
                     response.code in 400..499 -> R.string.error_incorrect_url
                     response.code in 500..599 -> R.string.error_server
                     else -> R.string.error_generic
