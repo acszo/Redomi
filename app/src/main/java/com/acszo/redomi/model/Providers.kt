@@ -23,5 +23,5 @@ data class Song(
     val type: String?,
     val title: String?,
     val artistName: String?,
-    val thumbnailUrl: String?
+    val thumbnailUrl: String? = null
 )
