@@ -27,5 +27,5 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.compose.foundation:foundation:1.7.4'
+    implementation 'androidx.compose.foundation:foundation:1.9.4'
 }
