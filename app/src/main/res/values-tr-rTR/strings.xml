@@ -50,4 +50,5 @@
     <string name="error_server">Sunucu hatası</string>
     <string name="error_timeout">İstek zaman aşımına uğradı</string>
     <string name="retry">Tekrar dene</string>
+    <string name="country_code">Country code</string>
 </resources>
