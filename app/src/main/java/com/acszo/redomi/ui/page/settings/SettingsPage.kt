@@ -4,11 +4,22 @@ import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,21 +39,25 @@ import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.data.Theme
 import com.acszo.redomi.isGithubBuild
-import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.DefaultDialog
 import com.acszo.redomi.ui.common.IconDescription
 import com.acszo.redomi.ui.common.RadioButtonItemDialog
+import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.nav.Pages.APPS_PAGE
 import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
 import com.acszo.redomi.ui.nav.Pages.UPDATE_PAGE
 import com.acszo.redomi.ui.theme.bottomItemShape
-import com.acszo.redomi.ui.theme.middleItemShape
+import com.acszo.redomi.ui.theme.middleSmallItemShape
+import com.acszo.redomi.ui.theme.middleLargeItemShape
 import com.acszo.redomi.ui.theme.topItemShape
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
 import com.acszo.redomi.versionName
 import com.acszo.redomi.viewmodel.DataStoreViewModel
+import java.util.Locale
+import java.util.Locale.getDefault
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsPage(
     dataStoreViewModel: DataStoreViewModel,
@@ -55,6 +70,7 @@ fun SettingsPage(
     val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
     val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
     val themeMode by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
+    val countryCode by dataStoreViewModel.countryCode.collectAsStateWithLifecycle()
 
     val redomi = stringResource(id = R.string.app_name)
 
@@ -66,6 +82,7 @@ fun SettingsPage(
 
     var openIconShapeDialog by remember { mutableStateOf(false) }
     var openThemeDialog by remember { mutableStateOf(false) }
+    var openCountryCodeDialog by remember { mutableStateOf(false) }
 
     ScaffoldWithLargeTopAppBar(
         title = redomi
@@ -96,7 +113,7 @@ fun SettingsPage(
                     icon = R.drawable.ic_format_list_bulleted,
                     title = stringResource(id = R.string.layout),
                     description = listOrientationText.lowercase().replaceFirstChar { it.uppercase() },
-                    itemShape = middleItemShape
+                    itemShape = middleSmallItemShape
                 ) {
                     navController.navigate(LAYOUT_PAGE)
                 }
@@ -107,7 +124,7 @@ fun SettingsPage(
                     icon = R.drawable.ic_category_filled,
                     title = stringResource(id = R.string.icon_shape),
                     description = stringResource(id = IconShape.entries[iconShape].toRes),
-                    itemShape = middleItemShape
+                    itemShape = middleSmallItemShape
                 ) {
                     openIconShapeDialog = true
                 }
@@ -121,6 +138,21 @@ fun SettingsPage(
                     itemShape = bottomItemShape
                 ) {
                     openThemeDialog = true
+                }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(12.dp))
+            }
+
+            item {
+                SettingsItem(
+                    icon = R.drawable.ic_world,
+                    title = stringResource(id = R.string.country_code),
+                    description = countryCode,
+                    itemShape = middleLargeItemShape
+                ) {
+                    openCountryCodeDialog = true
                 }
             }
 
@@ -157,7 +189,7 @@ fun SettingsPage(
                     icon = R.drawable.ic_github,
                     title = stringResource(id = R.string.github),
                     description = stringResource(id = R.string.github_description, repository),
-                    itemShape = if (isGithubBuild) middleItemShape else topItemShape
+                    itemShape = if (isGithubBuild) middleSmallItemShape else topItemShape
                 ) {
                     uriHandle.openUri("https://github.com/acszo/Redomi")
                 }
@@ -239,4 +271,70 @@ fun SettingsPage(
             onConfirmAction = { openThemeDialog = false }
         )
     }
+
+    if (openCountryCodeDialog) {
+        var selectedItem by remember { mutableStateOf<String?>(null) }
+        val countries = Locale.getISOCountries().associateWith { code ->
+            val name = Locale.Builder()
+                .setRegion(code)
+                .build()
+                .getDisplayCountry(getDefault())
+
+            "$name ($code)"
+        }
+        val textFieldState = rememberTextFieldState()
+        val filteredCountries = countries.filter {
+            it.value.lowercase().contains(
+            textFieldState.text.toString().lowercase())
+        }
+        val (allowExpanded, setExpanded) = remember { mutableStateOf(false) }
+        val expanded = allowExpanded && countries.isNotEmpty()
+
+        DefaultDialog(
+            icon = R.drawable.ic_world,
+            title = stringResource(id = R.string.country_code),
+            content = {
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = setExpanded
+                ) {
+                    TextField(
+                        modifier = Modifier.width(280.dp).menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
+                        state = textFieldState,
+                        lineLimits = TextFieldLineLimits.SingleLine,
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(
+                                expanded = expanded,
+                                modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.SecondaryEditable),
+                            )
+                        },
+                    )
+                    ExposedDropdownMenu(
+                        modifier = Modifier.heightIn(max = 280.dp),
+                        expanded = expanded,
+                        onDismissRequest = { setExpanded(false) },
+                    ) {
+                        filteredCountries.forEach { (code, name) ->
+                            DropdownMenuItem(
+                                text = { Text(name) },
+                                onClick = {
+                                    textFieldState.setTextAndPlaceCursorAtEnd(name)
+                                    selectedItem = code
+                                    setExpanded(false)
+                                },
+                                contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                            )
+                        }
+                    }
+                }
+            },
+            onDismissRequest = { openCountryCodeDialog = false },
+            enabledConfirmAction = selectedItem != null,
+            onConfirmAction = {
+                dataStoreViewModel.setCountryCode(selectedItem!!)
+                openCountryCodeDialog = false
+            }
+        )
+    }
+
 }

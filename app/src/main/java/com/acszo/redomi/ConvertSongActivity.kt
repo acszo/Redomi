@@ -45,8 +45,10 @@ class ConvertSongActivity : ComponentActivity() {
             val updateViewModel: UpdateViewModel = hiltViewModel()
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
 
+            val countryCode = dataStoreViewModel.getCountryCodeBlocking()
+
             LaunchedEffect(Unit) {
-                songLinkViewModel.getPlatformsLink(intentData, appList.key)
+                songLinkViewModel.getPlatformsLink(intentData, appList.key, countryCode)
                 if (isGithubBuild) updateViewModel.checkUpdate(versionName)
             }
 
@@ -68,7 +70,7 @@ class ConvertSongActivity : ComponentActivity() {
                     iconShape = IconShape.entries[iconShape].shape,
                     listOrientation = ListOrientation.entries[listOrientation],
                     gridSize = gridSize,
-                    refresh = { songLinkViewModel.getPlatformsLink(intentData, appList.key) }
+                    refresh = { songLinkViewModel.getPlatformsLink(intentData, appList.key, countryCode) }
                 )
             }
         }

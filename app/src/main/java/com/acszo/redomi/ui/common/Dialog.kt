@@ -25,6 +25,7 @@ fun DefaultDialog(
     verticalSpaceBy: Dp = 0.dp,
     content: @Composable ColumnScope.() -> Unit,
     onDismissRequest: () -> Unit = {},
+    enabledConfirmAction: Boolean = true,
     onConfirmAction: () -> Unit,
 ) {
     AlertDialog(
@@ -47,6 +48,7 @@ fun DefaultDialog(
         confirmButton = {
             TextButton(
                 onClick = onConfirmAction,
+                enabled = enabledConfirmAction
             ) {
                 Text(text = stringResource(id = R.string.ok))
             }

@@ -9,6 +9,6 @@ class SongLinkRepository(
     private val songLinkService: SongLinkService
 ) {
 
-    suspend fun getSongs(url: String): ApiResult<Providers> = apiCall { songLinkService.getSongs(url) }
+    suspend fun getSongs(url: String, countryCode: String): ApiResult<Providers> = apiCall { songLinkService.getSongs(url, countryCode) }
 
 }

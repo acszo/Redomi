@@ -12,9 +12,14 @@ val topItemShape: RoundedCornerShape
         bottomEnd = MaterialTheme.shapes.extraSmall.bottomEnd
     )
 
-val middleItemShape: RoundedCornerShape
+val middleSmallItemShape: RoundedCornerShape
     @Composable get() = RoundedCornerShape(
         corner = MaterialTheme.shapes.extraSmall.topStart
+    )
+
+val middleLargeItemShape: RoundedCornerShape
+    @Composable get() = RoundedCornerShape(
+        corner = MaterialTheme.shapes.large.topStart
     )
 
 val bottomItemShape: RoundedCornerShape

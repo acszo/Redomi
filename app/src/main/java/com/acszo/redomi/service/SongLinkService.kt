@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface SongLinkService {
 
     @GET("links")
-    suspend fun getSongs(@Query("url") url: String): Response<Providers>
+    suspend fun getSongs(@Query("url") url: String, @Query("userCountry") countryCode: String): Response<Providers>
 
 }

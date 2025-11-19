@@ -3,18 +3,18 @@ package com.acszo.redomi.viewmodel
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.acszo.redomi.R
 import com.acszo.redomi.data.SettingsDataStore
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.model.Song
 import com.acszo.redomi.repository.SongLinkRepository
+import com.acszo.redomi.service.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.acszo.redomi.R
-import com.acszo.redomi.service.ApiResult
 import javax.inject.Inject
 
 data class BottomSheetUiState(
@@ -33,9 +33,9 @@ class SongLinkViewModel @Inject constructor(
     private val _bottomSheetUiState = MutableStateFlow(BottomSheetUiState())
     val bottomSheetUiState = _bottomSheetUiState.asStateFlow()
 
-    fun getPlatformsLink(url: String, key: String) = viewModelScope.launch {
+    fun getPlatformsLink(url: String, key: String, countryCode: String) = viewModelScope.launch {
         _bottomSheetUiState.update { it.copy(isLoading = true) }
-        val response = songLinkRepository.getSongs(url)
+        val response = songLinkRepository.getSongs(url, countryCode)
 
         when(response) {
             is ApiResult.Success -> {

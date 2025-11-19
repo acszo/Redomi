@@ -20,10 +20,13 @@ object DataStoreConst {
     const val GRID_SIZE = "grid_size"
     const val ICON_SHAPE = "icon_shape"
     const val THEME_MODE = "theme_mode"
+    const val COUNTRY_CODE = "country_code"
 
     const val SMALL_GRID = 2
     const val MEDIUM_GRID = 3
     const val BIG_GRID = 4
+
+    const val DEFAULT_COUNTRY_CODE = "US"
 
 }
 
