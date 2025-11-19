@@ -50,4 +50,5 @@
     <string name="error_server">服务器错误</string>
     <string name="error_timeout">Request timed out</string>
     <string name="retry">Retry</string>
+    <string name="country_code">Country code</string>
 </resources>
