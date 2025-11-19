@@ -1,0 +1,16 @@
+# Improvements
+- New UI for Settings page
+- Smaller APK because of classes.dex compression
+- Error handling inside Update page
+- Load correct cover art from converted link
+- Preview of sharing link with its respective cover art and title,
+    in the case of search links no cover art is displayed (WIP)
+
+# Added
+- Android 8 support
+- Retry button when an error occurs during link convertion
+- New translations from Crowdin (Thanks everyone)
+- More domains for Yandex and Amazon Music that the app can open (Off by default)
+- Link sanitization which fixes Tidal and Deezer error when sharing
+- Country code (US as default, change manually inside Setting),
+    needed for some platforms that don't open links in your correct region
