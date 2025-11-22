@@ -3,7 +3,7 @@
   <h1>Redomi</h1>
   <p>Unofficial <a href="https://song.link/">song.link</a> client made in Jetpack Compose and Material You</p>
   
-  ![Supported versions](https://img.shields.io/badge/Support-9%2B-green?logo=android)
+  ![Supported versions](https://img.shields.io/badge/Support-8%2B-green?logo=android)
   [![Download count](https://img.shields.io/github/downloads/acszo/Redomi/total?label=Downloads&logo=github)](https://github.com/acszo/Redomi/releases/latest/)
   [![Crowdin](https://badges.crowdin.net/redomi/localized.svg)](https://crowdin.com/project/redomi)
 
