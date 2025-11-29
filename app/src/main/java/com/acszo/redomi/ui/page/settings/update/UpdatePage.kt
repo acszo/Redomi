@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -119,8 +120,8 @@ fun UpdatePage(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 18.dp),
-                    //.height(40.dp),
+                    .padding(top = 18.dp)
+                    .height(40.dp),
                 contentPadding = PaddingValues(0.dp),
                 enabled = progressDownloadStatus.value !is DownloadStatus.Downloading,
                 onClick = {
