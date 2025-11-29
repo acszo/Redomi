@@ -41,22 +41,21 @@ class UpdateViewModel @Inject constructor(
     private val _isUpdateAvailable: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isUpdateAvailable = _isUpdateAvailable.asStateFlow()
 
-    fun checkUpdate(currentVersion: String) = viewModelScope.launch {
+    fun checkUpdate(currentVersion: Int) = viewModelScope.launch {
         _updatePageUiState.update { it.copy(isLoading = true) }
-        val response = githubRepository.getLatest()
 
-        when (response) {
+        when (val response = githubRepository.getLatest()) {
             is ApiResult.Success -> {
                 val latestRelease = response.data
                 _isUpdateAvailable.update {
-                    currentVersion < latestRelease.tagName
+                    currentVersion < convertToVersionCode(latestRelease.tagName)
                 }
                 _updatePageUiState.update {
                     it.copy(latestRelease = latestRelease, isLoading = false, error = null)
                 }
             }
             is ApiResult.Error -> {
-                var message = when  {
+                val message = when  {
                     response.code in 400..499 -> R.string.update_info_failed
                     response.code in 500..599 -> R.string.error_server
                     else -> R.string.error_generic
@@ -72,6 +71,15 @@ class UpdateViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    // it will always be 1 digit for Major and 2 digits for Minor and Patch
+    fun convertToVersionCode(versionName: String): Int {
+        val len = versionName.length - 1
+        val versionMinor = if (versionName[3] == '.') "0${versionName[2]}" else versionName.substring(2, 4)
+        val versionPatch = if (versionName[len - 1] == '.') "0${versionName[len]}" else versionName.substring(len - 1)
+
+        return (versionName[0] + versionMinor + versionPatch).toInt()
     }
 
     suspend fun downloadApk(context: Context, release: Release): Flow<DownloadStatus> = withContext(Dispatchers.IO) {

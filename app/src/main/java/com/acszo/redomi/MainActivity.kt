@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(Unit) {
                 dataStoreViewModel.getIsFirstTime()
                 if (isGithubBuild) {
-                    updateViewModel.checkUpdate(versionName)
+                    updateViewModel.checkUpdate(versionCode)
                     scope.launch(Dispatchers.IO) {
                         deleteApk(context)
                     }

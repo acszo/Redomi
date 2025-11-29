@@ -9,3 +9,5 @@ class App: Application()
 val isGithubBuild: Boolean get() = BuildConfig.FLAVOR == "github"
 
 val versionName: String get() = BuildConfig.VERSION_NAME
+
+val versionCode: Int get() = BuildConfig.VERSION_CODE

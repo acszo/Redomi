@@ -33,7 +33,7 @@ import com.acszo.redomi.ui.common.fadingEdge
 import com.acszo.redomi.ui.common.ignoreHorizontalPadding
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk
-import com.acszo.redomi.versionName
+import com.acszo.redomi.versionCode
 import com.acszo.redomi.viewmodel.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -140,7 +140,7 @@ fun UpdatePage(
                             }
                         }
                     } else {
-                        updateViewModel.checkUpdate(versionName)
+                        updateViewModel.checkUpdate(versionCode)
                     }
                 },
             ) {

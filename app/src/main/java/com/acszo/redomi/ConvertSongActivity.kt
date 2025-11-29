@@ -49,7 +49,7 @@ class ConvertSongActivity : ComponentActivity() {
 
             LaunchedEffect(Unit) {
                 songLinkViewModel.getPlatformsLink(intentData, appList.key, countryCode)
-                if (isGithubBuild) updateViewModel.checkUpdate(versionName)
+                if (isGithubBuild) updateViewModel.checkUpdate(versionCode)
             }
 
             val bottomSheetUiState by songLinkViewModel.bottomSheetUiState.collectAsStateWithLifecycle()
