@@ -11,7 +11,6 @@
     <string name="apps_description">Wähle die Reihenfolge und welche Anwendungen angezeigt werden sollen</string>
     <string name="layout">Anordnung</string>
     <string name="list">Liste</string>
-    <string name="list_format">%se Liste</string>
     <string name="horizontal">Horizontal</string>
     <string name="vertical">Vertikal</string>
     <string name="icon_shape">Symbolform</string>
