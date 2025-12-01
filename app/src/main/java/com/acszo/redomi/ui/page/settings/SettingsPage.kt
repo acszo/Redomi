@@ -107,12 +107,10 @@ fun SettingsPage(
             }
 
             item {
-                val orientationText = stringResource(ListOrientation.entries[listOrientation].toRes)
-                val listOrientationText = stringResource(id = R.string.list_format, orientationText)
                 SettingsItem(
                     icon = R.drawable.ic_format_list_bulleted,
                     title = stringResource(id = R.string.layout),
-                    description = listOrientationText.lowercase().replaceFirstChar { it.uppercase() },
+                    description = stringResource(id = ListOrientation.entries[listOrientation].toRes),
                     itemShape = middleSmallItemShape
                 ) {
                     navController.navigate(LAYOUT_PAGE)
