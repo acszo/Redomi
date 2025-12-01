@@ -11,7 +11,6 @@
     <string name="apps_description">Wybierz kolejność i aplikacje do wyświetlenia</string>
     <string name="layout">Układ</string>
     <string name="list">Lista</string>
-    <string name="list_format">Lista %s</string>
     <string name="horizontal">Pozioma</string>
     <string name="vertical">Pionowa</string>
     <string name="icon_shape">Kształt ikon</string>
