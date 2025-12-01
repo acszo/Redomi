@@ -11,7 +11,6 @@
     <string name="apps_description">Sırayı ve görüntülenecek uygulamaları seçin</string>
     <string name="layout">Düzen</string>
     <string name="list">Liste</string>
-    <string name="list_format">%s Liste</string>
     <string name="horizontal">Yatay</string>
     <string name="vertical">Dikey</string>
     <string name="icon_shape">Simge şekli</string>
@@ -50,4 +49,5 @@
     <string name="error_server">Sunucu hatası</string>
     <string name="error_timeout">İstek zaman aşımına uğradı</string>
     <string name="retry">Tekrar dene</string>
+    <string name="country_code">Country code</string>
 </resources>

@@ -11,7 +11,6 @@
     <string name="apps_description">Wybierz kolejność i aplikacje do wyświetlenia</string>
     <string name="layout">Układ</string>
     <string name="list">Lista</string>
-    <string name="list_format">Lista %s</string>
     <string name="horizontal">Pozioma</string>
     <string name="vertical">Pionowa</string>
     <string name="icon_shape">Kształt ikon</string>
@@ -50,4 +49,5 @@
     <string name="error_server">Błąd serwera</string>
     <string name="error_timeout">Upłynął limit czasu żądania</string>
     <string name="retry">Spróbuj ponownie</string>
+    <string name="country_code">Country code</string>
 </resources>

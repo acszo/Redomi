@@ -11,7 +11,6 @@
     <string name="apps_description">Select order and which apps to view</string>
     <string name="layout">佈局</string>
     <string name="list">列表</string>
-    <string name="list_format">%s 列表</string>
     <string name="horizontal">水平</string>
     <string name="vertical">垂直</string>
     <string name="icon_shape">圖示形狀</string>
@@ -50,4 +49,5 @@
     <string name="error_server">伺服器錯誤</string>
     <string name="error_timeout">請求逾時</string>
     <string name="retry">重試</string>
+    <string name="country_code">Country code</string>
 </resources>
