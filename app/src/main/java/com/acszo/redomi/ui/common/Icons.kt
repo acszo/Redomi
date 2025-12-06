@@ -14,11 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.R
-import androidx.compose.ui.platform.LocalResources
 
 @Composable
 fun RotatingIcon(
@@ -51,15 +51,14 @@ fun RotatingIcon(
 @Composable
 fun NewReleaseIcon() {
     val display = LocalResources.current.displayMetrics
-    val width = display.widthPixels.dp / display.density
-    val height = display.heightPixels.dp / display.density
-    val widthOffset = width / 1.5f
-    val heightOffset = height / 2.2f
+    val size = display.widthPixels.dp / display.density
+    val xOffset = size * 0.3f
+    val yOffset = size * 0.1f
 
     RotatingIcon(
         icon = R.drawable.ic_new_releases_outside,
-        modifier = Modifier.offset(width - widthOffset, height - heightOffset),
-        size = width,
+        modifier = Modifier.offset(xOffset, yOffset),
+        size = size,
         tint = MaterialTheme.colorScheme.secondaryContainer,
         startValue = 90f,
     )
@@ -67,8 +66,8 @@ fun NewReleaseIcon() {
     Icon(
         painter = painterResource(id = R.drawable.ic_new_releases_inside),
         modifier = Modifier
-            .size(width)
-            .offset(width - widthOffset, height - heightOffset),
+            .size(size)
+            .offset(xOffset, yOffset),
         tint = MaterialTheme.colorScheme.secondaryContainer,
         contentDescription = null,
     )

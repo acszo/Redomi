@@ -56,7 +56,12 @@ fun UpdatePage(
         backButton = { backButton() }
     ) { padding, pageTitleWithDescription ->
         if (isUpdateAvailable) {
-            NewReleaseIcon()
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                NewReleaseIcon()
+            }
         }
 
         Column(
