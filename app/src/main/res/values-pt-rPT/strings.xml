@@ -47,7 +47,7 @@
     <string name="error_no_internet_connection">Sem ligação à Internet</string>
     <string name="error_generic">Surgiu um erro</string>
     <string name="error_server">Erro de Servidor</string>
-    <string name="error_timeout">Request timed out</string>
-    <string name="retry">Retry</string>
-    <string name="country_code">Country code</string>
+    <string name="error_timeout">O pedido expirou</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="country_code">Código do país</string>
 </resources>
