@@ -47,7 +47,7 @@
     <string name="error_no_internet_connection">Nessuna connessione internet</string>
     <string name="error_generic">Si è verificato un errore</string>
     <string name="error_server">Errore del server</string>
-    <string name="error_timeout">Request timed out</string>
-    <string name="retry">Retry</string>
-    <string name="country_code">Country code</string>
+    <string name="error_timeout">Richiesta scaduta</string>
+    <string name="retry">Riprova</string>
+    <string name="country_code">Codice paese</string>
 </resources>
