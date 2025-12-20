@@ -48,6 +48,6 @@
     <string name="error_generic">Un error ha ocurrido</string>
     <string name="error_server">Error de servidor</string>
     <string name="error_timeout">Tiempo de solicitud agotado</string>
-    <string name="retry">Retry</string>
-    <string name="country_code">Country code</string>
+    <string name="retry">Reintentar</string>
+    <string name="country_code">Código del país</string>
 </resources>
