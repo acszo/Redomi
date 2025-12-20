@@ -47,7 +47,7 @@
     <string name="error_no_internet_connection">Žádné připojení k internetu</string>
     <string name="error_generic">Vyskytla se chyba</string>
     <string name="error_server">Chyba serveru</string>
-    <string name="error_timeout">Request timed out</string>
-    <string name="retry">Retry</string>
-    <string name="country_code">Country code</string>
+    <string name="error_timeout">Požadavek vypršel</string>
+    <string name="retry">Opakovat</string>
+    <string name="country_code">Kód země</string>
 </resources>
