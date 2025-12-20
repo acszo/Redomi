@@ -47,7 +47,7 @@
     <string name="error_no_internet_connection">Нет подключения к Интернету</string>
     <string name="error_generic">Произошла ошибка</string>
     <string name="error_server">Ошибка сервера</string>
-    <string name="error_timeout">Request timed out</string>
-    <string name="retry">Retry</string>
-    <string name="country_code">Country code</string>
+    <string name="error_timeout">Время запроса истекло</string>
+    <string name="retry">Повторить</string>
+    <string name="country_code">Код страны</string>
 </resources>
