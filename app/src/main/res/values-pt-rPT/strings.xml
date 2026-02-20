@@ -11,7 +11,6 @@
     <string name="apps_description">Selecione a ordem e quais aplicativos deseja visualizar</string>
     <string name="layout">Disposição</string>
     <string name="list">Lista</string>
-    <string name="list_format">Lista %s</string>
     <string name="horizontal">Horizontal</string>
     <string name="vertical">Vertical</string>
     <string name="icon_shape">Forma do ícone</string>
@@ -48,6 +47,7 @@
     <string name="error_no_internet_connection">Sem ligação à Internet</string>
     <string name="error_generic">Surgiu um erro</string>
     <string name="error_server">Erro de Servidor</string>
-    <string name="error_timeout">Request timed out</string>
-    <string name="retry">Retry</string>
+    <string name="error_timeout">O pedido expirou</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="country_code">Código do país</string>
 </resources>

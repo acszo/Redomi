@@ -11,7 +11,6 @@
     <string name="apps_description">Select order and which apps to view</string>
     <string name="layout">نسق</string>
     <string name="list">قائمة</string>
-    <string name="list_format">قائمة %s</string>
     <string name="horizontal">أفقي</string>
     <string name="vertical">رَأسِيّ</string>
     <string name="icon_shape">شكل الأيقونة</string>
@@ -50,4 +49,5 @@
     <string name="error_server">خطأ من الخادم</string>
     <string name="error_timeout">Request timed out</string>
     <string name="retry">Retry</string>
+    <string name="country_code">Country code</string>
 </resources>

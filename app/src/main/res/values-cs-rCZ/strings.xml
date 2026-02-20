@@ -11,7 +11,6 @@
     <string name="apps_description">Vyberte pořadí a které aplikace se mají zobrazit</string>
     <string name="layout">Rozložení</string>
     <string name="list">Seznam</string>
-    <string name="list_format">%s seznam</string>
     <string name="horizontal">Horizontální</string>
     <string name="vertical">Vertikální</string>
     <string name="icon_shape">Tvar ikony</string>
@@ -48,6 +47,7 @@
     <string name="error_no_internet_connection">Žádné připojení k internetu</string>
     <string name="error_generic">Vyskytla se chyba</string>
     <string name="error_server">Chyba serveru</string>
-    <string name="error_timeout">Request timed out</string>
-    <string name="retry">Retry</string>
+    <string name="error_timeout">Požadavek vypršel</string>
+    <string name="retry">Opakovat</string>
+    <string name="country_code">Kód země</string>
 </resources>
