@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -80,9 +81,9 @@ fun SettingsPage(
     val modelName = "Model: ${Build.MODEL}"
     val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
 
-    var openIconShapeDialog by remember { mutableStateOf(false) }
-    var openThemeDialog by remember { mutableStateOf(false) }
-    var openCountryCodeDialog by remember { mutableStateOf(false) }
+    var openIconShapeDialog by rememberSaveable { mutableStateOf(false) }
+    var openThemeDialog by rememberSaveable { mutableStateOf(false) }
+    var openCountryCodeDialog by rememberSaveable { mutableStateOf(false) }
 
     ScaffoldWithLargeTopAppBar(
         title = redomi
@@ -271,7 +272,7 @@ fun SettingsPage(
     }
 
     if (openCountryCodeDialog) {
-        var selectedItem by remember { mutableStateOf<String?>(null) }
+        var selectedItem by rememberSaveable { mutableStateOf<String?>(null) }
         val countries = Locale.getISOCountries().associateWith { code ->
             val name = Locale.Builder()
                 .setRegion(code)
