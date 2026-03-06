@@ -36,11 +36,10 @@ fun RedomiTheme(
     val getTheme = Theme.entries[theme].mode()
 
     val colorScheme = when {
-         Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (getTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
         getTheme -> darkColorScheme
         else -> lightColorScheme
     }

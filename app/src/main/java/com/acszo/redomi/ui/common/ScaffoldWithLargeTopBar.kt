@@ -12,6 +12,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -59,17 +60,20 @@ fun SmallTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
     navigationIcon: @Composable () -> Unit = {}
 ) {
-    TopAppBar(
-        title = {
-            Text(
-                text = title,
-                modifier = Modifier.graphicsLayer { alpha = scrollBehavior.state.overlappedFraction },
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-        },
-        scrollBehavior = scrollBehavior,
-        navigationIcon = { navigationIcon() }
-    )
+    // to fix the delay when changing themes, I should animate the rest of the app to match this to look nicer but am lazy rn, adios
+    key(MaterialTheme.colorScheme) {
+        TopAppBar(
+            title = {
+                Text(
+                    text = title,
+                    modifier = Modifier.graphicsLayer { alpha = scrollBehavior.state.overlappedFraction },
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            },
+            scrollBehavior = scrollBehavior,
+            navigationIcon = { navigationIcon() }
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
