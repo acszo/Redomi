@@ -47,7 +47,6 @@ fun UpdatePage(
     val scope = rememberCoroutineScope()
 
     val uiState by updateViewModel.updatePageUiState.collectAsStateWithLifecycle()
-    val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
     val progressDownloadStatus = remember { mutableStateOf(DownloadStatus.Finished as DownloadStatus) }
 
     ScaffoldWithLargeTopAppBar(
@@ -55,7 +54,7 @@ fun UpdatePage(
         description = stringResource(id = R.string.update_description_page),
         backButton = { backButton() }
     ) { padding, pageTitleWithDescription ->
-        if (isUpdateAvailable) {
+        if (uiState.isUpdateAvailable) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.BottomEnd
@@ -80,8 +79,8 @@ fun UpdatePage(
                 if (uiState.latestRelease != null) {
                     item {
                         Text(
-                            text = if (isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
-                            color = if (isUpdateAvailable) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                            text = if (uiState.isUpdateAvailable) stringResource(id = R.string.title_changelogs_new) else stringResource(id = R.string.title_changelogs_current),
+                            color = if (uiState.isUpdateAvailable) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
                             style = MaterialTheme.typography.titleMedium,
                         )
                     }
@@ -114,7 +113,7 @@ fun UpdatePage(
                 }
             }
 
-            if (uiState.isLoading) {
+            if (!uiState.isLoaded) {
                 LinearProgressIndicator(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -130,7 +129,7 @@ fun UpdatePage(
                 contentPadding = PaddingValues(0.dp),
                 enabled = progressDownloadStatus.value !is DownloadStatus.Downloading,
                 onClick = {
-                    if (isUpdateAvailable) {
+                    if (uiState.isUpdateAvailable) {
                         scope.launch(Dispatchers.IO) {
                             if (!context.getApk().exists()) {
                                 updateViewModel.downloadApk(context, uiState.latestRelease!!)
@@ -145,7 +144,7 @@ fun UpdatePage(
                             }
                         }
                     } else {
-                        updateViewModel.checkUpdate(versionCode)
+                        updateViewModel.refresh(versionCode)
                     }
                 },
             ) {
@@ -169,7 +168,7 @@ fun UpdatePage(
 
                 Text(
                     text = stringResource(
-                        id = if (isUpdateAvailable) R.string.do_update else R.string.check_updates
+                        id = if (uiState.isUpdateAvailable) R.string.do_update else R.string.check_updates
                     ),
                 )
             }

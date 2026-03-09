@@ -20,7 +20,7 @@ import javax.inject.Inject
 data class BottomSheetUiState(
     val sourceSong: Song? = null,
     val songs: List<Song> = emptyList(),
-    val isLoading: Boolean = false,
+    val isLoaded: Boolean = false,
     val error: Int? = null
 )
 
@@ -34,10 +34,7 @@ class SongLinkViewModel @Inject constructor(
     val bottomSheetUiState = _bottomSheetUiState.asStateFlow()
 
     fun getPlatformsLink(url: String, key: String, countryCode: String) = viewModelScope.launch {
-        _bottomSheetUiState.update { it.copy(isLoading = true) }
-        val response = songLinkRepository.getSongs(url, countryCode)
-
-        when(response) {
+        when(val response = songLinkRepository.getSongs(url, countryCode)) {
             is ApiResult.Success -> {
                 val data = response.data
                 val sourceSong = data.entitiesByUniqueId[data.entityUniqueId]
@@ -66,7 +63,7 @@ class SongLinkViewModel @Inject constructor(
                 }
 
                 _bottomSheetUiState.update {
-                    it.copy(sourceSong = sourceSong, songs = songsInfo, isLoading = false, error = null)
+                    it.copy(sourceSong = sourceSong, songs = songsInfo, isLoaded = true)
                 }
             }
             is ApiResult.Error -> {
@@ -77,15 +74,23 @@ class SongLinkViewModel @Inject constructor(
                 }
 
                 _bottomSheetUiState.update {
-                    it.copy(error = message, isLoading = false)
+                    it.copy(error = message, isLoaded = true)
                 }
             }
             is ApiResult.Exception -> {
                 _bottomSheetUiState.update {
-                    it.copy(error = response.message, isLoading = false)
+                    it.copy(error = response.message, isLoaded = true)
                 }
             }
         }
+    }
+
+    fun refresh(url: String, key: String, countryCode: String) {
+        _bottomSheetUiState.update {
+            it.copy(sourceSong = null, songs = emptyList(), isLoaded = false, error = null)
+        }
+
+        getPlatformsLink(url, key, countryCode)
     }
 
 }

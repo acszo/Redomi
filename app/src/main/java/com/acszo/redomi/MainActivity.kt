@@ -36,18 +36,20 @@ class MainActivity : ComponentActivity() {
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
             val updateViewModel: UpdateViewModel = hiltViewModel()
 
+            val updatePageUiState by updateViewModel.updatePageUiState.collectAsStateWithLifecycle()
+            val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
+
             LaunchedEffect(Unit) {
                 dataStoreViewModel.getIsFirstTime()
                 if (isGithubBuild) {
-                    updateViewModel.checkUpdate(versionCode)
+                    if (!updatePageUiState.isLoaded) {
+                        updateViewModel.checkUpdate(versionCode)
+                    }
                     scope.launch(Dispatchers.IO) {
                         deleteApk(context)
                     }
                 }
             }
-
-            val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
-            val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
 
             RedomiTheme(
                 theme = theme
@@ -55,7 +57,7 @@ class MainActivity : ComponentActivity() {
                 RootNavigation(
                     dataStoreViewModel = dataStoreViewModel,
                     updateViewModel = updateViewModel,
-                    isUpdateAvailable = isUpdateAvailable,
+                    isUpdateAvailable = updatePageUiState.isUpdateAvailable,
                 )
             }
         }

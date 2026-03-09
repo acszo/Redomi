@@ -47,17 +47,21 @@ class ConvertSongActivity : ComponentActivity() {
 
             val countryCode = dataStoreViewModel.getCountryCodeBlocking()
 
-            LaunchedEffect(Unit) {
-                songLinkViewModel.getPlatformsLink(intentData, appList.key, countryCode)
-                if (isGithubBuild) updateViewModel.checkUpdate(versionCode)
-            }
-
             val bottomSheetUiState by songLinkViewModel.bottomSheetUiState.collectAsStateWithLifecycle()
-            val isUpdateAvailable by updateViewModel.isUpdateAvailable.collectAsStateWithLifecycle()
+            val updatePageUiState by updateViewModel.updatePageUiState.collectAsStateWithLifecycle()
             val theme by dataStoreViewModel.themeMode.collectAsStateWithLifecycle()
             val iconShape by dataStoreViewModel.iconShape.collectAsStateWithLifecycle()
             val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
             val gridSize by dataStoreViewModel.gridSize.collectAsStateWithLifecycle()
+
+            LaunchedEffect(Unit) {
+                if (!bottomSheetUiState.isLoaded)
+                    songLinkViewModel.getPlatformsLink(intentData, appList.key, countryCode)
+                if (isGithubBuild) {
+                    if (!updatePageUiState.isLoaded)
+                        updateViewModel.checkUpdate(versionCode)
+                }
+            }
 
             RedomiTheme(
                 theme = theme
@@ -66,11 +70,11 @@ class ConvertSongActivity : ComponentActivity() {
                     onDismiss = { this.finish() },
                     uiState = bottomSheetUiState,
                     isActionSend = isActionSend,
-                    isUpdateAvailable = isUpdateAvailable,
+                    isUpdateAvailable = updatePageUiState.isUpdateAvailable,
                     iconShape = IconShape.entries[iconShape].shape,
                     listOrientation = ListOrientation.entries[listOrientation],
                     gridSize = gridSize,
-                    refresh = { songLinkViewModel.getPlatformsLink(intentData, appList.key, countryCode) }
+                    refresh = { songLinkViewModel.refresh(intentData, appList.key, countryCode) }
                 )
             }
         }

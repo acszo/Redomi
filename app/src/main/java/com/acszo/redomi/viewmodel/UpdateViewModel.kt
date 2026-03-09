@@ -26,7 +26,8 @@ import javax.inject.Inject
 
 data class UpdatePageUiState(
     val latestRelease: Release? = null,
-    val isLoading: Boolean = false,
+    val isUpdateAvailable: Boolean = false,
+    val isLoaded: Boolean = false,
     val error: Int? = null,
 )
 
@@ -38,20 +39,13 @@ class UpdateViewModel @Inject constructor(
     private val _updatePageUiState = MutableStateFlow(UpdatePageUiState())
     val updatePageUiState = _updatePageUiState.asStateFlow()
 
-    private val _isUpdateAvailable: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isUpdateAvailable = _isUpdateAvailable.asStateFlow()
-
     fun checkUpdate(currentVersion: Int) = viewModelScope.launch {
-        _updatePageUiState.update { it.copy(isLoading = true) }
-
         when (val response = githubRepository.getLatest()) {
             is ApiResult.Success -> {
                 val latestRelease = response.data
-                _isUpdateAvailable.update {
-                    currentVersion < convertToVersionCode(latestRelease.tagName)
-                }
+                val isUpdateAvailable = currentVersion < convertToVersionCode(latestRelease.tagName)
                 _updatePageUiState.update {
-                    it.copy(latestRelease = latestRelease, isLoading = false, error = null)
+                    it.copy(latestRelease = latestRelease, isUpdateAvailable = isUpdateAvailable, isLoaded = true)
                 }
             }
             is ApiResult.Error -> {
@@ -62,19 +56,26 @@ class UpdateViewModel @Inject constructor(
                 }
 
                 _updatePageUiState.update {
-                    it.copy(error = message, isLoading = false)
+                    it.copy(error = message, isLoaded = true)
                 }
             }
             is ApiResult.Exception -> {
                 _updatePageUiState.update {
-                    it.copy(error = response.message, isLoading = false)
+                    it.copy(error = response.message, isLoaded = true)
                 }
             }
         }
     }
 
+    fun refresh(currentVersion: Int) {
+        _updatePageUiState.update {
+            it.copy(latestRelease = null, isUpdateAvailable = false, isLoaded = false, error = null)
+        }
+        checkUpdate(currentVersion)
+    }
+
     // it will always be 1 digit for Major and 2 digits for Minor and Patch
-    fun convertToVersionCode(versionName: String): Int {
+    private fun convertToVersionCode(versionName: String): Int {
         val len = versionName.length - 1
         val versionMinor = if (versionName[3] == '.') "0${versionName[2]}" else versionName.substring(2, 4)
         val versionPatch = if (versionName[len - 1] == '.') "0${versionName[len]}" else versionName.substring(len - 1)
