@@ -1,0 +1,4 @@
+# Fixes
+- TopAppBar delay when changing themes
+- Dialogs closing after screen rotation
+- Refetching data after screen rotation
