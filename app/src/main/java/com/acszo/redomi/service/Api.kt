@@ -16,7 +16,7 @@ object Api {
     const val SEARCH_QUERY_DEEZER = "https://www.deezer.com/search/"
     const val SEARCH_QUERY_TIDAL = "https://listen.tidal.com/search?q="
     const val SEARCH_QUERY_AMAZON_MUSIC = "https://music.amazon.com/search/"
-    const val SEARCH_QUERY_APPLE_MUSIC = "https://music.apple.com/search?term="
+    const val SEARCH_QUERY_APPLE_MUSIC = "https://music.apple.com/us/search?term="
     const val SEARCH_QUERY_SOUNDCLOUD = "https://soundcloud.com/search?q="
     const val SEARCH_QUERY_NAPSTER = "https://napster.com/search?query="
     const val SEARCH_QUERY_YANDEX = "https://music.yandex.ru/search?text="
