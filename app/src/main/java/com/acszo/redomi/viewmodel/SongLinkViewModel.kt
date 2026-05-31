@@ -38,7 +38,7 @@ class SongLinkViewModel @Inject constructor(
             is ApiResult.Success -> {
                 val data = response.data
                 val sourceSong = data.entitiesByUniqueId[data.entityUniqueId]
-                val query = sourceSong?.run { Uri.encode("$title - $artistName") }
+                val query = sourceSong?.run { Uri.encode("$title $artistName") }
 
                 val selectedApps = settingsDataStore.getSetOfStrings(key).first()
                 val orderedApps = platforms.keys.filter { selectedApps.contains(it) }
