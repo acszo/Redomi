@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,7 +33,8 @@ import com.acszo.redomi.ui.common.selectedTextColor
 
 @Composable
 fun Tabs(
-    selectedTab: MutableState<AppList>
+    selectedTab: AppList,
+    onClick: (AppList) -> Unit
 ) {
     val width = remember { mutableStateOf(0.dp) }
     val density = LocalDensity.current
@@ -49,13 +49,13 @@ fun Tabs(
     ) {
         AppList.entries.forEach { tab ->
             val tabColor by animateColorAsState(
-                targetValue = selectedBoxColor(selectedTab.value == tab),
+                targetValue = selectedBoxColor(selectedTab == tab),
                 animationSpec = tween(100, 0, LinearEasing),
                 label = ""
             )
 
             val animatedPadding by animateDpAsState(
-                targetValue = if (selectedTab.value == tab) 0.dp else width.value / 8,
+                targetValue = if (selectedTab == tab) 0.dp else width.value / 8,
                 label = ""
             )
 
@@ -70,14 +70,15 @@ fun Tabs(
                         }
                     }
                     .clip(MaterialTheme.shapes.extraLarge)
-                    .clickable {
-                        selectedTab.value = tab
-                    }
+                    .clickable { onClick(tab) }
                     .clip(MaterialTheme.shapes.extraLarge)
                     .layout { measurable, constraints ->
-                        val size = width.value.toPx() - animatedPadding.toPx()
+                        val size = (width.value - animatedPadding).toPx()
                         val placeable = measurable.measure(
-                            constraints.copy(minWidth = size.toInt())
+                            constraints.copy(
+                                minWidth = size.toInt(),
+                                maxWidth = size.toInt()
+                            )
                         )
                         layout(placeable.width, placeable.height) {
                             placeable.placeRelative(0, 0)
@@ -90,7 +91,7 @@ fun Tabs(
                     text = stringResource(id = tab.toRes),
                     modifier = Modifier.padding(vertical = 15.dp),
                     maxLines = 1,
-                    color = selectedTextColor(selectedTab.value == tab),
+                    color = selectedTextColor(selectedTab == tab),
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontWeight = FontWeight.W500,
                     )

@@ -15,6 +15,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,7 +35,7 @@ fun AppsPage(
     dataStoreViewModel: DataStoreViewModel,
     backButton: @Composable () -> Unit
 ) {
-    val selectedTab = rememberSaveable { mutableStateOf(AppList.OPENING) }
+    var selectedTab by rememberSaveable { mutableStateOf(AppList.OPENING) }
 
     LaunchedEffect(Unit) {
         dataStoreViewModel.getOpeningApps()
@@ -70,7 +71,10 @@ fun AppsPage(
                         .background(MaterialTheme.colorScheme.surface)
                         .padding(vertical = 14.dp),
                 ) {
-                    Tabs(selectedTab = selectedTab)
+                    Tabs(
+                        selectedTab = selectedTab,
+                        onClick = { selectedTab = it }
+                    )
                 }
             }
 
@@ -78,7 +82,7 @@ fun AppsPage(
                 Spacer(modifier = Modifier.height(14.dp))
             }
 
-            if (selectedTab.value == AppList.OPENING) {
+            if (selectedTab == AppList.OPENING) {
                 appsCheckBoxList(
                     apps = openingApps,
                     iconShape = iconShape,
@@ -107,7 +111,7 @@ fun AppsPage(
             item {
                 BottomInfo(
                     text = stringResource(
-                        id = if (selectedTab.value == AppList.OPENING) R.string.opening_apps_tab_info
+                        id = if (selectedTab == AppList.OPENING) R.string.opening_apps_tab_info
                         else R.string.sharing_apps_tab_info
                     )
                 )
