@@ -27,10 +27,11 @@
 
         <activity
             android:name=".ConvertSongActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:launchMode="singleInstance"
             android:exported="true"
             android:label="@string/title_bottom_sheet"
             android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
             android:theme="@style/Theme.Redomi.BottomSheet" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
