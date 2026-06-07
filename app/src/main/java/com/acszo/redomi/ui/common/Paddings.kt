@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
@@ -14,12 +14,16 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun PaddingValues.addPagePadding(
     padding: Dp
-): PaddingValues = PaddingValues(
-    start = padding,
-    top = this.calculateTopPadding(),
-    end = padding,
-    bottom = padding + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-)
+): PaddingValues {
+    val layoutDirection = LocalLayoutDirection.current
+    val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
+    return PaddingValues(
+        start = padding + safeDrawing.calculateStartPadding(layoutDirection),
+        top = this.calculateTopPadding(),
+        end = padding + safeDrawing.calculateEndPadding(layoutDirection),
+        bottom = padding + safeDrawing.calculateBottomPadding()
+    )
+}
 
 @Composable
 fun PaddingValues.removeTopPadding(): PaddingValues {
