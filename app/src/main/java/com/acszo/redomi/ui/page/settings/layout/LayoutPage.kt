@@ -24,6 +24,8 @@ import com.acszo.redomi.ui.common.RadioButtonItemPage
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.enterVerticalTransition
 import com.acszo.redomi.ui.common.exitVerticalTransition
+import com.acszo.redomi.ui.theme.bottomItemShape
+import com.acszo.redomi.ui.theme.topItemShape
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 
 @Composable
@@ -56,12 +58,17 @@ fun LayoutPage(
             }
 
             item {
-                ListOrientation.entries.forEach { item ->
-                    RadioButtonItemPage(
-                        item = item,
-                        isSelected = item == ListOrientation.entries[listOrientation],
-                        onClick = dataStoreViewModel::setListOrientation
-                    )
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                ) {
+                    ListOrientation.entries.forEach { item ->
+                        RadioButtonItemPage(
+                            item = item,
+                            isSelected = item == ListOrientation.entries[listOrientation],
+                            shape = if (item == ListOrientation.HORIZONTAL) topItemShape else bottomItemShape,
+                            onClick = dataStoreViewModel::setListOrientation
+                        )
+                    }
                 }
             }
 

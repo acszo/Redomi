@@ -30,7 +30,6 @@ import com.acszo.redomi.model.DownloadStatus
 import com.acszo.redomi.ui.common.NewReleaseIcon
 import com.acszo.redomi.ui.common.ScaffoldWithLargeTopAppBar
 import com.acszo.redomi.ui.common.fadingEdge
-import com.acszo.redomi.ui.common.ignoreHorizontalPadding
 import com.acszo.redomi.utils.UpdateUtil.getApk
 import com.acszo.redomi.utils.UpdateUtil.installApk
 import com.acszo.redomi.versionCode
@@ -115,9 +114,7 @@ fun UpdatePage(
 
             if (!uiState.isLoaded) {
                 LinearProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .ignoreHorizontalPadding()
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
 

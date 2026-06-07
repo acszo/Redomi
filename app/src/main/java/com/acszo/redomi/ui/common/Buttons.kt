@@ -67,9 +67,12 @@ fun <T> RadioButtonItemDialog(
 fun <T> RadioButtonItemPage(
     item: T,
     isSelected: Boolean,
+    shape: RoundedCornerShape,
     onClick: (Int) -> Unit
 ) where T : Enum<T>, T : Resource = RadioButtonItemPage(
-    modifier = Modifier.ignoreHorizontalPadding(),
+    modifier = Modifier
+        .clip(shape)
+        .background(MaterialTheme.colorScheme.surfaceContainer),
     item = item,
     isSelected = isSelected,
     verticalPadding = 24.dp,
