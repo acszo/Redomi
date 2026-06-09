@@ -3,6 +3,8 @@ package com.acszo.redomi
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -11,7 +13,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.acszo.redomi.ui.nav.RootNavigation
+import com.acszo.redomi.ui.nav.DecideLayout
 import com.acszo.redomi.ui.theme.RedomiTheme
 import com.acszo.redomi.utils.UpdateUtil.deleteApk
 import com.acszo.redomi.viewmodel.DataStoreViewModel
@@ -23,6 +25,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,10 +54,13 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
+            val windowSizeClass = calculateWindowSizeClass(this)
+
             RedomiTheme(
                 theme = theme
             ) {
-                RootNavigation(
+                DecideLayout(
+                    windowSizeClass = windowSizeClass,
                     dataStoreViewModel = dataStoreViewModel,
                     updateViewModel = updateViewModel,
                     isUpdateAvailable = updatePageUiState.isUpdateAvailable,

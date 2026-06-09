@@ -1,6 +1,12 @@
 package com.acszo.redomi.ui.nav
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,29 +23,81 @@ import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
 
 @Composable
-fun RootNavigation(
+fun DecideLayout(
+    windowSizeClass: WindowSizeClass,
     dataStoreViewModel: DataStoreViewModel,
     updateViewModel: UpdateViewModel,
     isUpdateAvailable: Boolean
 ) {
     val navController = rememberNavController()
 
+    val isCompactWidth = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
+    val isCompactHeight = windowSizeClass.heightSizeClass == WindowHeightSizeClass.Compact
+
+    if (isCompactWidth || isCompactHeight) {
+        RootNavigation(
+            navController = navController,
+            isCompact = true,
+            startDestination = Route.SettingsPage.route,
+            dataStoreViewModel = dataStoreViewModel,
+            updateViewModel = updateViewModel,
+            isUpdateAvailable = isUpdateAvailable,
+        )
+    } else {
+        Row {
+            SettingsPage(
+                modifier = Modifier.weight(1.15f),
+                dataStoreViewModel = dataStoreViewModel,
+                navigateTo = {
+                    navController.navigate(it) {
+                        launchSingleTop = true
+                    }
+                },
+                isUpdateAvailable = isUpdateAvailable
+            )
+
+            RootNavigation(
+                modifier = Modifier.weight(2f),
+                navController = navController,
+                isCompact = false,
+                startDestination = Route.AppsPage.route,
+                dataStoreViewModel = dataStoreViewModel,
+                updateViewModel = updateViewModel,
+                isUpdateAvailable = isUpdateAvailable,
+            )
+        }
+    }
+}
+
+@Composable
+fun RootNavigation(
+    modifier: Modifier = Modifier,
+    isCompact: Boolean,
+    navController: NavHostController,
+    startDestination: String,
+    dataStoreViewModel: DataStoreViewModel,
+    updateViewModel: UpdateViewModel,
+    isUpdateAvailable: Boolean
+) {
     NavHost(
+        modifier = modifier,
         navController = navController,
-        startDestination = Route.SettingsPage.route,
+        startDestination = startDestination,
         enterTransition = { enterHorizontalTransition(TransitionDirection.FORWARD) },
         exitTransition = { exitHorizontalTransition(TransitionDirection.BACKWARD) },
         popEnterTransition = { enterHorizontalTransition(TransitionDirection.BACKWARD) },
         popExitTransition = { exitHorizontalTransition(TransitionDirection.FORWARD) },
     ) {
-        composable(
-            route = Route.SettingsPage.route
-        ) {
-            SettingsPage(
-                dataStoreViewModel = dataStoreViewModel,
-                navController = navController,
-                isUpdateAvailable = isUpdateAvailable
-            )
+        if (isCompact) {
+            composable(
+                route = Route.SettingsPage.route
+            ) {
+                SettingsPage(
+                    dataStoreViewModel = dataStoreViewModel,
+                    navigateTo = { navController.navigate(it) },
+                    isUpdateAvailable = isUpdateAvailable
+                )
+            }
         }
         composable(
             route = Route.AppsPage.route
@@ -47,7 +105,9 @@ fun RootNavigation(
             AppsPage(
                 dataStoreViewModel = dataStoreViewModel,
             ) {
-                BackButton { navController.popBackStack() }
+                if (isCompact) {
+                    BackButton { navController.popBackStack() }
+                }
             }
         }
         composable(
@@ -56,7 +116,9 @@ fun RootNavigation(
             LayoutPage(
                 dataStoreViewModel = dataStoreViewModel,
             ) {
-                BackButton { navController.popBackStack() }
+                if (isCompact) {
+                    BackButton { navController.popBackStack() }
+                }
             }
         }
 
@@ -67,7 +129,9 @@ fun RootNavigation(
                 UpdatePage(
                     updateViewModel = updateViewModel
                 ) {
-                    BackButton { navController.popBackStack() }
+                    if (isCompact) {
+                        BackButton { navController.popBackStack() }
+                    }
                 }
             }
         }

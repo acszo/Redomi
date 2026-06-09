@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScaffoldWithLargeTopAppBar(
+    modifier: Modifier = Modifier,
     title: String,
     description: String? = null,
     backButton: @Composable () -> Unit = {},
@@ -29,7 +30,7 @@ fun ScaffoldWithLargeTopAppBar(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SmallTopAppBar(
                 title = title,

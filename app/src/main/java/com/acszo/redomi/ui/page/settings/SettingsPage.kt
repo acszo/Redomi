@@ -34,7 +34,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.acszo.redomi.R
 import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
@@ -48,8 +47,8 @@ import com.acszo.redomi.ui.nav.Pages.APPS_PAGE
 import com.acszo.redomi.ui.nav.Pages.LAYOUT_PAGE
 import com.acszo.redomi.ui.nav.Pages.UPDATE_PAGE
 import com.acszo.redomi.ui.theme.bottomItemShape
-import com.acszo.redomi.ui.theme.middleSmallItemShape
 import com.acszo.redomi.ui.theme.middleLargeItemShape
+import com.acszo.redomi.ui.theme.middleSmallItemShape
 import com.acszo.redomi.ui.theme.topItemShape
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
@@ -61,8 +60,9 @@ import java.util.Locale.getDefault
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsPage(
+    modifier: Modifier = Modifier,
     dataStoreViewModel: DataStoreViewModel,
-    navController: NavController,
+    navigateTo: (String) -> Unit,
     isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
@@ -86,6 +86,7 @@ fun SettingsPage(
     var openCountryCodeDialog by rememberSaveable { mutableStateOf(false) }
 
     ScaffoldWithLargeTopAppBar(
+        modifier = modifier,
         title = redomi
     ) { padding, pageTitle ->
         LazyColumn(
@@ -103,7 +104,7 @@ fun SettingsPage(
                     description = stringResource(id = R.string.apps_description),
                     itemShape = topItemShape
                 ) {
-                    navController.navigate(APPS_PAGE)
+                    navigateTo(APPS_PAGE)
                 }
             }
 
@@ -114,7 +115,7 @@ fun SettingsPage(
                     description = stringResource(id = ListOrientation.entries[listOrientation].toRes),
                     itemShape = middleSmallItemShape
                 ) {
-                    navController.navigate(LAYOUT_PAGE)
+                    navigateTo(LAYOUT_PAGE)
                 }
             }
 
@@ -177,7 +178,7 @@ fun SettingsPage(
                             }
                         }
                     ) {
-                        navController.navigate(UPDATE_PAGE)
+                        navigateTo(UPDATE_PAGE)
                     }
                 }
             }
