@@ -48,9 +48,14 @@ fun DecideLayout(
             SettingsPage(
                 modifier = Modifier.weight(1.15f),
                 dataStoreViewModel = dataStoreViewModel,
-                navigateTo = {
-                    navController.navigate(it) {
-                        launchSingleTop = true
+                navigateTo = { route ->
+                    val current = navController.currentDestination?.route!!
+                    if (current != route) {
+                        navController.navigate(route) {
+                            popUpTo(current) {
+                                inclusive = true
+                            }
+                        }
                     }
                 },
                 isUpdateAvailable = isUpdateAvailable
@@ -121,7 +126,6 @@ fun RootNavigation(
                 }
             }
         }
-
         if (isGithubBuild) {
             composable(
                 route = Route.UpdatePage.route
@@ -136,5 +140,4 @@ fun RootNavigation(
             }
         }
     }
-
 }
