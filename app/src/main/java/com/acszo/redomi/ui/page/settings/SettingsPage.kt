@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -55,7 +56,6 @@ import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
 import com.acszo.redomi.versionName
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import java.util.Locale
-import java.util.Locale.getDefault
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -278,7 +278,7 @@ fun SettingsPage(
             val name = Locale.Builder()
                 .setRegion(code)
                 .build()
-                .getDisplayCountry(getDefault())
+                .getDisplayCountry(LocalLocale.current.platformLocale)
 
             "$name ($code)"
         }
