@@ -24,10 +24,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.platform.LocalUriHandler
@@ -55,6 +56,7 @@ import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentOpenDefaultsApp
 import com.acszo.redomi.versionName
 import com.acszo.redomi.viewmodel.DataStoreViewModel
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -66,6 +68,7 @@ fun SettingsPage(
     isUpdateAvailable: Boolean
 ) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
 
     val isFirstTime by dataStoreViewModel.isFirstTime.collectAsStateWithLifecycle()
     val listOrientation by dataStoreViewModel.listOrientation.collectAsStateWithLifecycle()
@@ -76,7 +79,7 @@ fun SettingsPage(
     val redomi = stringResource(id = R.string.app_name)
 
     val uriHandle = LocalUriHandler.current
-    val clipboardManager = LocalClipboardManager.current
+    val clipboard = LocalClipboard.current
     val appVersion = "Version: $versionName"
     val modelName = "Model: ${Build.MODEL}"
     val androidVersion = "Android: ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})"
@@ -202,10 +205,12 @@ fun SettingsPage(
                     description = versionName,
                     itemShape = bottomItemShape
                 ) {
-                    copyText(
-                        clipboardManager = clipboardManager,
-                        text = appVersion + '\n' + modelName + '\n' + androidVersion
-                    )
+                    scope.launch {
+                        copyText(
+                            clipboard = clipboard,
+                            text = appVersion + '\n' + modelName + '\n' + androidVersion
+                        )
+                    }
                 }
             }
         }

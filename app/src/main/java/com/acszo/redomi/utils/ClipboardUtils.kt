@@ -1,12 +1,14 @@
 package com.acszo.redomi.utils
 
-import androidx.compose.ui.platform.ClipboardManager
-import androidx.compose.ui.text.AnnotatedString
+import android.content.ClipData
+import androidx.compose.ui.platform.Clipboard
+import androidx.compose.ui.platform.toClipEntry
 
 object ClipboardUtils {
 
-    fun copyText(clipboardManager: ClipboardManager, text: String) {
-        clipboardManager.setText(AnnotatedString(text))
+    suspend fun copyText(clipboard: Clipboard, text: String) {
+        val clipData = ClipData.newPlainText(text, text)
+        clipboard.setClipEntry(clipData.toClipEntry())
     }
 
 }

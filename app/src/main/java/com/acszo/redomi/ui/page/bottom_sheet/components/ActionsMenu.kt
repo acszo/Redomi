@@ -15,11 +15,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.ClipboardManager
-import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,6 +29,7 @@ import com.acszo.redomi.ui.common.ClickableItem
 import com.acszo.redomi.utils.ClipboardUtils.copyText
 import com.acszo.redomi.utils.IntentUtil.onIntentSend
 import com.acszo.redomi.utils.IntentUtil.onIntentView
+import kotlinx.coroutines.launch
 
 @Composable
 fun ActionsMenu(
@@ -36,7 +37,8 @@ fun ActionsMenu(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    val clipboardManager: ClipboardManager = LocalClipboardManager.current
+    val scope = rememberCoroutineScope()
+    val clipboard = LocalClipboard.current
 
     Row(
         modifier = Modifier
@@ -57,7 +59,7 @@ fun ActionsMenu(
             icon = R.drawable.ic_link,
             title = stringResource(id = android.R.string.copy)
         ) {
-            copyText(clipboardManager, url)
+            scope.launch { copyText(clipboard, url) }
             onDismiss()
         }
 
