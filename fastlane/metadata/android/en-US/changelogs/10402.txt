@@ -1,0 +1,11 @@
+# Added
+- Android 17 target
+- Tablet UI support
+- Safe drawing padding
+- Restricting activity recreation
+
+# Fixed
+- Apple music changing spaces into plus signs
+
+# Changed
+- Removed hyphen from search query
