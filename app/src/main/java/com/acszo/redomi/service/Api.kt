@@ -24,6 +24,18 @@ object Api {
 
 }
 
+// this key aint really a secret so we DO NOT CARE
+// made it this way for the fun of it
+fun key(): String {
+    val one = "b954"
+    val two = "374984"
+    val three = "b21e"
+    val four = "a8eb7d17"
+    val five = "3a76"
+    val six = "0530f8"
+    return "${four.reversed()}-${five}-${one.reversed()}-${three}-${six.reversed() + two}"
+}
+
 sealed class ApiResult<T: Any> {
     data class Success<T: Any>(val data: T): ApiResult<T>()
     data class Error(val code: Int): ApiResult<Nothing>()
