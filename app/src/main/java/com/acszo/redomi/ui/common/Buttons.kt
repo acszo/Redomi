@@ -53,7 +53,7 @@ fun <T> RadioButtonItemDialog(
     item: T,
     isSelected: Boolean,
     onClick: (Int) -> Unit
-) where T : Enum<T>, T : Resource = RadioButtonItemPage(
+) where T : Enum<T>, T : Resource = RadioButtonItem(
     modifier = Modifier.clip(MaterialTheme.shapes.small),
     item = item,
     isSelected = isSelected,
@@ -69,7 +69,7 @@ fun <T> RadioButtonItemPage(
     isSelected: Boolean,
     shape: RoundedCornerShape,
     onClick: (Int) -> Unit
-) where T : Enum<T>, T : Resource = RadioButtonItemPage(
+) where T : Enum<T>, T : Resource = RadioButtonItem(
     modifier = Modifier
         .clip(shape)
         .background(MaterialTheme.colorScheme.surfaceContainer),
@@ -81,7 +81,7 @@ fun <T> RadioButtonItemPage(
 )
 
 @Composable
-private fun <T> RadioButtonItemPage(
+private fun <T> RadioButtonItem(
     modifier: Modifier = Modifier,
     item: T,
     isSelected: Boolean,
