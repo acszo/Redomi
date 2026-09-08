@@ -6,8 +6,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -43,9 +45,10 @@ fun ActionsMenu(
     Row(
         modifier = Modifier
             .padding(vertical = 15.dp)
-            .height(150.dp)
+            .heightIn(min = 150.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
+        horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         ActionsItem(
             icon = R.drawable.ic_play,
@@ -98,6 +101,8 @@ private fun ActionsItem(
                 contentDescription = title
             )
         }
+
+        Spacer(Modifier.height(20.dp))
 
         Text(
             text = title,

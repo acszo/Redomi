@@ -3,7 +3,7 @@ package com.acszo.redomi.ui.page.bottom_sheet.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -61,7 +61,7 @@ private fun HorizontalList(
     LazyRow(
         modifier = Modifier
             .padding(vertical = 15.dp)
-            .height(150.dp),
+            .heightIn(min = 150.dp),
         contentPadding = PaddingValues(horizontal = 10.dp),
     ) {
         items(items = songs) {
