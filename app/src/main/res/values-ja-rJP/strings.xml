@@ -50,4 +50,7 @@
     <string name="error_timeout">Request timed out</string>
     <string name="retry">Retry</string>
     <string name="country_code">Country code</string>
+    <string name="search">検索</string>
+    <string name="warning_link_lookup_failed">一部のサービスに接続できませんでした。代わりに検索リンクを利用できます。サービスをタップするか、再試行してください。</string>
+    <string name="error_no_universal_link">このQobuzの項目の共通リンクが見つかりませんでした。曲の変換を使って、サービスへのリンクを共有してください。</string>
 </resources>

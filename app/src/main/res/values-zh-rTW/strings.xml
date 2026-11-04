@@ -50,4 +50,7 @@
     <string name="error_timeout">請求逾時</string>
     <string name="retry">重試</string>
     <string name="country_code">Country code</string>
+    <string name="search">搜尋</string>
+    <string name="warning_link_lookup_failed">無法連線至部分服務。您可以使用搜尋連結；請輕觸某個服務或重試。</string>
+    <string name="error_no_universal_link">找不到此 Qobuz 項目的通用連結。請使用轉換歌曲來分享特定服務的連結。</string>
 </resources>

@@ -50,4 +50,7 @@
     <string name="error_timeout">Tiempo de solicitud agotado</string>
     <string name="retry">Reintentar</string>
     <string name="country_code">Código del país</string>
+    <string name="search">Buscar</string>
+    <string name="warning_link_lookup_failed">No se pudo acceder a algunos servicios. Hay enlaces de búsqueda disponibles; toca un servicio o vuelve a intentarlo.</string>
+    <string name="error_no_universal_link">No se encontró un enlace universal para este elemento de Qobuz. Usa Convertir canción para compartir un enlace a un servicio.</string>
 </resources>

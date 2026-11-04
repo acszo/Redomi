@@ -50,4 +50,7 @@
     <string name="error_timeout">Upłynął limit czasu żądania</string>
     <string name="retry">Spróbuj ponownie</string>
     <string name="country_code">Kod kraju</string>
+    <string name="search">Szukaj</string>
+    <string name="warning_link_lookup_failed">Niektóre serwisy są niedostępne. Zamiast nich dostępne są linki do wyszukiwania; dotknij serwisu lub spróbuj ponownie.</string>
+    <string name="error_no_universal_link">Nie znaleziono uniwersalnego linku do tego elementu Qobuz. Użyj Konwertuj utwór, aby udostępnić link do wybranego serwisu.</string>
 </resources>

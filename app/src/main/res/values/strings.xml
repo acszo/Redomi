@@ -52,4 +52,7 @@
     <string name="error_timeout">Request timed out</string>
     <string name="retry">Retry</string>
     <string name="country_code">Country code</string>
+    <string name="search">Search</string>
+    <string name="warning_link_lookup_failed">Some services could not be reached. Search links are available instead; tap a service or retry.</string>
+    <string name="error_no_universal_link">No universal link could be found for this Qobuz item. Use Convert song to share a service link instead.</string>
 </resources>

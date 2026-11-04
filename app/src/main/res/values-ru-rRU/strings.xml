@@ -50,4 +50,7 @@
     <string name="error_timeout">Время запроса истекло</string>
     <string name="retry">Повторить</string>
     <string name="country_code">Код страны</string>
+    <string name="search">Поиск</string>
+    <string name="warning_link_lookup_failed">Некоторые сервисы недоступны. Вместо них доступны ссылки для поиска; нажмите на сервис или повторите попытку.</string>
+    <string name="error_no_universal_link">Универсальная ссылка для этой записи Qobuz не найдена. Используйте Преобразовать песню, чтобы поделиться ссылкой на отдельный сервис.</string>
 </resources>

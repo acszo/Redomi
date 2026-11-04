@@ -21,7 +21,8 @@ data class BottomSheetUiState(
     val sourceSong: Song? = null,
     val songs: List<Song> = emptyList(),
     val isLoaded: Boolean = false,
-    val error: Int? = null
+    val error: Int? = null,
+    val warning: Int? = null
 )
 
 @HiltViewModel
@@ -34,13 +35,13 @@ class SongLinkViewModel @Inject constructor(
     val bottomSheetUiState = _bottomSheetUiState.asStateFlow()
 
     fun getPlatformsLink(url: String, key: String, countryCode: String) = viewModelScope.launch {
-        when(val response = songLinkRepository.getSongs(url, countryCode)) {
+        val selectedApps = settingsDataStore.getSetOfStrings(key).first()
+        when(val response = songLinkRepository.getSongs(url, countryCode, "qobuz" in selectedApps)) {
             is ApiResult.Success -> {
                 val data = response.data
                 val sourceSong = data.entitiesByUniqueId[data.entityUniqueId]
                 val query = sourceSong?.run { Uri.encode("$title $artistName") }
 
-                val selectedApps = settingsDataStore.getSetOfStrings(key).first()
                 val orderedApps = platforms.keys.filter { selectedApps.contains(it) }
 
                 val songsInfo = orderedApps.mapNotNull { platform ->
@@ -63,7 +64,8 @@ class SongLinkViewModel @Inject constructor(
                 }
 
                 _bottomSheetUiState.update {
-                    it.copy(sourceSong = sourceSong, songs = songsInfo, isLoaded = true)
+                    it.copy(sourceSong = sourceSong, songs = songsInfo, isLoaded = true,
+                        warning = if (data.lookupFailed) R.string.warning_link_lookup_failed else null)
                 }
             }
             is ApiResult.Error -> {
@@ -87,7 +89,7 @@ class SongLinkViewModel @Inject constructor(
 
     fun refresh(url: String, key: String, countryCode: String) {
         _bottomSheetUiState.update {
-            it.copy(sourceSong = null, songs = emptyList(), isLoaded = false, error = null)
+            it.copy(sourceSong = null, songs = emptyList(), isLoaded = false, error = null, warning = null)
         }
 
         getPlatformsLink(url, key, countryCode)

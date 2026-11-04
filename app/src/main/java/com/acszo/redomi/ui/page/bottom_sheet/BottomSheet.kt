@@ -5,9 +5,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.acszo.redomi.data.ListOrientation
+import com.acszo.redomi.R
 import com.acszo.redomi.ui.common.enterFadeInTransition
 import com.acszo.redomi.ui.page.bottom_sheet.components.ActionsMenu
 import com.acszo.redomi.ui.page.bottom_sheet.components.AppsList
@@ -73,15 +78,26 @@ fun BottomSheet(
                 uiState.sourceSong != null -> {
                     val songs = uiState.songs
                     var selectedSong by remember { mutableStateOf(
-                        if (songs.size > 1) uiState.sourceSong else songs.first()
+                        if (songs.size == 1) songs.first() else uiState.sourceSong
                     ) }
-                    var showActionsMenu by remember { mutableStateOf(songs.size == 1) }
+                    var showActionsMenu by remember { mutableStateOf(songs.size == 1 && uiState.warning == null) }
 
-                    if (songs.size > 1 || isActionSend) {
+                    if (songs.size != 1 || isActionSend || uiState.warning != null) {
                         SongCard(
                             song = selectedSong,
                             isUpdateAvailable = isUpdateAvailable
                         )
+                    }
+
+                    uiState.warning?.let { warning ->
+                        Text(
+                            text = stringResource(warning),
+                            modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        TextButton(onClick = refresh) {
+                            Text(stringResource(R.string.retry))
+                        }
                     }
 
                     if (!showActionsMenu) {

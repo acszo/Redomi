@@ -50,4 +50,7 @@
     <string name="error_timeout">La demande a expiré</string>
     <string name="retry">Réessayer</string>
     <string name="country_code">Code du pays</string>
+    <string name="search">Rechercher</string>
+    <string name="warning_link_lookup_failed">Certains services sont inaccessibles. Des liens de recherche sont proposés ; touchez un service ou réessayez.</string>
+    <string name="error_no_universal_link">Aucun lien universel n\'a été trouvé pour cet élément Qobuz. Utilisez Convertir la musique pour partager un lien vers un service.</string>
 </resources>

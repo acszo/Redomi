@@ -50,4 +50,7 @@
     <string name="error_timeout">Request timed out</string>
     <string name="retry">Retry</string>
     <string name="country_code">Country code</string>
+    <string name="search">بحث</string>
+    <string name="warning_link_lookup_failed">تعذر الوصول إلى بعض الخدمات. تتوفر روابط بحث بدلاً منها؛ اضغط على خدمة أو أعد المحاولة.</string>
+    <string name="error_no_universal_link">لم يتم العثور على رابط موحد لهذا العنصر من Qobuz. استخدم تحويل الأغنية لمشاركة رابط خدمة بدلاً منه.</string>
 </resources>

@@ -13,6 +13,7 @@ import com.acszo.redomi.data.IconShape
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.ui.page.bottom_sheet.BottomSheet
 import com.acszo.redomi.ui.theme.RedomiTheme
+import com.acszo.redomi.utils.SharedLink
 import com.acszo.redomi.viewmodel.DataStoreViewModel
 import com.acszo.redomi.viewmodel.SongLinkViewModel
 import com.acszo.redomi.viewmodel.UpdateViewModel
@@ -29,18 +30,12 @@ class ConvertSongActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val isActionSend = (intent.action == Intent.ACTION_SEND)
-        var intentData: String
-        var appList = AppList.OPENING
+        val intentData = SharedLink.extract(
+            if (isActionSend) intent.getStringExtra(Intent.EXTRA_TEXT) else intent.dataString
+        ).orEmpty()
+        val appList = if (isActionSend) AppList.SHARING else AppList.OPENING
 
         setContent {
-            if (isActionSend) {
-                intentData = intent?.getStringExtra(Intent.EXTRA_TEXT)
-                    ?.replaceFirst(".*(?=https://)".toRegex(), "").toString()
-                appList = AppList.SHARING
-            } else {
-                intentData = intent?.data.toString()
-            }
-
             val songLinkViewModel: SongLinkViewModel = hiltViewModel()
             val updateViewModel: UpdateViewModel = hiltViewModel()
             val dataStoreViewModel: DataStoreViewModel = hiltViewModel()
@@ -80,4 +75,3 @@ class ConvertSongActivity : ComponentActivity() {
         }
     }
 }
-

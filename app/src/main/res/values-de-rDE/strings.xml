@@ -50,4 +50,7 @@
     <string name="error_timeout">Zeitüberschreitung bei Anforderung</string>
     <string name="retry">Erneut versuchen</string>
     <string name="country_code">Ländercode</string>
+    <string name="search">Suchen</string>
+    <string name="warning_link_lookup_failed">Einige Dienste sind nicht erreichbar. Stattdessen sind Suchlinks verfügbar. Tippe auf einen Dienst oder versuche es erneut.</string>
+    <string name="error_no_universal_link">Für diesen Qobuz-Eintrag wurde kein universeller Link gefunden. Verwende Song konvertieren, um einen Link zu einem bestimmten Dienst zu teilen.</string>
 </resources>

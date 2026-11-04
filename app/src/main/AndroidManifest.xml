@@ -52,6 +52,8 @@
 
                 <data android:scheme="https" />
                 <data android:host="open.spotify.com" />
+                <data android:host="open.qobuz.com" />
+                <data android:host="play.qobuz.com" />
                 <data android:host="tidal.com"/>
                 <data android:host="listen.tidal.com" />
                 <data android:host="play.napster.com" />
@@ -62,6 +64,16 @@
                 <data android:host="music.yandex.uz" />
                 <data android:pathPrefix="/track/" />
                 <data android:pathPrefix="/album/" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="www.qobuz.com" />
+                <data android:host="qobuz.com" />
+                <data android:pathPattern="/.*/album/.*" />
             </intent-filter>
 
             <intent-filter>

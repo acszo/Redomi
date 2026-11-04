@@ -1,12 +1,15 @@
 package com.acszo.redomi.model
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class Providers(
     val entityUniqueId: String,
     val linksByPlatform: Map<String, Link>,
-    val entitiesByUniqueId: Map<String, Song>
+    val entitiesByUniqueId: Map<String, Song>,
+    val pageUrl: String? = null,
+    @Transient val lookupFailed: Boolean = false
 )
 
 @Serializable

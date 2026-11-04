@@ -50,4 +50,7 @@
     <string name="error_timeout">Richiesta scaduta</string>
     <string name="retry">Riprova</string>
     <string name="country_code">Codice paese</string>
+    <string name="search">Cerca</string>
+    <string name="warning_link_lookup_failed">Alcuni servizi non sono raggiungibili. Sono disponibili collegamenti di ricerca; tocca un servizio o riprova.</string>
+    <string name="error_no_universal_link">Non è stato trovato un collegamento universale per questo elemento Qobuz. Usa Converti canzone per condividere un collegamento a un servizio.</string>
 </resources>

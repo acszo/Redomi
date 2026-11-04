@@ -50,4 +50,7 @@
     <string name="error_timeout">Request timed out</string>
     <string name="retry">Retry</string>
     <string name="country_code">Country code</string>
+    <string name="search">Pretraži</string>
+    <string name="warning_link_lookup_failed">Neke usluge nisu dostupne. Umjesto njih dostupni su linkovi za pretragu; dodirnite uslugu ili pokušajte ponovo.</string>
+    <string name="error_no_universal_link">Nije pronađen univerzalni link za ovu stavku na Qobuzu. Koristite Pretvori pjesmu da podijelite link određene usluge.</string>
 </resources>

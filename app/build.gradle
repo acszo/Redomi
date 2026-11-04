@@ -7,7 +7,10 @@ plugins {
 }
 
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+}
 
 android {
 
@@ -20,10 +23,12 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(keystoreProperties["storeFile"])
-            storePassword keystoreProperties["storePassword"]
-            keyAlias keystoreProperties["keyAlias"]
-            keyPassword keystoreProperties["keyPassword"]
+            if (keystorePropertiesFile.exists()) {
+                storeFile file(keystoreProperties["storeFile"])
+                storePassword keystoreProperties["storePassword"]
+                keyAlias keystoreProperties["keyAlias"]
+                keyPassword keystoreProperties["keyPassword"]
+            }
         }
     }
 
@@ -35,7 +40,6 @@ android {
         versionName "1.4.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.release
     }
 
     buildTypes {
@@ -139,5 +143,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:2.7.7"
 
     implementation project(":squircle")
+
+    testImplementation "junit:junit:4.13.2"
 
 }

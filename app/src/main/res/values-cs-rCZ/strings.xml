@@ -50,4 +50,7 @@
     <string name="error_timeout">Požadavek vypršel</string>
     <string name="retry">Opakovat</string>
     <string name="country_code">Kód země</string>
+    <string name="search">Hledat</string>
+    <string name="warning_link_lookup_failed">Některé služby nejsou dostupné. Místo nich jsou k dispozici odkazy na vyhledávání; klepněte na službu nebo to zkuste znovu.</string>
+    <string name="error_no_universal_link">Pro tuto položku Qobuz nebyl nalezen univerzální odkaz. Pomocí Převést skladbu můžete sdílet odkaz na konkrétní službu.</string>
 </resources>

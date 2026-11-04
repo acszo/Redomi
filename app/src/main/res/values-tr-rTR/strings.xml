@@ -50,4 +50,7 @@
     <string name="error_timeout">İstek zaman aşımına uğradı</string>
     <string name="retry">Tekrar dene</string>
     <string name="country_code">Ülke kodu</string>
+    <string name="search">Ara</string>
+    <string name="warning_link_lookup_failed">Bazı hizmetlere ulaşılamadı. Bunun yerine arama bağlantıları kullanılabilir; bir hizmete dokunun veya tekrar deneyin.</string>
+    <string name="error_no_universal_link">Bu Qobuz öğesi için evrensel bağlantı bulunamadı. Bir hizmet bağlantısı paylaşmak için Şarkıyı dönüştür seçeneğini kullanın.</string>
 </resources>

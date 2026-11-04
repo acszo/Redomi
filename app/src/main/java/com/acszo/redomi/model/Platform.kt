@@ -12,6 +12,7 @@ import com.acszo.redomi.service.Api.SEARCH_QUERY_SOUNDCLOUD
 import com.acszo.redomi.service.Api.SEARCH_QUERY_NAPSTER
 import com.acszo.redomi.service.Api.SEARCH_QUERY_YANDEX
 import com.acszo.redomi.service.Api.SEARCH_QUERY_ANGHAMI
+import com.acszo.redomi.service.Api.SEARCH_QUERY_QOBUZ
 
 object Platform {
 
@@ -26,7 +27,8 @@ object Platform {
         "soundcloud" to AppDetails("Soundcloud", R.drawable.ic_soundcloud, SEARCH_QUERY_SOUNDCLOUD),
         "napster" to AppDetails("Napster", R.drawable.ic_napster, SEARCH_QUERY_NAPSTER),
         "yandex" to AppDetails("Yandex Music", R.drawable.ic_yandex, SEARCH_QUERY_YANDEX),
-        "anghami" to AppDetails("Anghami", R.drawable.ic_anghami, SEARCH_QUERY_ANGHAMI)
+        "anghami" to AppDetails("Anghami", R.drawable.ic_anghami, SEARCH_QUERY_ANGHAMI),
+        "qobuz" to AppDetails("Qobuz", R.drawable.ic_qobuz, SEARCH_QUERY_QOBUZ)
     )
 
 }

@@ -18,7 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.acszo.redomi.R
 import com.acszo.redomi.data.ListOrientation
 import com.acszo.redomi.model.Platform.platforms
 import com.acszo.redomi.model.Song
@@ -66,7 +68,7 @@ private fun HorizontalList(
     ) {
         items(items = songs) {
             AppItem(
-                platform = it.platform,
+                song = it,
                 iconShape = iconShape,
                 onClick = { onClick(it) }
             )
@@ -88,7 +90,7 @@ private fun VerticalList(
     ) {
         items(items = songs) {
             AppItem(
-                platform = it.platform,
+                song = it,
                 iconShape = iconShape,
                 onClick = { onClick(it) }
             )
@@ -98,11 +100,11 @@ private fun VerticalList(
 
 @Composable
 private fun AppItem(
-    platform: String,
+    song: Song,
     iconShape: Shape,
     onClick: () -> Unit
 ) {
-    val app = platforms[platform]!!
+    val app = platforms[song.platform]!!
     val titleWords = app.title.split(' ')
 
     ClickableItem(
@@ -120,5 +122,8 @@ private fun AppItem(
         )
         Text(text = titleWords[0])
         Text(text = if (titleWords.size > 1) titleWords[1] else "")
+        if (!song.isMatched) {
+            Text(text = stringResource(R.string.search), style = MaterialTheme.typography.labelSmall)
+        }
     }
 }
